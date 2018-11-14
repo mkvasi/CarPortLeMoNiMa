@@ -1,5 +1,12 @@
+<%-- 
+    Document   : index
+    Created on : 14-11-2018, 13:44:38
+    Author     : Yeha
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="utf-8">
@@ -9,15 +16,15 @@
   <meta name="author" content="">
   <!-- styles -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700" rel="stylesheet">
-  <link href="assets/css/bootstrap.css" rel="stylesheet">
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/color/default.css" rel="stylesheet">
+  <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="bootstrap/css/style.css" rel="stylesheet">
+  <link href="bootstrap/color/default.css" rel="stylesheet">
   
   
   
   <!-- fav and touch icons -->
   
-  <link rel="shortcut icon" href="assets/ico/favicon.ico">
+  <link rel="shortcut icon" href="bootstrap/ico/favicon.ico">
 
   <!-- =======================================================
     Theme Name: Serenity
@@ -36,7 +43,7 @@
         <div class="container">
           <!-- logo -->
           <a class="brand logo" href="index.html">
-			<img src="assets/img/foglogo.PNG" alt="" />
+			<img src="bootstrap/img/foglogo.PNG" alt="" />
 			</a>
           <!-- end logo -->
           <!-- top menu -->
