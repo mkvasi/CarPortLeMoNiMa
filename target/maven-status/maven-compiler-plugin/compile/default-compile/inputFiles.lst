@@ -1,6 +1,10 @@
-C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\FrontController.java
-C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT\FogCarPortLeMoNiMa\src\main\java\DBAccess\DBConnector.java
-C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\LoginUserException.java
-C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\UnknownCommand.java
-C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\LogicFacade.java
-C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\Command.java
+C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT_&_Java\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\Carport.java
+C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT_&_Java\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\FrontController.java
+C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT_&_Java\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\Roof.java
+C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT_&_Java\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\Calculator.java
+C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT_&_Java\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\Material.java
+C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT_&_Java\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\Command.java
+C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT_&_Java\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\LogicFacade.java
+C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT_&_Java\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\LoginUserException.java
+C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT_&_Java\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\UnknownCommand.java
+C:\Users\nr\Documents\NetBeansProjects\2_Semester\Modul2\EksamensProjekt\GIT_&_Java\FogCarPortLeMoNiMa\src\main\java\DBAccess\DBConnector.java
