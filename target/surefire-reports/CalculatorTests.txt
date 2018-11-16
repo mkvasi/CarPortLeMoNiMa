@@ -1,6 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: CalculatorTests
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.047 sec <<< FAILURE!
 initializationError(CalculatorTests)  Time elapsed: 0.006 sec  <<< ERROR!
 java.lang.NoClassDefFoundError: org/hamcrest/SelfDescribing
@@ -39,3 +40,6 @@ Caused by: java.lang.ClassNotFoundException: org.hamcrest.SelfDescribing
 	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
 	... 29 more
+=======
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.057 sec
+>>>>>>> 3ff73fa6399574f6e99ef5e0a93c4afad1e73739
