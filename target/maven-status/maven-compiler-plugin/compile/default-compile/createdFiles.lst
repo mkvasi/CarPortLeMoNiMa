@@ -1,0 +1,11 @@
+FunctionLayer\Roof.class
+PresentationLayer\UnknownCommand.class
+FunctionLayer\Calculator.class
+FunctionLayer\BillOfMaterial.class
+PresentationLayer\FrontController.class
+FunctionLayer\LogicFacade.class
+PresentationLayer\Command.class
+FunctionLayer\Carport.class
+FunctionLayer\LoginUserException.class
+FunctionLayer\Material.class
+DBAccess\DBConnector.class

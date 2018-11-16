@@ -11,16 +11,19 @@ package FunctionLayer;
  */
 public class Material {
 
+    int id, qty;
     private String name, measure, type, description;
     private double buyprice, sellprice;
 
-    public Material(String name, String measure, String type, String description, double buyprice, double sellprice) {
+    public Material(int id, String name, String measure, String type, String description, double buyprice, double sellprice, int qty) {
+        this.id = id;
         this.name = name;
         this.measure = measure;
         this.type = type;
         this.description = description;
         this.buyprice = buyprice;
         this.sellprice = sellprice;
+        this.qty = qty;
     }
 
     public String getName() {
@@ -71,4 +74,21 @@ public class Material {
         this.sellprice = sellprice;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    
 }

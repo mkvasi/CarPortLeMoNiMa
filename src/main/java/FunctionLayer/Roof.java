@@ -15,7 +15,6 @@ public class Roof {
 
     private boolean flatRoof;
     private double length, width;
-    private List<Material> materialListRoof;
 
     public Roof(boolean flatRoof) {
         this.flatRoof = flatRoof;
@@ -45,17 +44,5 @@ public class Roof {
         this.width = width;
     }
 
-    public List<Material> getMaterial() {
-        return materialListRoof;
-    }
-
-    public void setMaterial(List<Material> materialListRoof) {
-        this.materialListRoof = materialListRoof;
-    }
-
-    public void addMaterialToRoof(Material material) {
-        materialListRoof.add(material);
-    }
-    
 }
 

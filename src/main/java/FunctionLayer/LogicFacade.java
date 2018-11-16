@@ -3,6 +3,7 @@ package FunctionLayer;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class LogicFacade {
     
@@ -27,4 +28,22 @@ public class LogicFacade {
 //DATAMAPPER CRUD
     
 //BUSINESS LOGIC
+    
+    Carport carport = new Carport(5.0, 3.0, new Roof(true));
+    
+    public void updateBomCarport() {
+        Calculator calc = new Calculator();
+        calc.countPostsForCarport(carport);
+        calc.countRemForCarport(carport);
+        calc.countBracketsForCarport(carport);
+        calc.countScrewsForBrackets(carport);
+        calc.countRaftersForRoof(carport);
+        calc.countScrewsForRaftersFlatRoof(carport);
+        calc.calculateRoofDimensions(carport);
+        calc.countEaves(carport);
+        
+        BillOfMaterial bom = new BillOfMaterial();
+        bom.setBomCarport(carport.getMaterialListCarport());
+    }
+    
 }
