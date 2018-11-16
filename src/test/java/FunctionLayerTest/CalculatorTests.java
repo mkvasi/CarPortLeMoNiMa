@@ -1,3 +1,5 @@
+package FunctionLayerTest;
+
 
 import FunctionLayer.Calculator;
 import FunctionLayer.Carport;
@@ -20,26 +22,22 @@ public class CalculatorTests {
     Carport carport;
     Calculator calc;
     
-    Roof roof1 = new Roof(true, 4.20, 2.70);
-    Roof roof2 = new Roof(true, 5.20, 3.70);
-    Roof roof3 = new Roof(true, 6.20, 3.20);
-    Roof roof4 = new Roof(true, 6.70, 4.70);
-    Roof roof5 = new Roof(true, 8.70, 4.20);
-    Roof roof6 = new Roof(true, 7.20, 4.70);
-    Roof pitchedRoof7 = new Roof(false, 5.20, 4.20);
+
+    Roof flatRoof = new Roof(true);
+    Roof pitchedRoof = new Roof(false);
     
-    Carport carport1 = new Carport(4, 2.5, roof1);
-    Carport carport2 = new Carport(5, 3.5, roof2);
-    Carport carport3 = new Carport(6, 3, roof3);
-    Carport carport4 = new Carport(6.5, 4.5, roof4);
-    Carport carport5 = new Carport(8.5, 4, roof5);
-    Carport carport6 = new Carport(7, 4.5, roof6);
-    Carport carportPitchedRoof = new Carport(5, 4, pitchedRoof7);
+    Carport carport1 = new Carport(4, 2.5, flatRoof);
+    Carport carport2 = new Carport(5, 3.5, flatRoof);
+    Carport carport3 = new Carport(6, 3, flatRoof);
+    Carport carport4 = new Carport(6.5, 4.5, flatRoof);
+    Carport carport5 = new Carport(8.5, 4, flatRoof);
+    Carport carport6 = new Carport(7, 4.5, flatRoof);
+    Carport carportPitchedRoof = new Carport(5, 4, pitchedRoof);
     
     
     @Before public void setup(){
         calc = new Calculator();
-        Roof roof = new Roof(true, 5.20, 3.20);
+        Roof roof = new Roof(true);
         carport = new Carport(5, 3, roof);
     }
     

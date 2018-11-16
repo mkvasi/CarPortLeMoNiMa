@@ -17,10 +17,8 @@ public class Roof {
     private double length, width;
     private List<Material> materialListRoof;
 
-    public Roof(boolean flatRoof, double length, double width) {
+    public Roof(boolean flatRoof) {
         this.flatRoof = flatRoof;
-        this.length = length;
-        this.width = width;
     }
 
     public boolean isFlatRoof() {
