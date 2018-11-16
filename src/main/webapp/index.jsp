@@ -4,6 +4,9 @@
     Author     : Yeha
 --%>
 
+<%@page import="FunctionLayer.Material"%>
+<%@page import="FunctionLayer.BillOfMaterial"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,6 +38,7 @@
     </head>
 
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
+        <% List<Material> billofmaterial = (List) request.getAttribute("bomCarport");%>
         <header>
             <!-- Navbar
             ================================================== -->
@@ -154,10 +158,10 @@
             </table>
 
         </div>
-        
-        
+
+
         <div id="pris">
-        <table>
+            <table>
                 <thead>
                     <tr>
                         <th>Pris</th>
@@ -167,7 +171,7 @@
 
                 </thead>
             </table>
-            
+
         </div>
 
         <div id="middle">
@@ -252,6 +256,43 @@
                         <td>stk.</td>
                         <td>understernbrædder til for & bag ende</td>
                     </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="middle">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Træ & tagplader</th>
+                        <th>Længde</th>
+                        <th>Antal</th>
+                        <th>Enhed</th>
+                        <th>Beskrivelse</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>25x200 mm. trykimp. Brædt</td>
+                        <td>360</td>
+                        <td>4</td>
+                        <td>stk.</td>
+                        <td>understernbrædder til for & bag ende</td>
+                    </tr>
+                    <%
+                        if (!billofmaterial.isEmpty()) {
+                            for (Material material : billofmaterial) {
+
+                                out.println("<tr>"
+                                        + "<td>" + material.getName() + "</td>"
+                                        + "<td>" + material.getQty() + "</td>"
+                                        + "<td>" + material.getQty() + "</td>"
+                                        + "<td>" + material.getMeasure() + "</td>"
+                                        + "<td>" + material.getDescription() + "</td>"
+                                        + "</tr>");
+                            }
+                        }
+                    %>
                 </tbody>
             </table>
         </div>

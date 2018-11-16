@@ -29,9 +29,12 @@ public class LogicFacade {
     
 //BUSINESS LOGIC
     
-    Carport carport = new Carport(5.0, 3.0, new Roof(true));
     
-    public void updateBomCarport() {
+    
+    public static List<Material> updateBomCarport(Carport carport) {
+        //Carport carport = new Carport(5.0, 3.0, new Roof(true));
+        System.out.println(carport.getHeigth());
+        
         Calculator calc = new Calculator();
         calc.countPostsForCarport(carport);
         calc.countRemForCarport(carport);
@@ -42,8 +45,12 @@ public class LogicFacade {
         calc.calculateRoofDimensions(carport);
         calc.countEaves(carport);
         
-        BillOfMaterial bom = new BillOfMaterial();
-        bom.setBomCarport(carport.getMaterialListCarport());
+        System.out.println("TEST");
+        System.out.println(carport.getMaterialListCarport().size());
+        
+        return carport.getMaterialListCarport();
+        //BillOfMaterial bom = new BillOfMaterial();
+        //bom.setBomCarport(carport.getMaterialListCarport());
     }
     
 }

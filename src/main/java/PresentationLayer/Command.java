@@ -12,6 +12,7 @@ abstract class Command {
 
     private static void initCommands() {
         commands = new HashMap<>();
+        commands.put("billofmaterial", new BillOfMaterialJSP());
     }
 
     static Command from(HttpServletRequest request) {
