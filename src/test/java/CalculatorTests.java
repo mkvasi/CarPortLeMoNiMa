@@ -26,7 +26,7 @@ public class CalculatorTests {
     Roof roof4 = new Roof(true, 6.70, 4.70);
     Roof roof5 = new Roof(true, 8.70, 4.20);
     Roof roof6 = new Roof(true, 7.20, 4.70);
-    Roof pitchedRoof = new Roof(false, 5.20, 4.20);
+    Roof pitchedRoof7 = new Roof(false, 5.20, 4.20);
     
     Carport carport1 = new Carport(4, 2.5, roof1);
     Carport carport2 = new Carport(5, 3.5, roof2);
@@ -34,7 +34,7 @@ public class CalculatorTests {
     Carport carport4 = new Carport(6.5, 4.5, roof4);
     Carport carport5 = new Carport(8.5, 4, roof5);
     Carport carport6 = new Carport(7, 4.5, roof6);
-    Carport carportPitchedRoof = new Carport(5, 4, pitchedRoof);
+    Carport carportPitchedRoof = new Carport(5, 4, pitchedRoof7);
     
     
     @Before public void setup(){
@@ -95,7 +95,8 @@ public class CalculatorTests {
         calc.calculateRoofDimensions(carport1);
         double actualRoofLength = carport1.getRoof().getLength();
         double actualRoofWidth = carport1.getRoof().getWidth();
-        Assert.assertEquals(4.20, actualRoofWidth, actualRoofLength);
+        Assert.assertEquals(5.20, actualRoofWidth, actualRoofWidth);
         Assert.assertEquals(2.70, actualRoofWidth, actualRoofWidth);
+
     }
 }
