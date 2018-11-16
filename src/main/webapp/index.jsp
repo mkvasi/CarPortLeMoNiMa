@@ -91,6 +91,85 @@
         </section>
 
 
+        <div id="kundeinfo">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Navn</th>
+                        <td>Yürpa Hanson</td>
+                    </tr>
+
+
+                    <tr>
+                        <th>Adresse</th>
+                        <td>Udkantsdanmarksvej 43</td>
+                    </tr>
+                    <tr>
+                        <th>Postnummer og by</th>
+                        <td>9283 Smørumsk</td>
+                    </tr>
+                    <tr>
+                        <th>Telefon</th>
+                        <td>45 36 74 85</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>Hanson@gmail.com</td>
+                    </tr>
+
+                </thead>
+            </table>
+
+        </div>
+
+        <div id="carportinfo">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Carport bredde</th>
+                        <td>300 cm</td>
+                    </tr>
+
+
+                    <tr>
+                        <th>Carport længde</th>
+                        <td>330 cm</td>
+                    </tr>
+                    <tr>
+                        <th>Tag</th>
+                        <td>Plasttrapezplader</td>
+                    </tr>
+                    <tr>
+                        <th>Redskabsrum bredde</th>
+                        <td>Ønsker ikke redskabsrum</td>
+                    </tr>
+                    <tr>
+                        <th>Redskabsrum længde</th>
+                        <td>Ønsker ikke redksbasrum</td>
+                    </tr>
+
+                </thead>
+            </table>
+
+        </div>
+        
+        
+        <div id="pris">
+        <table>
+                <thead>
+                    <tr>
+                        <th>Pris</th>
+                        <td>21.500,-</td>
+                    </tr>
+
+
+                </thead>
+            </table>
+            
+        </div>
+
         <div id="middle">
             <table>
                 <thead>

@@ -32,9 +32,29 @@ td, th {
     font-size: 18px;
 }
 
+#kundeinfo {
+    width: 600px;
+    height: 270px;
+    margin-left: 15px;
+}
+
+#carportinfo {
+    width: 600px;
+    heigh: 300px;
+    margin-left: 15px;
+    margin-bottom: 50px;
+}
+
+#pris {
+    width: 600px;
+    height: 100px;
+    margin-left: 15px;
+    margin-bottom: 50px;
+}
+
 #middle{
     height: 400px;
-    width: 1150px;
+    width: 1130px;
     overflow-y: scroll;
     margin-bottom: 100px;
 }
