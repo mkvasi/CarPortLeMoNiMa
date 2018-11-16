@@ -68,4 +68,12 @@ public class Calculator {
         double rafters = Math.ceil(carportLength / totalRafterDimension); // Total amount of rafter based on calculating length with total dimension per rafter
         return (int) rafters;
     }
+    
+    public int countEaves(Carport carport) {
+        double eavesWidth = 1.0;
+        double countEaves = Math.ceil(carport.getRoof().getWidth() / eavesWidth); // Total pieces of eaves with 1 meter width. 
+        double eaveMetersForLength = Math.ceil(carport.getLength());              // Length of each eave piece.
+        
+        return (int) countEaves;
+    }
 }
