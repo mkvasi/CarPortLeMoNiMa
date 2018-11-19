@@ -74,10 +74,10 @@ public class CarportCalculator {
     public int countScrewsForRafters(Carport carport, Material rafter) {
         
         int amountOfScrewsForOneMeterRaft = 4;
-        
-        int screws = rafter.getQty() * amountOfScrewsForOneMeterRaft; // Total amount of screws for the rafters, to hold the flat roof. For each rafter meter, 4 screws are added.
+        double totalRafterMeters = Math.ceil(rafter.getQty() * carport.getWidth());
+        double screws = totalRafterMeters * amountOfScrewsForOneMeterRaft; // Total amount of screws for the rafters, to hold the flat roof. For each rafter meter, 4 screws are added.
  
-        return screws;
+        return (int) screws;
     }
 
     public int countRemForCarport(Carport carport) {
