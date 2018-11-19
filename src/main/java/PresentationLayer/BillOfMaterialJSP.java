@@ -36,12 +36,12 @@ public class BillOfMaterialJSP extends Command {
     
         Carport carport = new Carport(length, width, roof); 
         List listDone = null; 
-//        try {
-//            List list = LogicFacade.getMaterialList();
-//            listDone = LogicFacade.getMaterialListWithQty(list, carport); 
-//        } catch (MaterialException ex) {
-//            Logger.getLogger(BillOfMaterial.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            List list = LogicFacade.getMaterialList();
+            listDone = LogicFacade.getMaterialListWithQty(list, carport); 
+        } catch (MaterialException ex) {
+            throw new IllegalArgumentException(); 
+        }
       
      
         
