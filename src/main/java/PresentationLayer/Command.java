@@ -1,6 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.LoginUserException;
+import FunctionLayer.exceptions.LoginUserException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +13,8 @@ abstract class Command {
     private static void initCommands() {
         commands = new HashMap<>();
         commands.put("billofmaterial", new BillOfMaterialJSP());
+        commands.put("sendrequest", new SendRequest());
+        
     }
 
     static Command from(HttpServletRequest request) {

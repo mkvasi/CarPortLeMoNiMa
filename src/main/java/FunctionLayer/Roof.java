@@ -5,7 +5,7 @@
  */
 package FunctionLayer;
 
-import java.util.List;
+
 
 /**
  *
@@ -13,19 +13,19 @@ import java.util.List;
  */
 public class Roof {
 
-    private boolean flatRoof;
+    private boolean isPitchedRoof;
     private double length, width;
 
     public Roof(boolean flatRoof) {
-        this.flatRoof = flatRoof;
+        this.isPitchedRoof = flatRoof;
     }
 
-    public boolean isFlatRoof() {
-        return flatRoof;
+    public boolean isPitchedRoof() {
+        return isPitchedRoof;
     }
 
-    public void setFlatRoof(boolean flatRoof) {
-        this.flatRoof = flatRoof;
+    public void setIsPitchedRoof(boolean isPitchedRoof) {
+        this.isPitchedRoof = isPitchedRoof;
     }
 
     public double getLength() {

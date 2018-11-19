@@ -1,17 +1,21 @@
 package PresentationLayer;
 
-import FunctionLayer.BillOfMaterial;
+//import FunctionLayer.BillOfMaterial;
 import FunctionLayer.Carport;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.LoginUserException;
+import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.Roof;
+import FunctionLayer.exceptions.MaterialException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * The purpose of BillOfMaterialJSP: !!!TYPE PURPOSE OF BillOfMaterialJSP HERE!!!
+ * The purpose of BillOfMaterial: !!!TYPE PURPOSE OF BillOfMaterial HERE!!!
  * @author Morten
  * @version 1.0
  * @since 16-11-2018
@@ -21,17 +25,32 @@ public class BillOfMaterialJSP extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) {
-        //BillOfMaterial bom = new BillOfMaterial();
-        //Carport carport = new Carport(5.0, 3.0, new Roof(true));
+
+        double length = Double.parseDouble(request.getParameter("length"));
+        double width = Double.parseDouble(request.getParameter("width"));
+        boolean roofFlat = Boolean.parseBoolean(request.getParameter("roof"));
         
-        System.out.println("TEST");
-        //System.out.println(carport.getHeigth());
+      
+        Roof roof = new Roof(roofFlat); 
         
-        //bom.setBomCarport(LogicFacade.updateBomCarport(carport));
+    
+        Carport carport = new Carport(length, width, roof); 
+        List listDone = null; 
+        try {
+            List list = LogicFacade.getMaterialList();
+            listDone = LogicFacade.getMaterialListWithQty(list, carport); 
+        } catch (MaterialException ex) {
+            throw new IllegalArgumentException(); 
+        }
+      
+     
         
-        //request.setAttribute("bomCarport", bom.getBomCarport());
         
-        return "index";
+        
+        request.setAttribute("carport", carport);
+        request.setAttribute("listDone", listDone);
+        
+        return "carportInformations";
     }
 
 }
