@@ -16,7 +16,7 @@ public class Carport {
     private double length, width;
     private double heigth;
     private Roof roof;
-    private List<Material> materialListCarport;
+    private List BOM; 
 
     public Carport(double length, double width, Roof roof) {
         this.length = length;
@@ -57,16 +57,16 @@ public class Carport {
         this.roof = roof;
     }
 
-    public List<Material> getMaterialListCarport() {
-        return materialListCarport;
+    public List getBOM() {
+        return BOM;
     }
 
-    public void setMaterialListCarport(List<Material> materialListCarport) {
-        this.materialListCarport = materialListCarport;
+    public void setBOM(List BOM) {
+        this.BOM = BOM;
     }
 
-    public void addMaterialToCarport(Material material) {
-        materialListCarport.add(material);
-    }
+
+
+
 
 }

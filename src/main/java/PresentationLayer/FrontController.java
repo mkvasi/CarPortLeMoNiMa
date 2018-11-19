@@ -1,6 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.LoginUserException;
+import FunctionLayer.exceptions.LoginUserException;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletException;

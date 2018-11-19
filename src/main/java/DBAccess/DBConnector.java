@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBConnector {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/fog";
+    private static final String URL = "jdbc:mysql://46.101.210.61/fog";
     private static final String USERNAME = "connect";
     private static final String PASSWORD = "connect";
 

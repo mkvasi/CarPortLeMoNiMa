@@ -4,8 +4,8 @@
     Author     : Yeha
 --%>
 
+<%@page import="FunctionLayer.Carport"%>
 <%@page import="FunctionLayer.Material"%>
-<%@page import="FunctionLayer.BillOfMaterial"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Serenity - Modern bootstrap website template</title>
+        <title>Fog - carport beregner</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -38,7 +38,8 @@
     </head>
 
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
-        <% List<Material> billofmaterial = (List) request.getAttribute("bomCarport");%>
+        <% List<Material> billofmaterial = (List) request.getAttribute("listDone");%>
+        <% Carport carport = (Carport) request.getAttribute("carport");%>
         <header>
             <!-- Navbar
             ================================================== -->
@@ -95,51 +96,20 @@
         </section>
 
 
-        <div id="kundeinfo">
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Navn</th>
-                        <td>Yürpa Hanson</td>
-                    </tr>
-
-
-                    <tr>
-                        <th>Adresse</th>
-                        <td>Udkantsdanmarksvej 43</td>
-                    </tr>
-                    <tr>
-                        <th>Postnummer og by</th>
-                        <td>9283 Smørumsk</td>
-                    </tr>
-                    <tr>
-                        <th>Telefon</th>
-                        <td>45 36 74 85</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>Hanson@gmail.com</td>
-                    </tr>
-
-                </thead>
-            </table>
-
-        </div>
-
         <div id="carportinfo">
-
+                <form action="FrontController" method="POST" name="sendrequest" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="sendrequest">
             <table>
                 <thead>
                     <tr>
                         <th>Carport bredde</th>
-                        <td>300 cm</td>
+                        <td><%out.print(carport.getWidth());%></td>
                     </tr>
 
 
                     <tr>
                         <th>Carport længde</th>
-                        <td>330 cm</td>
+                        <td><%out.print(carport.getLength());%></td>
                     </tr>
                     <tr>
                         <th>Tag</th>
@@ -157,7 +127,9 @@
                 </thead>
             </table>
 
+                     <button type="submit" value="Add" name="submit">Send forespørgelse</button>
         </div>
+                    
 
 
         <div id="pris">
@@ -187,46 +159,52 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>25x200 mm. trykimp. Brædt</td>
-                        <td>360</td>
-                        <td>4</td>
-                        <td>stk.</td>
-                        <td>understernbrædder til for & bag ende</td>
+                        <td><%out.print(billofmaterial.get(0).getName());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get(0).getQty());%></td>
+                        <td><%out.print(billofmaterial.get(0).getMeasure());%></td>
+                        <td><%out.print(billofmaterial.get(0).getDescription());%></td>
+                        
                     </tr>
-                    <tr>
-                        <td>25x200 mm. trykimp. Brædt</td>
-                        <td>360</td>
-                        <td>4</td>
-                        <td>stk.</td>
-                        <td>understernbrædder til for & bag ende</td>
+                       <tr>
+                        <td><%out.print(billofmaterial.get(1).getName());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get(1).getQty());%></td>
+                        <td><%out.print(billofmaterial.get(1).getMeasure());%></td>
+                        <td><%out.print(billofmaterial.get(1).getDescription());%></td>
+                        
                     </tr>
-                    <tr>
-                        <td>25x200 mm. trykimp. Brædt</td>
-                        <td>360</td>
-                        <td>4</td>
-                        <td>stk.</td>
-                        <td>understernbrædder til for & bag ende</td>
+                   <tr>
+                        <td><%out.print(billofmaterial.get(2).getName());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get(2).getQty());%></td>
+                        <td><%out.print(billofmaterial.get(2).getMeasure());%></td>
+                        <td><%out.print(billofmaterial.get(2).getDescription());%></td>
+                        
                     </tr>
-                    <tr>
-                        <td>25x200 mm. trykimp. Brædt</td>
-                        <td>360</td>
-                        <td>4</td>
-                        <td>stk.</td>
-                        <td>understernbrædder til for & bag ende</td>
+                  <tr>
+                        <td><%out.print(billofmaterial.get(3).getName());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get(3).getQty());%></td>
+                        <td><%out.print(billofmaterial.get(3).getMeasure());%></td>
+                        <td><%out.print(billofmaterial.get(3).getDescription());%></td>
+                        
                     </tr>
-                    <tr>
-                        <td>25x200 mm. trykimp. Brædt</td>
-                        <td>360</td>
-                        <td>4</td>
-                        <td>stk.</td>
-                        <td>understernbrædder til for & bag ende</td>
+                   <tr>
+                        <td><%out.print(billofmaterial.get(4).getName());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get(4).getQty());%></td>
+                        <td><%out.print(billofmaterial.get(4).getMeasure());%></td>
+                        <td><%out.print(billofmaterial.get(4).getDescription());%></td>
+                        
                     </tr>
-                    <tr>
-                        <td>25x200 mm. trykimp. Brædt</td>
-                        <td>360</td>
-                        <td>4</td>
-                        <td>stk.</td>
-                        <td>understernbrædder til for & bag ende</td>
+                   <tr>
+                        <td><%out.print(billofmaterial.get(5).getName());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get(5).getQty());%></td>
+                        <td><%out.print(billofmaterial.get(5).getMeasure());%></td>
+                        <td><%out.print(billofmaterial.get(5).getDescription());%></td>
+                        
                     </tr>
                     <tr>
                         <td>25x200 mm. trykimp. Brædt</td>
@@ -260,42 +238,8 @@
             </table>
         </div>
 
-        <div id="middle">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Træ & tagplader</th>
-                        <th>Længde</th>
-                        <th>Antal</th>
-                        <th>Enhed</th>
-                        <th>Beskrivelse</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>25x200 mm. trykimp. Brædt</td>
-                        <td>360</td>
-                        <td>4</td>
-                        <td>stk.</td>
-                        <td>understernbrædder til for & bag ende</td>
-                    </tr>
-                    <%
-                        if (!billofmaterial.isEmpty()) {
-                            for (Material material : billofmaterial) {
 
-                                out.println("<tr>"
-                                        + "<td>" + material.getName() + "</td>"
-                                        + "<td>" + material.getQty() + "</td>"
-                                        + "<td>" + material.getQty() + "</td>"
-                                        + "<td>" + material.getMeasure() + "</td>"
-                                        + "<td>" + material.getDescription() + "</td>"
-                                        + "</tr>");
-                            }
-                        }
-                    %>
-                </tbody>
-            </table>
-        </div>
+     
         <!-- Footer
        ================================================== -->
         <footer class="footer">

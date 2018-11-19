@@ -26,6 +26,17 @@ public class Material {
         this.qty = qty;
     }
 
+    public Material(int id, String name, String measure, String type, String description, double buyprice, double sellprice) {
+        this.id = id;
+        this.name = name;
+        this.measure = measure;
+        this.type = type;
+        this.description = description;
+        this.buyprice = buyprice;
+        this.sellprice = sellprice;
+    }
+    
+
     public String getName() {
         return name;
     }
@@ -88,7 +99,13 @@ public class Material {
 
     public void setQty(int qty) {
         this.qty = qty;
+ 
     }
 
+    @Override
+    public String toString() {
+        return "Material{" + "id=" + id + ", qty=" + qty + ", name=" + name + ", measure=" + measure + ", type=" + type + ", description=" + description + ", buyprice=" + buyprice + ", sellprice=" + sellprice + '}';
+    }
+    
     
 }

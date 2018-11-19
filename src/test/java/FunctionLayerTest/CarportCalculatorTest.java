@@ -1,8 +1,8 @@
 package FunctionLayerTest;
 
 
-import FunctionLayer.Calculator;
 import FunctionLayer.Carport;
+import FunctionLayer.CarportCalculator;
 import FunctionLayer.Roof;
 import org.junit.Test;
 import org.junit.Assert;
@@ -17,10 +17,10 @@ import org.junit.Before;
  *
  * @author nr
  */
-public class CalculatorTests {
+public class CarportCalculatorTest {
     
     Carport carport;
-    Calculator calc;
+    CarportCalculator calc;
     
 
     Roof flatRoof = new Roof(true);
@@ -36,7 +36,7 @@ public class CalculatorTests {
     
     
     @Before public void setup(){
-        calc = new Calculator();
+        calc = new CarportCalculator();
         Roof roof = new Roof(true);
         carport = new Carport(5, 3, roof);
     }

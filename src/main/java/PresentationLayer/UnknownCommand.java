@@ -1,6 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.LoginUserException;
+import FunctionLayer.exceptions.LoginUserException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
