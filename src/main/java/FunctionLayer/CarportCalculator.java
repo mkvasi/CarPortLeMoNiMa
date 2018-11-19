@@ -35,6 +35,9 @@ public class CarportCalculator {
         Material rem = materialList.get(5);
         rem.setQty(countRemForCarport(carport));
         
+        Material roof = materialList.get(6);
+        roof.setQty(countEaves(carport));
+        
         return materialList;
     }
 
@@ -89,22 +92,22 @@ public class CarportCalculator {
 
     public void calculateRoofDimensions(Carport carport) {
         double extraSpaceFlatRoof = 0.10;
-        if (carport.getRoof().isPitchedRoof()) {
+     
             double extraLength = extraSpaceFlatRoof * 2; // Total count of extra space for roof. For each length it would be added 10 cm (* 2)
             double extraWidth = extraSpaceFlatRoof * 2; // Total count of extra space for roof. For each wide it would be added 10 cm (* 2)
             carport.getRoof().setLength(carport.getLength() + extraLength);
             carport.getRoof().setWidth(carport.getWidth() + extraWidth);
-        }
+        
+        
     }
+
+    
+    public int countEaves(Carport carport) {
+        calculateRoofDimensions(carport);
+        double eavesWidth = 1.0;
+        double countEaves = Math.ceil(carport.getRoof().getWidth() / eavesWidth); // Total pieces of eaves with 1 meter width. 
+       // double eaveMetersForLength = Math.ceil(carport.getLength());              // Length of each eave piece.
+        return (int) countEaves;
+    }
+
 }
-//
-//    
-//    public int countEaves(Carport carport) {
-//        double eavesWidth = 1.0;
-//        double countEaves = Math.ceil(carport.getRoof().getWidth() / eavesWidth); // Total pieces of eaves with 1 meter width. 
-//        double eaveMetersForLength = Math.ceil(carport.getLength());              // Length of each eave piece.
-//        carport.addQtyOfMaterial(new Material(7, "Tagplade blå 6 meter", "stk.", "Tagplader", "Tagplader til flat tag", 60, 180, (int) countEaves));
-//        return (int) countEaves;
-//    }
-//
-//}

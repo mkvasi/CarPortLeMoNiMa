@@ -206,12 +206,13 @@
                         <td><%out.print(billofmaterial.get(5).getDescription());%></td>
                         
                     </tr>
-                    <tr>
-                        <td>25x200 mm. trykimp. Brædt</td>
-                        <td>360</td>
-                        <td>4</td>
-                        <td>stk.</td>
-                        <td>understernbrædder til for & bag ende</td>
+                                      <tr>
+                        <td><%out.print(billofmaterial.get(6).getName());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get(6).getQty());%></td>
+                        <td><%out.print(billofmaterial.get(6).getMeasure());%></td>
+                        <td><%out.print(billofmaterial.get(6).getDescription());%></td>
+                        
                     </tr>
                     <tr>
                         <td>25x200 mm. trykimp. Brædt</td>
