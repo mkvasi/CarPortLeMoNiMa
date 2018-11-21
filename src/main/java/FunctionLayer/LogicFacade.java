@@ -81,4 +81,9 @@ public class LogicFacade {
         return calc.getCarportBOM(materialList, carport);
     }
     
+        public static double getOfferPrice(List<Material> materialList) {
+        OfferPriceCalculator calc = new OfferPriceCalculator();
+        return calc.calculateOfferPrice(materialList); 
+    }
+    
 }

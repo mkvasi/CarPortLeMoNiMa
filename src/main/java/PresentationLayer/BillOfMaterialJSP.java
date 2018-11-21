@@ -32,21 +32,24 @@ public class BillOfMaterialJSP extends Command {
         
       
         Roof roof = new Roof(roofFlat); 
+        Carport carport = new Carport(length, width, roof); 
         
     
-        Carport carport = new Carport(length, width, roof); 
         List listDone = null; 
+        double offerPrice; 
         try {
             List list = LogicFacade.getMaterialList();
             listDone = LogicFacade.getMaterialListWithQty(list, carport); 
+            offerPrice = LogicFacade.getOfferPrice(listDone);
         } catch (MaterialException ex) {
             throw new IllegalArgumentException(); 
         }
-      
+        
+        
      
         
         
-        
+        request.setAttribute("offerprice", offerPrice);
         request.setAttribute("carport", carport);
         request.setAttribute("listDone", listDone);
         

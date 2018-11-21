@@ -1,0 +1,15 @@
+FunctionLayer\exceptions\MaterialException.class
+FunctionLayer\Roof.class
+PresentationLayer\SendRequest.class
+PresentationLayer\UnknownCommand.class
+PresentationLayer\BillOfMaterialJSP.class
+DBAccess\MaterialMapper.class
+FunctionLayer\Material.class
+FunctionLayer\exceptions\LoginUserException.class
+FunctionLayer\CarportCalculator.class
+FunctionLayer\OfferPriceCalculator.class
+PresentationLayer\FrontController.class
+FunctionLayer\LogicFacade.class
+PresentationLayer\Command.class
+FunctionLayer\Carport.class
+DBAccess\DBConnector.class

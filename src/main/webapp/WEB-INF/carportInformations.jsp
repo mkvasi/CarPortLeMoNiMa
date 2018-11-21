@@ -40,6 +40,7 @@
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
         <% List<Material> billofmaterial = (List) request.getAttribute("listDone");%>
         <% Carport carport = (Carport) request.getAttribute("carport");%>
+        <% double offerPrice = (Double) request.getAttribute("offerprice");%>
         <header>
             <!-- Navbar
             ================================================== -->
@@ -52,27 +53,7 @@
                         </a>
                         <!-- end logo -->
                         <!-- top menu -->
-                        <div class="navigation">
-                            <nav>
-                                <ul class="nav topnav">
-                                    <li class="dropdown active">
-                                        <a href="index.html">Home</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#">Features</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#">Pages</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#">Portfolio</a>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html">Contact</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                   
                         <!-- end menu -->
                     </div>
                 </div>
@@ -86,7 +67,7 @@
                     <div class="row">
                         <div class="span12">
                             <div class="centered">
-                                <h3>Forespørgelser</h3>
+                                <h3>Din carport er nedenfor</h3>
                                 <br>
                             </div>
                         </div>
@@ -99,6 +80,8 @@
         <div id="carportinfo">
                 <form action="FrontController" method="POST" name="sendrequest" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="sendrequest">
+                
+                
             <table>
                 <thead>
                     <tr>
@@ -112,8 +95,12 @@
                         <td><%out.print(carport.getLength());%></td>
                     </tr>
                     <tr>
-                        <th>Tag</th>
-                        <td>Plasttrapezplader</td>
+                        <th>Tag bredde</th>
+                        <td><%= (carport.getRoof().getWidth())%> </td>
+                    </tr>
+                    <tr>
+                        <th>Tag længde</th>
+                        <td><%= (carport.getRoof().getLength())%></td>
                     </tr>
                     <tr>
                         <th>Redskabsrum bredde</th>
@@ -121,23 +108,21 @@
                     </tr>
                     <tr>
                         <th>Redskabsrum længde</th>
-                        <td>Ønsker ikke redksbasrum</td>
+                        <td>Ønsker ikke redskabsrum</td>
                     </tr>
 
                 </thead>
             </table>
-
-                     <button type="submit" value="Add" name="submit">Send forespørgelse</button>
+                    <div id="button">
+                    <button type="submit" class="btn btn-primary">Send forespørgelse</button>
+                    </div>
         </div>
-                    
-
-
         <div id="pris">
             <table>
                 <thead>
                     <tr>
                         <th>Pris</th>
-                        <td>21.500,-</td>
+                        <td><%=offerPrice%></td>
                     </tr>
 
 
@@ -145,6 +130,9 @@
             </table>
 
         </div>
+                     
+
+
 
         <div id="middle">
             <table>
@@ -184,7 +172,7 @@
                     </tr>
                   <tr>
                         <td><%out.print(billofmaterial.get(3).getName());%></td>
-                        <td></td>
+                        <td><%out.print(billofmaterial.get(3).getLength());%></td>
                         <td><%out.print(billofmaterial.get(3).getQty());%></td>
                         <td><%out.print(billofmaterial.get(3).getMeasure());%></td>
                         <td><%out.print(billofmaterial.get(3).getDescription());%></td>
@@ -206,33 +194,44 @@
                         <td><%out.print(billofmaterial.get(5).getDescription());%></td>
                         
                     </tr>
-                    <tr>
-                        <td>25x200 mm. trykimp. Brædt</td>
-                        <td>360</td>
-                        <td>4</td>
-                        <td>stk.</td>
-                        <td>understernbrædder til for & bag ende</td>
+                                      <tr>
+                        <td><%out.print(billofmaterial.get(6).getName());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get(6).getQty());%></td>
+                        <td><%out.print(billofmaterial.get(6).getMeasure());%></td>
+                        <td><%out.print(billofmaterial.get(6).getDescription());%></td>
+                        
                     </tr>
                     <tr>
-                        <td>25x200 mm. trykimp. Brædt</td>
-                        <td>360</td>
-                        <td>4</td>
-                        <td>stk.</td>
-                        <td>understernbrædder til for & bag ende</td>
+                        <td><%out.print(billofmaterial.get(7).getName());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get(7).getQty());%></td>
+                        <td><%out.print(billofmaterial.get(7).getMeasure());%></td>
+                        <td><%out.print(billofmaterial.get(7).getDescription());%></td>
+                        
+                    </tr>
+               <tr>
+                        <td><%out.print(billofmaterial.get(8).getName());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get(8).getQty());%></td>
+                        <td><%out.print(billofmaterial.get(8).getMeasure());%></td>
+                        <td><%out.print(billofmaterial.get(8).getDescription());%></td>
+                        
                     </tr>
                     <tr>
-                        <td>25x200 mm. trykimp. Brædt</td>
-                        <td>360</td>
-                        <td>4</td>
-                        <td>stk.</td>
-                        <td>understernbrædder til for & bag ende</td>
-                    </tr>
-                    <tr>
-                        <td>25x200 mm. trykimp. Brædt</td>
-                        <td>360</td>
-                        <td>4</td>
-                        <td>stk.</td>
-                        <td>understernbrædder til for & bag ende</td>
+                        <td><%out.print(billofmaterial.get(9).getName());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get(9).getQty());%></td>
+                        <td><%out.print(billofmaterial.get(9).getMeasure());%></td>
+                        <td><%out.print(billofmaterial.get(9).getDescription());%></td>
+                        
+                    </tr>  <tr>
+                        <td><%out.print(billofmaterial.get(10).getName());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get(10).getQty());%></td>
+                        <td><%out.print(billofmaterial.get(10).getMeasure());%></td>
+                        <td><%out.print(billofmaterial.get(10).getDescription());%></td>
+                        
                     </tr>
                 </tbody>
             </table>

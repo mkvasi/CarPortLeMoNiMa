@@ -3,7 +3,10 @@
 //
 //import FunctionLayer.Carport;
 //import FunctionLayer.CarportCalculator;
+//import FunctionLayer.Material;
 //import FunctionLayer.Roof;
+//import java.util.ArrayList;
+//import java.util.List;
 //import org.junit.Test;
 //import org.junit.Assert;
 //import org.junit.Before;
@@ -22,10 +25,8 @@
 //    Carport carport;
 //    CarportCalculator calc;
 //    
-//
-//    Roof flatRoof = new Roof(true);
-//    Roof pitchedRoof = new Roof(false);
-//    
+//    Roof flatRoof = new Roof(false);
+//    Roof pitchedRoof = new Roof(true);
 //    Carport carport1 = new Carport(4, 2.5, flatRoof);
 //    Carport carport2 = new Carport(5, 3.5, flatRoof);
 //    Carport carport3 = new Carport(6, 3, flatRoof);
@@ -33,6 +34,12 @@
 //    Carport carport5 = new Carport(8.5, 4, flatRoof);
 //    Carport carport6 = new Carport(7, 4.5, flatRoof);
 //    Carport carportPitchedRoof = new Carport(5, 4, pitchedRoof);
+//    
+//    Material rafters = new Material(15, "Rafter", "stk.", "Tree", "Tree to hold eaves", 45, 90, 12);
+//    Material brackets = new Material(16, "Bracket", "stk.", "Brackets", "Brackets for posts", 7, 20, 16);
+//    Material fourPosts = new Material(17, "Post", "stk.", "Tree", "Posts for carport", 110, 350, 4);
+//    Material sixPosts = new Material(17, "Post", "stk.", "Tree", "Posts for carport", 110, 350, 6);
+//    
 //    
 //    
 //    @Before public void setup(){
@@ -55,13 +62,13 @@
 //    
 //     @Test
 //    public void testCountBracketsForCarport() {
-//        int actualBrackets = calc.countBracketsForCarport(carport4);
+//        int actualBrackets = calc.countBracketsForCarport(sixPosts);
 //        Assert.assertEquals(24, actualBrackets);       
 //    }
 //    
 //    @Test
 //    public void testCountScrewsForBrackets() {
-//        int actualScrews = calc.countScrewsForBrackets(carport3);
+//        int actualScrews = calc.countScrewsForBrackets(brackets);
 //        Assert.assertEquals(128, actualScrews);
 //    }
 //    @Test
@@ -72,8 +79,8 @@
 //    
 //    @Test
 //    public void testScrewsForRaftersFlatRoof() {
-//        int actualScrews = calc.countScrewsForRaftersFlatRoof(carport2);
-//        Assert.assertEquals(128, actualScrews);
+//        int actualScrews = calc.countScrewsForRafters(carport3, rafters);
+//        Assert.assertEquals(144, actualScrews);
 //    }
 //    
 //    @Test
