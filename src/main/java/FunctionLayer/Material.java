@@ -13,7 +13,7 @@ public class Material {
 
     int id, qty;
     private String name, measure, type, description;
-    private double buyprice, sellprice;
+    private double buyprice, sellprice, length;
 
     public Material(int id, String name, String measure, String type, String description, double buyprice, double sellprice, int qty) {
         this.id = id;
@@ -101,6 +101,15 @@ public class Material {
         this.qty = qty;
  
     }
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+    
 
     @Override
     public String toString() {
