@@ -14,7 +14,7 @@ package FunctionLayer;
 public class Roof {
 
     private boolean isPitchedRoof;
-    private double length, width;
+    private double length, width, slope;
 
     public Roof(boolean flatRoof) {
         this.isPitchedRoof = flatRoof;
@@ -43,6 +43,15 @@ public class Roof {
     public void setWidth(double width) {
         this.width = width;
     }
+
+    public double getSlope() {
+        return slope;
+    }
+
+    public void setSlope(double slope) {
+        this.slope = slope;
+    }
+    
 
 }
 

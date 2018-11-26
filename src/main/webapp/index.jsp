@@ -8,87 +8,171 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <title>Fog - carport beregner</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- styles -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/style.css" rel="stylesheet">
+        <link href="bootstrap/color/default.css" rel="stylesheet">
 
 
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <link href="bootstrap/css/css-orderform.css" rel="stylesheet">
 
+        <!-- fav and touch icons -->
+
+        <link rel="shortcut icon" href="bootstrap/ico/favicon.ico">
+
+        <!-- =======================================================
+          Theme Name: Serenity
+          Theme URL: https://bootstrapmade.com/serenity-bootstrap-corporate-template/
+          Author: BootstrapMade.com
+          Author URL: https://bootstrapmade.com
+        ======================================================= -->
     </head>
-    <body>
+    <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
+        <header>
+            <!-- Navbar
+            ================================================== -->
+            <div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <!-- logo -->
+                        <a class="brand logo" href="index.html">
+                            <img src="bootstrap/img/foglogo.PNG" alt="" />
+                        </a>
+                        <!-- end logo -->
+                        <!-- top menu -->
 
-        <div class="page-container" >
-
-            <form action="FrontController" method="POST" name="billofmaterial" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="billofmaterial">
-                <h1>Indtast mål til ønsket carport nedenfor</h1>
-
-                <input list="hosting-plan" type="label" placeholder="Vælg længden" name="length">
-
-                <datalist id="hosting-plan" >
-                    <option value="2.40" />
-                    <option value="2.70"/>
-                    <option value="3.00"/>
-                    <option value="3.30" />
-                    <option value="3.60"/>
-                    <option value="3.90"/>
-                    <option value="4.20" />
-                    <option value="4.50"/>
-                    <option value="4.80"/>
-                    <option value="5.10"/>
-                    <option value="5.40"/>
-                    <option value="5.70"/>
-                    <option value="6.00"/>
-                    <option value="6.30"/>
-                    <option value="6.60"/>
-                    <option value="6.90"/>
-                    <option value="7.20"/>
-                    <option value="7.50"/>
-                    <option value="7.80"/>
-                </datalist>
-                <input list="hosting-plan" type="label" placeholder="Vælg bredde" name="width" >
-
-                <datalist id="hosting-plan" >
-                    <option value="2.40" />
-                    <option value="2.70"/>
-                    <option value="3.00"/>
-                    <option value="3.30" />
-                    <option value="3.60"/>
-                    <option value="3.90"/>
-                    <option value="4.20" />
-                    <option value="4.50"/>
-                    <option value="4.80"/>
-                    <option value="5.10"/>
-                    <option value="5.40"/>
-                    <option value="5.70"/>
-                    <option value="6.00"/>
-                    <option value="6.30"/>
-                    <option value="6.60"/>
-                    <option value="6.90"/>
-                    <option value="7.20"/>
-                    <option value="7.50"/>
-                    <option value="7.80"/>
-                </datalist>
-                <div class="form-group">
-                    <div class="form-check">
-                        <label class="form-check-label" for="gridCheck" name="roof">
-                          Tag med hældning
-                        </label>
-                        <input  type="checkbox" id="gridCheck" name="roof" value="true">
+                        <!-- end menu -->
                     </div>
+                </div>
+            </div>
+        </header>
+        <!-- Subhead
+      ================================================== -->
+        <section id="subintro">
+            <div class="jumbotron subhead" id="overview">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="centered">
+                                <h3>Beregn din carport nedenfor</h3>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-         
-                    <button type="submit" value="Add" name="submit">Se carport</button>
+
+
+
+        <div class="containerForCarport">
+            <form action="FrontController" method="POST" name="carportOverview" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="carportOverview">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01" >Længde på carport</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name="length" >
+                    <option selected>Vælg venligst længde</option>
+                    <option value="2.4">2,4 m.</option>
+                    <option value="2.7">2,7 m</option>
+                    <option value="3.0">3,0 m</option>
+                    <option value="3.3">3,3 m</option>
+                    <option value="3.6">3,6 m</option>
+                    <option value="3.9">3,9 m</option>
+                    <option value="4.2">4,2 m</option>
+                    <option value="4.5">4,5 m</option>
+                    <option value="5.1">5,1 m</option>
+                    <option value="5.4">5,4 m</option>
+                    <option value="5.7">5,7 m</option>
+                    <option value="6.0">6,0 m</option>
+                    <option value="6.3">6,3 m</option>
+                    <option value="6.6">6,6 m</option>
+                    <option value="6.9">6,9 m</option>
+                    <option value="7.2">7,2 m</option>
+                    <option value="7.5">7,5 m</option>
+                    <option value="7.8">7,8 m</option>
+                </select>
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Bredde på carport</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name="width">
+                       <option selected>Vælg venligst bredde</option>
+                    <option value="2.4">2,4 m.</option>
+                    <option value="2.7">2,7 m</option>
+                    <option value="3.0">3,0 m</option>
+                    <option value="3.3">3,3 m</option>
+                    <option value="3.6">3,6 m</option>
+                    <option value="3.9">3,9 m</option>
+                    <option value="4.2">4,2 m</option>
+                    <option value="4.5">4,5 m</option>
+                    <option value="5.1">5,1 m</option>
+                    <option value="5.4">5,4 m</option>
+                    <option value="5.7">5,7 m</option>
+                    <option value="6.0">6,0 m</option>
+                    <option value="6.3">6,3 m</option>
+                    <option value="6.6">6,6 m</option>
+                    <option value="6.9">6,9 m</option>
+                    <option value="7.2">7,2 m</option>
+                    <option value="7.5">7,5 m</option>
+             
+                </select>
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Vi du have tag med hældning?</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name="roof">
+                    <option selected>Vælg venligst nedenfor</option>
+                    <option value="Ja">Ja</option>
+                    <option value="Nej">Nej</option>
+
+                </select>
+                <div id="button">
+                    <button type="submit" class="btn btn-primary">Se carport</button>
             </form>
-
         </div>
-    </body>
-</html>
+    </div>
 
-<!--<form name="billofmaterial" action="FrontController" method="POST">
-            <input type="hidden" name="command" value="billofmaterial">
-            <input type="submit" value="Stykliste">
-        </form>--> 
+
+
+
+
+    <!-- Footer
+   ================================================== -->
+    <footer class="footer">
+
+
+        <div class="container">
+            <div class="row">
+                <div class="span6">
+                    <p>
+                        &copy; Serenity - All right reserved
+                    </p>
+                </div>
+                <div class="span6">
+                    <div class="credits">
+                        <!--
+                          All the links in the footer should remain intact.
+                          You can delete the links only if you purchased the pro version.
+                          Licensing information: https://bootstrapmade.com/license/
+                          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Serenity
+                        -->
+                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+
+
+
+</body>
+
+</html>
