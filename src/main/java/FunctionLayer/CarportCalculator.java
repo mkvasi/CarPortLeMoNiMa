@@ -150,7 +150,7 @@ public class CarportCalculator {
     }
     public int calculateUndersternsbrædderForSides(Carport carport){
         double length = carport.getLength()+0.05; 
-
+        
         double numberOfBoards60 = length / 6;
         double numberOfBoardLeft = length % 6;
         double numberOfBoard54 = numberOfBoardLeft / 5.4;
