@@ -1,14 +1,17 @@
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\UnknownCommand.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\Carport.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\Roof.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\Command.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\LogicFacade.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\exceptions\LoginUserException.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\BillOfMaterialJSP.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\exceptions\MaterialException.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\FrontController.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\DBAccess\MaterialMapper.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\CarportCalculator.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\DBAccess\DBConnector.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\SendRequest.java
-C:\Users\leage\OneDrive\Skrivebord\Datamatik\2. semester\Modul-5\git\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\Material.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\Carport.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\BillOfMaterial.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\Command.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\calculators\BoardLengthCalculator.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\LogicFacade.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\exceptions\MaterialException.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\exceptions\LoginUserException.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\DBAccess\DBConnector.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\Material.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\calculators\OfferPriceCalculator.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\Roof.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\UnknownCommand.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\calculators\MaterialQtyCalculator.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\CarportOverview.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\DBAccess\MaterialMapper.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\PresentationLayer\FrontController.java
+C:\Users\Yeha\Desktop\FogCarportLeMoNiMa\FogCarPortLeMoNiMa\FogCarPortLeMoNiMa\src\main\java\FunctionLayer\BillOfMaterial.java

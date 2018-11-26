@@ -5,18 +5,25 @@
  */
 package FunctionLayer;
 
-import java.util.List;
+import java.util.HashMap;
 
-/**
- *
- * @author nr
- */
+
+
 public class Carport {
 
     private double length, width;
     private double heigth;
     private Roof roof;
-    private List BOM; 
+    private HashMap<String,Material> materialsToUseForThisCarport; 
+
+    public Carport(double length, double width, double heigth, Roof roof, HashMap<String, Material> materialsToUseForThisCarport) {
+        this.length = length;
+        this.width = width;
+        this.heigth = heigth;
+        this.roof = roof;
+        this.materialsToUseForThisCarport = materialsToUseForThisCarport;
+    }
+   
 
     public Carport(double length, double width, Roof roof) {
         this.length = length;
@@ -57,13 +64,19 @@ public class Carport {
         this.roof = roof;
     }
 
-    public List getBOM() {
-        return BOM;
+    public HashMap<String, Material> getMaterialsToUseForThisCarport() {
+        return materialsToUseForThisCarport;
     }
 
-    public void setBOM(List BOM) {
-        this.BOM = BOM;
+    public void setMaterialsToUseForThisCarport(HashMap<String, Material> materialsToUseForThisCarport) {
+        this.materialsToUseForThisCarport = materialsToUseForThisCarport;
     }
+
+ 
+
+   
+
+ 
 
 
 

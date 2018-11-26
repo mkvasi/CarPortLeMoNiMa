@@ -1,15 +1,13 @@
 package DBAccess;
 
-
 import FunctionLayer.Material;
 import FunctionLayer.exceptions.MaterialException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  *
@@ -17,62 +15,31 @@ import java.util.List;
  */
 public class MaterialMapper {
 
-
-    public static Material getMaterialById(int materialId) throws MaterialException {
+    public static HashMap<String, Material> getMaterialList() throws MaterialException {
         try {
-            Connection con = DBConnector.connection();
-            String SQL = "SELECT * FROM `MATERIALS` WHERE id=?";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, materialId);
-            ResultSet rs = ps.executeQuery();
-            Material material = null;
-            while (rs.next()) {
-
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String measure = rs.getString("measure");
-                String type = rs.getString("type");
-                String description = rs.getString("description");
-                double buyprice = rs.getDouble("buy_price");
-                double sellprice = rs.getDouble("sell_price"); 
-             
-                 
-      
-
-                material = new Material(id, name, measure, type, description, buyprice, sellprice); 
-                material.setId(materialId);
-            }
-
-            return material;
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            throw new MaterialException(ex.getMessage());
-        }
-    }
-
-    public static List getMaterialList() throws MaterialException {
-         try {
             Connection con = DBConnector.connection();
             String SQL = "SELECT * FROM `MATERIALS`";
             PreparedStatement ps = con.prepareStatement(SQL);
-            
+
             ResultSet rs = ps.executeQuery();
-            
+
             Material material = null;
-            List materialList = new ArrayList(); 
+            HashMap<String, Material> materialList = new HashMap();
             while (rs.next()) {
 
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String measure = rs.getString("measure");
-                String type = rs.getString("type");
+                double length = rs.getDouble("length");
+                double height = rs.getDouble("heigth");
+                double width = rs.getDouble("width");
+                int measure_id = rs.getInt("measure_id");
+                int type_id = rs.getInt("type_id");
                 String description = rs.getString("description");
                 double buyprice = rs.getDouble("buy_price");
-                double sellprice = rs.getDouble("sell_price"); 
-             
-                material = new Material(id, name, measure, type, description, buyprice, sellprice); 
-                materialList.add(material); 
-      
+                double sellprice = rs.getDouble("sell_price");
+                String name = description + length;
+
+                material = new Material(id, measure_id, type_id, description, buyprice, sellprice, length, width, height);
+                materialList.put(name, material);
 
             }
 
@@ -83,100 +50,67 @@ public class MaterialMapper {
         }
     }
 
-    
+    public static HashMap<Integer, TreeMap<Double, Material>> getAllBoardsForThisCarportWithOutLengthCalculation() throws MaterialException {
+        HashMap<Integer, TreeMap<Double, Material>> materialList = new HashMap<>();
+        try {
+            Connection con = DBConnector.connection();
 
-//    public static void createOrder(Order order, User user) throws OrderException {
-//        try {
-//            Connection con = Connector.connection();
-//            String SQL = "INSERT INTO `order` (length, width, layers, user_id) VALUES (?, ?, ?, ?)";
-//            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-//            ps.setInt(1, order.getLength());
-//            ps.setInt(2, order.getWidth());
-//            ps.setInt(3, order.getLayers());
-//            ps.setInt(4, user.getId());
-//            ps.executeUpdate();
-//            ResultSet ids = ps.getGeneratedKeys();
-//            ids.next();
-//            int id = ids.getInt(1);
-//            order.setId(id);
-//
-//        } catch (SQLException | ClassNotFoundException ex) {
-//            throw new OrderException(ex.getMessage());
-//        }
-//    }
-//
-//    public static List<Order> getUserOrders(User user) throws OrderException {
-//        try {
-//            Connection con = Connector.connection();
-//            String SQL = "SELECT * FROM `order` WHERE user_id=?";
-//            PreparedStatement ps = con.prepareStatement(SQL);
-//            ps.setInt(1, user.getId());
-//            ResultSet rs = ps.executeQuery();
-//            List<Order> orders = new ArrayList<>();
-//            while (rs.next()) {
-//                int orderId = rs.getInt("id");
-//                int length = rs.getInt("length");
-//                int width = rs.getInt("width");
-//                int layers = rs.getInt("layers");
-//
-//                Order order = new Order(length, width, layers);
-//                order.setId(orderId);
-//                orders.add(order);
-//            }
-//            return orders;
-//
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            throw new OrderException(ex.getMessage());
-//        }
-//    }
-//
-//    public static List<Order> getAllOrders() throws OrderException {
-//
-//        try {
-//            Connection con = Connector.connection();
-//            String SQL = "SELECT * FROM `order`";
-//            PreparedStatement pstmt = con.prepareStatement(SQL);
-//            ResultSet rs = pstmt.executeQuery();
-//            List<Order> orders = new ArrayList<>();
-//            while (rs.next()) {
-//                int orderId = rs.getInt("id");
-//                int length = rs.getInt("length");
-//                int width = rs.getInt("width");
-//                int layers = rs.getInt("layers");
-//
-//                Order order = new Order(length, width, layers);
-//                order.setId(orderId);
-//                orders.add(order);
-//            }
-//            return orders;
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            throw new OrderException(ex.getMessage());
-//        }
-//
-//    }
-//
-//    public static Order shipOrder(Order order) throws OrderException {
-//        try {
-//            Connection con = Connector.connection();
-//            String sql = "UPDATE `order` SET `shipped`=? WHERE `id`=?;";
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ps.setInt(1, 1);
-//            ps.setInt(2, order.getId());
-//            ps.executeUpdate();
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            throw new OrderException(ex.getMessage());
-//        }
-//        
-//        return order;
-//    }
-//
+            materialList.put(6, getBoardWithType_id(con, 6, 200.0, 25));
+            materialList.put(7, getBoardWithType_id(con, 7, 97.0, 97.0));
+            materialList.put(8, getBoardWithType_id(con, 8, 73.0, 38.0));
+            materialList.put(9, getBoardWithType_id(con, 9, 150.0, 50.0));
+            materialList.put(10, getBoardWithType_id(con, 10, 195.0, 45));
+            materialList.put(11, getBoardWithType_id(con, 11, 1.0, 1.0));
+
+            return materialList;
+
+        } catch (SQLException | ClassNotFoundException ex) {
+
+            throw new MaterialException(ex.getMessage());
+
+        }
+
+    }
+
+
+    public static TreeMap<Double, Material> getBoardWithType_id(Connection con, int type_id, double width, double height) throws SQLException {
+        String SQL = " SELECT * FROM `MATERIALS` WHERE type_id = " + type_id + " AND width =" + width + " AND heigth =" + height + "";
+        PreparedStatement ps = con.prepareStatement(SQL);
+        ResultSet rs = ps.executeQuery();
+
+        TreeMap<Double, Material> boardsType = new TreeMap();
+        Material material = null;
+        while (rs.next()) {
+
+            int id = rs.getInt("id");
+            String description = rs.getString("description");
+            double length = rs.getDouble("length");
+            int measure_id = rs.getInt("measure_id");
+            double buyprice = rs.getDouble("buy_price");
+            double sellprice = rs.getDouble("sell_price");
+       
+
+            material = new Material(id, type_id, measure_id, description, buyprice, sellprice, length, width, height);
+            boardsType.put(length, material);
+        }
+        return boardsType;
+    }
+
 //    public static void main(String[] args) throws MaterialException {
-//        Material m = getMaterialById(1); 
-//        
-//  
-//        List<Material> is = getMaterialList();
-//   
-//        System.out.println(""+m);
-//        System.err.println(""+is);
+//
+//        HashMap<Integer, TreeMap<Double, Material>> hej = getAllBoardsForThisCarportWithOutLengthCalculation();
+//        for (Map.Entry<Integer, TreeMap<Double, Material>> entry : hej.entrySet()) {
+//            Integer key = entry.getKey();
+//            TreeMap<Double, Material> value = entry.getValue();
+//            System.out.println(key);
+//            System.out.println(value);
+//
+//            for (Map.Entry<Double, Material> entry1 : value.entrySet()) {
+//                Double key1 = entry1.getKey();
+//                Material value1 = entry1.getValue();
+//
+//            }
+//
+//        }
 //    }
 }
