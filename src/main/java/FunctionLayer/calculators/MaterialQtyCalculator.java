@@ -5,13 +5,11 @@
  */
 package FunctionLayer.calculators;
 
-
 import FunctionLayer.Carport;
 import FunctionLayer.Material;
 import FunctionLayer.exceptions.MaterialException;
 import java.util.HashMap;
 import java.util.TreeMap;
-
 
 /**
  *
@@ -19,66 +17,33 @@ import java.util.TreeMap;
  */
 public class MaterialQtyCalculator {
 
-    BoardLengthCalculator calc = new BoardLengthCalculator();
+    AllMaterialsCalculator calc = new AllMaterialsCalculator();
 
     public HashMap<String, Material> getDoneCarportWithMaterialQty(Carport carport, HashMap<Integer, TreeMap<Double, Material>> boards) throws MaterialException {
-        HashMap<String, Material> boardList = calc.calculateAllBoardTypes(carport, boards);
-        HashMap<String, Material> materialListFromDB = carport.getMaterialsToUseForThisCarport();
-        HashMap<String, Material> materialListCalculated = new HashMap();
+        HashMap<String, Material> allMaterialsForThisCarport = calc.calculateAllMaterialTypes(carport, boards);
+      
+        //Calculate qty of spær, by getting spær from allMaterialsForThisCarport
+        allMaterialsForThisCarport.get("Spær").setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
+        allMaterialsForThisCarport.get("Rem").setQty(calculateQtyOfRemForCarport(carport, allMaterialsForThisCarport.get("Rem")));
+        allMaterialsForThisCarport.get("Stolper").setQty(countPostsForCarport(carport));
+
         
-        if (!carport.getRoof().isPitchedRoof()) {
-            Material spær;
-            spær = boardList.get("Spær");
-            materialListCalculated.put("Spær", spær);
-            spær.setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
-            spær.setName("Spær");
 
-            Material understernsider;
-            understernsider = boardList.get("Understern til siderne");
-            materialListCalculated.put("Understern til siderne", understernsider);
-            understernsider.setQty(calculateQtyOfRemForCarport(carport));
-            understernsider.setName("Understern til siderne");
+        Material understernSides = allMaterialsForThisCarport.get("Understern til siderne");
+        understernSides.setQty(calculateQtyOfRemForCarport(carport, understernSides));
+        
+        Material understernFront = allMaterialsForThisCarport.get("Understern til for og bagende" );
+        understernFront.setQty(calculateQtyOfRemForCarport(carport, understernFront));
+        
+        Material oversternSides = allMaterialsForThisCarport.get("Overstern til siderne");
+        oversternSides.setQty(calculateQtyOfRemForCarport(carport, oversternSides));
 
-            Material understernbagogfor;
-            understernbagogfor = boardList.get("Understern til for og bagende");
-            materialListCalculated.put("Understern til for og bagende", understernbagogfor);
-            understernbagogfor.setQty(calculateQtyOfRemForCarport(carport));
-            understernbagogfor.setName("Understern til for og bagende");
+        allMaterialsForThisCarport.get("Universalbeslag højre").setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
+        allMaterialsForThisCarport.get("Universalbeslag venstre").setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
 
-            Material overstern;
-            overstern = boardList.get("Overstern til siderne");
-            materialListCalculated.put("Overstern til siderne", overstern);
-            overstern.setQty(calculateQtyOfRemForCarport(carport));
-            overstern.setName("Overstern til siderne");
-        } else {
-            Material spær; 
-            spær = materialListFromDB.get("FÆDIGSKÅRET (BYG-SELV SPÆR SKAL SAMLES) 8 STK.1.0");
-            materialListCalculated.put("Spær", spær);
-            spær.setQty(1);
-            spær.setName("Spær");
-        }
+       
 
-        Material rem = boardList.get("Rem");
-        rem.setQty(calculateQtyOfRemForCarport(carport));
-        rem.setName("Rem");
-        materialListCalculated.put("Rem", rem);
-
-        Material universalBracketsRight = materialListFromDB.get("UNIVERSAL 190 MM HØJRE190.0");
-        materialListCalculated.put("Universalbeslag højre", universalBracketsRight);
-        universalBracketsRight.setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
-        universalBracketsRight.setName("Universalbeslag højre");
-
-        Material universalBracketsLeft = materialListFromDB.get("UNIVERSAL 190 MM VENSTRE190.0");
-        materialListCalculated.put("Universalbeslag venstre", universalBracketsLeft);
-        universalBracketsLeft.setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
-        universalBracketsLeft.setName("Universalbeslag");
-
-        Material posts = materialListFromDB.get("97X97 MM FYR STOLPE IMPR.3000.0");
-        materialListCalculated.put("Stolper", posts);
-        posts.setQty(countPostsForCarport(carport));
-        posts.setName("Stolper");
-
-        return materialListCalculated;
+        return allMaterialsForThisCarport;
     }
 
     // Total count of posts, for the carport. For each 3 meters, a new post will be added to each length (* 2)
@@ -95,15 +60,18 @@ public class MaterialQtyCalculator {
         return carriageBolts;
     }
 
-
     public int countAmountRaftersForRoofAndUniversalBracketsForRafter(Carport carport) {
-        double spaceBetweenEachRafter = 0.55;
-        double rafterWidth = 0.02;
-        double totalRafterDimension = spaceBetweenEachRafter + rafterWidth; // Total dimension for each rafter including both space and material.
+        if (!carport.getRoof().isPitchedRoof()) {
+            double spaceBetweenEachRafter = 0.55;
+            double rafterWidth = 0.02;
+            double totalRafterDimension = spaceBetweenEachRafter + rafterWidth; // Total dimension for each rafter including both space and material.
 
-        double rafters = Math.ceil(carport.getLength() / totalRafterDimension); // Total amount of rafter based on calculating length with total dimension per rafter
+            double rafters = Math.ceil(carport.getLength() / totalRafterDimension); // Total amount of rafter based on calculating length with total dimension per rafter
 
-        return (int) rafters;
+            return (int) rafters;
+        } else {
+            return 1;
+        }
     }
 
     public int countUniversalBracketsScrews(Material universalBracketsLeft) {
@@ -119,9 +87,12 @@ public class MaterialQtyCalculator {
     }
     //Skal have hjælp til denne metode, er der måske fejl i stykliste?
 
-    public int calculateQtyOfRemForCarport(Carport carport) {
-        int amountOfRemFlatRoof = 2;
-        return amountOfRemFlatRoof; // Amount of remme is set to 2 if the roof is flat
+    public int calculateQtyOfRemForCarport(Carport carport, Material board) {
+        int amountOfRem = 2;
+        if(board.getLength() < carport.getLength()){
+        return 4;     
+        }
+        return amountOfRem; // Amount of remme is set to 2 if the roof is flat
     }
 
     public void calculateRoofDimensions(Carport carport) {

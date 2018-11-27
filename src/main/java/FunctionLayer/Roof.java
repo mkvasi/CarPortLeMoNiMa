@@ -16,9 +16,21 @@ public class Roof {
     private boolean isPitchedRoof;
     private double length, width, slope;
 
+
+    
+    
+
     public Roof(boolean flatRoof) {
         this.isPitchedRoof = flatRoof;
     }
+
+    public Roof(boolean isPitchedRoof, double length, double width) {
+        this.isPitchedRoof = isPitchedRoof;
+        this.length = length;
+        this.width = width;
+       
+    }
+    
 
     public boolean isPitchedRoof() {
         return isPitchedRoof;

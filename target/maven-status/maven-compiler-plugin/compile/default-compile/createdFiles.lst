@@ -8,10 +8,12 @@ PresentationLayer\BillOfMaterial.class
 FunctionLayer\Material.class
 FunctionLayer\exceptions\LoginUserException.class
 FunctionLayer\calculators\OfferPriceCalculator.class
+FunctionLayer\Shed.class
 FunctionLayer\calculators\MaterialQtyCalculator.class
 PresentationLayer\FrontController.class
 FunctionLayer\LogicFacade.class
 PresentationLayer\Command.class
 PresentationLayer\CarportOverview.class
+FunctionLayer\calculators\AllMaterialsCalculator.class
 FunctionLayer\Carport.class
 DBAccess\DBConnector.class
