@@ -124,18 +124,74 @@
              
                 </select>
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Vi du have tag med hældning?</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Vil du have tag med hældning?</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" name="roof">
+                    <option selected value="Ja">Ja</option>
+                    <option value="Nej">Nej</option>
+
+                </select>
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Redskabsrum:</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name="shed">
                     <option selected>Vælg venligst nedenfor</option>
                     <option value="Ja">Ja</option>
                     <option value="Nej">Nej</option>
 
                 </select>
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Vælge længde</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name="shedLength">
+                    <option selected value="0.0">Ønsker ikke redsskabsrum</option>
+                   <option value="2.4">2,4 m.</option>
+                    <option value="2.7">2,7 m</option>
+                    <option value="3.0">3,0 m</option>
+                    <option value="3.3">3,3 m</option>
+                    <option value="3.6">3,6 m</option>
+                    <option value="3.9">3,9 m</option>
+                    <option value="4.2">4,2 m</option>
+                    <option value="4.5">4,5 m</option>
+                    <option value="5.1">5,1 m</option>
+                    <option value="5.4">5,4 m</option>
+                    <option value="5.7">5,7 m</option>
+                    <option value="6.0">6,0 m</option>
+                    <option value="6.3">6,3 m</option>
+                    <option value="6.6">6,6 m</option>
+                    <option value="6.9">6,9 m</option>
+                    <option value="7.2">7,2 m</option>
+                    <option value="7.5">7,5 m</option>
+
+                </select>
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Vælg bredde</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name="shedWidth">
+                    <option selected value="0.0">Ønsker ikke redskabsrum</option>
+                    <option value="2.4">2,4 m.</option>
+                    <option value="2.7">2,7 m</option>
+                    <option value="3.0">3,0 m</option>
+                    <option value="3.3">3,3 m</option>
+                    <option value="3.6">3,6 m</option>
+                    <option value="3.9">3,9 m</option>
+                    <option value="4.2">4,2 m</option>
+                    <option value="4.5">4,5 m</option>
+                    <option value="5.1">5,1 m</option>
+                    <option value="5.4">5,4 m</option>
+                    <option value="5.7">5,7 m</option>
+                    <option value="6.0">6,0 m</option>
+                    <option value="6.3">6,3 m</option>
+                    <option value="6.6">6,6 m</option>
+                    <option value="6.9">6,9 m</option>
+                    <option value="7.2">7,2 m</option>
+                    <option value="7.5">7,5 m</option>
+
+                </select>
                 <div id="button">
                     <button type="submit" class="btn btn-primary">Se carport</button>
-            </form>
         </div>
+            </form>
     </div>
 
 
