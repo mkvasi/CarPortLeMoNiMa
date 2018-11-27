@@ -60,6 +60,28 @@
                         <!-- top menu -->
 
                         <!-- end menu -->
+                        <div class="navigation">
+                            <nav>
+                                <ul class="nav topnav">
+                                    <li class="dropdown active">
+                                        <a href="index.html">Home</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#">Features</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#">Pages</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#">Portfolio</a>
+                                    </li>
+                                    <li>
+                                        <a href="contact.html">Contact</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- end menu -->
                     </div>
                 </div>
             </div>
@@ -81,6 +103,47 @@
             </div>
         </section>
 
+
+        <div id="customerinfo">
+
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Navn</th>
+                        <td>Yunson Yürpo </td>
+                    </tr>
+
+                    <tr>
+                        <th>Carport længde</th>
+                        <td><%out.print(carport.getLength());%></td>
+                    </tr>
+                    <tr>
+                        <th>Tag bredde</th>
+                        <td><%= (carport.getRoof().getWidth())%> </td>
+                    </tr>
+                    <tr>
+                        <th>Tag længde</th>
+                        <td><%= (carport.getRoof().getLength())%></td>
+                    </tr>
+                    <tr>
+                        <th>Redskabsrum bredde</th>
+                        <td><%=(carport.getShed().getWidth())%></td>
+                    </tr>
+                    <tr>
+                        <th>Redskabsrum længde</th>
+                        <td><%= (carport.getShed().getLength())%></td>
+                    </tr>
+                    <!--<tr>
+                          <th>Pris</th>
+                          <td><//%=offerPrice%></td>
+                          
+                      </tr>-->
+
+                </thead>
+            </table>
+
+        </div>
 
         <div id="carportinfo">
             <form action="FrontController" method="POST" name="billOfMaterial" action="FrontController" method="POST">
@@ -210,8 +273,8 @@
 
         <div id="yderst">
 
-            <SVG width="700" height=800>
-            <rect width="100%" height="100%" fill="#E6E6E6"/>
+            <SVG width="700" height=800 viewBox="">
+            <rect width="100%" height="100%" fill="#FFFFFF"/>
 
             <rect x="77" y="30" height="700" width="540" stroke-width="2"
                   style="stroke:#000000; fill: #EFF2FB"/>
@@ -290,17 +353,16 @@
 
             <%
 
-                
                 int pxmellemspar = 700 / billofmaterial.get("Spær").getQty();
                 int nextspar = 700 / billofmaterial.get("Spær").getQty();
-                
-                for (int i = 0; i < billofmaterial.get("Spær").getQty(); i++) {   
+
+                for (int i = 0; i < billofmaterial.get("Spær").getQty(); i++) {
                     out.println("<line x1=\"77\" y1=\"" + nextspar + "\" " + "x2=\"618\" y2=\"" + nextspar + "\" " + "style=\"stroke:rgb(0,0,0);stroke-width:3\" />");
-                        
-                        nextspar += pxmellemspar;
-                        
-                    }
-                
+
+                    nextspar += pxmellemspar;
+
+                }
+
 
             %>
 

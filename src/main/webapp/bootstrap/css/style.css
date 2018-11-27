@@ -52,7 +52,14 @@ td, th {
     font-size: 18px;
 }
 
-#kundeinfo {
+#yderst {
+    width: 700px;
+    height: 1000px;
+    margin-top: -1050px;
+    margin-left: 1150px;
+}
+
+#customerinfo {
     width: 600px;
     height: 270px;
     margin-left: 15px;
@@ -61,9 +68,8 @@ td, th {
 #carportinfo {
     width: 600px;
     height: 300px;
-    margin-left: 0px;
-    margin-top: 100px;
-    margin-bottom: 100px;
+    margin-left: 15px;
+    margin-top: 50px;
 }
 
 #button {
@@ -85,7 +91,7 @@ td, th {
     height: 400px;
     width: 1130px;
     overflow-y: scroll;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .clear {
@@ -173,7 +179,7 @@ img.left {
 
 header .navbar .brand.logo {
     padding: 0;
-    margin-left: 0;
+    margin-left: -300px;
     margin-top: 0;
 }
 
