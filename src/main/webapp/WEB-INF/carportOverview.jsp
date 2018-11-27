@@ -91,7 +91,7 @@
                     <thead>
                         <tr>
                             <th>Carport bredde</th>
-                            <td><%out.print(carport.getWidth());%></td>
+                            <td><%= (carport.getWidth())%> </td>
                         </tr>
 
 

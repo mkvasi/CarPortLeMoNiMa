@@ -21,8 +21,8 @@ public class CarportOverview extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws MaterialException {
-       double shedLength = 0.0;
-       double shedWidth =0.0; 
+        double shedLength = 0.0;
+        double shedWidth = 0.0;
         boolean roofFlat;
         boolean shedWanted;
         double length = Double.parseDouble(request.getParameter("length"));
@@ -41,17 +41,14 @@ public class CarportOverview extends Command {
         } else {
             shedWanted = false;
             shedLength = 0.0;
-            shedWidth = 0.0; 
+            shedWidth = 0.0;
         }
-        
-        Roof roof = new Roof(roofFlat, length+0.3,width+0.3);
-        Carport carport; 
-        
-        
-         carport = new Carport(length, width, roof, new Shed(shedWanted, shedLength, shedWidth));
-            
-        
-            
+
+        Roof roof = new Roof(roofFlat, length, width);
+        Carport carport;
+
+        carport = new Carport(length - 1, width - 0.3, roof, new Shed(shedWanted, shedLength, shedWidth));
+
         LogicFacade.getAllMaterialsFromDB(carport);
         HashMap<String, Material> billOfMaterials = LogicFacade.getDoneCarportWithMaterialList(carport);
 
