@@ -4,7 +4,6 @@
     Author     : Yeha
 --%>
 
-<%@page import="com.sun.corba.se.spi.presentation.rmi.StubAdapter.request(Object, String, boolean)"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="FunctionLayer.Carport"%>
 <%@page import="FunctionLayer.Material"%>
@@ -39,10 +38,6 @@
         ======================================================= -->
     </head>
 
-        <% Carport carport = (Carport) request.getAttribute("carport");%>
-        <% HashMap<String , Material> billofmaterial = (HashMap) request.getAttribute("billOfMaterial");  %>
-        <% //double offerPrice = (Double) request.getAttribute("offerprice");%>
-=======
     <% Carport carport = (Carport) request.getAttribute("carport");%>
     <%if(carport.getShed() == null){
         carport.setLength(0.0);
@@ -50,7 +45,6 @@
     }%>
     <% HashMap<String, Material> billofmaterial = (HashMap) request.getAttribute("billOfMaterial");  %>
     <% //double offerPrice = (Double) request.getAttribute("offerprice");%>
-    
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
         <header>
             <!-- Navbar
@@ -64,7 +58,7 @@
                         </a>
                         <!-- end logo -->
                         <!-- top menu -->
-                   
+
                         <!-- end menu -->
                     </div>
                 </div>
@@ -89,131 +83,8 @@
 
 
         <div id="carportinfo">
-                <form action="FrontController" method="POST" name="billOfMaterial" action="FrontController" method="POST">
+            <form action="FrontController" method="POST" name="billOfMaterial" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="billOfMaterial">
-<<<<<<< HEAD
-                
-                
-            <table>
-                <thead>
-                    <tr>
-                        <th>Carport bredde</th>
-                        <td><%out.print(carport.getWidth());%></td>
-                    </tr>
-
-
-                    <tr>
-                        <th>Carport længde</th>
-                        <td><%out.print(carport.getLength());%></td>
-                    </tr>
-                    <tr>
-                        <th>Tag bredde</th>
-                        <td><%= (carport.getRoof().getWidth())%> </td>
-                    </tr>
-                    <tr>
-                        <th>Tag længde</th>
-                        <td><%= (carport.getRoof().getLength())%></td>
-                    </tr>
-                    <tr>
-                        <th>Redskabsrum bredde</th>
-                        <td>Ønsker ikke redskabsrum</td>
-                    </tr>
-                    <tr>
-                        <th>Redskabsrum længde</th>
-                        <td>Ønsker ikke redskabsrum</td>
-                    </tr>
-                  <!--<tr>
-                        <th>Pris</th>
-                        <td><//%=offerPrice%></td>
-                        
-                    </tr>-->
-
-                </thead>
-            </table>
-                  
-                        
-                           
-
-             <div id="middle">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Anvendes som</th>
-                        <th>Produkt</th>
-                        <th>Længde</th>
-                        <th>Antal</th>
-                    
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><%out.print(billofmaterial.get("Spær").getName());%></td>
-                        <td><%out.print(billofmaterial.get("Spær").getDescription());%></td>
-                        <td><%out.print(billofmaterial.get("Spær").getLength());%></td>
-                        <td><%out.print(billofmaterial.get("Spær").getQty());%></td>
-                    </tr>
-                    <tr>
-                        <td><%out.print(billofmaterial.get("Rem").getName());%></td>
-                        <td><%out.print(billofmaterial.get("Rem").getDescription());%></td>
-                        <td><%out.print(billofmaterial.get("Rem").getLength());%></td>
-                        <td><%out.print(billofmaterial.get("Rem").getQty());%></td>
-                    </tr>
-                    <tr>
-                        <td><%out.print(billofmaterial.get("Universalbeslag højre").getName());%></td>
-                        <td><%out.print(billofmaterial.get("Universalbeslag højre").getDescription());%></td>
-                        <td><%out.print(billofmaterial.get("Universalbeslag højre").getLength());%></td>
-                        <td><%out.print(billofmaterial.get("Universalbeslag højre").getQty());%></td>
-   
-                    </tr>
-                    <tr>
-                        <td><%out.print(billofmaterial.get("Universalbeslag venstre").getName());%></td>
-                        <td><%out.print(billofmaterial.get("Universalbeslag venstre").getDescription());%></td>
-                        <td><%out.print(billofmaterial.get("Universalbeslag venstre").getLength());%></td>
-                        <td><%out.print(billofmaterial.get("Universalbeslag venstre").getQty());%></td>
-   
-                    </tr>
-                    <tr>
-                        <td><%out.print(billofmaterial.get("Stolper").getName());%></td>
-                        <td><%out.print(billofmaterial.get("Stolper").getDescription());%></td>
-                        <td></td>
-                        <td><%out.print(billofmaterial.get("Stolper").getQty());%></td>
-   
-                    </tr>
-                    <tr>
-                        <td><%out.print(billofmaterial.get("Understern til siderne").getName());%></td>
-                        <td><%out.print(billofmaterial.get("Understern til siderne").getDescription());%></td>
-                        <td><%out.print(billofmaterial.get("Understern til siderne").getLength());%></td>
-                        <td><%out.print(billofmaterial.get("Understern til siderne").getQty());%></td>
-   
-                    </tr>
-                    <tr>
-                        <td><%out.print(billofmaterial.get("Understern til for og bagende").getName());%></td>
-                        <td><%out.print(billofmaterial.get("Understern til for og bagende").getDescription());%></td>
-                        <td><%out.print(billofmaterial.get("Understern til for og bagende").getLength());%></td>
-                        <td><%out.print(billofmaterial.get("Understern til for og bagende").getQty());%></td>
-   
-                    </tr>
-                         <tr>
-                        <td><%out.print(billofmaterial.get("Overstern til siderne").getName());%></td>
-                        <td><%out.print(billofmaterial.get("Overstern til siderne").getDescription());%></td>
-                        <td><%out.print(billofmaterial.get("Overstern til siderne").getLength());%></td>
-                        <td><%out.print(billofmaterial.get("Overstern til siderne").getQty());%></td>
-   
-                    </tr>
-                </tbody>
-        </div>
-                        
-           
-
-
-
-            
-            </table>
-
-        </div>
-        </div> 
-           
-=======
 
 
                 <table>
@@ -337,12 +208,12 @@
                 </div>
             </form> </div>
 
->>>>>>> marko
 
 
 
 
-     
+
+
         <!-- Footer
        ================================================== -->
         <footer class="footer">
