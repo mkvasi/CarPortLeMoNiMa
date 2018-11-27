@@ -17,7 +17,9 @@ import java.util.TreeMap;
  * @author leage
  */
 public class AllMaterialsCalculator {
-
+    
+    int toMilimeters = 1000;
+    
     //Using TreeMap instead of hashmap, because the TreeMap is a NavigableMap, which can be useful in this case, 
     //where we are trying to get the best match for a board, instead of looping through each element in a hashMap or List 
     public HashMap<String, Material> calculateAllMaterialTypes(Carport carport, HashMap<Integer, TreeMap<Double, Material>> boards) {
@@ -47,7 +49,7 @@ public class AllMaterialsCalculator {
 //Finding the best board length to use for spær, or returning the type of board that we need two of to get the correct length
     Material getBoardForRafter(Carport carport, TreeMap<Double, Material> boards) {
 
-        double carportMeasure = carport.getWidth() * 1000;
+        double carportMeasure = carport.getWidth() * toMilimeters;                      // To get the dimension in milimeters, so it's comparable to the materials in the database.
 
              
         Map.Entry<Double, Material> boardMatch = boards.ceilingEntry(carportMeasure);
@@ -56,7 +58,7 @@ public class AllMaterialsCalculator {
             return board;
 
         } else {
-            carportMeasure = carportMeasure / 2;
+            carportMeasure = carportMeasure / 2;                                // Results in having two boards to fill out the carport length
             boardMatch = boards.ceilingEntry(carportMeasure);
             Material board = boardMatch.getValue();
             return board;
@@ -64,7 +66,7 @@ public class AllMaterialsCalculator {
     }
 
     Material getBoardForRem(Carport carport, TreeMap<Double, Material> boards) {
-        double carportMeasure = carport.getLength() * 1000;
+        double carportMeasure = carport.getLength() * toMilimeters;                     // To get the dimension in milimeters, so it's comparable to the materials in the database.
 
         
         Map.Entry<Double, Material> boardMatch = boards.ceilingEntry(carportMeasure);
@@ -73,7 +75,7 @@ public class AllMaterialsCalculator {
             return board;
 
         } else {
-            carportMeasure = carportMeasure / 2;
+            carportMeasure = carportMeasure / 2;                                // Results in having two boards to fill out the carport length
             boardMatch = boards.ceilingEntry(carportMeasure);
             Material board = boardMatch.getValue();
             return board;
@@ -81,7 +83,9 @@ public class AllMaterialsCalculator {
     }
 
     private Material getBoardLengthForOversternAndUndersternSides(Carport carport, TreeMap<Double, Material> boards) {
-        double carportMeasure = (carport.getLength() * 1000) + 50;
+        
+        int extraSpace = 50;                                                    // 2.5 Cencimeter extra space for each side.
+        double carportMeasure = (carport.getLength() * toMilimeters) + extraSpace;      // To get the dimension in milimeters, so it's comparable to the materials in the database.
 
           
         Map.Entry<Double, Material> boardMatch = boards.ceilingEntry(carportMeasure);
@@ -90,7 +94,7 @@ public class AllMaterialsCalculator {
             return board;
 
         } else {
-            carportMeasure = carportMeasure / 2;
+            carportMeasure = carportMeasure / 2;                                // Results in having two boards to fill out the carport length
             boardMatch = boards.ceilingEntry(carportMeasure);
             Material board = boardMatch.getValue();
             return board;
@@ -98,7 +102,9 @@ public class AllMaterialsCalculator {
     }
 
     private Material getBoardForUndersternFrontAndBack(Carport carport, TreeMap<Double, Material> boards) {
-        double carportMeasure = (carport.getWidth() * 1000) + 50;
+        
+        int extraSpace = 50;                                                    // Extra space in each side for the boards.
+        double carportMeasure = (carport.getWidth() * toMilimeters) + extraSpace;       // To get the dimension in milimeters, so it's comparable to the materials in the database.
              
         Map.Entry<Double, Material> boardMatch = boards.ceilingEntry(carportMeasure);
         if (boardMatch != null) {
@@ -106,7 +112,7 @@ public class AllMaterialsCalculator {
             return board;
 
         } else {
-            carportMeasure = carportMeasure / 2;
+            carportMeasure = carportMeasure / 2;                                // Results in having two boards to fill out the carport length
             boardMatch = boards.ceilingEntry(carportMeasure);
             Material board = boardMatch.getValue();
             return board;
