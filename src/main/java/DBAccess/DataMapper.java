@@ -32,22 +32,26 @@ public class DataMapper {
             while (rs.next()) {
 
                 int id = rs.getInt("id");
-                double length = rs.getDouble("length");
+                String description = rs.getString("description");
                 double height = rs.getDouble("heigth");
                 double width = rs.getDouble("width");
-                int measure_id = rs.getInt("measure_id");
+                double length = rs.getDouble("length");
+                double buyprice = rs.getDouble("buyprice");
+                double sellprice = rs.getDouble("sellprice");
+                boolean defaultUsed = rs.getBoolean("defaultused");
                 int type_id = rs.getInt("type_id");
-                String description = rs.getString("description");
-                double buyprice = rs.getDouble("buy_price");
-                double sellprice = rs.getDouble("sell_price");
+                int measure_id = rs.getInt("measure_id");
+                
+                
+                
                 //int _width = Integer.parseInt(String.valueOf(width));
                 //int _height = Integer.parseInt(String.valueOf(height));
                 //int name = type_id + _width + _height;
 
                 //material = new Material(id, measure_id, type_id, description, buyprice, sellprice, length, width, height);
                 //materialList.put(name, new Material(id, measure_id, type_id, description, buyprice, sellprice, length, width, height));
-                materialList.add(new Material(id, measure_id, type_id, description, buyprice, sellprice, length, width, height));
-
+                //materialList.add(new Material(id, measure_id, type_id, description, buyprice, sellprice, length, width, height));
+                materialList.add(new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
             }
 
             return materialList;

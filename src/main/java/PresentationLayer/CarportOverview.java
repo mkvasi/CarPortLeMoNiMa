@@ -10,13 +10,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * The purpose of BillOfMaterial: !!!TYPE PURPOSE OF BillOfMaterial HERE!!!
- *
- * @author Morten
- * @version 1.0
- * @since 16-11-2018
- */
 public class CarportOverview extends Command {
 
     @Override

@@ -48,22 +48,36 @@ public class AllMaterialsCalculator {
 //
 //        return allMaterialsToUseForThisCarport;
 //    }
-    public HashMap<String, Material> calculateAllMaterialTypes(Carport carport, BillOfMaterial billOfMaterial, HashMap<Integer, TreeMap<Double, Material>> boards) {
-        HashMap<String, Material> allMaterialsToUseForThisCarport = new HashMap<>();
-        HashMap<String, Material> materialListFromDB = ();
+    public BillOfMaterial calculateAllMaterialTypes(Carport carport, BillOfMaterial billOfMaterial, HashMap<Integer, TreeMap<Double, Material>> boards) {
+//        HashMap<String, Material> allMaterialsToUseForThisCarport = new HashMap<>();
+//        HashMap<String, Material> materialListFromDB = ();
 
-        if (!carport.getRoof().isPitchedRoof()) {
+//        if (!carport.getRoof().isPitchedRoof()) {
+//            billOfMaterial.addMaterialToBOM(new LineItem(0, "Spær", getBoardForRafter(carport, boards.get(10))));
+////            allMaterialsToUseForThisCarport.put("Spær", getBoardForRafter(carport, boards.get(10)));
+//
+//        } else {
+//            billOfMaterial.addMaterialToBOM(materialQTY);
+//            allMaterialsToUseForThisCarport.put("Spær", materialListFromDB.get("FÆDIGSKÅRET (BYG-SELV SPÆR SKAL SAMLES) 8 STK.1.0"));
+//
+//        }
+        if (carport.getRoof().getCelsiusForSlope() == 0) {
             billOfMaterial.addMaterialToBOM(new LineItem(0, "Spær", getBoardForRafter(carport, boards.get(10))));
 //            allMaterialsToUseForThisCarport.put("Spær", getBoardForRafter(carport, boards.get(10)));
 
         } else {
-            allMaterialsToUseForThisCarport.put("Spær", materialListFromDB.get("FÆDIGSKÅRET (BYG-SELV SPÆR SKAL SAMLES) 8 STK.1.0"));
+            billOfMaterial.addMaterialToBOM(new LineItem(0, "Spær", getBoardForRafter(carport, boards.get(10)));
+            //allMaterialsToUseForThisCarport.put("Spær", materialListFromDB.get("FÆDIGSKÅRET (BYG-SELV SPÆR SKAL SAMLES) 8 STK.1.0"));
 
         }
-        allMaterialsToUseForThisCarport.put("Rem", getBoardForRem(carport, boards.get(10)));
-        allMaterialsToUseForThisCarport.put("Understern til siderne", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6)));
-        allMaterialsToUseForThisCarport.put("Understern til for og bagende", getBoardForUndersternFrontAndBack(carport, boards.get(6)));
-        allMaterialsToUseForThisCarport.put("Overstern til siderne", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6)));
+        billOfMaterial.addMaterialToBOM(new LineItem(0, "Rem", getBoardForRem(carport, boards.get(10))));
+        billOfMaterial.addMaterialToBOM(new LineItem(0, "Understern til siderne", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
+        billOfMaterial.addMaterialToBOM(new LineItem(0, "Understern til for og bagende", getBoardForUndersternFrontAndBack(carport, boards.get(6))));
+        billOfMaterial.addMaterialToBOM(new LineItem(0, "Overstern til siderne", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
+//        allMaterialsToUseForThisCarport.put("Rem", getBoardForRem(carport, boards.get(10)));
+//        allMaterialsToUseForThisCarport.put("Understern til siderne", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6)));
+//        allMaterialsToUseForThisCarport.put("Understern til for og bagende", getBoardForUndersternFrontAndBack(carport, boards.get(6)));
+//        allMaterialsToUseForThisCarport.put("Overstern til siderne", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6)));
         // allBoardsForThisCarport.put("Overstern til for og bagende", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6)));
 
         allMaterialsToUseForThisCarport.put("Universalbeslag højre", materialListFromDB.get("UNIVERSAL 190 MM HØJRE190.0"));
@@ -71,7 +85,7 @@ public class AllMaterialsCalculator {
 
         allMaterialsToUseForThisCarport.put("Stolper", materialListFromDB.get("97X97 MM FYR STOLPE IMPR.3000.0"));
 
-        return allMaterialsToUseForThisCarport;
+        return billOfMaterial;
     }
 
 //Finding the best board length to use for spær, or returning the type of board that we need two of to get the correct length
@@ -193,7 +207,8 @@ public class AllMaterialsCalculator {
     }
 
     public int countAmountRaftersForRoofAndUniversalBracketsForRafter(Carport carport) {
-        if (!carport.getRoof().isPitchedRoof()) {
+//        if (!carport.getRoof().isPitchedRoof()) {
+        if (carport.getRoof().getCelsiusForSlope() == 0) {
             double spaceBetweenEachRafter = 0.55;
             double rafterWidth = 0.02;
             double totalRafterDimension = spaceBetweenEachRafter + rafterWidth; // Total dimension for each rafter including both space and material.

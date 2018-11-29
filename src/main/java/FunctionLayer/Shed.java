@@ -10,33 +10,69 @@ package FunctionLayer;
  * @author leage
  */
 public class Shed {
-    boolean shedWanted;
-    double length, width; 
-    Roof roof;
-
+    
+    private int id;
+    private double heigth, width, length;
     
     
+//    boolean shedWanted;
+//    double length, width; 
+//    Roof roof;
+//
+//    
+//    
+//
+//    public Shed(boolean wantShed, double length, double width) {
+//        this.shedWanted = wantShed;
+//        this.length = length;
+//        this.width = width;
+//    }
+//
+//    public boolean isShedWanted() {
+//        return shedWanted;
+//    }
+//
+//    public void setShedWanted(boolean shedWanted) {
+//        this.shedWanted = shedWanted;
+//    }
+//
+//    public double getLength() {
+//        return length;
+//    }
+//
+//    public void setLength(double length) {
+//        this.length = length;
+//    }
+//
+//    public double getWidth() {
+//        return width;
+//    }
+//
+//    public void setWidth(double width) {
+//        this.width = width;
+//    }
 
-    public Shed(boolean wantShed, double length, double width) {
-        this.shedWanted = wantShed;
-        this.length = length;
+    public Shed(int id, double heigth, double width, double length) {
+        this.id = id;
+        this.heigth = heigth;
         this.width = width;
-    }
-
-    public boolean isShedWanted() {
-        return shedWanted;
-    }
-
-    public void setShedWanted(boolean shedWanted) {
-        this.shedWanted = shedWanted;
-    }
-
-    public double getLength() {
-        return length;
-    }
-
-    public void setLength(double length) {
         this.length = length;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getHeigth() {
+        return heigth;
+    }
+
+    public void setHeigth(double heigth) {
+        this.heigth = heigth;
     }
 
     public double getWidth() {
@@ -46,8 +82,16 @@ public class Shed {
     public void setWidth(double width) {
         this.width = width;
     }
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
     
- 
+    
     
     
 }

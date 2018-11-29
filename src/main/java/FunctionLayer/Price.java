@@ -31,16 +31,16 @@ public class Price {
     public void calculateBuyPrice(BillOfMaterial billOfMaterial){
         buyprice = 0.00;
         
-        for (LineItem materialQTY : billOfMaterial.getMaterialWithQty()) {
-            buyprice += materialQTY.getQty() * materialQTY.getMaterial().getBuyprice();
+        for (LineItem lineItem : billOfMaterial.getLineItems()) {
+            buyprice += lineItem.getQty() * lineItem.getMaterial().getBuyprice();
         }
     }
     
     public void calculateSellPrice(BillOfMaterial billOfMaterial){
         sellprice = 0.00;
         
-        for (LineItem materialQTY : billOfMaterial.getMaterialWithQty()) {
-            sellprice += materialQTY.getQty() * materialQTY.getMaterial().getSellprice();
+        for (LineItem lineItem : billOfMaterial.getLineItems()) {
+            sellprice += lineItem.getQty() * lineItem.getMaterial().getSellprice();
         }
     }
 }

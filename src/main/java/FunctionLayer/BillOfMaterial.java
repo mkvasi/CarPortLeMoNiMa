@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class BillOfMaterial {
     
-    private List<LineItem> materialWithQty;
+    private List<LineItem> lineItems;
     
 //    HashMap<String,Material> BOM;
 //
@@ -31,16 +31,16 @@ public class BillOfMaterial {
 //    }
 //    
 
-    public List<LineItem> getMaterialWithQty() {
-        return materialWithQty;
+    public List<LineItem> getLineItems() {
+        return lineItems;
     }
 
-    public void setMaterialWithQty(List<LineItem> materialWithQty) {
-        this.materialWithQty = materialWithQty;
+    public void setLineItems(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
     }
     
-    public void addMaterialToBOM(LineItem materialQTY){
-        materialWithQty.add(materialQTY);
+    public void addMaterialToBOM(LineItem lineItem){
+        lineItems.add(lineItem);
     }
     
 }

@@ -57,9 +57,9 @@ public class LogicFacade {
     }
 
     public static HashMap<Integer, TreeMap<Double, Material>> getAllBoards() throws MaterialException {
-        MaterialType materialType = new MaterialType();
-        materialType.setMaterialListFromDB(DataMapper.getMaterialList());
-        return materialType.getAllMaterialList();
+        MaterialDefault materialDefault = new MaterialDefault();
+        materialDefault.setMaterialListFromDB(DataMapper.getMaterialList());
+        return materialDefault.getAllMaterialList();
         //return DataMapper.getAllBoardsForThisCarportWithOutLengthCalculation();
     }
 
