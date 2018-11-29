@@ -12,7 +12,7 @@ package FunctionLayer;
 public class Shed {
     
     private int id;
-    private double heigth, width, length;
+    private double heigth = 2.25, width, length;
     
     
 //    boolean shedWanted;
@@ -52,12 +52,24 @@ public class Shed {
 //        this.width = width;
 //    }
 
-    public Shed(int id, double heigth, double width, double length) {
+    public Shed(int id, int heigth, double width, double length) {
         this.id = id;
-        this.heigth = heigth;
         this.width = width;
         this.length = length;
     }
+
+    public Shed(int id, double width, double length) {
+        this.id = id;
+        this.width = width;
+        this.length = length;
+    }
+
+    public Shed(double width, double length) {
+         this.width = width;
+        this.length = length;
+    }
+
+ 
 
     public int getId() {
         return id;

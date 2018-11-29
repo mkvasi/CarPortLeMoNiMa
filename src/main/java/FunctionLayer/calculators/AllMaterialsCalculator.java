@@ -10,6 +10,7 @@ import FunctionLayer.Carport;
 import FunctionLayer.LineItem;
 import FunctionLayer.Material;
 import FunctionLayer.Roof;
+import FunctionLayer.Shed;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -277,4 +278,30 @@ public class AllMaterialsCalculator {
 
         return (int) roofTiles;
     }
+    //ANVENDES KUN TIL TAG MED HÆLDNING!
+    //Beregner vindskedernes(Facia) længde, skal modtage boardtypen(25x150 mm trykimp. bræt), og carporten som parameter.
+    //Kan også beregne længden på vandbrædderne(RainWare)(19x100mm tryk imp. bræt)
+    //QTY er altid 2, men denne beregner kun længden på en vindskede/vandbræt
+    public Material calculateBoardForFaciaAndRainWare(Carport carport, TreeMap<Double, Material> boards){
+        double hypotenuse = (carport.getWidth() / 2); 
+        int roofAngle = carport.getRoof().getCelsiusForSlope();
+        double carportMeasure = (hypotenuse)/(Math.cos(Math.toRadians(roofAngle)));
+        return boardCalculator(carportMeasure, carport, boards); 
+    }
+    //STILL IN THE MAKING
+//    public Material calculateBoardForGableDecor(Carport carport, TreeMap<Double, Material> boards){
+//        double hypotenuse = (carport.getWidth() / 2); 
+//        int roofAngle = carport.getRoof().getCelsiusForSlope();
+//        double carportMeasure = (hypotenuse)/(Math.cos(Math.toRadians(roofAngle)));
+//        return boardCalculator(carportMeasure, carport, boards); 
+//    }
+//    public Material calculateBoardForFaciaAndRainWare(Carport carport, TreeMap<Double, Material> boards){
+//        carport.getWidth();
+//    }
+//    public static void main(String[] args) {
+//        Carport carport  = new Carport(7.3, 3.6, new Roof(20), new Shed(0, 0));
+//        AllMaterialsCalculator hej1 = new AllMaterialsCalculator();
+//        double hej = hej1.calculateBoardForFaciaAndRainWare(carport);
+//        System.out.println(hej);
+//    }
 }

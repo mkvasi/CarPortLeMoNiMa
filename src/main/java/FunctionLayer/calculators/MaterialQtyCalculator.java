@@ -20,30 +20,31 @@ public class MaterialQtyCalculator {
     AllMaterialsCalculator calc = new AllMaterialsCalculator();
 
     public HashMap<String, Material> getDoneCarportWithMaterialQty(Carport carport, HashMap<Integer, TreeMap<Double, Material>> boards) throws MaterialException {
-        HashMap<String, Material> allMaterialsForThisCarport = calc.calculateAllMaterialTypes(carport, boards);
+        //HashMap<String, Material> allMaterialsForThisCarport = calc.calculateAllMaterialTypes(carport, boards);
+        HashMap<String, Material> allMaterialsForThisCarportWithLength = calc.calculateAllMaterialTypes(carport, boards);
       
         //Calculate qty of spær, by getting spær from allMaterialsForThisCarport
-        allMaterialsForThisCarport.get("Spær").setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
-        allMaterialsForThisCarport.get("Rem").setQty(calculateQtyOfRemForCarport(carport, allMaterialsForThisCarport.get("Rem")));
-        allMaterialsForThisCarport.get("Stolper").setQty(countPostsForCarport(carport));
+        allMaterialsForThisCarportWithLength.get("Spær").setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
+        allMaterialsForThisCarportWithLength.get("Rem").setQty(calculateQtyOfRemForCarport(carport, allMaterialsForThisCarportWithLength.get("Rem")));
+        allMaterialsForThisCarportWithLength.get("Stolper").setQty(countPostsForCarport(carport));
 
         
 
-        Material understernSides = allMaterialsForThisCarport.get("Understern til siderne");
+        Material understernSides = allMaterialsForThisCarportWithLength.get("Understern til siderne");
         understernSides.setQty(calculateQtyOfRemForCarport(carport, understernSides));
         
-        Material understernFront = allMaterialsForThisCarport.get("Understern til for og bagende" );
+        Material understernFront = allMaterialsForThisCarportWithLength.get("Understern til for og bagende" );
         understernFront.setQty(calculateQtyOfRemForCarport(carport, understernFront));
         
-        Material oversternSides = allMaterialsForThisCarport.get("Overstern til siderne");
+        Material oversternSides = allMaterialsForThisCarportWithLength.get("Overstern til siderne");
         oversternSides.setQty(calculateQtyOfRemForCarport(carport, oversternSides));
 
-        allMaterialsForThisCarport.get("Universalbeslag højre").setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
-        allMaterialsForThisCarport.get("Universalbeslag venstre").setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
+        allMaterialsForThisCarportWithLength.get("Universalbeslag højre").setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
+        allMaterialsForThisCarportWithLength.get("Universalbeslag venstre").setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
 
        
 
-        return allMaterialsForThisCarport;
+        return allMaterialsForThisCarportWithLength;
     }
 
 //    // Total count of posts, for the carport. For each 3 meters, a new post will be added to each length (* 2)

@@ -27,12 +27,12 @@ public class Carport {
 //        this.shed = shed;
 //    }
 //
-//    public Carport(double length, double width, Roof roof, Shed shed) {
-//        this.length = length;
-//        this.width = width;
-//        this.roof = roof;
-//        this.shed = shed;
-//    }
+    public Carport(double length, double width, Roof roof, Shed shed) {
+        this.length = length;
+        this.width = width;
+        this.roof = roof;
+        this.shed = shed;
+    }
 //
 ////    public Carport(double length, double width, double heigth, Roof roof, HashMap<String, Material> materialsToUseForThisCarport) {
 ////        this.length = length;

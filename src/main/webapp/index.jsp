@@ -79,8 +79,8 @@
                     <label class="input-group-text" for="inputGroupSelect01" >Længde på carport</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" name="length" >
-                    <option selected>Vælg venligst længde</option>
-                    <option value="2.4">2,4 m.</option>
+                   
+                    <option selected value="2.4">2,4 m.</option>
                     <option value="2.7">2,7 m</option>
                     <option value="3.0">3,0 m</option>
                     <option value="3.3">3,3 m</option>
@@ -103,8 +103,8 @@
                     <label class="input-group-text" for="inputGroupSelect01">Bredde på carport</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" name="width">
-                       <option selected>Vælg venligst bredde</option>
-                    <option value="2.4">2,4 m.</option>
+                     
+                    <option selected value="2.4">2,4 m.</option>
                     <option value="2.7">2,7 m</option>
                     <option value="3.0">3,0 m</option>
                     <option value="3.3">3,3 m</option>
@@ -124,20 +124,18 @@
              
                 </select>
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Vil du have tag med hældning?</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Hældning på taget?</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" name="roof">
-                    <option selected value="Ja">Ja</option>
-                    <option value="Nej">Nej</option>
-
-                </select>
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Redskabsrum:</label>
-                </div>
-                <select class="custom-select" id="inputGroupSelect01" name="shed">
-                    <option selected>Vælg venligst nedenfor</option>
-                    <option value="Ja">Ja</option>
-                    <option value="Nej">Nej</option>
+                    <option selected value="0">Ingen hældning</option>
+                    <option value="10">10°</option>
+                    <option value="15">15°</option>
+                    <option value="20">20°</option>
+                    <option value="25">25°</option>
+                    <option value="30">30°</option>
+                    <option value="35">35°</option>
+                    <option value="40">40°</option>
+                    <option value="45">45°</option>
 
                 </select>
                 <div class="input-group-prepend">

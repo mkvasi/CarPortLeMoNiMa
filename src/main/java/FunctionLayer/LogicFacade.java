@@ -63,4 +63,16 @@ public class LogicFacade {
         //return DataMapper.getAllBoardsForThisCarportWithOutLengthCalculation();
     }
 
+       public static Carport makeCarport(double length, double width, int roofAngle, double shedLength, double shedWidth) {
+        Roof roofDone = new Roof(roofAngle); 
+        Shed shed = new Shed(width, length);
+        Carport carport = new Carport (length, width, roofDone, shed); 
+        return carport;
+    }
+       
+//       public static void main(String[] args) throws MaterialException {
+//       HashMap<Integer, TreeMap<Double,Material>> hej = getAllBoards(); 
+//           System.out.println(hej.toString());
+//    }
+
 }

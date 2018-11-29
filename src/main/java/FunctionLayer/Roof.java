@@ -73,6 +73,13 @@ public class Roof {
         this.length = length;
     }
 
+    public Roof(int roofSlopeCelsius) {
+        this.roofSlopeCelsius = roofSlopeCelsius;
+    }
+    
+
+   
+
     public int getCelsiusForSlope() {
         return roofSlopeCelsius;
     }
