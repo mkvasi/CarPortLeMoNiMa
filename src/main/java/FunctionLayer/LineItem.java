@@ -13,6 +13,12 @@ public class LineItem {
     private String helpDescription;
     private Material material;
 
+    public LineItem(int qty, String helpDescription, Material material) {
+        this.qty = qty;
+        this.helpDescription = helpDescription;
+        this.material = material;
+    }
+    
     public int getQty() {
         return qty;
     }
@@ -36,5 +42,7 @@ public class LineItem {
     public void setMaterial(Material material) {
         this.material = material;
     }   
+    
+    
 
 }

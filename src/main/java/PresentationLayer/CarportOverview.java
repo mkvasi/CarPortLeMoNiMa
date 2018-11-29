@@ -49,7 +49,7 @@ public class CarportOverview extends Command {
 
         carport = new Carport(length - 1, width - 0.3, roof, new Shed(shedWanted, shedLength, shedWidth));
 
-        LogicFacade.getAllMaterialsFromDB(carport);
+//        LogicFacade.getAllMaterialsFromDB(carport);
         HashMap<String, Material> billOfMaterials = LogicFacade.getDoneCarportWithMaterialList(carport);
 
         request.setAttribute("billOfMaterial", billOfMaterials);

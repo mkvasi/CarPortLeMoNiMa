@@ -6,15 +6,30 @@ import DBAccess.DataMapper;
 import FunctionLayer.exceptions.MaterialException;
 import java.util.HashMap;
 import java.util.TreeMap;
+import FunctionLayer.BillOfMaterial;
 
 public class LogicFacade {
 
-    public static HashMap<String, Material> getAllMaterialsFromDB(Carport carport) throws MaterialException {
+//    public static HashMap<String, Material> getAllMaterialsFromDB(Carport carport) throws MaterialException {
+//        //HashMap<String, Material> lort = DataMapper.getMaterialList();
+//        ListToMapConvert listToMap = new ListToMapConvert();
+//        HashMap<String, Material> lort = listToMap.listToHashMapMaterials(DataMapper.getMaterialList());
+//        carport.setMaterialsToUseForThisCarport(lort);
+//        return lort;
+//
+//    }
+//        public static HashMap<String, Material> getAllMaterialsFromDB(Carport carport) throws MaterialException {
+//        //HashMap<String, Material> lort = DataMapper.getMaterialList();
+//        ListToMapConvert listToMap = new ListToMapConvert();
+//        HashMap<String, Material> mapMaterialsFromDB = listToMap.listToHashMapMaterials(DataMapper.getMaterialList());
+//        return mapMaterialsFromDB;
+//
+//    }
+    public static void getAllMaterialsFromDB(BillOfMaterial billOfMaterial) throws MaterialException {
         //HashMap<String, Material> lort = DataMapper.getMaterialList();
         ListToMapConvert listToMap = new ListToMapConvert();
-        HashMap<String, Material> lort = listToMap.listToHashMapMaterials(DataMapper.getMaterialList());
-        carport.setMaterialsToUseForThisCarport(lort);
-        return lort;
+        HashMap<String, Material> mapMaterialsFromDB = listToMap.listToHashMapMaterials(DataMapper.getMaterialList());
+        
 
     }
 
@@ -29,13 +44,12 @@ public class LogicFacade {
 //        Price price = new Price();
 //        price.
 //    }
-    
     public static double getBuyPrice(BillOfMaterial billOfMaterial) throws MaterialException {
         Price price = new Price();
         price.calculateBuyPrice(billOfMaterial);
         return price.getBuyprice();
     }
-    
+
     public static double getSellPrice(BillOfMaterial billOfMaterial) throws MaterialException {
         Price price = new Price();
         price.calculateSellPrice(billOfMaterial);
@@ -50,5 +64,3 @@ public class LogicFacade {
     }
 
 }
-
-

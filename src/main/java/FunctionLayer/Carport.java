@@ -15,7 +15,7 @@ public class Carport {
     private double heigth;
     private Roof roof;
     private Shed shed; 
-    private HashMap<String,Material> materialsToUseForThisCarport; 
+//    private HashMap<String,Material> materialsToUseForThisCarport; 
 
     public Shed getShed() {
         return shed;
@@ -32,14 +32,23 @@ public class Carport {
         this.shed = shed;
     }
 
-    public Carport(double length, double width, double heigth, Roof roof, HashMap<String, Material> materialsToUseForThisCarport) {
+//    public Carport(double length, double width, double heigth, Roof roof, HashMap<String, Material> materialsToUseForThisCarport) {
+//        this.length = length;
+//        this.width = width;
+//        this.heigth = heigth;
+//        this.roof = roof;
+//        this.materialsToUseForThisCarport = materialsToUseForThisCarport;
+//    }
+
+    public Carport(double length, double width, double heigth, Roof roof, Shed shed) {
         this.length = length;
         this.width = width;
         this.heigth = heigth;
         this.roof = roof;
-        this.materialsToUseForThisCarport = materialsToUseForThisCarport;
+        this.shed = shed;
     }
-   
+    
+      
 
     public Carport(double length, double width, Roof roof) {
         this.length = length;
@@ -80,13 +89,13 @@ public class Carport {
         this.roof = roof;
     }
 
-    public HashMap<String, Material> getMaterialsToUseForThisCarport() {
-        return materialsToUseForThisCarport;
-    }
-
-    public void setMaterialsToUseForThisCarport(HashMap<String, Material> materialsToUseForThisCarport) {
-        this.materialsToUseForThisCarport = materialsToUseForThisCarport;
-    }
+//    public HashMap<String, Material> getMaterialsToUseForThisCarport() {
+//        return materialsToUseForThisCarport;
+//    }
+//
+//    public void setMaterialsToUseForThisCarport(HashMap<String, Material> materialsToUseForThisCarport) {
+//        this.materialsToUseForThisCarport = materialsToUseForThisCarport;
+//    }
 
  
 
