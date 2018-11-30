@@ -28,11 +28,11 @@ public class BillOfMaterial2 extends Command {
        Carport carport = (Carport) request.getAttribute("carport"); 
       
       //HashMap carportWithDBMaterials = LogicFacade.getAllMaterialsFromDB(carport);
-       HashMap<String, Material> billOfMaterial = LogicFacade.getDoneCarportWithMaterialList(carport); 
+       //HashMap<String, Material> billOfMaterial = LogicFacade.getDoneCarportWithMaterialList(carport); 
        
      // billOfMaterial.setBOM((FunctionLayer.BillOfMaterial2) request.getAttribute("billOfMaterial"));
       
-      request.setAttribute("billOfMaterial", billOfMaterial);
+      //request.setAttribute("billOfMaterial", billOfMaterial);
       request.setAttribute("carport", carport);
       return "billOfMaterial";
     }

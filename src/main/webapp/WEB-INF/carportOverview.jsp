@@ -43,7 +43,7 @@
             carport.setLength(0.0);
             carport.setWidth(0.0);
         }%>
-    <% HashMap<String, Material> billofmaterial = (HashMap) request.getAttribute("billOfMaterial");  %>
+    <% //HashMap<String, Material> billofmaterial = (HashMap) request.getAttribute("billOfMaterial");  %>
     <% //double offerPrice = (Double) request.getAttribute("offerprice");%>
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
         <header>

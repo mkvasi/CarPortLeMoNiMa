@@ -24,39 +24,47 @@ public class AllMaterialsCalculator {
     int toMilimeters = 1000;
 
     public BillOfMaterial calculateMaterials(Carport carport, BillOfMaterial billOfMaterial, HashMap<Integer, TreeMap<Double, Material>> boards) {
-
-        //Spær
+        
+        //Beregninger til fladt tag!
         if (carport.getRoof().getCelsiusForSlope() == 0) {
-            billOfMaterial.addMaterialToBOM(new LineItem(0, "Spær", getBoardForRafter(carport, boards.get(10))));
-        } else {
-            billOfMaterial.addMaterialToBOM(new LineItem(0, "Spær", getBoardForRafter(carport, boards.get(11))));
+            Material board;
+            
+            //Spær
+            board = getBoardForRafter(carport, boards.get(10));
+            billOfMaterial.addMaterialToBOM(new LineItem(calculateQtyOfRaftersForRoofAndUniversalBracketsForRafter(carport), "Spær", board));
+
+            //Rem
+            board = getBoardForRem(carport, boards.get(10));
+            billOfMaterial.addMaterialToBOM(new LineItem(calculateQtyOfRem(carport, board), "Rem", board));
+
+            //Understern til siderne
+            board = getBoardLengthForOversternAndUndersternSides(carport, boards.get(6));
+            billOfMaterial.addMaterialToBOM(new LineItem(calculateQtyOfRem(carport, board), "Understern til siderne", board));
+
+            //Understern til for og bagende
+            board = getBoardForUndersternFrontAndBack(carport, boards.get(6));
+            billOfMaterial.addMaterialToBOM(new LineItem(calculateQtyOfRaftersForRoofAndUniversalBracketsForRafter(carport), "Understern til for og bagende", board));
+
+            //Overstern til siderne
+            board = getBoardLengthForOversternAndUndersternSides(carport, boards.get(6));
+            billOfMaterial.addMaterialToBOM(new LineItem(calculateQtyOfRem(carport, board), "Overstern til siderne", board));
+
+            //Overstern til for og bagende
+            board = getBoardLengthForOversternAndUndersternSides(carport, boards.get(6));
+            billOfMaterial.addMaterialToBOM(new LineItem(calculateQtyOfRaftersForRoofAndUniversalBracketsForRafter(carport), "Overstern til for og bagende", board));
+//
+//            //Universalbeslag højre
+//            billOfMaterial.addMaterialToBOM(new LineItem(calculateQtyOfRaftersForRoofAndUniversalBracketsForRafter(carport), "Universalbeslag højre", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
+//
+//            //Universalbeslag venstre
+//            billOfMaterial.addMaterialToBOM(new LineItem(calculateQtyOfRaftersForRoofAndUniversalBracketsForRafter(carport), "Universalbeslag venstre", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
+//
+//            //Stolper
+//            billOfMaterial.addMaterialToBOM(new LineItem(calculateQtyOfPosts(carport), "Stolper", getBoardLengthForOversternAndUndersternSides(carport, boards.get(7))));
+//
+//            //Skruer
+//            billOfMaterial.addMaterialToBOM(new LineItem(0, "Skruer", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
         }
-
-        //Rem
-        billOfMaterial.addMaterialToBOM(new LineItem(0, "Rem", getBoardForRem(carport, boards.get(10))));
-
-        //Understern til siderne
-        billOfMaterial.addMaterialToBOM(new LineItem(0, "Understern til siderne", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
-
-        //Understern til for og bagende
-        billOfMaterial.addMaterialToBOM(new LineItem(0, "Understern til for og bagende", getBoardForUndersternFrontAndBack(carport, boards.get(6))));
-
-        //Overstern til siderne
-        billOfMaterial.addMaterialToBOM(new LineItem(0, "Overstern til siderne", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
-
-        //Overstern til for og bagende
-        billOfMaterial.addMaterialToBOM(new LineItem(0, "Overstern til for og bagende", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
-
-        //Universalbeslag højre
-        billOfMaterial.addMaterialToBOM(new LineItem(0, "Universalbeslag højre", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
-
-        //Universalbeslag venstre
-        billOfMaterial.addMaterialToBOM(new LineItem(0, "Universalbeslag venstre", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
-
-        //Stolper
-        billOfMaterial.addMaterialToBOM(new LineItem(0, "Stolper", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
-
-        //Skruer
         return billOfMaterial;
     }
 
@@ -100,50 +108,54 @@ public class AllMaterialsCalculator {
     }
 
     //******************************************Calculating QTY methods***********************************************
-    // Total count of posts, for the carport. For each 3 meters, a new post will be added to each length (* 2)
-    public int countPostsForCarport(Carport carport) {
-        int meterPerPost = 3;
-        double posts = ((Math.ceil(carport.getLength() / meterPerPost) * 2));
-        return (int) posts;
-    }
-
-    //Using two carriage bolt pr. posts according to carport manual 
-    public int countCarriageBoltandSquareSlices(Material post) {
-        int amountOfCarriageBoltPerPost = 2;
-        int carriageBolts = post.getQty() * amountOfCarriageBoltPerPost;
-        return carriageBolts;
-    }
-
-    public int countAmountRaftersForRoofAndUniversalBracketsForRafter(Carport carport) {
+    public int calculateQtyOfRaftersForRoofAndUniversalBracketsForRafter(Carport carport) {
         if (carport.getRoof().getCelsiusForSlope() == 0) {
             double spaceBetweenEachRafter = 0.55;
             double rafterWidth = 0.02;
             double totalRafterDimension = spaceBetweenEachRafter + rafterWidth; // Total dimension for each rafter including both space and material.
-
             double rafters = Math.ceil(carport.getLength() / totalRafterDimension); // Total amount of rafter based on calculating length with total dimension per rafter
-
             return (int) rafters;
         } else {
             return 1;
         }
     }
-
-    public int countUniversalBracketsScrews(Material universalBracketsLeft) {
-        double amountOfUniversalBrackets = universalBracketsLeft.getQty() * 2; //We have to multiply to get the full amount of brackets
-        double screws = 9 * amountOfUniversalBrackets;  // According to the carport instructions we need 3 screws pr. surface (universal brackets have 3 surfaces), 
-        // which means 9 screws pr. universal brack
-        double packages = Math.ceil(screws / 250) + 1;//Each package contains 250 screws according to the manual and one package get added to the hulbånd 
-        return (int) packages;
-    }
     
     //Skal have hjælp til denne metode, er der måske fejl i stykliste?
-    public int calculateQtyOfRemForCarport(Carport carport, Material board) {
+    public int calculateQtyOfRem(Carport carport, Material board) {
         int amountOfRem = 2;
         if (board.getLength() < carport.getLength()) {
             return 4;
         }
         return amountOfRem; //Amount of remme is set to 2 if the roof is flat
     }
+    
+        // Total count of posts, for the carport. For each 3 meters, a new post will be added to each length (* 2)
+    public int calculateQtyOfPosts(Carport carport) {
+        int meterPerPost = 3;
+        double posts = ((Math.ceil(carport.getLength() / meterPerPost) * 2));
+        return (int) posts;
+    }
+    
+    
+    
+    
+    
+
+
+//    //Using two carriage bolt pr. posts according to carport manual 
+//    public int countCarriageBoltandSquareSlices(Material post) {
+//        int amountOfCarriageBoltPerPost = 2;
+//        int carriageBolts = post.getQty() * amountOfCarriageBoltPerPost;
+//        return carriageBolts;
+//    }
+//
+//    public int countUniversalBracketsScrews(Material universalBracketsLeft) {
+//        double amountOfUniversalBrackets = universalBracketsLeft.getQty() * 2; //We have to multiply to get the full amount of brackets
+//        double screws = 9 * amountOfUniversalBrackets;  // According to the carport instructions we need 3 screws pr. surface (universal brackets have 3 surfaces), 
+//        // which means 9 screws pr. universal brack
+//        double packages = Math.ceil(screws / 250) + 1;//Each package contains 250 screws according to the manual and one package get added to the hulbånd 
+//        return (int) packages;
+//    }
 
     // SKAL LAVES OM
     public int countEaves(Carport carport) {
@@ -165,38 +177,36 @@ public class AllMaterialsCalculator {
         double roofTiles = Math.ceil((carport.getRoof().getLength())) * rygstenTilesPrMeterLength;
         return (int) roofTiles;
     }
-  
-    public Material returnMaterialForFarciaAndRainware(Carport carport, TreeMap<Double, Material> boards){
+
+    public Material returnMaterialForFarciaAndRainware(Carport carport, TreeMap<Double, Material> boards) {
         double boardLengthHypotenuse = calculateBoardLengthForFarciaAndRainware(carport); // Kalder metode for at få længden på vinskederne (hypotenusen)
         return boardCalculator(boardLengthHypotenuse, carport, boards);  // Kalder boardCalculator som finder det bræt som matcher længden bedst.
     }
-    
+
     //METODER NEDENFOR BRUGES KUN TIL TAG MED HÆLDNING!
-    
-    
     //Beregner vindskedernes(Facia) længde, skal modtage boardtypen(25x150 mm trykimp. bræt), og carporten som parameter.
     //Kan også beregne længden på vandbrædderne(RainWare)(19x100mm tryk imp. bræt)
-    public Double calculateBoardLengthForFarciaAndRainware(Carport carport){
+    public Double calculateBoardLengthForFarciaAndRainware(Carport carport) {
         double hosliggendeKatete = (carport.getRoof().getWidth() / 2);          // Tagbredden divideres med 2 for at finde midten af gavlen
         int roofAngle = carport.getRoof().getCelsiusForSlope();                 // roofAngle holder hældningen på taget
-        double boardLengthHypotenuse = (hosliggendeKatete)/(Math.cos(Math.toRadians(roofAngle))); //  Hypotenusen isoleres i cosinus formel for retvinklet trekanter, for at finde længden på vindskederne
-        
+        double boardLengthHypotenuse = (hosliggendeKatete) / (Math.cos(Math.toRadians(roofAngle))); //  Hypotenusen isoleres i cosinus formel for retvinklet trekanter, for at finde længden på vindskederne
+
         return boardLengthHypotenuse;
     }
-            
+
     public Double calculateHeightForRoof(Carport carport) {
         double boardLengthHypotenuse = calculateBoardLengthForFarciaAndRainware(carport); // Kalder metode for at få længden på vinskederne (hypotenusen)
         double height = (Math.sin(carport.getRoof().getWidth()) * boardLengthHypotenuse); // 
-        
-        return height;                
+
+        return height;
     }
-    
+
     // Carportens halve gavl
     public Double calculateBoardsForGable(Carport carport, Material board) {
         double halfGable = (carport.getRoof().getWidth() / 2);                  // Finder bredden på en halv gavl
-        double countBoards = (halfGable * toMilimeters  / board.getWidth() * 2);// Retunere hvor mange brædder der skal bruges til gavlen. Der ganges med to fordi det både gælder for og bag
-        
-       return countBoards;
+        double countBoards = (halfGable * toMilimeters / board.getWidth() * 2);// Retunere hvor mange brædder der skal bruges til gavlen. Der ganges med to fordi det både gælder for og bag
+
+        return countBoards;
     }
 
 //    
