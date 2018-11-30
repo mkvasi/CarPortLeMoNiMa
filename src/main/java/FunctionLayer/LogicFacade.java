@@ -1,7 +1,6 @@
 package FunctionLayer;
 
 //import FunctionLayer.calculators.OfferPriceCalculator;
-import FunctionLayer.calculators.MaterialQtyCalculator;
 import DBAccess.DataMapper;
 import FunctionLayer.exceptions.MaterialException;
 import java.util.HashMap;
@@ -73,18 +72,18 @@ public class LogicFacade {
 //        return mapMaterialsFromDB;
 //
 //    }
-    public static void getAllMaterialsFromDB(BillOfMaterial billOfMaterial) throws MaterialException {
-        //HashMap<String, Material> lort = DataMapper.getMaterialList();
-        ListToMapConvert listToMap = new ListToMapConvert();
-        HashMap<String, Material> mapMaterialsFromDB = listToMap.listToHashMapMaterials(DataMapper.getMaterialList());
-        
-
-    }
-
-    public static HashMap<String, Material> getDoneCarportWithMaterialList(Carport carport) throws MaterialException {
-        MaterialQtyCalculator calc = new MaterialQtyCalculator();
-        return calc.getDoneCarportWithMaterialQty(carport, getAllBoards());
-    }
+//    public static void getAllMaterialsFromDB(BillOfMaterial billOfMaterial) throws MaterialException {
+//        //HashMap<String, Material> lort = DataMapper.getMaterialList();
+//        ListToMapConvert listToMap = new ListToMapConvert();
+//        HashMap<String, Material> mapMaterialsFromDB = listToMap.listToHashMapMaterials(DataMapper.getMaterialList());
+//        
+//
+//    }
+//
+//    public static HashMap<String, Material> getDoneCarportWithMaterialList(Carport carport) throws MaterialException {
+//        MaterialQtyCalculator calc = new MaterialQtyCalculator();
+//        return calc.getDoneCarportWithMaterialQty(carport, getAllBoards());
+//    }
 
 //    public static double getOfferPrice(BillOfMaterial bill) throws MaterialException {
 ////        OfferPriceCalculator calc = new OfferPriceCalculator();
