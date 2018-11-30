@@ -222,11 +222,12 @@ public class AllMaterialsCalculator {
         return carriageBolts;
     }
 
-    public int countAmountRaftersForRoofAndUniversalBracketsForRafter(Carport carport) {
+    public int countAmountRaftersForRoofAndUniversalBracketsForRafter(Carport carport, TreeMap<Double, Material> boards) {
 //        if (!carport.getRoof().isPitchedRoof()) {
         if (carport.getRoof().getCelsiusForSlope() == 0) {
             double spaceBetweenEachRafter = 0.55;
-            double rafterWidth = 0.02;
+            double rafterWidth = boards.firstEntry().getValue().getWidth();
+//            double rafterWidth = 0.02;
             double totalRafterDimension = spaceBetweenEachRafter + rafterWidth; // Total dimension for each rafter including both space and material.
 
             double rafters = Math.ceil(carport.getLength() / totalRafterDimension); // Total amount of rafter based on calculating length with total dimension per rafter
@@ -250,9 +251,9 @@ public class AllMaterialsCalculator {
     }
     //Skal have hjælp til denne metode, er der måske fejl i stykliste?
 
-    public int calculateQtyOfRemForCarport(Carport carport, Material board) {
+    public int calculateQtyOfRemForCarport(Carport carport, Material boards) {
         int amountOfRem = 2;
-        if (board.getLength() < carport.getLength()) {
+        if (boards.getLength() < carport.getLength()) {
             return 4;
         }
         return amountOfRem; // Amount of remme is set to 2 if the roof is flat
@@ -270,21 +271,13 @@ public class AllMaterialsCalculator {
 
     // SKAL LAVES OM
     public int countEaves(Carport carport) {
-        calculateRoofDimensions(carport);
+        carport.getRoof().calculateRoofDimensions(carport);
         double eavesWidth = 1.0;
         double countEaves = Math.ceil(carport.getRoof().getWidth() / eavesWidth); // Total pieces of eaves with 1 meter width. 
         // double eaveMetersForLength = Math.ceil(carport.getLength());              // Length of each eave piece.
         return (int) countEaves;
     }
 
-    //add tiles pr. m2, based on measure from stykliste
-    public int calculateTiles(Carport carport) {
-        calculateRoofDimensions(carport);
-        int tilesPrM2 = 11;
-        double roof = Math.ceil((carport.getRoof().getLength() * (carport.getRoof().getWidth()))) * tilesPrM2;
-
-        return (int) roof;
-    }
 
     //stykslisten says 21 rygsten for 7,3 m, we calculate with 3 rygsten each meter
     public int calculateRygstensTiles(Carport carport) {
@@ -295,7 +288,7 @@ public class AllMaterialsCalculator {
     }
     
     
-    public Material returnMaterialForFarciaAndRainware(Carport carport, TreeMap<Double, Material> boards){
+    public Material materialForFarciaAndRainware(Carport carport, TreeMap<Double, Material> boards){
         double boardLengthHypotenuse = calculateBoardLengthForFarciaAndRainware(carport); // Kalder metode for at få længden på vinskederne (hypotenusen)
         return boardCalculator(boardLengthHypotenuse, carport, boards);  // Kalder boardCalculator som finder det bræt som matcher længden bedst.
     }
@@ -320,13 +313,35 @@ public class AllMaterialsCalculator {
         return height;                
     }
     
-    // Carportens halve gavl
-    public Double calculateBoardsForGable(Carport carport, Material board) {
+    // Den maksimale højde på taget, og den halve bredde på gavl, bruges til at regne antal brædder.
+    public Double calculateBoardsForGable(Carport carport, Material boards) {
         double halfGable = (carport.getRoof().getWidth() / 2);                  // Finder bredden på en halv gavl
-        double countBoards = (halfGable * toMilimeters  / board.getWidth() * 2);// Retunere hvor mange brædder der skal bruges til gavlen. Der ganges med to fordi det både gælder for og bag
+        double countBoards = (halfGable * toMilimeters  / boards.getWidth() * 2);// Retunere hvor mange brædder der skal bruges til gavlen. Der ganges med to fordi det både gælder for og bag
         
        return countBoards;
     }
+    
+    // Regner antal lægter ud som skal ligge på begge sidder af skråtaget
+    public int calculateBattensForPitchedRoof(Carport carport, TreeMap<Double, Material> boards) {
+        int spaceBetweenEachBatten = 300;
+        double battenWidth = boards.firstEntry().getValue().getWidth();
+        double totalMeasureBetweenEachBatten = spaceBetweenEachBatten + battenWidth;
+        
+        double hypotenuseLength = calculateBoardLengthForFarciaAndRainware(carport);
+        double countBattens = (Math.ceil(hypotenuseLength * 1000 / totalMeasureBetweenEachBatten * 2)); // Længden af vindskeden bruges til at finde ud af antallet af lægter pr. side af skråtaget. For at dække begge sider ganges der med to. Math.ceil() bruges til at runde op. 
+        
+        return (int) countBattens;
+    }
+        
+    //add tiles pr. m2, based on measure from stykliste
+    public int calculateTiles(Carport carport) {
+        carport.getRoof().calculateRoofDimensions(carport);
+        int tilesPrM2 = 11;
+        double roof = Math.ceil((carport.getRoof().getLength() * (carport.getRoof().getWidth()))) * tilesPrM2;
+
+        return (int) roof;
+    }
+        
     //STILL IN THE MAKING
 //    public Material calculateBoardForGableDecor(Carport carport, TreeMap<Double, Material> boards){
 //        double hypotenuse = (carport.getWidth() / 2); 

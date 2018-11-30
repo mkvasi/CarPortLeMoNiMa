@@ -18,7 +18,7 @@ public class Roof {
     private final double FLATWIDTH = 0.0;
     private final double FLATLENGTH = 50.0;
     private final double SLOPEWIDTH = 300.0;
-    private final double SLOPELENGTH = 0.0;
+    private final double SLOPELENGTH = 300.0;
     private final double TOMILIMETERS = 1000;
 //    private double heigth, width, length; 
 
@@ -163,11 +163,11 @@ public class Roof {
     
     public void calculateRoofDimensions(Carport carport){
         if(roofSlopeCelsius == 0){
-            width = (carport.getWidth() * TOMILIMETERS) + FLATWIDTH;
-            length = (carport.getLength() * TOMILIMETERS) + FLATLENGTH;
+            width = (carport.getWidth() * TOMILIMETERS) + (FLATWIDTH * 2);
+            length = (carport.getLength() * TOMILIMETERS) + (FLATLENGTH * 2);
         } else {
-            width = (carport.getWidth() * TOMILIMETERS) + SLOPEWIDTH;
-            length = (carport.getLength() * TOMILIMETERS) + SLOPELENGTH;
+            width = (carport.getWidth() * TOMILIMETERS) + (SLOPEWIDTH * 2);
+            length = (carport.getLength() * TOMILIMETERS) + (SLOPELENGTH * 2);
         }
     }
 }
