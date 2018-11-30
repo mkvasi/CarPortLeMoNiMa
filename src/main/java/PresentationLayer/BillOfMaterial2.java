@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author leage
  */
-public class BillOfMaterial extends Command {
+public class BillOfMaterial2 extends Command {
 
-    public BillOfMaterial() {
+    public BillOfMaterial2() {
     }
 
     @Override
@@ -30,7 +30,7 @@ public class BillOfMaterial extends Command {
       //HashMap carportWithDBMaterials = LogicFacade.getAllMaterialsFromDB(carport);
        HashMap<String, Material> billOfMaterial = LogicFacade.getDoneCarportWithMaterialList(carport); 
        
-     // billOfMaterial.setBOM((FunctionLayer.BillOfMaterial) request.getAttribute("billOfMaterial"));
+     // billOfMaterial.setBOM((FunctionLayer.BillOfMaterial2) request.getAttribute("billOfMaterial"));
       
       request.setAttribute("billOfMaterial", billOfMaterial);
       request.setAttribute("carport", carport);

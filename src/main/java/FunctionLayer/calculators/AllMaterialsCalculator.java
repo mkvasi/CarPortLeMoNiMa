@@ -23,6 +23,21 @@ public class AllMaterialsCalculator {
 
     int toMilimeters = 1000;
 
+    public BillOfMaterial calculateMaterialsForCarport(Carport carport, BillOfMaterial billOfMaterial, HashMap<Integer, TreeMap<Double, Material>> boards){
+        return billOfMaterial;
+    }
+    
+    public BillOfMaterial calculateMaterialsForRoofFlat(Carport carport, BillOfMaterial billOfMaterial, HashMap<Integer, TreeMap<Double, Material>> boards){
+        return billOfMaterial;
+    }
+    
+    public BillOfMaterial calculateMaterialsForRoofSlope(Carport carport, BillOfMaterial billOfMaterial, HashMap<Integer, TreeMap<Double, Material>> boards){
+        return billOfMaterial;
+    }
+    
+    public BillOfMaterial calculateMaterialsForShed(Carport carport, BillOfMaterial billOfMaterial, HashMap<Integer, TreeMap<Double, Material>> boards){
+        return billOfMaterial;
+    }
     //Using TreeMap instead of hashmap, because the TreeMap is a NavigableMap, which can be useful in this case, 
     //where we are trying to get the best match for a board, instead of looping through each element in a hashMap or List 
 //    public HashMap<String, Material> calculateAllMaterialTypes(Carport carport, HashMap<Integer, TreeMap<Double, Material>> boards) {
@@ -67,7 +82,7 @@ public class AllMaterialsCalculator {
 //            allMaterialsToUseForThisCarport.put("Spær", getBoardForRafter(carport, boards.get(10)));
 
         } else {
-            billOfMaterial.addMaterialToBOM(new LineItem(0, "Spær", getBoardForRafter(carport, boards.get(10)));
+            billOfMaterial.addMaterialToBOM(new LineItem(0, "Spær", getBoardForRafter(carport, boards.get(10))));
             //allMaterialsToUseForThisCarport.put("Spær", materialListFromDB.get("FÆDIGSKÅRET (BYG-SELV SPÆR SKAL SAMLES) 8 STK.1.0"));
 
         }
@@ -243,15 +258,15 @@ public class AllMaterialsCalculator {
         return amountOfRem; // Amount of remme is set to 2 if the roof is flat
     }
 
-    public void calculateRoofDimensions(Carport carport) {
-        double extraSpaceFlatRoof = 0.30;
-
-        double extraLength = extraSpaceFlatRoof * 2; // Total count of extra space for roof. For each length it would be added 30 cm (* 2)
-        double extraWidth = extraSpaceFlatRoof * 2; // Total count of extra space for roof. For each wide it would be added 30 cm (* 2)
-        carport.getRoof().setLength(carport.getLength() + extraLength);
-        carport.getRoof().setWidth(carport.getWidth() + extraWidth);
-
-    }
+//    public void calculateRoofDimensions(Carport carport) {
+//        double extraSpaceFlatRoof = 0.30;
+//
+//        double extraLength = extraSpaceFlatRoof * 2; // Total count of extra space for roof. For each length it would be added 30 cm (* 2)
+//        double extraWidth = extraSpaceFlatRoof * 2; // Total count of extra space for roof. For each wide it would be added 30 cm (* 2)
+//        carport.getRoof().setLength(carport.getLength() + extraLength);
+//        carport.getRoof().setWidth(carport.getWidth() + extraWidth);
+//
+//    }
 
     // SKAL LAVES OM
     public int countEaves(Carport carport) {

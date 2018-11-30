@@ -15,8 +15,12 @@ public class Roof {
 
     private int roofSlopeCelsius;
     private double heigth, width, length;
-    
-    
+    private final double FLATWIDTH = 0.0;
+    private final double FLATLENGTH = 50.0;
+    private final double SLOPEWIDTH = 300.0;
+    private final double SLOPELENGTH = 0.0;
+    private final double TOMILIMETERS = 1000;
+//    private double heigth, width, length; 
 
 
     
@@ -66,12 +70,12 @@ public class Roof {
 //        this.slope = slope;
 //    }
 
-    public Roof(int roofSlopeCelsius, double heigth, double width, double length) {
-        this.roofSlopeCelsius = roofSlopeCelsius;
-        this.heigth = heigth;
-        this.width = width;
-        this.length = length;
-    }
+//    public Roof(int roofSlopeCelsius, double heigth, double width, double length) {
+//        this.roofSlopeCelsius = roofSlopeCelsius;
+//        this.heigth = heigth;
+//        this.width = width;
+//        this.length = length;
+//    }
 
     public Roof(int roofSlopeCelsius) {
         this.roofSlopeCelsius = roofSlopeCelsius;
@@ -87,6 +91,51 @@ public class Roof {
     public void setCelsiusForSlope(int roofSlopeCelsius) {
         this.roofSlopeCelsius = roofSlopeCelsius;
     }
+    
+//
+//    public double getHeigth() {
+//        return heigth;
+//    }
+//
+//    public void setHeigth(double heigth) {
+//        this.heigth = heigth;
+//    }
+//
+//    public double getWidth() {
+//        return width;
+//    }
+//
+//    public void setWidth(double width) {
+//        this.width = width;
+//    }
+//
+//    public double getLength() {
+//        return length;
+//    }
+//
+//    public void setLength(double length) {
+//        this.length = length;
+//    }
+//    
+//    public void calculateRoofDimensionsFlat(Carport carport) {
+//        double extraSpaceFlatRoof = 0.30;
+//
+//        double extraLength = extraSpaceFlatRoof * 2; // Total count of extra space for roof. For each length it would be added 30 cm (* 2)
+//        double extraWidth = extraSpaceFlatRoof * 2; // Total count of extra space for roof. For each wide it would be added 30 cm (* 2)
+//        carport.getRoof().setLength(carport.getLength() + extraLength);
+//        carport.getRoof().setWidth(carport.getWidth() + extraWidth);
+//
+//    }
+//    
+//    public void calculateRoofDimensionsSlope(Carport carport) {
+//        double extraSpaceFlatRoof = 0.30;
+//
+//        double extraLength = extraSpaceFlatRoof * 2; // Total count of extra space for roof. For each length it would be added 30 cm (* 2)
+//        double extraWidth = extraSpaceFlatRoof * 2; // Total count of extra space for roof. For each wide it would be added 30 cm (* 2)
+//        carport.getRoof().setLength(carport.getLength() + extraLength);
+//        carport.getRoof().setWidth(carport.getWidth() + extraWidth);
+//
+//    }
 
     public double getHeigth() {
         return heigth;
@@ -112,8 +161,14 @@ public class Roof {
         this.length = length;
     }
     
-    
-    
-
+    public void calculateRoofDimensions(Carport carport){
+        if(roofSlopeCelsius == 0){
+            width = (carport.getWidth() * TOMILIMETERS) + FLATWIDTH;
+            length = (carport.getLength() * TOMILIMETERS) + FLATLENGTH;
+        } else {
+            width = (carport.getWidth() * TOMILIMETERS) + SLOPEWIDTH;
+            length = (carport.getLength() * TOMILIMETERS) + SLOPELENGTH;
+        }
+    }
 }
 
