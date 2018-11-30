@@ -300,7 +300,9 @@ public class AllMaterialsCalculator {
         return boardCalculator(boardLengthHypotenuse, carport, boards);  // Kalder boardCalculator som finder det bræt som matcher længden bedst.
     }
     
-    //ANVENDES KUN TIL TAG MED HÆLDNING!
+    //METODER NEDENFOR BRUGES KUN TIL TAG MED HÆLDNING!
+    
+    
     //Beregner vindskedernes(Facia) længde, skal modtage boardtypen(25x150 mm trykimp. bræt), og carporten som parameter.
     //Kan også beregne længden på vandbrædderne(RainWare)(19x100mm tryk imp. bræt)
     public Double calculateBoardLengthForFarciaAndRainware(Carport carport){
@@ -318,7 +320,6 @@ public class AllMaterialsCalculator {
         return height;                
     }
     
-    // ANVENDES KUN TIL TAG MED HÆLDNING
     // Carportens halve gavl
     public Double calculateBoardsForGable(Carport carport, Material board) {
         double halfGable = (carport.getRoof().getWidth() / 2);                  // Finder bredden på en halv gavl
