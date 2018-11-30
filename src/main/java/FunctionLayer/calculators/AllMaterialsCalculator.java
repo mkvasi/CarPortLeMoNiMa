@@ -278,15 +278,38 @@ public class AllMaterialsCalculator {
 
         return (int) roofTiles;
     }
+    
+    
+    public Material returnMaterialForFarciaAndRainware(Carport carport, TreeMap<Double, Material> boards){
+        double boardLengthHypotenuse = calculateBoardLengthForFarciaAndRainware(carport); // Kalder metode for at få længden på vinskederne (hypotenusen)
+        return boardCalculator(boardLengthHypotenuse, carport, boards);  // Kalder boardCalculator som finder det bræt som matcher længden bedst.
+    }
+    
     //ANVENDES KUN TIL TAG MED HÆLDNING!
     //Beregner vindskedernes(Facia) længde, skal modtage boardtypen(25x150 mm trykimp. bræt), og carporten som parameter.
     //Kan også beregne længden på vandbrædderne(RainWare)(19x100mm tryk imp. bræt)
-    //QTY er altid 2, men denne beregner kun længden på en vindskede/vandbræt
-    public Material calculateBoardForFaciaAndRainWare(Carport carport, TreeMap<Double, Material> boards){
-        double hypotenuse = (carport.getWidth() / 2); 
-        int roofAngle = carport.getRoof().getCelsiusForSlope();
-        double carportMeasure = (hypotenuse)/(Math.cos(Math.toRadians(roofAngle)));
-        return boardCalculator(carportMeasure, carport, boards); 
+    public Double calculateBoardLengthForFarciaAndRainware(Carport carport){
+        double hosliggendeKatete = (carport.getRoof().getWidth() / 2);          // Tagbredden divideres med 2 for at finde midten af gavlen
+        int roofAngle = carport.getRoof().getCelsiusForSlope();                 // roofAngle holder hældningen på taget
+        double boardLengthHypotenuse = (hosliggendeKatete)/(Math.cos(Math.toRadians(roofAngle))); //  Hypotenusen isoleres i cosinus formel for retvinklet trekanter, for at finde længden på vindskederne
+        
+        return boardLengthHypotenuse;
+    }
+            
+    public Double calculateHeightForRoof(Carport carport) {
+        double boardLengthHypotenuse = calculateBoardLengthForFarciaAndRainware(carport); // Kalder metode for at få længden på vinskederne (hypotenusen)
+        double height = (Math.sin(carport.getRoof().getWidth()) * boardLengthHypotenuse); // 
+        
+        return height;                
+    }
+    
+    // ANVENDES KUN TIL TAG MED HÆLDNING
+    // Carportens halve gavl
+    public Double calculateBoardsForGable(Carport carport, Material board) {
+        double halfGable = (carport.getRoof().getWidth() / 2);                  // Finder bredden på en halv gavl
+        double countBoards = (halfGable * toMilimeters  / board.getWidth() * 2);// Retunere hvor mange brædder der skal bruges til gavlen. Der ganges med to fordi det både gælder for og bag
+        
+       return countBoards;
     }
     //STILL IN THE MAKING
 //    public Material calculateBoardForGableDecor(Carport carport, TreeMap<Double, Material> boards){
