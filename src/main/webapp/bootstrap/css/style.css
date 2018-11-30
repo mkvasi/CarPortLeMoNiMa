@@ -11,24 +11,31 @@
 @import url('overwrite.css');
 /* ====================================== */
 
-.select2-container .select2-selection--single{
+.navigation {
+
+}
+
+.select2-spa .select2-selection--single{
     height:34px !important;
-    
+
 }
 .select2-container--default .select2-selection--single{
     border: 1px solid #ccc !important; 
     border-radius: 0px !important; 
-    
+
 }
 .container{
-    margin-left: 700px;
-    
+
+    width: 320px;
+    margin: auto;
+
 }
 
 .containerForCarport{
-    margin-left: 700px;
+    margin: auto;
     margin-bottom: 500px;
     margin-top: 50px;
+    width: 235px;
 }
 
 table { 
@@ -52,40 +59,68 @@ td, th {
     font-size: 18px;
 }
 
-#kundeinfo {
+hr {
+    border-top: 1px solid;
+}
+
+#svgfront {
+    width: 700px;
+    height: 600px;
+    margin-left: 1000px;
+    margin-top: -860px;
+}
+
+#yderst {
+    width: 700px;
+    height: 1000px;
+    margin-top: -150px;
+    margin-left: 80px;
+    transform: rotate(90deg);
+}
+
+#customerinfo {
     width: 600px;
-    height: 270px;
-    margin-left: 15px;
+    height: 300px;
+    margin-left: 670px;
+    margin-top: -270px;
 }
 
 #carportinfo {
     width: 600px;
+    height: 270px;
+    margin-top: 50px;
+    margin-left: 15px;
+}
+
+#dates {
+    width: 400px;
     height: 300px;
-    margin-left: 0px;
-    margin-top: 100px;
-    margin-bottom: 100px;
+    margin-left: 1330px;
+    margin-top: -300px;
 }
 
 #button {
+    margin: auto;
     margin-top: 20px;
-    margin-left: 75px;
     width: 100px;
     height: 150px;
-   
+
 }
 
 #pris {
-    width: 600px;
-    height: 100px;
-    margin-left: 450px;
-    margin-bottom: 50px;
+    width: 400px;
+    height: 50px;
+    margin-left: 1330px;
+    margin-top: -90px;
 }
 
-#middle{
-    height: 400px;
-    width: 1130px;
+#stykliste{
+    height: 377px;
+    width: 1120px;
     overflow-y: scroll;
-    margin-top: 100px;
+    margin: auto;
+    margin-top: 80px;
+    margin-bottom: -300px;
 }
 
 .clear {
