@@ -177,7 +177,7 @@
                 <thead>
                     <tr>
                         <th>Navn</th>
-                        <td>Yunson Yürpo </td>
+                        <td>Yunson Yürpor </td>
                     </tr>
 
                     <tr>
@@ -237,7 +237,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Pris</th>
+                        <th>Tilbuds Pris.......</th>
                         <td>15.499,-</td>
                     </tr>                 
 
@@ -488,29 +488,29 @@
             <line x1="650" y1="598" x2="660" y2="598" style="stroke:rgb(0,0,0);stroke-width:2" />
 
 
-            <rect x="215" y="569" rx="5" ry="5" height="30" width="30" stroke-width="2"
+            <rect x="223" y="569" rx="5" ry="5" height="30" width="30" stroke-width="2"
                   style="stroke:#000000; fill: #424242"/> 
 
-            <rect x="425" y="569" rx="5" ry="5" height="30" width="30" stroke-width="2"
+            <rect x="433" y="569" rx="5" ry="5" height="30" width="30" stroke-width="2"
                   style="stroke:#000000; fill: #424242"/> 
 
-            <rect x="235" y="440" rx="10" ry="10" height="100" width="200" stroke-width="2"
+            <rect x="243" y="440" rx="10" ry="10" height="100" width="200" stroke-width="2"
                   style="stroke:#000000; fill: #6E6E6E"/>
 
-            <rect x="210" y="488" rx="10" ry="10" height="100" width="250" stroke-width="2"
+            <rect x="218" y="488" rx="10" ry="10" height="100" width="250" stroke-width="2"
                   style="stroke:#000000; fill: #043D80"/>
 
 
-            <rect x="222" y="500" rx="5" ry="5" height="20" width="40" stroke-width="2"
+            <rect x="230" y="500" rx="5" ry="5" height="20" width="40" stroke-width="2"
                   style="stroke:#000000; fill: #DF0101"/>	  
 
-            <rect x="408" y="500" rx="5" ry="5" height="20" width="40" stroke-width="2"
+            <rect x="416" y="500" rx="5" ry="5" height="20" width="40" stroke-width="2"
                   style="stroke:#000000; fill: #DF0101"/>
 
-            <rect x="300" y="545" rx="5" ry="5" height="25" width="65" stroke-width="2"
+            <rect x="308" y="545" rx="5" ry="5" height="25" width="65" stroke-width="2"
                   style="stroke:#000000; fill: #D8D8D8"/>
 
-            <text x="308" y="562" fill="">AG 3124</text>
+            <text x="328" y="562" fill="">FOG</text>
 
 
             <%
@@ -661,27 +661,13 @@
                 <div class="row">
                     <div class="span6">
                         <p>
-                            &copy; Serenity - All right reserved
+                            &copy; LeMoNiMa - All right reserved
                         </p>
-                    </div>
-                    <div class="span6">
-                        <div class="credits">
-                            <!--
-                              All the links in the footer should remain intact.
-                              You can delete the links only if you purchased the pro version.
-                              Licensing information: https://bootstrapmade.com/license/
-                              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Serenity
-                            -->
-                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                        </div>
                     </div>
                 </div>
             </div>
 
         </footer>
-
-
-
 
     </body>
 

@@ -48,6 +48,28 @@
                         <!-- top menu -->
 
                         <!-- end menu -->
+                        <div class="navigation">
+                            <nav>
+                                <ul class="nav topnav">
+                                    <li class="dropdown active">
+                                        <a href="index.html">Home</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#">Features</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#">Pages</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#">Portfolio</a>
+                                    </li>
+                                    <li>
+                                        <a href="contact.html">Contact</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- end menu -->
                     </div>
                 </div>
             </div>
@@ -60,7 +82,7 @@
                     <div class="row">
                         <div class="span12">
                             <div class="centered">
-                                <h3>Beregn din carport nedenfor</h3>
+                                <h3></h3>
                                 <br>
                             </div>
                         </div>
@@ -69,7 +91,11 @@
             </div>
         </section>
 
+        <br>
 
+        <h3 style="text-align: center;">Beregn din carport nedenfor</h3>
+
+        <hr>
 
 
         <div class="containerForCarport">
@@ -79,7 +105,7 @@
                     <label class="input-group-text" for="inputGroupSelect01" >Længde på carport</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" name="length" >
-                   
+
                     <option selected value="2.4">2,4 m.</option>
                     <option value="2.7">2,7 m</option>
                     <option value="3.0">3,0 m</option>
@@ -103,7 +129,7 @@
                     <label class="input-group-text" for="inputGroupSelect01">Bredde på carport</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" name="width">
-                     
+
                     <option selected value="2.4">2,4 m.</option>
                     <option value="2.7">2,7 m</option>
                     <option value="3.0">3,0 m</option>
@@ -121,7 +147,7 @@
                     <option value="6.9">6,9 m</option>
                     <option value="7.2">7,2 m</option>
                     <option value="7.5">7,5 m</option>
-             
+
                 </select>
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Hældning på taget?</label>
@@ -143,7 +169,7 @@
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" name="shedLength">
                     <option selected value="0.0">Ønsker ikke redsskabsrum</option>
-                   <option value="2.4">2,4 m.</option>
+                    <option value="2.4">2,4 m.</option>
                     <option value="2.7">2,7 m</option>
                     <option value="3.0">3,0 m</option>
                     <option value="3.3">3,3 m</option>
@@ -188,45 +214,32 @@
                 </select>
                 <div id="button">
                     <button type="submit" class="btn btn-primary">Se carport</button>
-        </div>
-            </form>
-    </div>
-
-
-
-
-
-    <!-- Footer
-   ================================================== -->
-    <footer class="footer">
-
-
-        <div class="container">
-            <div class="row">
-                <div class="span6">
-                    <p>
-                        &copy; Serenity - All right reserved
-                    </p>
                 </div>
-                <div class="span6">
-                    <div class="credits">
-                        <!--
-                          All the links in the footer should remain intact.
-                          You can delete the links only if you purchased the pro version.
-                          Licensing information: https://bootstrapmade.com/license/
-                          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Serenity
-                        -->
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </form>
+        </div>
+
+
+
+
+
+        <!-- Footer
+       ================================================== -->
+        <footer class="footer">
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="span6">
+                        <p>
+                            &copy; LeMoNiMa - All right reserved
+                        </p>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </footer>
-
+        </footer>
 
 
-
-</body>
+    </body>
 
 </html>
