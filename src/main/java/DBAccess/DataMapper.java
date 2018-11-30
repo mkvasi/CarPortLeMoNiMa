@@ -20,7 +20,7 @@ public class DataMapper {
     public static List<Material> getMaterialList() throws MaterialException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = "SELECT * FROM `MATERIALS`";
+            String SQL = "SELECT * FROM `materials` ORDER BY type_id, description, length ASC";
             PreparedStatement ps = con.prepareStatement(SQL);
 
             ResultSet rs = ps.executeQuery();
@@ -55,6 +55,51 @@ public class DataMapper {
             }
 
             return materialList;
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new MaterialException(ex.getMessage());
+        }
+    }
+    
+    public static Material getFirstDefaultMaterial() throws MaterialException {
+        try {
+            Connection con = DBConnector.connection();
+            String SQL = "SELECT * FROM `materials` WHERE defaultused = 1 ORDER BY type_id, description, length ASC LIMIT 1";
+            PreparedStatement ps = con.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+
+            //Material material = null;
+            //HashMap<Integer, Material> materialList = new HashMap();
+            //List<Material> materialList = new ArrayList();
+            
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String description = rs.getString("description");
+                double height = rs.getDouble("heigth");
+                double width = rs.getDouble("width");
+                double length = rs.getDouble("length");
+                double buyprice = rs.getDouble("buyprice");
+                double sellprice = rs.getDouble("sellprice");
+                boolean defaultUsed = rs.getBoolean("defaultused");
+                int type_id = rs.getInt("type_id");
+                int measure_id = rs.getInt("measure_id");
+                
+                
+                
+                //int _width = Integer.parseInt(String.valueOf(width));
+                //int _height = Integer.parseInt(String.valueOf(height));
+                //int name = type_id + _width + _height;
+
+                //material = new Material(id, measure_id, type_id, description, buyprice, sellprice, length, width, height);
+                //materialList.put(name, new Material(id, measure_id, type_id, description, buyprice, sellprice, length, width, height));
+                //materialList.add(new Material(id, measure_id, type_id, description, buyprice, sellprice, length, width, height));
+                //materialList.add(new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
+                return new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id);
+            }
+
+            return null;
 
         } catch (SQLException | ClassNotFoundException ex) {
             throw new MaterialException(ex.getMessage());

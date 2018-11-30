@@ -1,8 +1,10 @@
 package PresentationLayer;
 
+import FunctionLayer.BillOfMaterial;
 import FunctionLayer.Carport;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Material;
+import FunctionLayer.Price;
 import FunctionLayer.Roof;
 import FunctionLayer.Shed;
 import FunctionLayer.exceptions.MaterialException;
@@ -22,11 +24,16 @@ public class CarportOverview extends Command {
 
         Carport carport = LogicFacade.makeCarport(length, width, roofAngle, shedLength, shedWidth);
         //LogicFacade.getAllMaterialsFromDB(carport);
-        HashMap<String, Material> billOfMaterials = LogicFacade.getDoneCarportWithMaterialList(carport);
+//        HashMap<String, Material> billOfMaterials = LogicFacade.getDoneCarportWithMaterialList(carport);
 
-        request.setAttribute("billOfMaterial", billOfMaterials);
+        BillOfMaterial billOfMaterial = LogicFacade.makeBillOfMaterial();
+        
+        Price price = LogicFacade.makePrice(billOfMaterial);
+
+        request.setAttribute("billOfMaterial", billOfMaterial);
 
         //request.setAttribute("offerprice", offerPrice);
+        request.setAttribute("price", price);
         request.setAttribute("carport", carport);
 
         return "carportOverview";

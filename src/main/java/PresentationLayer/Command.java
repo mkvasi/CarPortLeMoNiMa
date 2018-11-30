@@ -14,7 +14,7 @@ abstract class Command {
     private static void initCommands() {
         commands = new HashMap<>();
         commands.put("carportOverview", new CarportOverview());
-        commands.put("billOfMaterial", new BillOfMaterial());
+        commands.put("billOfMaterial", new BillOfMaterial2());
         
     }
 
