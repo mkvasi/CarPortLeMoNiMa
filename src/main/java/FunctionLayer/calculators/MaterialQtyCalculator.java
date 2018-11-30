@@ -23,6 +23,7 @@ public class MaterialQtyCalculator {
         HashMap<String, Material> allMaterialsForThisCarport = calc.calculateAllMaterialTypes(carport, boards);
       
         //Calculate qty of spær, by getting spær from allMaterialsForThisCarport
+       
         allMaterialsForThisCarport.get("Spær").setQty(countAmountRaftersForRoofAndUniversalBracketsForRafter(carport));
         allMaterialsForThisCarport.get("Rem").setQty(calculateQtyOfRemForCarport(carport, allMaterialsForThisCarport.get("Rem")));
         allMaterialsForThisCarport.get("Stolper").setQty(countPostsForCarport(carport));

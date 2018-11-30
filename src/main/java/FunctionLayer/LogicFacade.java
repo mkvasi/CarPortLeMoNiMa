@@ -50,6 +50,13 @@ public class LogicFacade {
     public static HashMap<Integer, TreeMap<Double, Material>> getAllBoards() throws MaterialException {
         return MaterialMapper.getAllBoardsForThisCarportWithOutLengthCalculation();
     }
+    
+    public static Carport makeCarport(double length, double width, boolean roof, double shedLength, double shedWidth) {
+        Roof roofDone = new Roof(roof); 
+        Shed shed = new Shed(shedLength, shedWidth); 
+        Carport carport = new Carport (length, width, roofDone, shed); 
+        return carport;
+    }
 
 }
 

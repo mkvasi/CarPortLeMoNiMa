@@ -29,25 +29,25 @@ public class CarportOverview extends Command {
         double width = Double.parseDouble(request.getParameter("width"));
         String _roof = request.getParameter("roof");
         String _shed = request.getParameter("shed");
-        if (_roof.equals("Ja")) {
+        if (_roof.equals("1.0")) {
             roofFlat = true;
         } else {
             roofFlat = false;
         }
-        if (_shed.equals("Ja")) {
-            shedWanted = true;
-            shedLength = Double.parseDouble(request.getParameter("shedLength"));
-            shedWidth = Double.parseDouble(request.getParameter("shedWidth"));
-        } else {
+        if (shedLength == 0.0 || shedWidth == 0.0 ) {
             shedWanted = false;
             shedLength = 0.0;
             shedWidth = 0.0;
+        } else {
+            shedWanted = true;
+            shedLength = Double.parseDouble(request.getParameter("shedLength"));
+            shedWidth = Double.parseDouble(request.getParameter("shedWidth"));
         }
 
         Roof roof = new Roof(roofFlat, length, width);
         Carport carport;
 
-        carport = new Carport(length - 1, width - 0.3, roof, new Shed(shedWanted, shedLength, shedWidth));
+        carport = new Carport(length, width, roof, new Shed(shedWanted, shedLength, shedWidth));
 
         LogicFacade.getAllMaterialsFromDB(carport);
         HashMap<String, Material> billOfMaterials = LogicFacade.getDoneCarportWithMaterialList(carport);
