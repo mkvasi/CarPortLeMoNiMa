@@ -20,14 +20,15 @@ public class Login extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginUserException {
+        String id = request.getParameter("id");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        Customer user = LogicFacade.login(email, password);
+        Customer customer = LogicFacade.login(Integer.parseInt(id), email, password);
         HttpSession session = request.getSession();
-        session.setAttribute("user", user);
-        session.setAttribute("role", user.getRole());
-        if (user.getRole().equals("employee")) {
-            return (user.getRole() + "page");
+        session.setAttribute("user", customer);
+        session.setAttribute("role", customer.getRole());
+        if (customer.getRole().equals("employee")) {
+            return (customer.getRole() + "page");
         } else {
             return "carportOverview";
         }

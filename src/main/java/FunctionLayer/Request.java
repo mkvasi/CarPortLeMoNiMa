@@ -14,16 +14,16 @@ public class Request {
     private final String NO_OFFER_SENT = "Tilbud ej sendt!";
     private final String NO_PAYMENT = "Tilbud ej betalt!";
     private double priceDefault, priceEmployee;
-    private User user;
+    private Customer customer;
     private Employee employee;
     private Carport carport;
 
-    public Request(int id, String requestDate, String offerDate, String paymentDate, double priceDefault, double priceEmployee, User user, Employee employee, Carport carport) {
+    public Request(int id, String requestDate, String offerDate, String paymentDate, double priceDefault, double priceEmployee, Customer customer, Employee employee, Carport carport) {
         this.id = id;
         this.requestDate = requestDate;
         this.priceDefault = priceDefault;
         this.priceEmployee = priceEmployee;
-        this.user = user;
+        this.customer = customer;
         this.employee = employee;
         this.carport = carport;
         
@@ -88,15 +88,15 @@ public class Request {
         this.priceEmployee = priceEmployee;
     }
 
-    public User getUser() {
-        return user;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Employee getEmployee() {
+      public Employee getEmployee() {
         return employee;
     }
 
