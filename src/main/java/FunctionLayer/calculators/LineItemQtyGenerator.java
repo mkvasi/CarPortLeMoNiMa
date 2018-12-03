@@ -110,7 +110,7 @@ public class LineItemQtyGenerator {
     }
 
     public int countEaves(Carport carport) {
-        carport.getRoof().calculateRoofDimensions(carport);
+        //carport.getRoof().calculateRoofDimensions(carport);
         double eavesWidth = 1.0;
         double countEaves = Math.ceil(carport.getRoof().getWidth() / eavesWidth); // Total pieces of eaves with 1 meter width. 
         return (int) countEaves;

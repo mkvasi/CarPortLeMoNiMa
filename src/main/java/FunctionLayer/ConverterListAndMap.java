@@ -17,7 +17,7 @@ import java.util.TreeMap;
 public class ConverterListAndMap {
     
    
-
+//Denne metode repræsentere default listen fra DB, som hashMap
     public HashMap<Integer,TreeMap<Double, Material>> ListToHashMap(List<Material> listOfMaterials) {
         HashMap<Integer, TreeMap<Double, Material>> materialMap = new HashMap();
         TreeMap <Double, Material> materialTreeMap6 = new TreeMap(); 
