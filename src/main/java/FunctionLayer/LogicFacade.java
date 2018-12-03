@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.TreeMap;
 import FunctionLayer.BillOfMaterial;
 import FunctionLayer.calculators.LineItemQtyGenerator;
+import FunctionLayer.exceptions.LoginUserException;
 import java.util.List;
 
 public class LogicFacade {
@@ -51,6 +52,14 @@ public class LogicFacade {
         return con.ListToHashMap(getAllDefaultMaterialsAsList(carport));
     }
 
+    public static User login(String email, String password) throws LoginUserException {
+        return DataMapper.login(email, password);
+    }
 
+    public static User createUser(String email, String password) throws LoginUserException, InstantiationException, IllegalAccessException {
+        User user = new User(email, password, email);
+        DataMapper.createUser(user);
+        return user;
+    }
 
 }

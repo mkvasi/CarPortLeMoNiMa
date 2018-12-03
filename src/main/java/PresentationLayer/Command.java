@@ -15,7 +15,7 @@ abstract class Command {
         commands = new HashMap<>();
         commands.put("carportOverview", new CarportOverview());
         commands.put("billOfMaterial", new BillOfMaterial2());
-        
+        commands.put("login", new Login());
     }
 
     static Command from(HttpServletRequest request) {

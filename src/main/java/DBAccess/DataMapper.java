@@ -1,6 +1,7 @@
 package DBAccess;
 
 import FunctionLayer.Material;
+import FunctionLayer.User;
 import FunctionLayer.exceptions.MaterialException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,6 +52,14 @@ public class DataMapper {
             throw new MaterialException(ex.getMessage());
         }
 
+    }
+
+    public static User login(String email, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static void createUser(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
