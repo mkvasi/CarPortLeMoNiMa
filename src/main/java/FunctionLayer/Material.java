@@ -17,139 +17,6 @@ public class Material {
     private double buyprice, sellprice;
     private boolean defaultUsed;
     private int type_id, measure_id;
-    
-    
-    
-    
-    
-//    int id, qty, type_id, measure_id;
-//    private String description, name;
-//    private double buyprice, sellprice, length, width, height;
-//
-//    public Material(int id, int qty, int type_id, int measure_id, String description, String name, double buyprice, double sellprice, double length, double width, double height) {
-//        this.id = id;
-//        this.qty = qty;
-//        this.type_id = type_id;
-//        this.measure_id = measure_id;
-//        this.description = description;
-//        this.name = name;
-//        this.buyprice = buyprice;
-//        this.sellprice = sellprice;
-//        this.length = length;
-//        this.width = width;
-//        this.height = height;
-//    }
-//
-//    public Material(int id, int type_id, int measure_id, String description, double buyprice, double sellprice, double length, double width, double height) {
-//        this.id = id;
-//        this.type_id = type_id;
-//        this.measure_id = measure_id;
-//        this.description = description;
-//        this.buyprice = buyprice;
-//        this.sellprice = sellprice;
-//        this.length = length;
-//        this.width = width;
-//        this.height = height;
-//    }
-//
-//    public Material(String description, double length) {
-//        this.description = description;
-//        this.length = length;
-//    }
-//
-//    public double getLength() {
-//        return length;
-//    }
-//
-//    public void setLength(double length) {
-//        this.length = length;
-//    }
-//
-//    public int getType_id() {
-//        return type_id;
-//    }
-//
-//    public void setType_id(int type_id) {
-//        this.type_id = type_id;
-//    }
-//
-//    public int getMeasure_id() {
-//        return measure_id;
-//    }
-//
-//    public void setMeasure_id(int measure_id) {
-//        this.measure_id = measure_id;
-//    }
-//
-//    public String getDescription() {
-//        return description;
-//    }
-//
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
-//
-//    public double getBuyprice() {
-//        return buyprice;
-//    }
-//
-//    public void setBuyprice(double buyprice) {
-//        this.buyprice = buyprice;
-//    }
-//
-//    public double getSellprice() {
-//        return sellprice;
-//    }
-//
-//    public void setSellprice(double sellprice) {
-//        this.sellprice = sellprice;
-//    }
-//
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//    public int getQty() {
-//        return qty;
-//    }
-//
-//    public void setQty(int qty) {
-//        this.qty = qty;
-//
-//    }
-//
-//    public double getWidth() {
-//        return width;
-//    }
-//
-//    public void setWidth(double width) {
-//        this.width = width;
-//    }
-//
-//    public double getHeight() {
-//        return height;
-//    }
-//
-//    public void setHeight(double height) {
-//        this.height = height;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "Material{" + "id=" + id + ", qty=" + qty + ", type_id=" + type_id + ", measure_id=" + measure_id + ", description=" + description + ", name=" + name + ", buyprice=" + buyprice + ", sellprice=" + sellprice + ", length=" + length + ", width=" + width + ", height=" + height + "\n";
-//    }
 
     public Material(int id, String description, double heigth, double width, double length, double buyprice, double sellprice, boolean defaultUsed, int type_id, int measure_id) {
         this.id = id;
@@ -163,6 +30,11 @@ public class Material {
         this.type_id = type_id;
         this.measure_id = measure_id;
     }
+    //For test purpose
+    public Material(double length) {
+        this.length = length;
+    }
+    
 
     public int getId() {
         return id;

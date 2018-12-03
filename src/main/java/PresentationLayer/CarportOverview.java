@@ -18,23 +18,25 @@ public class CarportOverview extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws MaterialException {
         double length = Double.parseDouble(request.getParameter("length"));
         double width = Double.parseDouble(request.getParameter("width"));
-        int roofAngle = Integer.parseInt(request.getParameter("roof"));
+        int roofSlopeCelcius = Integer.parseInt(request.getParameter("roof"));
         double shedLength = Double.parseDouble(request.getParameter("shedLength"));
         double shedWidth = Double.parseDouble(request.getParameter("shedWidth"));
 
-        Carport carport = LogicFacade.makeCarport(length, width, roofAngle, shedLength, shedWidth);
+        Carport carport = LogicFacade.makeCarport(length, width, roofSlopeCelcius, shedLength, shedWidth);
         //LogicFacade.getAllMaterialsFromDB(carport);
 //        HashMap<String, Material> billOfMaterials = LogicFacade.getDoneCarportWithMaterialList(carport);
 
-        BillOfMaterial billOfMaterial = LogicFacade.makeBillOfMaterial();
+        BillOfMaterial billOfMaterial = LogicFacade.makeBillOfMaterial(carport);
+        carport.setBillOfmaterial(billOfMaterial);
         
-        Price price = LogicFacade.makePrice(billOfMaterial);
+        //Price price = LogicFacade.makePrice(billOfMaterial);
 
-        request.setAttribute("billOfMaterial", billOfMaterial);
+       // request.setAttribute("billOfMaterial", billOfMaterial);
 
         //request.setAttribute("offerprice", offerPrice);
-        request.setAttribute("price", price);
+       // request.setAttribute("price", price);
         request.setAttribute("carport", carport);
+        request.setAttribute("billOfMaterial", billOfMaterial);
 
         return "carportOverview";
 //        double shedLength = 0.0;

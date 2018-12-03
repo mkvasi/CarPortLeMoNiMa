@@ -5,7 +5,6 @@
  */
 package FunctionLayer;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,21 +14,20 @@ import java.util.List;
 public class BillOfMaterial {
     
     private List<LineItem> lineItems;
+
+    public BillOfMaterial() {
+    }
+
+    public BillOfMaterial(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
+    }
+
+    @Override
+    public String toString() {
+        return "BillOfMaterial{" + "lineItems=" + lineItems + '}';
+    }
     
-//    HashMap<String,Material> BOM;
-//
-//    public BillOfMaterial(HashMap<String, Material> BOM) {
-//        this.BOM = BOM;
-//    }
-//
-//    public HashMap<String, Material> getBOM() {
-//        return BOM;
-//    }
-//
-//    public void setBOM(HashMap<String, Material> BOM) {
-//        this.BOM = BOM;
-//    }
-//    
+ 
 
     public List<LineItem> getLineItems() {
         return lineItems;
@@ -39,8 +37,9 @@ public class BillOfMaterial {
         this.lineItems = lineItems;
     }
     
-    public void addMaterialToBOM(LineItem lineItem){
+    public List<LineItem> addMaterialToBOM(LineItem lineItem, List<LineItem> lineItems){
         lineItems.add(lineItem);
+        return lineItems;
     }
     
 }

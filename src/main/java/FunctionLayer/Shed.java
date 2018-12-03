@@ -12,45 +12,8 @@ package FunctionLayer;
 public class Shed {
     
     private int id;
-    private double heigth = 2.25, width, length;
-    
-    
-//    boolean shedWanted;
-//    double length, width; 
-//    Roof roof;
-//
-//    
-//    
-//
-//    public Shed(boolean wantShed, double length, double width) {
-//        this.shedWanted = wantShed;
-//        this.length = length;
-//        this.width = width;
-//    }
-//
-//    public boolean isShedWanted() {
-//        return shedWanted;
-//    }
-//
-//    public void setShedWanted(boolean shedWanted) {
-//        this.shedWanted = shedWanted;
-//    }
-//
-//    public double getLength() {
-//        return length;
-//    }
-//
-//    public void setLength(double length) {
-//        this.length = length;
-//    }
-//
-//    public double getWidth() {
-//        return width;
-//    }
-//
-//    public void setWidth(double width) {
-//        this.width = width;
-//    }
+    private double width, length;
+   
 
     public Shed(int id, int heigth, double width, double length) {
         this.id = id;
@@ -77,14 +40,6 @@ public class Shed {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public double getHeigth() {
-        return heigth;
-    }
-
-    public void setHeigth(double heigth) {
-        this.heigth = heigth;
     }
 
     public double getWidth() {
