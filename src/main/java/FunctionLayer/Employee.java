@@ -12,14 +12,33 @@ package FunctionLayer;
 public class Employee {
     
     private int id;
-    private String firstName, lastName, email, role;
+    private boolean admin;
+    private String firstName, lastName, email, password, role;
 
-    public Employee(int id, String firstName, String lastName, String email, String role) {
+    public Employee(int id, boolean admin, String firstName, String lastName, String email, String password, String role) {
         this.id = id;
+        this.admin = admin;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
         this.role = role;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getId() {

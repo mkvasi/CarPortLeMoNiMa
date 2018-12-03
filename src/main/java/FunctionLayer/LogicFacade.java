@@ -52,12 +52,12 @@ public class LogicFacade {
         return con.ListToHashMap(getAllDefaultMaterialsAsList(carport));
     }
 
-    public static User login(String email, String password) throws LoginUserException {
-        return DataMapper.login(email, password);
+    public static Customer login(int id, String email, String password) throws LoginUserException {
+        return DataMapper.login(id, email, password);
     }
 
-    public static User createUser(String email, String password) throws LoginUserException, InstantiationException, IllegalAccessException {
-        User user = new User(email, password, email);
+    public static Customer createUser(int zipcode, int phone, String firstName, String lastName, String city, String email, String password, String role) throws LoginUserException, InstantiationException, IllegalAccessException {
+        Customer user = new Customer(zipcode, phone, firstName, lastName, city, email, password, role);
         DataMapper.createUser(user);
         return user;
     }
