@@ -11,28 +11,28 @@ package FunctionLayer;
  */
 public class Customer {
     
-    private int id, zipcode, phone;
     private String firstName, lastName, city, email, password, role;
+    private int id, zipcode, phone;
 
-    public Customer(int id, int zipcode, int phone, String firstName, String lastName, String city, String email, String password, String role) {
+    public Customer(int id, String firstName, String lastName, String email, int zipcode, String city, int phone, String password, String role) {
         this.id = id;
-        this.zipcode = zipcode;
-        this.phone = phone;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.city = city;
         this.email = email;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.phone = phone;
         this.password = password;
         this.role = role;
     }
 
-    public Customer(int zipcode, int phone, String firstName, String lastName, String city, String email, String password, String role) {
-        this.zipcode = zipcode;
-        this.phone = phone;
+    public Customer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.city = city;
         this.email = email;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.phone = phone;
         this.password = password;
         this.role = role;
     }

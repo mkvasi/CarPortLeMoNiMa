@@ -2,15 +2,18 @@ package DBAccess;
 
 import FunctionLayer.Material;
 import FunctionLayer.Customer;
+import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,7 +24,10 @@ public class DataMapper {
     private final double SHED_CLADDING_LENGTH = 3000.0;
     private final int ROOF_FLAT_CLADDING_TYPE = 2;
     private final int ROOF_SLOPE_CLADDING_TYPE = 3;
-    
+
+    private static final String INSERT_CUSTOMER_DEFAULT = "INSERT INTO `customer` (firstname, lastname, email, zipcode, city, phonenumber, password, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String GET_LOGIN_USER = "SELECT id, role FROM `customer` WHERE email=? AND password=?";
+
     public static List<Material> getDefaultList() throws MaterialException {
         try {
             Connection con = DBConnector.connection();
@@ -31,7 +37,7 @@ public class DataMapper {
             ResultSet rs = ps.executeQuery();
 
             List<Material> materialList = new ArrayList();
-            
+
             while (rs.next()) {
 
                 int id = rs.getInt("id");
@@ -44,19 +50,18 @@ public class DataMapper {
                 boolean defaultUsed = rs.getBoolean("defaultused");
                 int type_id = rs.getInt("type_id");
                 int measure_id = rs.getInt("measure_id");
-                
-                
+
                 materialList.add(new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
             }
 
-           return materialList;
+            return materialList;
 
         } catch (SQLException | ClassNotFoundException ex) {
             throw new MaterialException(ex.getMessage());
         }
 
     }
-    
+
     public static List<Material> getShedCladdingMaterialList(int input_type_id, double input_length) throws MaterialException {
         try {
             Connection con = DBConnector.connection();
@@ -68,7 +73,7 @@ public class DataMapper {
             ResultSet rs = ps.executeQuery();
 
             List<Material> materialList = new ArrayList();
-            
+
             while (rs.next()) {
 
                 int id = rs.getInt("id");
@@ -81,19 +86,18 @@ public class DataMapper {
                 boolean defaultUsed = rs.getBoolean("defaultused");
                 int type_id = rs.getInt("type_id");
                 int measure_id = rs.getInt("measure_id");
-                
-                
+
                 materialList.add(new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
             }
 
-           return materialList;
+            return materialList;
 
         } catch (SQLException | ClassNotFoundException ex) {
             throw new MaterialException(ex.getMessage());
         }
 
     }
-    
+
     public static List<String> getRoofFlatCladdingMaterialListJSP(int input_type_id) throws MaterialException {
         try {
             Connection con = DBConnector.connection();
@@ -104,21 +108,21 @@ public class DataMapper {
             ResultSet rs = ps.executeQuery();
 
             List<String> roofFlatMaterialListDefault = new ArrayList();
-            
+
             while (rs.next()) {
                 String description = rs.getString("description");
-                
+
                 roofFlatMaterialListDefault.add(description);
             }
 
-           return roofFlatMaterialListDefault;
+            return roofFlatMaterialListDefault;
 
         } catch (SQLException | ClassNotFoundException ex) {
             throw new MaterialException(ex.getMessage());
         }
 
     }
-    
+
     //Ny transaction til at først finde description ud fra id og derefter køre nedenståend epå udlæst description
     public static TreeMap<Double, Material> getRoofFlatCladdingMaterialList(String input_description) throws MaterialException {
         try {
@@ -131,7 +135,7 @@ public class DataMapper {
             ResultSet rs = ps.executeQuery();
 
             TreeMap<Double, Material> listRoofFlat = new TreeMap();
-            
+
             while (rs.next()) {
 
                 int id = rs.getInt("id");
@@ -144,18 +148,18 @@ public class DataMapper {
                 boolean defaultUsed = rs.getBoolean("defaultused");
                 int type_id = rs.getInt("type_id");
                 int measure_id = rs.getInt("measure_id");
-                
+
                 listRoofFlat.put(length, new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
             }
 
-           return listRoofFlat;
+            return listRoofFlat;
 
         } catch (SQLException | ClassNotFoundException ex) {
             throw new MaterialException(ex.getMessage());
         }
 
     }
-    
+
     public static List<Material> getRoofSlopeCladdingMaterialList(int input_type_id) throws MaterialException {
         try {
             Connection con = DBConnector.connection();
@@ -166,7 +170,7 @@ public class DataMapper {
             ResultSet rs = ps.executeQuery();
 
             List<Material> materialList = new ArrayList();
-            
+
             while (rs.next()) {
 
                 int id = rs.getInt("id");
@@ -179,12 +183,11 @@ public class DataMapper {
                 boolean defaultUsed = rs.getBoolean("defaultused");
                 int type_id = rs.getInt("type_id");
                 int measure_id = rs.getInt("measure_id");
-                
-                
+
                 materialList.add(new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
             }
 
-           return materialList;
+            return materialList;
 
         } catch (SQLException | ClassNotFoundException ex) {
             throw new MaterialException(ex.getMessage());
@@ -192,13 +195,34 @@ public class DataMapper {
 
     }
 
-
-    public static void createUser(Customer user) {
+    public static Customer login(String email, String password) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public static Customer login(int id, String email, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static Customer createCustomer(Customer c) throws LoginUserException {
+        try {
+            Connection con = DBConnector.connection();
+            String SQL = INSERT_CUSTOMER_DEFAULT;
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, c.getFirstName());
+            ps.setString(2, c.getLastName());
+            ps.setString(3, c.getEmail());
+            ps.setInt(4, c.getZipcode());
+            ps.setString(5, c.getCity());
+            ps.setInt(6, c.getPhone());
+            ps.setString(7, c.getPassword());
+            ps.setString(8, c.getRole());
+            ps.executeUpdate();
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            int id = ids.getInt(1);
+            c.setId(id);
+        } catch (SQLException ex) {
+            throw new LoginUserException(ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DataMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }
