@@ -319,7 +319,75 @@ public class DataMapper {
     }
     */
     
-    public static void createRequest(Request request, BillOfMaterial billOfMaterial, Carport carport, Shed shed){
-        
+    public static void createRequest(Request request, Carport carport, Shed shed){
+        try {
+            Connection conn = DBConnector.connection();
+            PreparedStatement shedPstmt = conn.prepareStatement(INSERT_ORDER_CREATE_ORDER, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement carportPstmt = conn.prepareStatement(INSERT_CUPCAKE_CREATE_ORDER, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement requestPstmt = conn.prepareStatement(INSERT_ORDER_DETAILS_CREATE_ORDER);
+            PreparedStatement billOfMaterialPstmt = conn.prepareStatement(UPDATE_BALANCE_CREATE_ORDER);
+            ResultSet rs = null;
+            int orderId = 0;
+            try {
+                orderPstmt.setString(1, username);
+                orderPstmt.setDouble(2, shoppingCart.getTotalpriceForShoppingCart());
+                orderPstmt.setString(3, orderDate);
+                //To create a transaction we need to not have automatic commit after each statement.
+                conn.setAutoCommit(false);
+                int resultOrder = orderPstmt.executeUpdate();
+                rs = orderPstmt.getGeneratedKeys();
+                rs.next();
+                orderId = rs.getInt(1);
+                if (resultOrder == 1) {
+                    ResultSet rsCupcake = null;
+                    int cupcakeId = 0;
+                    for (LineItem lineItem : shoppingCart.getArrLineItems()) {
+                        cupcakePstmt.setString(1, lineItem.getCupcake().getName());
+                        cupcakePstmt.setDouble(2, lineItem.getCupcake().getPrice());
+                        cupcakePstmt.setString(3, lineItem.getCupcake().getTop());
+                        cupcakePstmt.setString(4, lineItem.getCupcake().getBottom());
+                        int resultCupcake = cupcakePstmt.executeUpdate();
+                        rsCupcake = cupcakePstmt.getGeneratedKeys();
+                        rsCupcake.next();
+                        cupcakeId = rsCupcake.getInt(1);
+                        if (resultCupcake == 1) {
+                            orderDetailsPstmt.setInt(1, orderId);
+                            orderDetailsPstmt.setInt(2, cupcakeId);
+                            orderDetailsPstmt.setInt(3, lineItem.getQty());
+                            orderDetailsPstmt.setDouble(4, lineItem.getTotalprice());
+                            orderDetailsPstmt.executeUpdate();
+                            updateBalancePstmt.setDouble(1, balance);
+                            updateBalancePstmt.setString(2, username);
+                            updateBalancePstmt.executeUpdate();
+                            conn.commit();
+                        } else {
+                            conn.rollback();
+                        }
+                    }
+                    conn.commit();
+                } else {
+                    conn.rollback();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace(); //This should go in the log file.
+                // roll back the transaction
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } finally {
+                conn.setAutoCommit(true);
+                if (orderPstmt != null) {
+                    orderPstmt.close();
+                }
+                if (cupcakePstmt != null) {
+                    cupcakePstmt.close();
+                }
+                if (orderDetailsPstmt != null) {
+                    orderDetailsPstmt.close();
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
