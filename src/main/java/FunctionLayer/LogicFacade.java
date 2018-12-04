@@ -52,7 +52,7 @@ public class LogicFacade {
         return con.ListToHashMap(getAllDefaultMaterialsAsList(carport));
     }
 
-    public static Customer login(String email, String password) throws LoginUserException, ClassNotFoundException {
+    public static Customer login(String email, String password) throws LoginUserException {
         return DataMapper.login(email, password);
     }
 
