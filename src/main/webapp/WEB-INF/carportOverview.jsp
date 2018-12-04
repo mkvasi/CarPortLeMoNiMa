@@ -543,49 +543,49 @@
 
 
             <%
-                if (carport.getRoof().getCelsiusForSlope() == 10) {
+                if (carport.getRoof().getRoofSlopeCelsius() == 10) {
                     out.println("<polygon points=\"330,230 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                if (carport.getRoof().getCelsiusForSlope() == 15) {
+            <%                if (carport.getRoof().getRoofSlopeCelsius() == 15) {
                     out.println("<polygon points=\"330,220 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                if (carport.getRoof().getCelsiusForSlope() == 20) {
+            <%                if (carport.getRoof().getRoofSlopeCelsius() == 20) {
                     out.println("<polygon points=\"330,210 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                if (carport.getRoof().getCelsiusForSlope() == 25) {
+            <%                if (carport.getRoof().getRoofSlopeCelsius() == 25) {
                     out.println("<polygon points=\"330,200 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                if (carport.getRoof().getCelsiusForSlope() == 30) {
+            <%                if (carport.getRoof().getRoofSlopeCelsius() == 30) {
                     out.println("<polygon points=\"330,190 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                if (carport.getRoof().getCelsiusForSlope() == 35) {
+            <%                if (carport.getRoof().getRoofSlopeCelsius() == 35) {
                     out.println("<polygon points=\"330,180 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                if (carport.getRoof().getCelsiusForSlope() == 40) {
+            <%                if (carport.getRoof().getRoofSlopeCelsius() == 40) {
                     out.println("<polygon points=\"330,170 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                 if (carport.getRoof().getCelsiusForSlope() == 45) {
+            <%                 if (carport.getRoof().getRoofSlopeCelsius() == 45) {
                     out.println("<polygon points=\"330,160 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
