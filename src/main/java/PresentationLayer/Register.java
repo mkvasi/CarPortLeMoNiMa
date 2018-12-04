@@ -30,11 +30,10 @@ import javax.servlet.http.HttpSession;
         String phone = request.getParameter("phone");
         String password1 = request.getParameter("password1");
         String password2 = request.getParameter("password2");
-        String role = request.getParameter("role");
         if (password1.equals(password2)) {
             Customer customer = null;
             try {
-                customer = LogicFacade.createCustomer(firstName, lastName, email, Integer.parseInt(zipcode), city, Integer.parseInt(phone), password2, role);
+                customer = LogicFacade.createCustomer(firstName, lastName, email, Integer.parseInt(zipcode), city, Integer.parseInt(phone), password2);
             } catch (InstantiationException ex) {
                 Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IllegalAccessException ex) {
