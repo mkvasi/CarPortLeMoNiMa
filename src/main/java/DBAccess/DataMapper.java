@@ -56,7 +56,7 @@ public class DataMapper {
 
             return materialList;
 
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             throw new MaterialException(ex.getMessage());
         }
 
@@ -195,7 +195,7 @@ public class DataMapper {
 
     }
 
-    public static Customer login(String email, String password) throws LoginUserException, ClassNotFoundException {
+    public static Customer login(String email, String password) throws LoginUserException {
         try {
             Connection con = DBConnector.connection();
             String SQL = GET_LOGIN_USER;
