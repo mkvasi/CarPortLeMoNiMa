@@ -4,6 +4,7 @@
     Author     : Yeha
 --%>
 
+<%@page import="FunctionLayer.Price"%>
 <%@page import="FunctionLayer.LineItem"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="FunctionLayer.BillOfMaterial"%>
@@ -44,7 +45,7 @@
     <% Carport carport = (Carport) request.getAttribute("carport");%>
  
         <%  BillOfMaterial billofmaterial = (BillOfMaterial) request.getAttribute("billOfMaterial");  %>
-    <% //double offerPrice = (Double) request.getAttribute("offerprice");%>
+    <% Price offerPrice = (Price) request.getAttribute("offerprice");%>
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
         <header>
             <!-- Navbar
@@ -237,8 +238,12 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Tilbuds Pris.......</th>
-                        <td>15.499,-</td>
+                      
+                    
+                              <th>Pris</th>
+                              <td><%=offerPrice.getSellprice()%></td>
+                              
+                        
                     </tr>                 
 
                 </thead>

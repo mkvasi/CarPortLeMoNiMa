@@ -21,54 +21,24 @@ public class CarportOverview extends Command {
         int roofSlopeCelcius = Integer.parseInt(request.getParameter("roof"));
         double shedLength = Double.parseDouble(request.getParameter("shedLength"));
         double shedWidth = Double.parseDouble(request.getParameter("shedWidth"));
+        
 
         Carport carport = LogicFacade.makeCarport(length, width, roofSlopeCelcius, shedLength, shedWidth);
-        //LogicFacade.getAllMaterialsFromDB(carport);
-//        HashMap<String, Material> billOfMaterials = LogicFacade.getDoneCarportWithMaterialList(carport);
+      
 
         BillOfMaterial billOfMaterial = LogicFacade.makeBillOfMaterial(carport);
         carport.setBillOfmaterial(billOfMaterial);
         
-        //Price price = LogicFacade.makePrice(billOfMaterial);
+        Price price = LogicFacade.makePrice(billOfMaterial);
 
        // request.setAttribute("billOfMaterial", billOfMaterial);
 
-        //request.setAttribute("offerprice", offerPrice);
+        request.setAttribute("offerprice", price);
        // request.setAttribute("price", price);
         request.setAttribute("carport", carport);
         request.setAttribute("billOfMaterial", billOfMaterial);
 
         return "carportOverview";
-//        double shedLength = 0.0;
-//        double shedWidth = 0.0;
-//        boolean roofFlat;
-//        boolean shedWanted;
-//        double length = Double.parseDouble(request.getParameter("length"));
-//        double width = Double.parseDouble(request.getParameter("width"));
-//        String _roof = request.getParameter("roof");
-//        String _shed = request.getParameter("shed");
-//        if (_roof.equals("Ja")) {
-//            roofFlat = true;
-//        } else {
-//            roofFlat = false;
-//        }
-//        if (_shed.equals("Ja")) {
-//            shedWanted = true;
-//            shedLength = Double.parseDouble(request.getParameter("shedLength"));
-//            shedWidth = Double.parseDouble(request.getParameter("shedWidth"));
-//        } else {
-//            shedWanted = false;
-//            shedLength = 0.0;
-//            shedWidth = 0.0;
-//        }
-//
-//        Roof roof = new Roof(roofFlat, length, width);
-//        Carport carport;
-//
-//        carport = new Carport(length - 1, width - 0.3, roof, new Shed(shedWanted, shedLength, shedWidth));
-
-//        LogicFacade.getAllMaterialsFromDB(carport);
-      
 
     }
 }
