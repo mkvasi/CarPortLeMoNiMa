@@ -16,7 +16,7 @@ public class LogicFacade {
 //BUSINESS LOGIC    
     public static Carport makeCarport(double length, double width, int roofSlopCelsius, double shedLength, double shedWidth) {
         if (shedLength > 0.0 && shedWidth > 0.0) {
-            Carport carport = new Carport(length, width, new Roof(roofSlopCelsius), new Shed(width, length), new BillOfMaterial());
+            Carport carport = new Carport(length, width, new Roof(roofSlopCelsius), new Shed(shedWidth, shedLength), new BillOfMaterial());
             carport.getRoof().calculateRoofDimensions(carport);
             return carport;
         } else {

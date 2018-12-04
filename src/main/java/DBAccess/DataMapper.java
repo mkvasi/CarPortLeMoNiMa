@@ -4,6 +4,7 @@ import FunctionLayer.BillOfMaterial;
 import FunctionLayer.Carport;
 import FunctionLayer.Material;
 import FunctionLayer.Customer;
+import FunctionLayer.LineItem;
 import FunctionLayer.Request;
 import FunctionLayer.Shed;
 import FunctionLayer.exceptions.LoginUserException;
@@ -28,7 +29,6 @@ public class DataMapper {
     //private final double SHED_CLADDING_LENGTH = 3000.0;
     //private final int ROOF_FLAT_CLADDING_TYPE = 2;
     //private final int ROOF_SLOPE_CLADDING_TYPE = 3;
-
     private static final String INSERT_CUSTOMER_DEFAULT = "INSERT INTO `CUSTOMER` (firstname, lastname, email, zipcode, city, phonenumber, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_LOGIN_USER = "SELECT * FROM `CUSTOMER` WHERE email=? AND password=?";
 
@@ -130,7 +130,7 @@ public class DataMapper {
     public static TreeMap<Double, Material> getRoofFlatCladdingMaterialList(int input_type_id) throws MaterialException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = "SELECT * FROM materials WHERE description = (SELECT description FROM materials WHERE id = ?)";
+            String SQL = "SELECT * FROM MATERIALS WHERE description = (SELECT description FROM MATERIALS WHERE id = ?)";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, input_type_id);
 
@@ -245,126 +245,54 @@ public class DataMapper {
         }
     }
 
-    /*
-    public void createOrder(ShoppingCart shoppingCart, String username, double balance) {
-        try {
-            Connection conn = new DBConnector().getConnection();
-            PreparedStatement orderPstmt = conn.prepareStatement(INSERT_ORDER_CREATE_ORDER, Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement cupcakePstmt = conn.prepareStatement(INSERT_CUPCAKE_CREATE_ORDER, Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement orderDetailsPstmt = conn.prepareStatement(INSERT_ORDER_DETAILS_CREATE_ORDER);
-            PreparedStatement updateBalancePstmt = conn.prepareStatement(UPDATE_BALANCE_CREATE_ORDER);
-            ResultSet rs = null;
-            int orderId = 0;
-            try {
-                orderPstmt.setString(1, username);
-                orderPstmt.setDouble(2, shoppingCart.getTotalpriceForShoppingCart());
-                orderPstmt.setString(3, orderDate);
-                //To create a transaction we need to not have automatic commit after each statement.
-                conn.setAutoCommit(false);
-                int resultOrder = orderPstmt.executeUpdate();
-                rs = orderPstmt.getGeneratedKeys();
-                rs.next();
-                orderId = rs.getInt(1);
-                if (resultOrder == 1) {
-                    ResultSet rsCupcake = null;
-                    int cupcakeId = 0;
-                    for (LineItem lineItem : shoppingCart.getArrLineItems()) {
-                        cupcakePstmt.setString(1, lineItem.getCupcake().getName());
-                        cupcakePstmt.setDouble(2, lineItem.getCupcake().getPrice());
-                        cupcakePstmt.setString(3, lineItem.getCupcake().getTop());
-                        cupcakePstmt.setString(4, lineItem.getCupcake().getBottom());
-                        int resultCupcake = cupcakePstmt.executeUpdate();
-                        rsCupcake = cupcakePstmt.getGeneratedKeys();
-                        rsCupcake.next();
-                        cupcakeId = rsCupcake.getInt(1);
-                        if (resultCupcake == 1) {
-                            orderDetailsPstmt.setInt(1, orderId);
-                            orderDetailsPstmt.setInt(2, cupcakeId);
-                            orderDetailsPstmt.setInt(3, lineItem.getQty());
-                            orderDetailsPstmt.setDouble(4, lineItem.getTotalprice());
-                            orderDetailsPstmt.executeUpdate();
-                            updateBalancePstmt.setDouble(1, balance);
-                            updateBalancePstmt.setString(2, username);
-                            updateBalancePstmt.executeUpdate();
-                            conn.commit();
-                        } else {
-                            conn.rollback();
-                        }
-                    }
-                    conn.commit();
-                } else {
-                    conn.rollback();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace(); //This should go in the log file.
-                // roll back the transaction
-                if (conn != null) {
-                    conn.rollback();
-                }
-            } finally {
-                conn.setAutoCommit(true);
-                if (orderPstmt != null) {
-                    orderPstmt.close();
-                }
-                if (cupcakePstmt != null) {
-                    cupcakePstmt.close();
-                }
-                if (orderDetailsPstmt != null) {
-                    orderDetailsPstmt.close();
-                }
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-    */
-    
-    public static void createRequest(Request request, Carport carport, Shed shed){
+    public static void createRequest(Customer customer, Request request, Carport carport, Shed shed) {
         try {
             Connection conn = DBConnector.connection();
-            PreparedStatement shedPstmt = conn.prepareStatement(INSERT_ORDER_CREATE_ORDER, Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement carportPstmt = conn.prepareStatement(INSERT_CUPCAKE_CREATE_ORDER, Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement requestPstmt = conn.prepareStatement(INSERT_ORDER_DETAILS_CREATE_ORDER);
-            PreparedStatement billOfMaterialPstmt = conn.prepareStatement(UPDATE_BALANCE_CREATE_ORDER);
-            ResultSet rs = null;
-            int orderId = 0;
+            PreparedStatement shedPstmt = conn.prepareStatement("INSERT INTO `SHED` (`heigth`, `width`, `length`, `shedcladding`) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement carportPstmt = conn.prepareStatement("INSERT INTO `CARPORT` (`heigth`, `width`, `length`, `roofslopecelsius`, `roofcladding`, `shed_id`) VALUES (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement requestPstmt = conn.prepareStatement("INSERT INTO `REQUEST` (`pricedefault`, `priceemployee`, `customer_id`, `carport_id`) VALUES (?,?,?,?)");
+            PreparedStatement billOfMaterialPstmt = conn.prepareStatement("INSERT INTO `CARPORT_HAS_MATERIALS` (`carport_id`, `materials_id`) VALUES (?,?)");
+            ResultSet rsShed = null;
+            int shedId = 0;
             try {
-                orderPstmt.setString(1, username);
-                orderPstmt.setDouble(2, shoppingCart.getTotalpriceForShoppingCart());
-                orderPstmt.setString(3, orderDate);
+                shedPstmt.setDouble(1, shed.getHeigth());
+                shedPstmt.setDouble(2, shed.getWidth());
+                shedPstmt.setDouble(3, shed.getLength());
+                shedPstmt.setInt(4, shed.getShedCladding());
                 //To create a transaction we need to not have automatic commit after each statement.
                 conn.setAutoCommit(false);
-                int resultOrder = orderPstmt.executeUpdate();
-                rs = orderPstmt.getGeneratedKeys();
-                rs.next();
-                orderId = rs.getInt(1);
-                if (resultOrder == 1) {
-                    ResultSet rsCupcake = null;
-                    int cupcakeId = 0;
-                    for (LineItem lineItem : shoppingCart.getArrLineItems()) {
-                        cupcakePstmt.setString(1, lineItem.getCupcake().getName());
-                        cupcakePstmt.setDouble(2, lineItem.getCupcake().getPrice());
-                        cupcakePstmt.setString(3, lineItem.getCupcake().getTop());
-                        cupcakePstmt.setString(4, lineItem.getCupcake().getBottom());
-                        int resultCupcake = cupcakePstmt.executeUpdate();
-                        rsCupcake = cupcakePstmt.getGeneratedKeys();
-                        rsCupcake.next();
-                        cupcakeId = rsCupcake.getInt(1);
-                        if (resultCupcake == 1) {
-                            orderDetailsPstmt.setInt(1, orderId);
-                            orderDetailsPstmt.setInt(2, cupcakeId);
-                            orderDetailsPstmt.setInt(3, lineItem.getQty());
-                            orderDetailsPstmt.setDouble(4, lineItem.getTotalprice());
-                            orderDetailsPstmt.executeUpdate();
-                            updateBalancePstmt.setDouble(1, balance);
-                            updateBalancePstmt.setString(2, username);
-                            updateBalancePstmt.executeUpdate();
-                            conn.commit();
-                        } else {
-                            conn.rollback();
+                int resultShed = shedPstmt.executeUpdate();
+                rsShed = shedPstmt.getGeneratedKeys();
+                rsShed.next();
+                shedId = rsShed.getInt(1);
+                if (resultShed == 1) {
+                    ResultSet rsCarport = null;
+                    int carportId = 0;
+                    carportPstmt.setDouble(1, carport.getHeigth());
+                    carportPstmt.setDouble(2, carport.getWidth());
+                    carportPstmt.setDouble(3, carport.getLength());
+                    carportPstmt.setInt(4, carport.getRoof().getRoofSlopeCelsius());
+                    carportPstmt.setInt(5, carport.getRoof().getRoofCladding());
+                    carportPstmt.setInt(6, shedId);
+                    int resultCarport = carportPstmt.executeUpdate();
+                    rsCarport = carportPstmt.getGeneratedKeys();
+                    rsCarport.next();
+                    carportId = rsCarport.getInt(1);
+                    if (resultCarport == 1) {
+                        requestPstmt.setDouble(1, request.getPriceDefault());
+                        requestPstmt.setDouble(2, request.getPriceEmployee());
+                        requestPstmt.setInt(3, customer.getId());
+                        requestPstmt.setInt(4, carportId);
+                        requestPstmt.executeUpdate();
+                        for (LineItem lineItem : carport.getBillOfmaterial().getLineItems()) {
+                            billOfMaterialPstmt.setInt(1, carportId);
+                            billOfMaterialPstmt.setInt(2, lineItem.getMaterial().getId());
+                            billOfMaterialPstmt.executeUpdate();
                         }
+                        conn.commit();
+                    } else {
+                        conn.rollback();
                     }
-                    conn.commit();
                 } else {
                     conn.rollback();
                 }
@@ -376,18 +304,10 @@ public class DataMapper {
                 }
             } finally {
                 conn.setAutoCommit(true);
-                if (orderPstmt != null) {
-                    orderPstmt.close();
-                }
-                if (cupcakePstmt != null) {
-                    cupcakePstmt.close();
-                }
-                if (orderDetailsPstmt != null) {
-                    orderDetailsPstmt.close();
-                }
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+            
+        }catch (Exception ex) {
+                ex.printStackTrace();
+            }
     }
 }

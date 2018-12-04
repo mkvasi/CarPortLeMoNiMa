@@ -13,14 +13,14 @@ import java.util.List;
 public class Carport {
 
     private int id;
-    private double length, width;
+    private double heigth, length, width;
     private Roof roof;
     private Shed shed; 
     private BillOfMaterial billOfmaterial;
     
 
 
-    public Carport( double length, double width, Roof roof, Shed shed, BillOfMaterial billOfmaterial) {
+    public Carport(double length, double width, Roof roof, Shed shed, BillOfMaterial billOfmaterial) {
         this.length = length;
         this.width = width;
         this.roof = roof;
@@ -37,6 +37,13 @@ public class Carport {
         this.id = id;
     }
 
+    public double getHeigth() {
+        return heigth;
+    }
+
+    public void setHeigth(double heigth) {
+        this.heigth = heigth;
+    }
 
     public double getWidth() {
         return width;
@@ -73,8 +80,6 @@ public class Carport {
     public BillOfMaterial getBillOfmaterial() {
         return billOfmaterial;
     }
-
- 
 
     public void setBillOfmaterial(BillOfMaterial billOfmaterial) {
         this.billOfmaterial = billOfmaterial;

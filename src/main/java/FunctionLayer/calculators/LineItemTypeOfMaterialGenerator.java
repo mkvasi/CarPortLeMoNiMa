@@ -36,7 +36,7 @@ public class LineItemTypeOfMaterialGenerator {
 
     //******************************************Get correct board methods***********************************************
     public Material getBoardForRafter(Carport carport, TreeMap<Double, Material> boards) {
-        if (carport.getRoof().getCelsiusForSlope() == 0) {
+        if (carport.getRoof().getRoofSlopeCelsius() == 0) {
             double carportMeasure = carport.getWidth() * toMilimeters; // To get the dimension in milimeters, so it's comparable to the materials in the database.
             return boardCalculator(carportMeasure, carport, boards);
         } else {

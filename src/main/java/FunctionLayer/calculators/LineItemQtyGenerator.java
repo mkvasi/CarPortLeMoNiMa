@@ -79,7 +79,7 @@ public class LineItemQtyGenerator {
 
     public int getQTYForRafter(Carport carport, Material board) {
 
-        if (carport.getRoof().getCelsiusForSlope() == 0) {
+        if (carport.getRoof().getRoofSlopeCelsius() == 0) {
             double spaceBetweenEachRafter = 0.55;
             double rafterWidth = 0.02;
             double totalRafterDimension = spaceBetweenEachRafter + rafterWidth; // Total dimension for each rafter including both space and material.
@@ -133,7 +133,7 @@ public class LineItemQtyGenerator {
     //Kan også beregne længden på vandbrædderne(RainWare)(19x100mm tryk imp. bræt)
     public Double calculateBoardLengthForFarciaAndRainware(Carport carport) {
         double hosliggendeKatete = (carport.getRoof().getWidth() / 2);          // Tagbredden divideres med 2 for at finde midten af gavlen
-        int roofAngle = carport.getRoof().getCelsiusForSlope();                 // roofAngle holder hældningen på taget
+        int roofAngle = carport.getRoof().getRoofSlopeCelsius();                 // roofAngle holder hældningen på taget
         double boardLengthHypotenuse = (hosliggendeKatete) / (Math.cos(Math.toRadians(roofAngle))); //  Hypotenusen isoleres i cosinus formel for retvinklet trekanter, for at finde længden på vindskederne
 
         return boardLengthHypotenuse;
@@ -177,7 +177,7 @@ public class LineItemQtyGenerator {
 
 
     private int getUniversalBracketsQty(Carport carport, Material mat) {
-        if (carport.getRoof().getCelsiusForSlope() == 0) {
+        if (carport.getRoof().getRoofSlopeCelsius() == 0) {
             
             return getQTYForRafter(carport, mat);
         } else {
@@ -187,7 +187,7 @@ public class LineItemQtyGenerator {
     }
 
     private int calculateQtyOfBræddebolt(Carport carport, Material mat) {
-        if (carport.getRoof().getCelsiusForSlope() == 0) {
+        if (carport.getRoof().getRoofSlopeCelsius() == 0) {
             return getQtyOfPosts(carport)*2;
         } else {
             return 8;

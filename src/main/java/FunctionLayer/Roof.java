@@ -15,6 +15,7 @@ public class Roof {
 
     private int roofSlopeCelsius;
     private double heigth, width, length;
+    private int roofCladding;
     private final double FLATWIDTH = 0.0;
     private final double FLATLENGTH = 50.0;
     private final double SLOPEWIDTH = 300.0;
@@ -24,18 +25,14 @@ public class Roof {
     public Roof(int roofSlopeCelsius) {
         this.roofSlopeCelsius = roofSlopeCelsius;
     }
-    
 
-   
-
-    public int getCelsiusForSlope() {
+    public int getRoofSlopeCelsius() {
         return roofSlopeCelsius;
     }
 
-    public void setCelsiusForSlope(int roofSlopeCelsius) {
+    public void setRoofSlopeCelsius(int roofSlopeCelsius) {
         this.roofSlopeCelsius = roofSlopeCelsius;
     }
-    
 
     public double getHeigth() {
         return heigth;
@@ -60,6 +57,16 @@ public class Roof {
     public void setLength(double length) {
         this.length = length;
     }
+
+    public int getRoofCladding() {
+        return roofCladding;
+    }
+
+    public void setRoofCladding(int roofCladding) {
+        this.roofCladding = roofCladding;
+    }
+    
+    
     
     public void calculateRoofDimensions(Carport carport){
         if(roofSlopeCelsius == 0){
