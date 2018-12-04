@@ -32,7 +32,22 @@
                 <td>
                     <form name="register" action="FrontController" method="POST">
                         <input type="hidden" name="command" value="register">
+                        Firstname:<br>
+                        <input type="text" name="firstname" value="">
+                        <br>
+                        Lastname:<br>
+                        <input type="text" name="lastname" value="">
+                        <br>
                         Email:<br>
+                        <input type="text" name="email" value="">
+                        <br>
+                        Zipcode:<br>
+                        <input type="text" name="email" value="">
+                        <br>
+                        City:<br>
+                        <input type="text" name="email" value="">
+                        <br>
+                        Phone:<br>
                         <input type="text" name="email" value="">
                         <br>
                         Password:<br>
