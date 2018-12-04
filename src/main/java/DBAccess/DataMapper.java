@@ -29,7 +29,7 @@ public class DataMapper {
     //private final int ROOF_FLAT_CLADDING_TYPE = 2;
     //private final int ROOF_SLOPE_CLADDING_TYPE = 3;
 
-    private static final String INSERT_CUSTOMER_DEFAULT = "INSERT INTO `customer` (firstname, lastname, email, zipcode, city, phonenumber, password, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_CUSTOMER_DEFAULT = "INSERT INTO `customer` (firstname, lastname, email, zipcode, city, phonenumber, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_LOGIN_USER = "SELECT id, role FROM `customer` WHERE email=? AND password=?";
 
     public static List<Material> getDefaultList() throws MaterialException {
@@ -197,11 +197,33 @@ public class DataMapper {
 
     }
 
-    public static Customer login(String email, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static Customer login(String email, String password) throws LoginUserException, ClassNotFoundException {
+        try {
+            Connection con = DBConnector.connection();
+            String SQL = GET_LOGIN_USER;
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
+                int zipcode = rs.getInt("zipcode");
+                String city = rs.getString("city");
+                int phone = rs.getInt("phone");
+                String role = rs.getString("role");
+                Customer customer = new Customer(id, firstname, lastname, email, zipcode, city, phone, password, role);
+                return customer;
+            } else {
+                throw new LoginUserException("Could not validate user");
+            }
+        } catch (SQLException ex) {
+            throw new LoginUserException(ex.getMessage());
+        }
     }
 
-    public static Customer createCustomer(Customer c) throws LoginUserException {
+    public static void createCustomer(Customer c) throws LoginUserException {
         try {
             Connection con = DBConnector.connection();
             String SQL = INSERT_CUSTOMER_DEFAULT;
@@ -213,7 +235,6 @@ public class DataMapper {
             ps.setString(5, c.getCity());
             ps.setInt(6, c.getPhone());
             ps.setString(7, c.getPassword());
-            ps.setString(8, c.getRole());
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
@@ -222,7 +243,6 @@ public class DataMapper {
         } catch (SQLException ex) {
             throw new LoginUserException(ex.getMessage());
         }
-        return null;
     }
 
     /*
