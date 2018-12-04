@@ -34,7 +34,6 @@ import javax.servlet.http.HttpSession;
             Customer customer = LogicFacade.createCustomer(firstName, lastName, email, Integer.parseInt(zipcode), city, Integer.parseInt(phone), password2);
             HttpSession session = request.getSession();
             session.setAttribute("user", customer);
-            session.setAttribute("role", customer.getRole());
             return "index";
         } else {
             throw new LoginUserException("the two passwords did not match");

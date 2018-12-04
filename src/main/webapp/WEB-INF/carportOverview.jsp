@@ -43,8 +43,8 @@
     </head>
 
     <% Carport carport = (Carport) request.getAttribute("carport");%>
- 
-        <%  BillOfMaterial billofmaterial = (BillOfMaterial) request.getAttribute("billOfMaterial");  %>
+
+    <%  BillOfMaterial billofmaterial = (BillOfMaterial) request.getAttribute("billOfMaterial");  %>
     <% Price offerPrice = (Price) request.getAttribute("offerprice");%>
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
         <header>
@@ -112,63 +112,63 @@
 
 
         <div id="carportinfo">
-          <!-- <form action="FrontController" method="POST" name="billOfMaterial" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="billOfMaterial"> -->
+            <!-- <form action="FrontController" method="POST" name="billOfMaterial" action="FrontController" method="POST">
+                  <input type="hidden" name="command" value="billOfMaterial"> -->
 
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Carport bredde</th>
-                            <td><%= (carport.getWidth())%> m</td>
-                        </tr>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Carport bredde</th>
+                        <td><%= (carport.getWidth())%> m</td>
+                    </tr>
 
 
-                        <tr>
-                            <th>Carport længde</th>
-                            <td><%out.print(carport.getLength());%> m</td>
-                        </tr>
-                        <tr>
-                            <th>Tag bredde</th>
-                            <td><%= (carport.getRoof().getWidth())%> m</td>
-                        </tr>
-                        <tr>
-                            <th>Tag længde</th>
-                            <td><%= (carport.getRoof().getLength())%> m</td>
-                        </tr>
-                        <tr>
-                            <th>Redskabsrum bredde</th>
-                            <td>
-                                <%
-                                    if (carport.getShed() == null) {
-                                        out.println("Ønsker ikke redskabsrum");
-                                    } else {
-                                        out.println(carport.getShed().getWidth() + " m");
-                                    }
-                                %>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Redskabsrum længde</th>
-                            <td>
-                                <%
-                                    if (carport.getShed() == null) {
-                                        out.println("Ønsker ikke redskabsrum");
-                                    } else {
-                                        out.println(carport.getShed().getLength() + " m");
-                                    }
-                                %>
-                            </td>
-                        </tr>
-                        <!--<tr>
-                              <th>Pris</th>
-                              <td><//%=offerPrice%></td>
-                              
-                          </tr>-->
+                    <tr>
+                        <th>Carport længde</th>
+                        <td><%out.print(carport.getLength());%> m</td>
+                    </tr>
+                    <tr>
+                        <th>Tag bredde</th>
+                        <td><%= (carport.getRoof().getWidth())%> m</td>
+                    </tr>
+                    <tr>
+                        <th>Tag længde</th>
+                        <td><%= (carport.getRoof().getLength())%> m</td>
+                    </tr>
+                    <tr>
+                        <th>Redskabsrum bredde</th>
+                        <td>
+                            <%
+                                if (carport.getShed() == null) {
+                                    out.println("Ønsker ikke redskabsrum");
+                                } else {
+                                    out.println(carport.getShed().getWidth() + " m");
+                                }
+                            %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Redskabsrum længde</th>
+                        <td>
+                            <%
+                                if (carport.getShed() == null) {
+                                    out.println("Ønsker ikke redskabsrum");
+                                } else {
+                                    out.println(carport.getShed().getLength() + " m");
+                                }
+                            %>
+                        </td>
+                    </tr>
+                    <!--<tr>
+                          <th>Pris</th>
+                          <td><//%=offerPrice%></td>
+                          
+                      </tr>-->
 
-                    </thead>
-                </table>
-           <!-- </form>-->
+                </thead>
+            </table>
+            <!-- </form>-->
         </div>
 
         <div id="customerinfo">
@@ -238,19 +238,19 @@
             <table>
                 <thead>
                     <tr>
-                      
-                    
-                              <th>Pris</th>
-                              <td><%=offerPrice.getSellprice()%></td>
-                              
-                        
+
+
+                        <th>Pris</th>
+                        <td><%=offerPrice.getSellprice()%></td>
+
+
                     </tr>                 
 
                 </thead>
             </table>
 
         </div>
-                             <br>
+        <br>
         <br>
         <h3 style="text-align: center;">Tegninger</h3>
 
@@ -311,7 +311,6 @@
                     out.println("<rect x=\"485\" y=\"50%\" height=\"15\" width=\"14\" stroke-width=\"2\"style=\"stroke:#000000; fill: #3B0B0B\"/>");
                     out.println("<rect y=\"50%\" height=\"15\" width=\"14\" stroke-width=\"2\"style=\"stroke:#000000; fill: #3B0B0B\"/>");
                 }
-
             %>
 
             <!--  <rect y="50%" x="485" height="15" width="15"
@@ -322,7 +321,7 @@
             -->
 
 
-            <%                if (carport.getShed() != null) {
+            <%    if (carport.getShed() != null) {
                     out.println("<rect x=\"15\" y=\"150\" height=\"15\" width=\"470\" stroke-width=\"2\"\n"
                             + "				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n"
                             + "				  \n"
@@ -339,6 +338,25 @@
                             + "			<rect y=\"150\" x=\"243\" height=\"15\" width=\"15\"\n"
                             + "                  style=\"stroke:#000000; fill: #3B0B0B\"/>");
                 }
+
+//              if (carport.getShed() == halv bredde)
+//                 {
+//                    out.println("<rect x=\"15\" y=\"150\" height=\"15\" width=\"235\" stroke-width=\"2\"\n" +
+//"				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n" +
+//"				  \n" +
+//"			<rect x=\"243\" y=\"15\" height=\"150\" width=\"15\" stroke-width=\"2\"\n" +
+//"				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n" +
+//"			\n" +
+//"\n" +
+//"			<rect y=\"150\" height=\"15\" width=\"15\"\n" +
+//"                  style=\"stroke:#000000; fill: #3B0B0B\"/> \n" +
+//"				  \n" +
+//"			<rect y=\"0\" x=\"243\" height=\"15\" width=\"15\"\n" +
+//"                  style=\"stroke:#000000; fill: #3B0B0B\"/>\n" +
+//"				  \n" +
+//"			<rect y=\"150\" x=\"243\" height=\"15\" width=\"15\"\n" +
+//"                  style=\"stroke:#000000; fill: #3B0B0B\"/>");
+//                }
 
             %>
 
@@ -369,16 +387,16 @@
             -->
 
 
-            <%  int qty= 0; 
-                for(LineItem lineItem : billofmaterial.getLineItems()) {
-                   if(lineItem.getHelpDescription().equals("Spær")){
-                       qty = lineItem.getQty();
-                   }
-                   
+            <%  int qty = 0;
+                for (LineItem lineItem : billofmaterial.getLineItems()) {
+                    if (lineItem.getHelpDescription().equals("Spær")) {
+                        qty = lineItem.getQty();
+                    }
+
                 }
-  
-                int pxmellemspar = 700 / qty; 
-                int nextspar = 700 / qty; 
+
+                int pxmellemspar = 700 / qty;
+                int nextspar = 700 / qty;
 
                 for (int i = 0; i < qty; i++) {
                     out.println("<line x1=\"77\" y1=\"" + nextspar + "\" " + "x2=\"618\" y2=\"" + nextspar + "\" " + "style=\"stroke:rgb(0,0,0);stroke-width:3\" />");
@@ -592,11 +610,11 @@
 
 
 
-      
 
-                            <div id="stykliste">                                   
-   <table>
-    <thead>
+
+        <div id="stykliste">                                   
+            <table>
+                <thead>
                     <tr>
                         <th>Produkt</th>
                         <th>Anvendelses område</th>
@@ -606,25 +624,26 @@
                     </tr>
                 </thead>
                 <tbody>
-       <% for (LineItem lineItem : billofmaterial.getLineItems()) {%>
-       <tr>
-       <td><% out.print(lineItem.getMaterial().getDescription()); %></td>
-       <td><% out.print(lineItem.getHelpDescription()); %></td>
-       <td><% out.print(lineItem.getQty()); %></td>
-       <td><% out.print(lineItem.getMaterial().getLength());} %></td>
-         
-         
-     
-       <!-- create an html table row -->
-       <!-- create cells of row -->
-       <!-- close row -->
-       <!-- close the loop -->
+                    <% for (LineItem lineItem : billofmaterial.getLineItems()) {%>
+                    <tr>
+                        <td><% out.print(lineItem.getMaterial().getDescription()); %></td>
+                        <td><% out.print(lineItem.getHelpDescription()); %></td>
+                        <td><% out.print(lineItem.getQty()); %></td>
+                        <td><% out.print(lineItem.getMaterial().getLength());
+           }%></td>
 
-   <!-- close table --> 
-       </tr>
+
+
+                        <!-- create an html table row -->
+                        <!-- create cells of row -->
+                        <!-- close row -->
+                        <!-- close the loop -->
+
+                        <!-- close table --> 
+                    </tr>
                 </tbody>
-   </table> 
-                            </div>
+            </table> 
+        </div>
 
 
         <!-- Footer

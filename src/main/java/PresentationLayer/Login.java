@@ -20,7 +20,6 @@ public class Login extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginUserException {
-        String id = request.getParameter("id");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         Customer customer = LogicFacade.login(email, password);
