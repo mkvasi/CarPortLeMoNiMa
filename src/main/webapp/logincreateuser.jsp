@@ -42,13 +42,13 @@
                         <input type="text" name="email" value="">
                         <br>
                         Zipcode:<br>
-                        <input type="text" name="email" value="">
+                        <input type="text" name="zipcode" value="">
                         <br>
                         City:<br>
-                        <input type="text" name="email" value="">
+                        <input type="text" name="city" value="">
                         <br>
                         Phone:<br>
-                        <input type="text" name="email" value="">
+                        <input type="text" name="phone" value="">
                         <br>
                         Password:<br>
                         <input type="password" name="password1" value="">

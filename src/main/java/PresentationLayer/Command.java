@@ -16,6 +16,7 @@ abstract class Command {
         commands.put("carportOverview", new CarportOverview());
         commands.put("billOfMaterial", new BillOfMaterial2());
         commands.put("login", new Login());
+        commands.put("register", new Register());
     }
 
     static Command from(HttpServletRequest request) {

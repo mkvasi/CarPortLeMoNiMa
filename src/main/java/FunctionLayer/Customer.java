@@ -26,18 +26,7 @@ public class Customer {
         this.role = role;
     }
 
-    public Customer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password, String role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.zipcode = zipcode;
-        this.city = city;
-        this.phone = phone;
-        this.password = password;
-        this.role = role;
-    }
-
-    public Customer(String firstName, String lastName, String city, String email, String password, int zipcode, int phone) {
+    public Customer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

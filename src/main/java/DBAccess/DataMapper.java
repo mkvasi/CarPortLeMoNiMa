@@ -29,8 +29,8 @@ public class DataMapper {
     //private final int ROOF_FLAT_CLADDING_TYPE = 2;
     //private final int ROOF_SLOPE_CLADDING_TYPE = 3;
 
-    private static final String INSERT_CUSTOMER_DEFAULT = "INSERT INTO `customer` (firstname, lastname, email, zipcode, city, phonenumber, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private static final String GET_LOGIN_USER = "SELECT id, role FROM `customer` WHERE email=? AND password=?";
+    private static final String INSERT_CUSTOMER_DEFAULT = "INSERT INTO `CUSTOMER` (firstname, lastname, email, zipcode, city, phonenumber, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String GET_LOGIN_USER = "SELECT * FROM `CUSTOMER` WHERE email=? AND password=?";
 
     public static List<Material> getDefaultList() throws MaterialException {
         try {

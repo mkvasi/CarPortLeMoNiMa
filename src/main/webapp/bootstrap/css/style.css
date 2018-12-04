@@ -11,6 +11,48 @@
 @import url('overwrite.css');
 /* ====================================== */
 
+form {
+  margin:0 auto;
+  width:300px
+}
+input {
+  margin-bottom:3px;
+  padding:10px;
+  width: 100%;
+  border:1px solid #CCC
+}
+button {
+  padding:10px
+}
+label {
+  cursor:pointer
+}
+#form-switch {
+  display:none
+}
+#register-form {
+  display:none
+}
+#form-switch:checked~#register-form {
+  display:block
+}
+#form-switch:checked~#login-form {
+  display:none
+}
+
+.button1 {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
 .navigation {
 
 }
@@ -61,6 +103,12 @@ td, th {
 
 hr {
     border-top: 1px solid;
+}
+
+#list {
+    margin: auto;
+    width: 200px;
+    height: 800px;
 }
 
 #svgfront {
