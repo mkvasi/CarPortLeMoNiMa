@@ -31,14 +31,7 @@ import javax.servlet.http.HttpSession;
         String password1 = request.getParameter("password1");
         String password2 = request.getParameter("password2");
         if (password1.equals(password2)) {
-            Customer customer = null;
-            try {
-                customer = LogicFacade.createCustomer(firstName, lastName, email, Integer.parseInt(zipcode), city, Integer.parseInt(phone), password2);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Customer customer = LogicFacade.createCustomer(firstName, lastName, email, Integer.parseInt(zipcode), city, Integer.parseInt(phone), password2);
             HttpSession session = request.getSession();
             session.setAttribute("user", customer);
             session.setAttribute("role", customer.getRole());

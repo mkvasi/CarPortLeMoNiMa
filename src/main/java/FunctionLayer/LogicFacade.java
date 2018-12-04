@@ -56,7 +56,7 @@ public class LogicFacade {
         return DataMapper.login(email, password);
     }
 
-    public static Customer createCustomer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) throws LoginUserException, InstantiationException, IllegalAccessException {
+    public static Customer createCustomer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) throws LoginUserException {
         Customer user = new Customer(firstName, lastName, city, email, password, zipcode, phone);
         DataMapper.createCustomer(user);
         return user;
