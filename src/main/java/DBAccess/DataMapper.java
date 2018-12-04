@@ -1,7 +1,11 @@
 package DBAccess;
 
+import FunctionLayer.BillOfMaterial;
+import FunctionLayer.Carport;
 import FunctionLayer.Material;
 import FunctionLayer.Customer;
+import FunctionLayer.Request;
+import FunctionLayer.Shed;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
 import java.sql.Connection;
@@ -21,9 +25,9 @@ import java.util.logging.Logger;
  */
 public class DataMapper {
 
-    private final double SHED_CLADDING_LENGTH = 3000.0;
-    private final int ROOF_FLAT_CLADDING_TYPE = 2;
-    private final int ROOF_SLOPE_CLADDING_TYPE = 3;
+    //private final double SHED_CLADDING_LENGTH = 3000.0;
+    //private final int ROOF_FLAT_CLADDING_TYPE = 2;
+    //private final int ROOF_SLOPE_CLADDING_TYPE = 3;
 
     private static final String INSERT_CUSTOMER_DEFAULT = "INSERT INTO `customer` (firstname, lastname, email, zipcode, city, phonenumber, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_LOGIN_USER = "SELECT id, role FROM `customer` WHERE email=? AND password=?";
@@ -92,7 +96,7 @@ public class DataMapper {
 
             return materialList;
 
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             throw new MaterialException(ex.getMessage());
         }
 
@@ -117,20 +121,18 @@ public class DataMapper {
 
             return roofFlatMaterialListDefault;
 
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             throw new MaterialException(ex.getMessage());
         }
 
     }
 
-    //Ny transaction til at først finde description ud fra id og derefter køre nedenståend epå udlæst description
-    public static TreeMap<Double, Material> getRoofFlatCladdingMaterialList(String input_description) throws MaterialException {
+    public static TreeMap<Double, Material> getRoofFlatCladdingMaterialList(int input_type_id) throws MaterialException {
         try {
             Connection con = DBConnector.connection();
-            //Ny transaction til at først finde description ud fra id og derefter køre nedenståend epå udlæst description
-            String SQL = "SELECT * FROM `MATERIALS` WHERE description = '?'";
+            String SQL = "SELECT * FROM materials WHERE description = (SELECT description FROM materials WHERE id = ?)";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setString(1, input_description);
+            ps.setInt(1, input_type_id);
 
             ResultSet rs = ps.executeQuery();
 
@@ -154,7 +156,7 @@ public class DataMapper {
 
             return listRoofFlat;
 
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             throw new MaterialException(ex.getMessage());
         }
 
@@ -189,7 +191,7 @@ public class DataMapper {
 
             return materialList;
 
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             throw new MaterialException(ex.getMessage());
         }
 
@@ -240,9 +242,84 @@ public class DataMapper {
             c.setId(id);
         } catch (SQLException ex) {
             throw new LoginUserException(ex.getMessage());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DataMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /*
+    public void createOrder(ShoppingCart shoppingCart, String username, double balance) {
+        try {
+            Connection conn = new DBConnector().getConnection();
+            PreparedStatement orderPstmt = conn.prepareStatement(INSERT_ORDER_CREATE_ORDER, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement cupcakePstmt = conn.prepareStatement(INSERT_CUPCAKE_CREATE_ORDER, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement orderDetailsPstmt = conn.prepareStatement(INSERT_ORDER_DETAILS_CREATE_ORDER);
+            PreparedStatement updateBalancePstmt = conn.prepareStatement(UPDATE_BALANCE_CREATE_ORDER);
+            ResultSet rs = null;
+            int orderId = 0;
+            try {
+                orderPstmt.setString(1, username);
+                orderPstmt.setDouble(2, shoppingCart.getTotalpriceForShoppingCart());
+                orderPstmt.setString(3, orderDate);
+                //To create a transaction we need to not have automatic commit after each statement.
+                conn.setAutoCommit(false);
+                int resultOrder = orderPstmt.executeUpdate();
+                rs = orderPstmt.getGeneratedKeys();
+                rs.next();
+                orderId = rs.getInt(1);
+                if (resultOrder == 1) {
+                    ResultSet rsCupcake = null;
+                    int cupcakeId = 0;
+                    for (LineItem lineItem : shoppingCart.getArrLineItems()) {
+                        cupcakePstmt.setString(1, lineItem.getCupcake().getName());
+                        cupcakePstmt.setDouble(2, lineItem.getCupcake().getPrice());
+                        cupcakePstmt.setString(3, lineItem.getCupcake().getTop());
+                        cupcakePstmt.setString(4, lineItem.getCupcake().getBottom());
+                        int resultCupcake = cupcakePstmt.executeUpdate();
+                        rsCupcake = cupcakePstmt.getGeneratedKeys();
+                        rsCupcake.next();
+                        cupcakeId = rsCupcake.getInt(1);
+                        if (resultCupcake == 1) {
+                            orderDetailsPstmt.setInt(1, orderId);
+                            orderDetailsPstmt.setInt(2, cupcakeId);
+                            orderDetailsPstmt.setInt(3, lineItem.getQty());
+                            orderDetailsPstmt.setDouble(4, lineItem.getTotalprice());
+                            orderDetailsPstmt.executeUpdate();
+                            updateBalancePstmt.setDouble(1, balance);
+                            updateBalancePstmt.setString(2, username);
+                            updateBalancePstmt.executeUpdate();
+                            conn.commit();
+                        } else {
+                            conn.rollback();
+                        }
+                    }
+                    conn.commit();
+                } else {
+                    conn.rollback();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace(); //This should go in the log file.
+                // roll back the transaction
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } finally {
+                conn.setAutoCommit(true);
+                if (orderPstmt != null) {
+                    orderPstmt.close();
+                }
+                if (cupcakePstmt != null) {
+                    cupcakePstmt.close();
+                }
+                if (orderDetailsPstmt != null) {
+                    orderDetailsPstmt.close();
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    */
+    
+    public static void createRequest(Request request, BillOfMaterial billOfMaterial, Carport carport, Shed shed){
+        
+    }
 }
