@@ -367,7 +367,7 @@ public class DataMapper {
         }
     }
     
-    public static List<Integer> getListEmployeeNotOpenRequestId() throws MaterialException {
+    public static List<Integer> getListEmployeeAssignedRequestId() throws MaterialException {
         try {
             Connection con = DBConnector.connection();
             PreparedStatement ps = con.prepareStatement(GET_REQUESTID_BY_EMPLOYEE_NOTNULL);
