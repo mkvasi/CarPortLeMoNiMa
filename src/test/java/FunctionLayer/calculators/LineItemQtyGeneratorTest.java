@@ -130,7 +130,7 @@ public class LineItemQtyGeneratorTest {
     @Test
     public void testGetQTYForRafterSmallCarport() {
         Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
-        Material board = new Material(3000.0);
+        Material board = new Material(3000);
         int expResult = 5;
         int result = instance.getQTYForRafter(carport, board);
         assertEquals(expResult, result);
@@ -139,7 +139,7 @@ public class LineItemQtyGeneratorTest {
     @Test
     public void testGetQTYForRafterSmallCarportPitchedRoof25() {
         Carport carport = new Carport(2.4, 2.4, roof25, shedNull, bill);
-        Material board = new Material(3000.0);
+        Material board = new Material(3000);
         int expResult = 8;
         int result = instance.getQTYForRafter(carport, board);
         assertEquals(expResult, result);
@@ -148,7 +148,7 @@ public class LineItemQtyGeneratorTest {
     @Test
     public void testGetQTYForRafterBigCarportPitchedRoof25() {
         Carport carport = new Carport(7.5, 7.8, roof25, shedNull, bill);
-        Material board = new Material(4200.0);
+        Material board = new Material(4200);
         int expResult = 8;
         int result = instance.getQTYForRafter(carport, board);
         assertEquals(expResult, result);
@@ -198,7 +198,7 @@ public class LineItemQtyGeneratorTest {
     @Test
     public void testGetQTYForRemSmallCarport() {
         Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
-        Material board = new Material(3000.0);
+        Material board = new Material(3000);
         int expResult = 2;
         int result = instance.getQTYForRem(carport, board);
         assertEquals(expResult, result);
