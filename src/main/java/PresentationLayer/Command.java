@@ -1,7 +1,9 @@
 package PresentationLayer;
 
+import FunctionLayer.exceptions.CalculatorException;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
+import FunctionLayer.exceptions.SystemException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -29,5 +31,5 @@ abstract class Command {
     }
 
     abstract String execute(HttpServletRequest request, HttpServletResponse response)
-            throws LoginUserException, MaterialException;
+            throws LoginUserException, MaterialException, SystemException ,CalculatorException;
 }

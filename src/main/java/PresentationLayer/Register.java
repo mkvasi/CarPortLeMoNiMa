@@ -8,6 +8,7 @@ package PresentationLayer;
 import FunctionLayer.Customer;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.exceptions.LoginUserException;
+import FunctionLayer.exceptions.SystemException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpSession;
   public class Register extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginUserException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginUserException, SystemException {
         String firstName = request.getParameter("firstname");
         String lastName = request.getParameter("lastname");
         String zipcode = request.getParameter("zipcode");

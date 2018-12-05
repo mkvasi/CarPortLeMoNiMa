@@ -9,6 +9,7 @@ import FunctionLayer.Request;
 import FunctionLayer.Shed;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
+import FunctionLayer.exceptions.SystemException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,13 +33,17 @@ public class DataMapper {
     private static final String INSERT_CUSTOMER_DEFAULT = "INSERT INTO `CUSTOMER` (firstname, lastname, email, zipcode, city, phonenumber, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_LOGIN_USER = "SELECT * FROM `CUSTOMER` WHERE email=? AND password=?";
 
-    public static List<Material> getDefaultList() throws MaterialException {
+    public static List<Material> getDefaultList() throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
             String SQL = "SELECT * FROM `MATERIALS` WHERE defaultused = 1 ORDER BY type_id ASC";
             PreparedStatement ps = con.prepareStatement(SQL);
 
             ResultSet rs = ps.executeQuery();
+
+            if (!rs.next()) {
+                throw new MaterialException("No default materials could be found in database!");
+            }
 
             List<Material> materialList = new ArrayList();
 
@@ -61,12 +66,13 @@ public class DataMapper {
             return materialList;
 
         } catch (SQLException ex) {
-            throw new MaterialException(ex.getMessage());
+            throw new SystemException("Technical error! Contact your IT-support!");
+            //Logging
         }
 
     }
 
-    public static List<Material> getShedCladdingMaterialList(int input_type_id, double input_length) throws MaterialException {
+    public static List<Material> getShedCladdingMaterialList(int input_type_id, double input_length) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
             String SQL = "SELECT * FROM `MATERIALS` WHERE type_id = ? AND length = ? ORDER BY description ASC";
@@ -75,6 +81,10 @@ public class DataMapper {
             ps.setDouble(2, input_length);
 
             ResultSet rs = ps.executeQuery();
+            
+            if (!rs.next()) {
+                throw new MaterialException("No materials for shed cladding could be found in database!");
+            }
 
             List<Material> materialList = new ArrayList();
 
@@ -97,12 +107,13 @@ public class DataMapper {
             return materialList;
 
         } catch (SQLException ex) {
-            throw new MaterialException(ex.getMessage());
+            throw new SystemException("Technical error! Contact your IT-support!");
+            //Logging
         }
 
     }
 
-    public static List<String> getRoofFlatCladdingMaterialListJSP(int input_type_id) throws MaterialException {
+    public static List<String> getRoofFlatCladdingMaterialListJSP(int input_type_id) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
             String SQL = "SELECT DISTINCT description FROM `MATERIALS` WHERE type_id = ?;";
@@ -110,6 +121,10 @@ public class DataMapper {
             ps.setInt(1, input_type_id);
 
             ResultSet rs = ps.executeQuery();
+            
+            if (!rs.next()) {
+                throw new MaterialException("No materials for flat roof cladding could be found in database!");
+            }
 
             List<String> roofFlatMaterialListDefault = new ArrayList();
 
@@ -122,12 +137,13 @@ public class DataMapper {
             return roofFlatMaterialListDefault;
 
         } catch (SQLException ex) {
-            throw new MaterialException(ex.getMessage());
+            throw new SystemException("Technical error! Contact your IT-support!");
+            //Logging
         }
 
     }
 
-    public static TreeMap<Double, Material> getRoofFlatCladdingMaterialList(int input_type_id) throws MaterialException {
+    public static TreeMap<Double, Material> getRoofFlatCladdingMaterialList(int input_type_id) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
             String SQL = "SELECT * FROM MATERIALS WHERE description = (SELECT description FROM MATERIALS WHERE id = ?)";
@@ -135,6 +151,10 @@ public class DataMapper {
             ps.setInt(1, input_type_id);
 
             ResultSet rs = ps.executeQuery();
+            
+            if (!rs.next()) {
+                throw new MaterialException("No materials for flat roof cladding could be found in database!");
+            }
 
             TreeMap<Double, Material> listRoofFlat = new TreeMap();
 
@@ -157,12 +177,13 @@ public class DataMapper {
             return listRoofFlat;
 
         } catch (SQLException ex) {
-            throw new MaterialException(ex.getMessage());
+            throw new SystemException("Technical error! Contact your IT-support!");
+            //Logging
         }
 
     }
 
-    public static List<Material> getRoofSlopeCladdingMaterialList(int input_type_id) throws MaterialException {
+    public static List<Material> getRoofSlopeCladdingMaterialList(int input_type_id) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
             String SQL = "SELECT * FROM `MATERIALS` WHERE type_id = ?";
@@ -170,6 +191,10 @@ public class DataMapper {
             ps.setInt(1, input_type_id);
 
             ResultSet rs = ps.executeQuery();
+            
+            if (!rs.next()) {
+                throw new MaterialException("No materials for slope roof cladding could be found in database!");
+            }
 
             List<Material> materialList = new ArrayList();
 
@@ -192,12 +217,13 @@ public class DataMapper {
             return materialList;
 
         } catch (SQLException ex) {
-            throw new MaterialException(ex.getMessage());
+            throw new SystemException("Technical error! Contact your IT-support!");
+            //Logging
         }
 
     }
 
-    public static Customer login(String email, String password) throws LoginUserException {
+    public static Customer login(String email, String password) throws LoginUserException, SystemException {
         try {
             Connection con = DBConnector.connection();
             String SQL = GET_LOGIN_USER;
@@ -219,11 +245,12 @@ public class DataMapper {
                 throw new LoginUserException("Could not validate user");
             }
         } catch (SQLException ex) {
-            throw new LoginUserException(ex.getMessage());
+            throw new SystemException("Technical error! Contact your IT-support!");
+            //Logging
         }
     }
 
-    public static void createCustomer(Customer c) throws LoginUserException {
+    public static void createCustomer(Customer c) throws LoginUserException, SystemException {
         try {
             Connection con = DBConnector.connection();
             String SQL = INSERT_CUSTOMER_DEFAULT;
@@ -241,11 +268,12 @@ public class DataMapper {
             int id = ids.getInt(1);
             c.setId(id);
         } catch (SQLException ex) {
-            throw new LoginUserException(ex.getMessage());
+            throw new SystemException("Technical error! Contact your IT-support!");
+            //Logging
         }
     }
 
-    public static void createRequest(Customer customer, Request request, Carport carport, Shed shed) {
+    public static void createRequest(Customer customer, Request request, Carport carport, Shed shed) throws SystemException {
         try {
             Connection conn = DBConnector.connection();
             PreparedStatement shedPstmt = conn.prepareStatement("INSERT INTO `SHED` (`heigth`, `width`, `length`, `shedcladding`) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -259,7 +287,6 @@ public class DataMapper {
                 shedPstmt.setDouble(2, shed.getWidth());
                 shedPstmt.setDouble(3, shed.getLength());
                 shedPstmt.setInt(4, shed.getShedCladding());
-                //To create a transaction we need to not have automatic commit after each statement.
                 conn.setAutoCommit(false);
                 int resultShed = shedPstmt.executeUpdate();
                 rsShed = shedPstmt.getGeneratedKeys();
@@ -296,22 +323,21 @@ public class DataMapper {
                 } else {
                     conn.rollback();
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace(); //This should go in the log file.
-                // roll back the transaction
-                if (conn != null) {
-                    conn.rollback();
-                }
+            } catch (Exception ex) {
+                conn.rollback();
+                throw new SystemException("Technical error! Contact your IT-support!");
+                //Logging                
             } finally {
                 conn.setAutoCommit(true);
             }
-            
-        }catch (Exception ex) {
-                ex.printStackTrace();
-            }
+
+        } catch (SQLException ex) {
+            throw new SystemException("Technical error! Contact your IT-support!");
+            //Logging
+        }
     }
-    
-    public static List<Integer> getListCustomerRequestId(Customer customer) throws MaterialException {
+
+    public static List<Integer> getListCustomerRequestId(Customer customer) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
             String SQL = "SELECT id FROM `REQUEST` WHERE customer_id = ?";
@@ -319,6 +345,10 @@ public class DataMapper {
             ps.setInt(1, customer.getId());
 
             ResultSet rs = ps.executeQuery();
+            
+            if (!rs.next()) {
+                throw new MaterialException("No request for this customer could be found in database!");
+            }
 
             List<Integer> listCustomerRequestId = new ArrayList();
 
@@ -332,17 +362,22 @@ public class DataMapper {
             return listCustomerRequestId;
 
         } catch (SQLException ex) {
-            throw new MaterialException(ex.getMessage());
+            throw new SystemException("Technical error! Contact your IT-support!");
+            //Logging
         }
     }
-    
-    public static List<Integer> getListEmployeeOpenRequestId() throws MaterialException {
+
+    public static List<Integer> getListEmployeeOpenRequestId() throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
             String SQL = "SELECT id FROM `REQUEST` WHERE employee_id IS NULL?";
             PreparedStatement ps = con.prepareStatement(SQL);
 
             ResultSet rs = ps.executeQuery();
+            
+            if (!rs.next()) {
+                throw new MaterialException("No assigned request could be found in database!");
+            }
 
             List<Integer> listEmployeeOpenRequestId = new ArrayList();
 
@@ -356,17 +391,22 @@ public class DataMapper {
             return listEmployeeOpenRequestId;
 
         } catch (SQLException ex) {
-            throw new MaterialException(ex.getMessage());
+            throw new SystemException("Technical error! Contact your IT-support!");
+            //Logging
         }
     }
-    
-    public static List<Integer> getListEmployeeNotOpenRequestId() throws MaterialException {
+
+    public static List<Integer> getListEmployeeNotOpenRequestId() throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
             String SQL = "SELECT id FROM `REQUEST` WHERE employee_id IS NOT NULL?";
             PreparedStatement ps = con.prepareStatement(SQL);
 
             ResultSet rs = ps.executeQuery();
+            
+            if (!rs.next()) {
+                throw new MaterialException("No unassigned request could be found in database!");
+            }
 
             List<Integer> listEmployeeNotOpenRequestId = new ArrayList();
 
@@ -380,7 +420,8 @@ public class DataMapper {
             return listEmployeeNotOpenRequestId;
 
         } catch (SQLException ex) {
-            throw new MaterialException(ex.getMessage());
+            throw new SystemException("Technical error! Contact your IT-support!");
+            //Logging
         }
     }
 }

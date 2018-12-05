@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.TreeMap;
 import FunctionLayer.BillOfMaterial;
 import FunctionLayer.calculators.LineItemQtyGenerator;
+import FunctionLayer.exceptions.CalculatorException;
 import FunctionLayer.exceptions.LoginUserException;
+import FunctionLayer.exceptions.SystemException;
 import java.util.List;
 
 public class LogicFacade {
@@ -26,7 +28,7 @@ public class LogicFacade {
         }
     }
 
-    public static BillOfMaterial makeBillOfMaterial(Carport carport) throws MaterialException {
+    public static BillOfMaterial makeBillOfMaterial(Carport carport) throws MaterialException, SystemException, CalculatorException {
 
         LineItemQtyGenerator calc = new LineItemQtyGenerator();
 
@@ -41,22 +43,22 @@ public class LogicFacade {
         return price;
     }
 
-    public static List<Material> getAllDefaultMaterialsAsList(Carport carport) throws MaterialException {
+    public static List<Material> getAllDefaultMaterialsAsList(Carport carport) throws MaterialException, SystemException {
         return DataMapper.getDefaultList();
 
     }
 
-    public static HashMap<Integer, TreeMap<Double, Material>> getAllDefaultMaterialsAsHashMapOfTreeMaps(Carport carport) throws MaterialException {
+    public static HashMap<Integer, TreeMap<Double, Material>> getAllDefaultMaterialsAsHashMapOfTreeMaps(Carport carport) throws MaterialException, SystemException {
 
         ConverterListAndMap con = new ConverterListAndMap();
         return con.ListToHashMap(getAllDefaultMaterialsAsList(carport));
     }
 
-    public static Customer login(String email, String password) throws LoginUserException {
+    public static Customer login(String email, String password) throws LoginUserException, SystemException {
         return DataMapper.login(email, password);
     }
 
-    public static Customer createCustomer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) throws LoginUserException {
+    public static Customer createCustomer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) throws LoginUserException, SystemException {
         Customer user = new Customer(firstName, lastName, email, zipcode, city, phone, password);
         DataMapper.createCustomer(user);
         return user;

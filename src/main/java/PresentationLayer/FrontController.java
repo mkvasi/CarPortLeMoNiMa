@@ -1,7 +1,9 @@
 package PresentationLayer;
 
+import FunctionLayer.exceptions.CalculatorException;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
+import FunctionLayer.exceptions.SystemException;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletException;
@@ -32,7 +34,7 @@ public class FrontController extends HttpServlet {
             } else {
                 request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
             }
-        } catch (LoginUserException | MaterialException ex) {
+        } catch (LoginUserException | MaterialException | SystemException | CalculatorException ex) {
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } 
