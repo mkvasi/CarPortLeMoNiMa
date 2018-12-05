@@ -1,7 +1,8 @@
 package FunctionLayer;
 
 //import FunctionLayer.calculators.OfferPriceCalculator;
-import DBAccess.DataMapper;
+import DBAccess.MaterialMapper;
+import DBAccess.UserMapper;
 import FunctionLayer.exceptions.MaterialException;
 import java.util.HashMap;
 import java.util.TreeMap;
@@ -44,7 +45,7 @@ public class LogicFacade {
     }
 
     public static List<Material> getAllDefaultMaterialsAsList(Carport carport) throws MaterialException, SystemException {
-        return DataMapper.getDefaultList();
+        return MaterialMapper.getDefaultList();
 
     }
 
@@ -55,12 +56,12 @@ public class LogicFacade {
     }
 
     public static Customer login(String email, String password) throws LoginUserException, SystemException {
-        return DataMapper.login(email, password);
+        return UserMapper.login(email, password);
     }
 
     public static Customer createCustomer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) throws LoginUserException, SystemException {
         Customer user = new Customer(firstName, lastName, email, zipcode, city, phone, password);
-        DataMapper.createCustomer(user);
+        UserMapper.createCustomer(user);
         return user;
     }
 

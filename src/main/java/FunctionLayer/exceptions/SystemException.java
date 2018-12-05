@@ -22,4 +22,10 @@ public class SystemException extends Exception {
     public SystemException(String msg) {
         super(msg);
     }
+
+    public SystemException(Throwable thrwbl) {
+        super("There was a technical error - please contact IT-Support", thrwbl);
+    }
+    
+    
 }

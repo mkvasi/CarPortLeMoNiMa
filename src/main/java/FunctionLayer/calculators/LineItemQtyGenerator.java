@@ -60,23 +60,21 @@ public class LineItemQtyGenerator {
         //Universalbeslag venstre
         board = boards.get(13).firstEntry().getValue();
         lineItemList.add(new LineItem(getUniversalBracketsQty(carport, board), "Universalbeslag venstre", board));
-      
+
         //Stolper
         board = boards.get(7).firstEntry().getValue();
         lineItemList.add(new LineItem(getQtyOfPosts(carport), "Stolper", board));
-        
+
         //Bræddebolt
         board = boards.get(14).firstEntry().getValue();
         lineItemList.add(new LineItem(calculateQtyOfBræddebolt(carport, board), "Bræddebolt", board));
 
 //            //Skruer
 //            billOfMaterial.addMaterialToBOM(new LineItem(0, "Skruer", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
-
         billOfMaterial.setLineItems(lineItemList);
 
         return billOfMaterial;
     }
-
 
     public int getQTYForRafter(Carport carport, Material board) throws CalculatorException {
 
@@ -87,69 +85,67 @@ public class LineItemQtyGenerator {
                 double totalRafterDimension = spaceBetweenEachRafter + rafterWidth; // Total dimension for each rafter including both space and material.
                 double rafters = Math.ceil(carport.getLength() / totalRafterDimension); // Total amount of rafter based on calculating length with total dimension per rafter
                 if (carport.getWidth() * toMilimeters > board.getLength()) {
-                    return (int) rafters * 2;                    
+                    return (int) rafters * 2;
                 }
                 return (int) rafters;
             } else {
                 return 8;
             }
         } catch (Exception ex) {
-            throw new CalculatorException("There was an error calculating the amount of rafters for the carport.", ex);
+            throw new CalculatorException(ex);
         }
     }
 
- 
     public int getQTYForRem(Carport carport, Material board) throws CalculatorException {
         try {
-        int amountOfRem = 2;
+            int amountOfRem = 2;
             if (board.getLength() < carport.getLength() * toMilimeters) {
                 return amountOfRem * 2;
             }
-            return amountOfRem;            
+            return amountOfRem;
         } catch (Exception ex) {
-            throw new CalculatorException("There was an error counting rem's for the carport.", ex);
+            throw new CalculatorException(ex);
         }
     }
 
-
     public int getQtyOfPosts(Carport carport) throws CalculatorException {
         try {
-        int meterPerPost = 2;
+            int meterPerPost = 2;
             double posts = ((Math.ceil(carport.getLength() / meterPerPost) * 2));
             return (int) posts;
         } catch (Exception ex) {
-            throw new CalculatorException("There was an error calculating the amount of posts for the carport", ex);
+            throw new CalculatorException(ex);
         }
     }
 
     public int countEaves(Carport carport) throws CalculatorException {
         //carport.getRoof().calculateRoofDimensions(carport);
         try {
-        double eavesWidth = 1.0;
+            double eavesWidth = 1.0;
             double countEaves = Math.ceil(carport.getRoof().getWidth() / eavesWidth); // Total pieces of eaves with 1 meter width. 
             return (int) countEaves;
         } catch (Exception ex) {
-            throw new CalculatorException("There was an error calculating the amount of eaves for the roof.", ex);
+            throw new CalculatorException(ex);
         }
     }
 
     //stykslisten says 21 rygsten for 7,3 m, we calculate with 3 rygsten each meter
     public int calculateRygstensTiles(Carport carport) throws CalculatorException {
         try {
-        int rygstenTilesPrMeterLength = 3;
+            int rygstenTilesPrMeterLength = 3;
             double roofTiles = Math.ceil((carport.getRoof().getLength())) * rygstenTilesPrMeterLength;
             return (int) roofTiles;
         } catch (Exception ex) {
-            throw new CalculatorException("There was an error calculating the amount of tiles for the roof.", ex);
+            throw new CalculatorException(ex);
         }
     }
 
     public Material returnMaterialForFarciaAndRainware(Carport carport, TreeMap<Double, Material> boards) throws CalculatorException {
         try {
-        double boardLengthHypotenuse = calculateBoardLengthForFarciaAndRainware(carport); // Kalder metode for at få længden på vinskederne (hypotenusen)
+            double boardLengthHypotenuse = calculateBoardLengthForFarciaAndRainware(carport); // Kalder metode for at få længden på vinskederne (hypotenusen)
             return calc.boardCalculator(boardLengthHypotenuse, carport, boards);  // Kalder boardCalculator som finder det bræt som matcher længden bedst.
         } catch (Exception ex) {
-            throw new CalculatorException("There was an error finding the best possible board for the 'Farcia' on the carport", ex);
+            throw new CalculatorException(ex);
         }
     }
 
@@ -164,7 +160,7 @@ public class LineItemQtyGenerator {
 
             return boardLengthHypotenuse;
         } catch (Exception ex) {
-            throw new CalculatorException("There was an error calculating the board length for the 'Farcia'", ex);
+            throw new CalculatorException(ex);
         }
     }
 
@@ -175,7 +171,7 @@ public class LineItemQtyGenerator {
 
             return height;
         } catch (CalculatorException ex) {
-            throw new CalculatorException("There was an error calculating the height of the roof.", ex);
+            throw new CalculatorException(ex);
         }
     }
 
@@ -187,7 +183,7 @@ public class LineItemQtyGenerator {
 
             return countBoards;
         } catch (Exception ex) {
-            throw new CalculatorException("There was an error calculating the amount of boards to be used for the gable.", ex);
+            throw new CalculatorException(ex);
         }
     }
 
@@ -197,13 +193,13 @@ public class LineItemQtyGenerator {
             int spaceBetweenEachBatten = 300;
             double battenWidth = boards.firstEntry().getValue().getWidth();
             double totalMeasureBetweenEachBatten = spaceBetweenEachBatten + battenWidth;
-            
+
             double hypotenuseLength = calculateBoardLengthForFarciaAndRainware(carport);
             double countBattens = (Math.ceil(hypotenuseLength * 1000 / totalMeasureBetweenEachBatten * 2)); // Længden af vindskeden bruges til at finde ud af antallet af lægter pr. side af skråtaget. For at dække begge sider ganges der med to. Math.ceil() bruges til at runde op. 
 
             return (int) countBattens;
         } catch (CalculatorException ex) {
-            throw new CalculatorException("There was an error calculating the amount of battens for the roof.", ex);
+            throw new CalculatorException(ex);
         }
     }
 
@@ -213,25 +209,24 @@ public class LineItemQtyGenerator {
             carport.getRoof().calculateRoofDimensions(carport);
             int tilesPrM2 = 11;
             double roof = Math.ceil((carport.getRoof().getLength() * (carport.getRoof().getWidth()))) * tilesPrM2;
-            
+
             return (int) roof;
         } catch (Exception ex) {
-            throw new CalculatorException("There was an error calculating the amount of tiles for the roof.", ex);
+            throw new CalculatorException(ex);
         }
     }
-
 
     private int getUniversalBracketsQty(Carport carport, Material mat) throws CalculatorException {
         try {
             if (carport.getRoof().getRoofSlopeCelsius() == 0) {
-                
+
                 return getQTYForRafter(carport, mat);
             } else {
                 return 8;
-                
+
             }
         } catch (CalculatorException ex) {
-            throw new CalculatorException("There was an error calculating the amount of universal brackets for the carport.", ex);
+            throw new CalculatorException(ex);
         }
     }
 
@@ -241,10 +236,10 @@ public class LineItemQtyGenerator {
                 return getQtyOfPosts(carport) * 2;
             } else {
                 return 8;
-                
+
             }
         } catch (CalculatorException ex) {
-            throw new CalculatorException("There was an error calculating the amount of braeddebolt for the carport.", ex);
+            throw new CalculatorException(ex);
         }
     }
 }

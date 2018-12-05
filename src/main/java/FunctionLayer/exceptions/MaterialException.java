@@ -6,4 +6,12 @@ public class MaterialException extends Exception {
         super(msg);
     }
 
+    public MaterialException() {
+        super("There was an error. Please try again later.");
+    }
+
+
+    
+    
+
 }

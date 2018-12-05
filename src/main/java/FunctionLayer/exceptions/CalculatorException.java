@@ -15,24 +15,23 @@ public class CalculatorException extends Exception {
      * Creates a new instance of <code>CalculatorException</code> without detail
      * message.
      */
-
     /**
      * Constructs an instance of <code>CalculatorException</code> with the
      * specified detail message.
      *
      * @param msg the detail message.
      */
+    
     public CalculatorException(String msg) {
         super(msg);
     }
 
-    public CalculatorException(String string, Throwable thrwbl) {
-        super(string, thrwbl);
+    public CalculatorException() {
+        super("There was a technical error - please come back later");
     }
 
     public CalculatorException(Throwable thrwbl) {
-        super(thrwbl);
+        super("There was a technical error - please come back later", thrwbl);
     }
-    
-    
+
 }

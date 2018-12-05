@@ -68,7 +68,7 @@ public class DataMapperIT {
     @Test
     public void testGetDefaultList() throws Exception {
         int amountOfItemsOnList = 47;
-        int result = DataMapper.getDefaultList().size();
+        int result = MaterialMapper.getDefaultList().size();
         assertEquals(amountOfItemsOnList, result);
        
     }
@@ -82,7 +82,7 @@ public class DataMapperIT {
         int input_type_id = 6;
         double input_length = 3600.0;
         int expResult = 9;
-        int result = DataMapper.getShedCladdingMaterialList(input_type_id, input_length).size();
+        int result = MaterialMapper.getShedCladdingMaterialList(input_type_id, input_length).size();
         assertEquals(expResult, result);
     
     }
