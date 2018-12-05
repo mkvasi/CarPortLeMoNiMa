@@ -38,6 +38,11 @@ public class Material {
     public Material(int type_id) {
         this.type_id = type_id;
     }
+    //Til test
+    public Material(int type_id, double length) {
+        this.type_id = type_id;
+        this.length = length; 
+    }
     
     
     
