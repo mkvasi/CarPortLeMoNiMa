@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import FunctionLayer.LogicFacade;
 import FunctionLayer.exceptions.CalculatorException;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
+@WebServlet(name = "FrontController", urlPatterns = {"/FrontController", "index.jsp"})
 public class FrontController extends HttpServlet {
 
     /**
@@ -26,6 +27,10 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+//        String command = request.getParameter("command");
+//        if (command == null) {
+//            getDefaultMaterialList = LogicFacade.getAllDefaultMaterialsAsList(carport)
+//        }
         try {
             Command action = Command.from(request);
             String view = action.execute(request, response);
@@ -37,7 +42,7 @@ public class FrontController extends HttpServlet {
         } catch (LoginUserException | MaterialException | SystemException | CalculatorException ex) {
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("index.jsp").forward(request, response);
-        } 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

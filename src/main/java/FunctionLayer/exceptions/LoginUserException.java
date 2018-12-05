@@ -6,4 +6,9 @@ public class LoginUserException extends Exception {
         super(msg);
     }
 
+    public LoginUserException(String string, Throwable thrwbl) {
+        super(string, thrwbl);
+    }
+
+    
 }
