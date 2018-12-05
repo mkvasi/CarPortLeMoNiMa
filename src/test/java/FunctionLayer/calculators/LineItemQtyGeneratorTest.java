@@ -10,6 +10,7 @@ import FunctionLayer.Carport;
 import FunctionLayer.Material;
 import FunctionLayer.Roof;
 import FunctionLayer.Shed;
+import FunctionLayer.exceptions.CalculatorException;
 import java.util.HashMap;
 import java.util.TreeMap;
 import org.junit.After;
@@ -106,7 +107,7 @@ public class LineItemQtyGeneratorTest {
      */
     @Test
     //Listens 
-    public void testMakeBillOfMaterial() {
+    public void testMakeBillOfMaterial() throws CalculatorException {
         Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
         HashMap<Integer, TreeMap<Double, Material>> boards = new HashMap();
         boards.put(6, treemap);
@@ -128,7 +129,7 @@ public class LineItemQtyGeneratorTest {
      * Test of getQTYForRafter method, of class LineItemQtyGenerator.
      */
     @Test
-    public void testGetQTYForRafterSmallCarport() {
+    public void testGetQTYForRafterSmallCarport() throws CalculatorException {
         Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
         Material board = new Material(3000);
         int expResult = 5;
@@ -137,7 +138,7 @@ public class LineItemQtyGeneratorTest {
 
     }
     @Test
-    public void testGetQTYForRafterSmallCarportPitchedRoof25() {
+    public void testGetQTYForRafterSmallCarportPitchedRoof25() throws CalculatorException {
         Carport carport = new Carport(2.4, 2.4, roof25, shedNull, bill);
         Material board = new Material(3000);
         int expResult = 8;
@@ -146,7 +147,7 @@ public class LineItemQtyGeneratorTest {
 
     }
     @Test
-    public void testGetQTYForRafterBigCarportPitchedRoof25() {
+    public void testGetQTYForRafterBigCarportPitchedRoof25() throws CalculatorException {
         Carport carport = new Carport(7.5, 7.8, roof25, shedNull, bill);
         Material board = new Material(4200);
         int expResult = 8;
@@ -156,7 +157,7 @@ public class LineItemQtyGeneratorTest {
     }
 
     @Test
-    public void testGetQTYForRafterBigCarport() {
+    public void testGetQTYForRafterBigCarport() throws CalculatorException {
         Carport carport = new Carport(7.5, 7.8, roof0, shedNull, bill);
         Material board = new Material(4200.0);
         int expResult = 28;
@@ -165,7 +166,7 @@ public class LineItemQtyGeneratorTest {
 
     }
     @Test
-    public void testGetQTYForRafterNotChooseAbleValueForUserSmallCarport() {
+    public void testGetQTYForRafterNotChooseAbleValueForUserSmallCarport() throws CalculatorException {
         Carport carport = new Carport(2.5, 3.8, roof0, shedNull, bill);
         Material board = new Material(4200.0);
         int expResult = 5;
@@ -174,7 +175,7 @@ public class LineItemQtyGeneratorTest {
 
     }
     @Test
-    public void testGetQTYForRafterNotChooseAbleValueForUserBigCarport() {
+    public void testGetQTYForRafterNotChooseAbleValueForUserBigCarport() throws CalculatorException {
         Carport carport = new Carport(7.9, 7.2, roof0, shedNull, bill);
         Material board = new Material(4200.0);
         int expResult = 28;
@@ -187,7 +188,7 @@ public class LineItemQtyGeneratorTest {
      * Test of getQTYForRem method, of class LineItemQtyGenerator.
      */
     @Test
-    public void testGetQTYForRemBigCarport() {
+    public void testGetQTYForRemBigCarport() throws CalculatorException {
         Carport carport = new Carport(7.5, 7.8, roof0, shedNull, bill);
         Material board = new Material(4200.0);
         int expResult = 4;
@@ -196,7 +197,7 @@ public class LineItemQtyGeneratorTest {
       
     }
     @Test
-    public void testGetQTYForRemSmallCarport() {
+    public void testGetQTYForRemSmallCarport() throws CalculatorException {
         Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
         Material board = new Material(3000);
         int expResult = 2;
@@ -209,7 +210,7 @@ public class LineItemQtyGeneratorTest {
      * Test of getQtyOfPosts method, of class LineItemQtyGenerator.
      */
     @Test
-    public void testGetQtyOfPostsBigCarport() {
+    public void testGetQtyOfPostsBigCarport() throws CalculatorException {
         Carport carport = new Carport(7.5, 7.8, roof0, shedNull, bill);
     
         int expResult = 8;
@@ -218,7 +219,7 @@ public class LineItemQtyGeneratorTest {
  
     }
     @Test
-    public void testGetQtyOfPostsSmallCarport() {
+    public void testGetQtyOfPostsSmallCarport() throws CalculatorException {
         Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
     
         int expResult = 4;
@@ -227,7 +228,7 @@ public class LineItemQtyGeneratorTest {
  
     }
     @Test
-    public void testGetQtyOfPostsSmallCarportPitchedRoof25() {
+    public void testGetQtyOfPostsSmallCarportPitchedRoof25() throws CalculatorException {
         Carport carport = new Carport(2.4, 2.4, roof25, shedNull, bill);
     
         int expResult = 4;
@@ -236,7 +237,7 @@ public class LineItemQtyGeneratorTest {
  
     }
     @Test
-    public void testGetQtyOfPostsBigCarportPitchedRoof25() {
+    public void testGetQtyOfPostsBigCarportPitchedRoof25() throws CalculatorException {
         Carport carport = new Carport(7.5, 2.4, roof25, shedNull, bill);
        int expResult = 8;
         int result = instance.getQtyOfPosts(carport);
