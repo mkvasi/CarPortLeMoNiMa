@@ -30,13 +30,28 @@ public class DataMapper {
     //private final int ROOF_FLAT_CLADDING_TYPE = 2;
     //private final int ROOF_SLOPE_CLADDING_TYPE = 3;
     private static final String INSERT_CUSTOMER_DEFAULT = "INSERT INTO `CUSTOMER` (firstname, lastname, email, zipcode, city, phonenumber, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_INTO_SHED = "INSERT INTO `SHED` (`heigth`, `width`, `length`, `shedcladding`) VALUES (?,?,?,?)";
+    private static final String INSERT_INTO_CARPORT = "INSERT INTO `CARPORT` (`heigth`, `width`, `length`, `roofslopecelsius`, `roofcladding`, `shed_id`) VALUES (?,?,?,?,?,?)";
+    private static final String INSERT_INTO_REQUEST = "INSERT INTO `REQUEST` (`pricedefault`, `priceemployee`, `customer_id`, `carport_id`) VALUES (?,?,?,?)";
+    private static final String INSERT_INTO_CARPORT_HAS_MATERIALS = "INSERT INTO `CARPORT_HAS_MATERIALS` (`carport_id`, `materials_id`) VALUES (?,?)";
+    
     private static final String GET_LOGIN_USER = "SELECT * FROM `CUSTOMER` WHERE email=? AND password=?";
-
+    private static final String GET_DEFAULT_MATERIALS = "SELECT * FROM `MATERIALS` WHERE defaultused = 1 ORDER BY type_id ASC";
+    private static final String GET_MATERIALS_BY_TYPEID_LENGTH = "SELECT * FROM `MATERIALS` WHERE type_id = ? AND length = ? ORDER BY description ASC";
+    private static final String GET_DISTINCT_MATERIALDESCRIPTION_BY_TYPEID = "SELECT DISTINCT description FROM `MATERIALS` WHERE type_id = ?;";
+    private static final String GET_MATERIAL_BY_DESCRIPTION = "SELECT * FROM MATERIALS WHERE description = (SELECT description FROM MATERIALS WHERE id = ?)";
+    private static final String GET_MATERIALS_BY_TYPEID = "SELECT * FROM `MATERIALS` WHERE type_id = ?";
+    private static final String GET_REQUESTID_BY_CUSTOMERID = "SELECT id FROM `REQUEST` WHERE customer_id = ?";
+    private static final String GET_REQUESTID_BY_EMPLOYEE_NULL = "SELECT id FROM `REQUEST` WHERE employee_id IS NULL?";
+    private static final String GET_REQUESTID_BY_EMPLOYEE_NOTNULL = "SELECT id FROM `REQUEST` WHERE employee_id IS NOT NULL?";
+    
+    
+    
+    
     public static List<Material> getDefaultList() throws MaterialException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = "SELECT * FROM `MATERIALS` WHERE defaultused = 1 ORDER BY type_id ASC";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            PreparedStatement ps = con.prepareStatement(GET_DEFAULT_MATERIALS);
 
             ResultSet rs = ps.executeQuery();
 
@@ -69,8 +84,7 @@ public class DataMapper {
     public static List<Material> getShedCladdingMaterialList(int input_type_id, double input_length) throws MaterialException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = "SELECT * FROM `MATERIALS` WHERE type_id = ? AND length = ? ORDER BY description ASC";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            PreparedStatement ps = con.prepareStatement(GET_MATERIALS_BY_TYPEID_LENGTH);
             ps.setInt(1, input_type_id);
             ps.setDouble(2, input_length);
 
@@ -105,8 +119,7 @@ public class DataMapper {
     public static List<String> getRoofFlatCladdingMaterialListJSP(int input_type_id) throws MaterialException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = "SELECT DISTINCT description FROM `MATERIALS` WHERE type_id = ?;";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            PreparedStatement ps = con.prepareStatement(GET_DISTINCT_MATERIALDESCRIPTION_BY_TYPEID);
             ps.setInt(1, input_type_id);
 
             ResultSet rs = ps.executeQuery();
@@ -130,8 +143,7 @@ public class DataMapper {
     public static TreeMap<Double, Material> getRoofFlatCladdingMaterialList(int input_type_id) throws MaterialException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = "SELECT * FROM MATERIALS WHERE description = (SELECT description FROM MATERIALS WHERE id = ?)";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            PreparedStatement ps = con.prepareStatement(GET_MATERIAL_BY_DESCRIPTION);
             ps.setInt(1, input_type_id);
 
             ResultSet rs = ps.executeQuery();
@@ -165,8 +177,7 @@ public class DataMapper {
     public static List<Material> getRoofSlopeCladdingMaterialList(int input_type_id) throws MaterialException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = "SELECT * FROM `MATERIALS` WHERE type_id = ?";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            PreparedStatement ps = con.prepareStatement(GET_MATERIALS_BY_TYPEID);
             ps.setInt(1, input_type_id);
 
             ResultSet rs = ps.executeQuery();
@@ -200,8 +211,7 @@ public class DataMapper {
     public static Customer login(String email, String password) throws LoginUserException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = GET_LOGIN_USER;
-            PreparedStatement ps = con.prepareStatement(SQL);
+            PreparedStatement ps = con.prepareStatement(GET_LOGIN_USER);
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
@@ -226,8 +236,7 @@ public class DataMapper {
     public static void createCustomer(Customer c) throws LoginUserException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = INSERT_CUSTOMER_DEFAULT;
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(INSERT_CUSTOMER_DEFAULT, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, c.getFirstName());
             ps.setString(2, c.getLastName());
             ps.setString(3, c.getEmail());
@@ -248,10 +257,10 @@ public class DataMapper {
     public static void createRequest(Customer customer, Request request, Carport carport, Shed shed) {
         try {
             Connection conn = DBConnector.connection();
-            PreparedStatement shedPstmt = conn.prepareStatement("INSERT INTO `SHED` (`heigth`, `width`, `length`, `shedcladding`) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement carportPstmt = conn.prepareStatement("INSERT INTO `CARPORT` (`heigth`, `width`, `length`, `roofslopecelsius`, `roofcladding`, `shed_id`) VALUES (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement requestPstmt = conn.prepareStatement("INSERT INTO `REQUEST` (`pricedefault`, `priceemployee`, `customer_id`, `carport_id`) VALUES (?,?,?,?)");
-            PreparedStatement billOfMaterialPstmt = conn.prepareStatement("INSERT INTO `CARPORT_HAS_MATERIALS` (`carport_id`, `materials_id`) VALUES (?,?)");
+            PreparedStatement shedPstmt = conn.prepareStatement(INSERT_INTO_SHED, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement carportPstmt = conn.prepareStatement(INSERT_INTO_CARPORT, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement requestPstmt = conn.prepareStatement(INSERT_INTO_REQUEST);
+            PreparedStatement billOfMaterialPstmt = conn.prepareStatement(INSERT_INTO_CARPORT_HAS_MATERIALS);
             ResultSet rsShed = null;
             int shedId = 0;
             try {
@@ -314,8 +323,7 @@ public class DataMapper {
     public static List<Integer> getListCustomerRequestId(Customer customer) throws MaterialException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = "SELECT id FROM `REQUEST` WHERE customer_id = ?";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            PreparedStatement ps = con.prepareStatement(GET_REQUESTID_BY_CUSTOMERID);
             ps.setInt(1, customer.getId());
 
             ResultSet rs = ps.executeQuery();
@@ -336,11 +344,10 @@ public class DataMapper {
         }
     }
     
-    public static List<Integer> getListEmployeeOpenRequestId() throws MaterialException {
+    public static List<Integer> getListEmployeeUnassignedRequestId() throws MaterialException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = "SELECT id FROM `REQUEST` WHERE employee_id IS NULL?";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            PreparedStatement ps = con.prepareStatement(GET_REQUESTID_BY_EMPLOYEE_NULL);
 
             ResultSet rs = ps.executeQuery();
 
@@ -363,8 +370,7 @@ public class DataMapper {
     public static List<Integer> getListEmployeeNotOpenRequestId() throws MaterialException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = "SELECT id FROM `REQUEST` WHERE employee_id IS NOT NULL?";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            PreparedStatement ps = con.prepareStatement(GET_REQUESTID_BY_EMPLOYEE_NOTNULL);
 
             ResultSet rs = ps.executeQuery();
 
