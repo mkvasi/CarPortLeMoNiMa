@@ -25,20 +25,32 @@ import static org.junit.Assert.*;
  */
 public class LineItemQtyGeneratorTest {
 
-
+    
     LineItemQtyGenerator instance;
-   //Different roofs
+    TreeMap<Double, Material> treemap;
+    Material material3000;
+    Material material3600;
+    Material material3900;
+    Material material4200;
+    Material material4500;
+    Material material4800;
+    Material material5100;
+    Material material5400;
+    Material material6000;
+//Different roofs
     Roof roof0;
     Roof roof25;
     Roof roof45;
     Roof roofNull;
-   
-  //Different sheds
-  
+     
+
+//Different sheds
+    
     Shed shedNoLength;
     Shed shedNull;
-  //Different BOMs
-    BillOfMaterial bill;
+   
+//Different BOMs
+    BillOfMaterial bill; 
 
   
 
@@ -53,11 +65,8 @@ public class LineItemQtyGeneratorTest {
     public static void tearDownClass() {
     }
 
-    @Before
+      @Before
     public void setUp() {
-        instance = new LineItemQtyGenerator();
-
-        roof0 = new Roof(0);//Min slope
         roof25 = new Roof(25); //In between min and max
         roof45 = new Roof(45);//Max slope
         roofNull = null;
@@ -65,7 +74,27 @@ public class LineItemQtyGeneratorTest {
         shedNoLength = new Shed(0.0, 0.0);
         shedNull = null;
 
-        bill = new BillOfMaterial(); 
+        bill = new BillOfMaterial();
+        instance = new LineItemQtyGenerator();
+        material3000 = new Material(3000);
+        material3600 = new Material(3600);
+        material4200 = new Material(4200);
+        material4500 = new Material(4500);
+        material4800 = new Material(4800);
+        material5100 = new Material(5100);
+        material5400 = new Material(5400);
+        material6000 = new Material(6000);
+      
+        treemap = new TreeMap();
+        treemap.put(3000.0, material3000);
+        treemap.put(3600.0, material3600);
+        treemap.put(4200.0, material4200);
+        treemap.put(4500.0, material4500);
+        treemap.put(4800.0, material4800);
+        treemap.put(5100.0, material5100);
+        treemap.put(5400.0, material5400);
+        treemap.put(6000.0, material6000);
+        roof0 = new Roof(0);//Min slope
     }
 
     @After
@@ -75,18 +104,25 @@ public class LineItemQtyGeneratorTest {
     /**
      * Test of makeBillOfMaterial method, of class LineItemQtyGenerator.
      */
-//    @Test
-//    public void testMakeBillOfMaterial() {
-//        System.out.println("makeBillOfMaterial");
-//        Carport carport = null;
-//        HashMap<Integer, TreeMap<Double, Material>> boards = null;
-//        LineItemQtyGenerator instance = new LineItemQtyGenerator();
-//        BillOfMaterial expResult = null;
-//        BillOfMaterial result = instance.makeBillOfMaterial(carport, boards);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    //Listens 
+    public void testMakeBillOfMaterial() {
+        Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
+        HashMap<Integer, TreeMap<Double, Material>> boards = new HashMap();
+        boards.put(6, treemap);
+        boards.put(7, treemap);
+        boards.put(13, treemap);
+        boards.put(14, treemap);
+        boards.put(10, treemap);
+        boards.put(12, treemap);
+        int expResult = 8;
+        int result = instance.makeBillOfMaterial(carport, boards).getLineItems().size();
+  
+        assertEquals(expResult, result);
+      
+    }
+        
+     
 
     /**
      * Test of getQTYForRafter method, of class LineItemQtyGenerator.

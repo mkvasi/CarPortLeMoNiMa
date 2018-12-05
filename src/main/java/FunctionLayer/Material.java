@@ -30,10 +30,16 @@ public class Material {
         this.type_id = type_id;
         this.measure_id = measure_id;
     }
-    //For test purpose
+    //Til test
     public Material(double length) {
         this.length = length;
     }
+    //Til test
+    public Material(int type_id) {
+        this.type_id = type_id;
+    }
+    
+    
     
 
     public int getId() {
