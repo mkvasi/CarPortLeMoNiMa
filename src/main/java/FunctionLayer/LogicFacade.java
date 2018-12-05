@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.TreeMap;
 import FunctionLayer.BillOfMaterial;
 import FunctionLayer.calculators.LineItemQtyGenerator;
+import FunctionLayer.exceptions.CalculatorException;
 import FunctionLayer.exceptions.LoginUserException;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class LogicFacade {
         }
     }
 
-    public static BillOfMaterial makeBillOfMaterial(Carport carport) throws MaterialException {
+    public static BillOfMaterial makeBillOfMaterial(Carport carport) throws MaterialException, CalculatorException {
 
         LineItemQtyGenerator calc = new LineItemQtyGenerator();
 
