@@ -99,7 +99,7 @@
         <hr>
 
         <div style=""
-            <input type='checkbox' name="command" value="login" id='form-switch'>
+        <input type='checkbox' name="command" value="login" id='form-switch'>
     <form name="login" id='login-form' action="FrontController" method='POST'>
         <input type="text" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Password" required>

@@ -43,17 +43,17 @@ public class ConverterListAndMapTest {
     /**
      * Test of ListToHashMap method, of class ConverterListAndMap.
      */
-    @Test
-    public void testListToHashMap() {
-     
-        List<Material> listOfMaterials = null;
-        ConverterListAndMap instance = new ConverterListAndMap();
-        HashMap<Integer, TreeMap<Double, Material>> expResult = null;
-        HashMap<Integer, TreeMap<Double, Material>> result = instance.ListToHashMap(listOfMaterials);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testListToHashMap() {
+//     
+//        List<Material> listOfMaterials = null;
+//        ConverterListAndMap instance = new ConverterListAndMap();
+//        HashMap<Integer, TreeMap<Double, Material>> expResult = null;
+//        HashMap<Integer, TreeMap<Double, Material>> result = instance.ListToHashMap(listOfMaterials);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
     
 }

@@ -211,7 +211,7 @@ public class DataMapper {
                 String lastname = rs.getString("lastname");
                 int zipcode = rs.getInt("zipcode");
                 String city = rs.getString("city");
-                int phone = rs.getInt("phone");
+                int phone = rs.getInt("phonenumber");
                 String role = rs.getString("role");
                 Customer customer = new Customer(id, firstname, lastname, email, zipcode, city, phone, password, role);
                 return customer;
@@ -309,5 +309,78 @@ public class DataMapper {
         }catch (Exception ex) {
                 ex.printStackTrace();
             }
+    }
+    
+    public static List<Integer> getListCustomerRequestId(Customer customer) throws MaterialException {
+        try {
+            Connection con = DBConnector.connection();
+            String SQL = "SELECT id FROM `REQUEST` WHERE customer_id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, customer.getId());
+
+            ResultSet rs = ps.executeQuery();
+
+            List<Integer> listCustomerRequestId = new ArrayList();
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+
+                listCustomerRequestId.add(id);
+            }
+
+            return listCustomerRequestId;
+
+        } catch (SQLException ex) {
+            throw new MaterialException(ex.getMessage());
+        }
+    }
+    
+    public static List<Integer> getListEmployeeOpenRequestId() throws MaterialException {
+        try {
+            Connection con = DBConnector.connection();
+            String SQL = "SELECT id FROM `REQUEST` WHERE employee_id IS NULL?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+
+            List<Integer> listEmployeeOpenRequestId = new ArrayList();
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+
+                listEmployeeOpenRequestId.add(id);
+            }
+
+            return listEmployeeOpenRequestId;
+
+        } catch (SQLException ex) {
+            throw new MaterialException(ex.getMessage());
+        }
+    }
+    
+    public static List<Integer> getListEmployeeNotOpenRequestId() throws MaterialException {
+        try {
+            Connection con = DBConnector.connection();
+            String SQL = "SELECT id FROM `REQUEST` WHERE employee_id IS NOT NULL?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+
+            List<Integer> listEmployeeNotOpenRequestId = new ArrayList();
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+
+                listEmployeeNotOpenRequestId.add(id);
+            }
+
+            return listEmployeeNotOpenRequestId;
+
+        } catch (SQLException ex) {
+            throw new MaterialException(ex.getMessage());
+        }
     }
 }
