@@ -91,7 +91,7 @@ public class LineItemQtyGenerator {
             } else {
                 return 8;
             }
-        } catch (Exception ex) {
+        } catch (NullPointerException ex) {
             throw new CalculatorException(ex);
         }
     }
@@ -103,7 +103,7 @@ public class LineItemQtyGenerator {
                 return amountOfRem * 2;
             }
             return amountOfRem;
-        } catch (Exception ex) {
+        } catch (NullPointerException ex) {
             throw new CalculatorException(ex);
         }
     }

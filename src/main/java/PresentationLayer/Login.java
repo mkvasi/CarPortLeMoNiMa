@@ -30,7 +30,7 @@ public class Login extends Command {
         if (customer.getRole().equals("employee")) {
             return (customer.getRole() + "page");
         } else {
-            return "carportOverview";
+            return "userpage";
         }
     }
 }

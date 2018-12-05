@@ -1,6 +1,7 @@
 package PresentationLayer;
 
 import FunctionLayer.exceptions.CalculatorException;
+import FunctionLayer.exceptions.ConverterMapException;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
 import FunctionLayer.exceptions.SystemException;
@@ -31,5 +32,5 @@ abstract class Command {
     }
 
     abstract String execute(HttpServletRequest request, HttpServletResponse response)
-            throws LoginUserException, MaterialException, SystemException ,CalculatorException;
+            throws LoginUserException, MaterialException, SystemException ,CalculatorException, ConverterMapException;
 }

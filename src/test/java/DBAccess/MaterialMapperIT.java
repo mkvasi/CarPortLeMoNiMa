@@ -5,15 +5,10 @@
  */
 package DBAccess;
 
-import FunctionLayer.Carport;
-import FunctionLayer.Customer;
 import FunctionLayer.Material;
-import FunctionLayer.Request;
-import FunctionLayer.Shed;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import java.util.TreeMap;
 import org.junit.After;
@@ -27,8 +22,9 @@ import static org.junit.Assert.*;
  *
  * @author leage
  */
-public class DataMapperIT {
-    private static Connection testConnection;
+public class MaterialMapperIT {
+    
+  private static Connection testConnection;
     private static String USER = "connect";
     private static String USERPW = "connect";
     private static String DBNAME = "fog";
@@ -57,35 +53,35 @@ public class DataMapperIT {
 }
     }
     
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of getDefaultList method, of class DataMapper.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testGetDefaultList() throws Exception {
-        int amountOfItemsOnList = 47;
-        int result = MaterialMapper.getDefaultList().size();
-        assertEquals(amountOfItemsOnList, result);
-       
-    }
-
-    /**
-     * Test of getShedCladdingMaterialList method, of class DataMapper.
-     */
-    @Test
-    public void testGetShedCladdingMaterialList() throws Exception {
-        
-        int input_type_id = 6;
-        double input_length = 3600.0;
-        int expResult = 9;
-        int result = MaterialMapper.getShedCladdingMaterialList(input_type_id, input_length).size();
-        assertEquals(expResult, result);
-    
-    }
+//    @After
+//    public void tearDown() {
+//    }
+//
+//    /**
+//     * Test of getDefaultList method, of class DataMapper.
+//     * @throws java.lang.Exception
+//     */
+//    @Test
+//    public void testGetDefaultList() throws Exception {
+//        int amountOfItemsOnList = 47;
+//        int result = MaterialMapper.getDefaultList().size();
+//        assertEquals(amountOfItemsOnList, result);
+//       
+//    }
+//
+//    /**
+//     * Test of getShedCladdingMaterialList method, of class DataMapper.
+//     */
+//    @Test
+//    public void testGetShedCladdingMaterialList() throws Exception {
+//        
+//        int input_type_id = 6;
+//        double input_length = 3600.0;
+//        int expResult = 9;
+//        int result = MaterialMapper.getShedCladdingMaterialList(input_type_id, input_length).size();
+//        assertEquals(expResult, result);
+//    
+//    }
 //
 //    /**
 //     * Test of getRoofFlatCladdingMaterialListJSP method, of class DataMapper.

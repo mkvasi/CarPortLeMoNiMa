@@ -53,10 +53,10 @@
                             <nav>
                                 <ul class="nav topnav">
                                     <li class="dropdown active">
-                                        <a href="index.html">Home</a>
+                                        <a href="index.html">Forside</a>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="#">Features</a>
+                                        <a href="#">Min profil</a>
                                     </li>
                                     <li class="dropdown">
                                         <a href="#">Pages</a>

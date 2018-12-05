@@ -1,10 +1,12 @@
 package FunctionLayer;
 
+import FunctionLayer.exceptions.ConverterMapException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
 
 /**
  * The purpose of ConverterListAndMap is to have an entity to convert a List to a Map
@@ -18,8 +20,9 @@ public class ConverterListAndMap {
     
    
 //Denne metode repræsentere default listen fra DB, som hashMap
-    public HashMap<Integer,TreeMap<Double, Material>> ListToHashMap(List<Material> listOfMaterials) {
+    public HashMap<Integer,TreeMap<Double, Material>> ListToHashMap(List<Material> listOfMaterials) throws ConverterMapException {
         HashMap<Integer, TreeMap<Double, Material>> materialMap = new HashMap();
+        try {
         TreeMap <Double, Material> materialTreeMap6 = new TreeMap(); 
         TreeMap <Double, Material> materialTreeMap10 = new TreeMap(); 
         TreeMap <Double, Material> materialTreeMap12 = new TreeMap(); 
@@ -27,7 +30,7 @@ public class ConverterListAndMap {
         TreeMap <Double, Material> materialTreeMap7 = new TreeMap(); 
         TreeMap <Double, Material> materialTreeMap14 = new TreeMap(); 
         
-        
+            
         for (Material material : listOfMaterials) {
            int type_id = material.getType_id(); 
             switch(type_id){
@@ -60,6 +63,9 @@ public class ConverterListAndMap {
         }
 
 
+        } catch (Exception e) {
+            throw new ConverterMapException(e.getMessage()); 
+        }
         return materialMap;
                     
         }

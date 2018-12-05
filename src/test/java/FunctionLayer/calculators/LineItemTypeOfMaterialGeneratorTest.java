@@ -63,16 +63,24 @@ public class LineItemTypeOfMaterialGeneratorTest {
 
     @Before
     public void setUp() {
+        roof25 = new Roof(25); //In between min and max
+        roof45 = new Roof(45);//Max slope
+        roofNull = null;
+
+        shedNoLength = new Shed(0.0, 0.0);
+        shedNull = null;
+
+        bill = new BillOfMaterial();
         instance = new LineItemTypeOfMaterialGenerator();
-        material3000 = new Material(3000);
-        material3600 = new Material(3600);
-        material4200 = new Material(4200);
-        material4500 = new Material(4500);
-        material4800 = new Material(4800);
-        material5100 = new Material(5100);
-        material5400 = new Material(5400);
-        material6000 = new Material(6000);
-      
+        material3000 = new Material(0, "3000", 0, 0, 3000, 0, 0, true, 0, 0);
+        material3600 = new Material(0, "3600", 0, 0, 3600, 0, 0, true, 0, 0);
+        material4200 = new Material(0, "4200", 0, 0, 4200, 0, 0, true, 0, 0);
+        material4500 = new Material(0, "4500", 0, 0, 4500, 0, 0, true, 0, 0);
+        material4800 = new Material(0, "4800", 0, 0, 4800, 0, 0, true, 0, 0);
+        material5100 = new Material(0, "5100", 0, 0, 5100, 0, 0, true, 0, 0);
+        material5400 = new Material(0, "5400", 0, 0, 5400, 0, 0, true, 0, 0);
+        material6000 = new Material(0, "6000", 0, 0, 6000, 0, 0, true, 0, 0);
+
         treemap = new TreeMap();
         treemap.put(3000.0, material3000);
         treemap.put(3600.0, material3600);
@@ -83,14 +91,6 @@ public class LineItemTypeOfMaterialGeneratorTest {
         treemap.put(5400.0, material5400);
         treemap.put(6000.0, material6000);
         roof0 = new Roof(0);//Min slope
-        roof25 = new Roof(25); //In between min and max
-        roof45 = new Roof(45);//Max slope
-        roofNull = null;
-
-        shedNoLength = new Shed(0.0, 0.0);
-        shedNull = null;
-
-        bill = new BillOfMaterial();
     }
 
     @After

@@ -2,6 +2,7 @@ package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
 import FunctionLayer.exceptions.CalculatorException;
+import FunctionLayer.exceptions.ConverterMapException;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
 import FunctionLayer.exceptions.SystemException;
@@ -24,6 +25,8 @@ public class FrontController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws FunctionLayer.exceptions.CalculatorException
+     * @throws FunctionLayer.exceptions.ConverterMapException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,7 +42,7 @@ public class FrontController extends HttpServlet {
             } else {
                 request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
             }
-        } catch (LoginUserException | MaterialException | SystemException | CalculatorException ex) {
+        } catch (LoginUserException | MaterialException | SystemException | CalculatorException | ConverterMapException ex) {
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }

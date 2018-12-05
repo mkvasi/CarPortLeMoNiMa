@@ -80,6 +80,13 @@ label {
     width: 235px;
 }
 
+.containerForLogin{
+    margin: auto;
+    margin-bottom: 500px;
+    margin-top: 50px;
+    margin-left: 500px;
+    width: 235px;
+}
 table { 
     width: 1100px; 
     border-collapse: collapse; 

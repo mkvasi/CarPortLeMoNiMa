@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import FunctionLayer.BillOfMaterial;
 import FunctionLayer.calculators.LineItemQtyGenerator;
 import FunctionLayer.exceptions.CalculatorException;
+import FunctionLayer.exceptions.ConverterMapException;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.SystemException;
 import java.util.List;
@@ -29,7 +30,7 @@ public class LogicFacade {
         }
     }
 
-    public static BillOfMaterial makeBillOfMaterial(Carport carport) throws MaterialException, SystemException, CalculatorException {
+    public static BillOfMaterial makeBillOfMaterial(Carport carport) throws MaterialException, SystemException, CalculatorException, ConverterMapException {
 
         LineItemQtyGenerator calc = new LineItemQtyGenerator();
 
@@ -49,7 +50,7 @@ public class LogicFacade {
 
     }
 
-    public static HashMap<Integer, TreeMap<Double, Material>> getAllDefaultMaterialsAsHashMapOfTreeMaps(Carport carport) throws MaterialException, SystemException {
+    public static HashMap<Integer, TreeMap<Double, Material>> getAllDefaultMaterialsAsHashMapOfTreeMaps(Carport carport) throws ConverterMapException, SystemException, MaterialException {
 
         ConverterListAndMap con = new ConverterListAndMap();
         return con.ListToHashMap(getAllDefaultMaterialsAsList(carport));
