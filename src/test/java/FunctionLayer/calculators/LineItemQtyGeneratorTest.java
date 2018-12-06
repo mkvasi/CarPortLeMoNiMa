@@ -47,6 +47,7 @@ public class LineItemQtyGeneratorTest {
 //Different sheds
     Shed shedNoLength;
     Shed shedNull;
+    Shed shedSmall;
 
 //Different BOMs
     BillOfMaterial bill;
@@ -69,6 +70,7 @@ public class LineItemQtyGeneratorTest {
         roofNull = null;
 
         shedNoLength = new Shed(0.0, 0.0);
+        shedSmall = new Shed(2.4, 2.4);
         shedNull = null;
 
         bill = new BillOfMaterial();
@@ -112,7 +114,8 @@ public class LineItemQtyGeneratorTest {
         boards.put(14, treemap);
         boards.put(10, treemap);
         boards.put(12, treemap);
-        int expResult = 8;
+        boards.put(4, treemap);
+        int expResult = 11;
         int result = instance.makeBillOfMaterial(carport, boards).getLineItems().size();
 
         assertEquals(expResult, result);
@@ -284,129 +287,42 @@ public class LineItemQtyGeneratorTest {
     }
 
 
-//    /**
-//     * Test of countEaves method, of class LineItemQtyGenerator.
-//     */
-//    @Test
-//    public void testCountEaves() {
-//        System.out.println("countEaves");
-//        Carport carport = null;
-//        LineItemQtyGenerator instance = new LineItemQtyGenerator();
-//        int expResult = 0;
-//        int result = instance.countEaves(carport);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of calculateRygstensTiles method, of class LineItemQtyGenerator.
-//     */
-//    @Test
-//    public void testCalculateRygstensTiles() {
-//        System.out.println("calculateRygstensTiles");
-//        Carport carport = null;
-//        LineItemQtyGenerator instance = new LineItemQtyGenerator();
-//        int expResult = 0;
-//        int result = instance.calculateRygstensTiles(carport);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of returnMaterialForFarciaAndRainware method, of class
-//     * LineItemQtyGenerator.
-//     */
-//    @Test
-//    public void testReturnMaterialForFarciaAndRainware() {
-//        System.out.println("returnMaterialForFarciaAndRainware");
-//        Carport carport = null;
-//        TreeMap<Double, Material> boards = null;
-//        LineItemQtyGenerator instance = new LineItemQtyGenerator();
-//        Material expResult = null;
-//        Material result = instance.returnMaterialForFarciaAndRainware(carport, boards);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of calculateBoardLengthForFarciaAndRainware method, of class
-//     * LineItemQtyGenerator.
-//     */
-//    @Test
-//    public void testCalculateBoardLengthForFarciaAndRainware() {
-//        System.out.println("calculateBoardLengthForFarciaAndRainware");
-//        Carport carport = null;
-//        LineItemQtyGenerator instance = new LineItemQtyGenerator();
-//        Double expResult = null;
-//        Double result = instance.calculateBoardLengthForFarciaAndRainware(carport);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of calculateHeightForRoof method, of class LineItemQtyGenerator.
-//     */
-//    @Test
-//    public void testCalculateHeightForRoof() {
-//        System.out.println("calculateHeightForRoof");
-//        Carport carport = null;
-//        LineItemQtyGenerator instance = new LineItemQtyGenerator();
-//        Double expResult = null;
-//        Double result = instance.calculateHeightForRoof(carport);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of calculateBoardsForGable method, of class LineItemQtyGenerator.
-//     */
-//    @Test
-//    public void testCalculateBoardsForGable() {
-//        System.out.println("calculateBoardsForGable");
-//        Carport carport = null;
-//        Material boards = null;
-//        LineItemQtyGenerator instance = new LineItemQtyGenerator();
-//        Double expResult = null;
-//        Double result = instance.calculateBoardsForGable(carport, boards);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of calculateBattensForPitchedRoof method, of class
-//     * LineItemQtyGenerator.
-//     */
-//    @Test
-//    public void testCalculateBattensForPitchedRoof() {
-//        System.out.println("calculateBattensForPitchedRoof");
-//        Carport carport = null;
-//        TreeMap<Double, Material> boards = null;
-//        LineItemQtyGenerator instance = new LineItemQtyGenerator();
-//        int expResult = 0;
-//        int result = instance.calculateBattensForPitchedRoof(carport, boards);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of calculateTiles method, of class LineItemQtyGenerator.
-//     */
-//    @Test
-//    public void testCalculateTiles() {
-//        System.out.println("calculateTiles");
-//        Carport carport = null;
-//        LineItemQtyGenerator instance = new LineItemQtyGenerator();
-//        int expResult = 0;
-//        int result = instance.calculateTiles(carport);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of getUniversalBracketsQtyForOneSide method, of class LineItemQtyGenerator.
+     */
+ 
+
+    /**
+     * Test of getQtyOfBræddebolt method, of class LineItemQtyGenerator.
+     */
+    @Test
+    public void testGetQtyOfBræddeboltSmallCarport() throws Exception {
+        Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
+  
+        int expResult = 8;
+        int result = instance.getQtyOfBræddebolt(carport);
+        assertEquals(expResult, result);
+        
+    }
+    @Test
+    public void testGetQtyOfBræddeboltBigCarport() throws Exception {
+        Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
+  
+        int expResult = 8;
+        int result = instance.getQtyOfBræddebolt(carport);
+        assertEquals(expResult, result);
+    }
+    
+     @Test
+    public void testGetQtyOfBræddeboltSmallCarportSmallShed() throws Exception {
+        Carport carport = new Carport(2.4, 2.4, roof0, shedSmall, bill);
+  
+        int expResult = 20;
+        int result = instance.getQtyOfBræddebolt(carport);
+        assertEquals(expResult, result);
+        
+    }
+
+   
+
 }
