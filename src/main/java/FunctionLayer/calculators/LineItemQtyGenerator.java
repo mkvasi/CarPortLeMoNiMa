@@ -28,51 +28,52 @@ public class LineItemQtyGenerator {
         List<LineItem> lineItemList = new ArrayList();
         BillOfMaterial billOfMaterial = new BillOfMaterial();
 
-        Material board;
+        Material material;
 
         //Spær
-        board = calc.getBoardForRafter(carport, boards.get(10));
-        lineItemList.add(new LineItem(getQTYForRafter(carport, board), "Spær", board));
+        material = calc.getBoardForRafter(carport, boards.get(10));
+        lineItemList.add(new LineItem(getQTYForRafter(carport, material), "Spær", material));
 
         //Rem
-        board = calc.getBoardForRem(carport, boards.get(6));
-        lineItemList.add(new LineItem(getQTYForRem(carport, board), "Rem", board));
+        material = calc.getBoardForRem(carport, boards.get(6));
+        lineItemList.add(new LineItem(getQTYForRem(carport, material), "Rem", material));
 
         //Understern til siderne
-        board = calc.getBoardLengthForOversternAndUndersternSides(carport, boards.get(6));
-        lineItemList.add(new LineItem(getQTYForRem(carport, board), "Understern til siderne", board));
+        material = calc.getBoardLengthForOversternAndUndersternSides(carport, boards.get(6));
+        lineItemList.add(new LineItem(getQTYForRem(carport, material), "Understern til siderne", material));
 
         //Understern til for og bagende
-        board = calc.getBoardForUndersternFrontAndBack(carport, boards.get(6));
-        lineItemList.add(new LineItem(getQTYForRafter(carport, board), "Understern til for og bagende", board));
-//            //Overstern til siderne
-//            board = getBoardLengthForOversternAndUndersternSides(carport, boards.get(6));
-//            billOfMaterial.addMaterialToBOM(new LineItem(calculateQtyOfRem(carport, board), "Overstern til siderne", board));
-//
-//            //Overstern til for og bagende
-//            board = getBoardLengthForOversternAndUndersternSides(carport, boards.get(6));
-//            billOfMaterial.addMaterialToBOM(new LineItem(calculateQtyOfRaftersForRoofAndUniversalBracketsForRafter(carport), "Overstern til for og bagende", board));
-//
+        material = calc.getBoardForUndersternFrontAndBack(carport, boards.get(6));
+        lineItemList.add(new LineItem(getQTYForRafter(carport, material), "Understern til for og bagende", material));
+        //Overstern til siderne
+        material = calc.getBoardLengthForOversternAndUndersternSides(carport, boards.get(6));
+        lineItemList.add(new LineItem(getQTYForRem(carport, material), "Overstern til siderne", material));
+
+        //Overstern til for og bagende
+        material = calc.getBoardLengthForOversternAndUndersternSides(carport, boards.get(6));
+        lineItemList.add(new LineItem(1, "Overstern til for og bagende", material));
+
         //Universalbeslag højre
-        board = boards.get(12).firstEntry().getValue();
-        lineItemList.add(new LineItem(getUniversalBracketsQty(carport, board), "Universalbeslag højre", board));
+        material = boards.get(12).firstEntry().getValue();
+        lineItemList.add(new LineItem(getUniversalBracketsQtyForOneSide(carport, material), "Universalbeslag højre", material));
 
         //Universalbeslag venstre
-        board = boards.get(13).firstEntry().getValue();
-        lineItemList.add(new LineItem(getUniversalBracketsQty(carport, board), "Universalbeslag venstre", board));
+        material = boards.get(13).firstEntry().getValue();
+        lineItemList.add(new LineItem(getUniversalBracketsQtyForOneSide(carport, material), "Universalbeslag venstre", material));
 
         //Stolper
-        board = boards.get(7).firstEntry().getValue();
-        lineItemList.add(new LineItem(getQtyOfPosts(carport), "Stolper", board));
+        material = boards.get(7).firstEntry().getValue();
+        lineItemList.add(new LineItem(getQtyOfPosts(carport), "Stolper", material));
 
         //Bræddebolt
-        board = boards.get(14).firstEntry().getValue();
-        lineItemList.add(new LineItem(calculateQtyOfBræddebolt(carport, board), "Bræddebolt", board));
+        material = boards.get(14).firstEntry().getValue();
+        lineItemList.add(new LineItem(getQtyOfBræddebolt(carport), "Bræddebolt", material));
 
-//            //Skruer
-//            billOfMaterial.addMaterialToBOM(new LineItem(0, "Skruer", getBoardLengthForOversternAndUndersternSides(carport, boards.get(6))));
+        //Skruer
+        material = boards.get(4).firstEntry().getValue();
+        lineItemList.add(new LineItem(getQtyOfScrews(carport, material), "Skruer", material));
+
         billOfMaterial.setLineItems(lineItemList);
-
         return billOfMaterial;
     }
 
@@ -109,10 +110,16 @@ public class LineItemQtyGenerator {
     }
 
     public int getQtyOfPosts(Carport carport) throws CalculatorException {
+        int extraPostForShed = 6;
         try {
             int meterPerPost = 2;
             double posts = ((Math.ceil(carport.getLength() / meterPerPost) * 2));
+            if(carport.getShed() == null){
             return (int) posts;
+            }else{
+            return (int) posts + extraPostForShed;     
+            }
+                
         } catch (Exception ex) {
             throw new CalculatorException(ex);
         }
@@ -216,7 +223,7 @@ public class LineItemQtyGenerator {
         }
     }
 
-    private int getUniversalBracketsQty(Carport carport, Material mat) throws CalculatorException {
+    public int getUniversalBracketsQtyForOneSide(Carport carport, Material mat) throws CalculatorException {
         try {
             if (carport.getRoof().getRoofSlopeCelsius() == 0) {
 
@@ -230,12 +237,27 @@ public class LineItemQtyGenerator {
         }
     }
 
-    private int calculateQtyOfBræddebolt(Carport carport, Material mat) throws CalculatorException {
+    public int getQtyOfBræddebolt(Carport carport) throws CalculatorException {
+        //int extraBræddeBoltForShed = 
         try {
             if (carport.getRoof().getRoofSlopeCelsius() == 0) {
                 return getQtyOfPosts(carport) * 2;
             } else {
                 return 8;
+
+            }
+        } catch (CalculatorException ex) {
+            throw new CalculatorException(ex);
+        }
+    }
+    private int getQtyOfScrews(Carport carport, Material mat) throws CalculatorException {
+        int screwsForEachUniversalBracket = 9;
+        int screwsInEachPackage = 200;
+        try {
+            if (carport.getRoof().getRoofSlopeCelsius() == 0) {
+                return (int) Math.ceil(((getUniversalBracketsQtyForOneSide(carport, mat)*2) * screwsForEachUniversalBracket))/screwsInEachPackage; 
+            } else {
+                return (int)Math.ceil((8 * screwsForEachUniversalBracket))/screwsInEachPackage;
 
             }
         } catch (CalculatorException ex) {

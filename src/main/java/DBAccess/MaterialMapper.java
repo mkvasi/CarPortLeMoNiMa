@@ -1,25 +1,17 @@
 package DBAccess;
 
-import FunctionLayer.BillOfMaterial;
-import FunctionLayer.Carport;
+
 import FunctionLayer.Material;
-import FunctionLayer.Customer;
-import FunctionLayer.LineItem;
-import FunctionLayer.Request;
-import FunctionLayer.Shed;
-import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
 import FunctionLayer.exceptions.SystemException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -218,5 +210,11 @@ public class MaterialMapper {
             //Logging
         }
 
+    }
+    public static void main(String[] args) throws MaterialException, SystemException {
+        List hej = new ArrayList();
+        hej = getRoofFlatCladdingMaterialListJSP(2);
+       
+        System.out.println(hej.toString());
     }
 }

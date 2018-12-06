@@ -29,6 +29,7 @@ public class ConverterListAndMap {
         TreeMap <Double, Material> materialTreeMap13 = new TreeMap(); 
         TreeMap <Double, Material> materialTreeMap7 = new TreeMap(); 
         TreeMap <Double, Material> materialTreeMap14 = new TreeMap(); 
+        TreeMap <Double, Material> materialTreeMap4 = new TreeMap(); 
         
             
         for (Material material : listOfMaterials) {
@@ -57,6 +58,10 @@ public class ConverterListAndMap {
                 case 14:
                         materialTreeMap14.put(material.getLength(), material);
                     materialMap.put(type_id, materialTreeMap14); 
+                break;
+                case 4:
+                    materialTreeMap4.put(material.getLength(), material);
+                    materialMap.put(type_id, materialTreeMap4); 
                 break;
                 
             }
