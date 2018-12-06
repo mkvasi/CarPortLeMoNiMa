@@ -11,63 +11,48 @@ package FunctionLayer;
  */
 public class Material {
 
-    int id, qty, type_id, measure_id;
-    private String description, name;
-    private double buyprice, sellprice, length, width, height;
+    private int id;
+    private String description;
+    private double heigth, width, length;
+    private double buyprice, sellprice;
+    private boolean defaultUsed;
+    private int type_id, measure_id;
 
-    public Material(int id, int qty, int type_id, int measure_id, String description, String name, double buyprice, double sellprice, double length, double width, double height) {
+    public Material(int id, String description, double heigth, double width, double length, double buyprice, double sellprice, boolean defaultUsed, int type_id, int measure_id) {
         this.id = id;
-        this.qty = qty;
-        this.type_id = type_id;
-        this.measure_id = measure_id;
         this.description = description;
-        this.name = name;
+        this.heigth = heigth;
+        this.width = width;
+        this.length = length;
         this.buyprice = buyprice;
         this.sellprice = sellprice;
+        this.defaultUsed = defaultUsed;
+        this.type_id = type_id;
+        this.measure_id = measure_id;
+    }
+    //Til test
+    public Material(double length) {
         this.length = length;
-        this.width = width;
-        this.height = height;
+    }
+    //Til test
+    public Material(int type_id) {
+        this.type_id = type_id;
+    }
+    //Til test
+    public Material(int type_id, double length) {
+        this.type_id = type_id;
+        this.length = length; 
+    }
+    
+    
+    
+
+    public int getId() {
+        return id;
     }
 
-    public Material(int id, int type_id, int measure_id, String description, double buyprice, double sellprice, double length, double width, double height) {
+    public void setId(int id) {
         this.id = id;
-        this.type_id = type_id;
-        this.measure_id = measure_id;
-        this.description = description;
-        this.buyprice = buyprice;
-        this.sellprice = sellprice;
-        this.length = length;
-        this.width = width;
-        this.height = height;
-    }
-
-    public Material(String description, double length) {
-        this.description = description;
-        this.length = length;
-    }
-
-    public double getLength() {
-        return length;
-    }
-
-    public void setLength(double length) {
-        this.length = length;
-    }
-
-    public int getType_id() {
-        return type_id;
-    }
-
-    public void setType_id(int type_id) {
-        this.type_id = type_id;
-    }
-
-    public int getMeasure_id() {
-        return measure_id;
-    }
-
-    public void setMeasure_id(int measure_id) {
-        this.measure_id = measure_id;
     }
 
     public String getDescription() {
@@ -76,6 +61,30 @@ public class Material {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getHeigth() {
+        return heigth;
+    }
+
+    public void setHeigth(double heigth) {
+        this.heigth = heigth;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
     }
 
     public double getBuyprice() {
@@ -94,50 +103,31 @@ public class Material {
         this.sellprice = sellprice;
     }
 
-    public int getId() {
-        return id;
+    public boolean isDefaultUsed() {
+        return defaultUsed;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDefaultUsed(boolean defaultUsed) {
+        this.defaultUsed = defaultUsed;
     }
 
-    public int getQty() {
-        return qty;
+    public int getType_id() {
+        return type_id;
     }
 
-    public void setQty(int qty) {
-        this.qty = qty;
-
+    public void setType_id(int type_id) {
+        this.type_id = type_id;
     }
 
-    public double getWidth() {
-        return width;
+    public int getMeasure_id() {
+        return measure_id;
     }
 
-    public void setWidth(double width) {
-        this.width = width;
+    public void setMeasure_id(int measure_id) {
+        this.measure_id = measure_id;
     }
 
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Material{" + "id=" + id + ", qty=" + qty + ", type_id=" + type_id + ", measure_id=" + measure_id + ", description=" + description + ", name=" + name + ", buyprice=" + buyprice + ", sellprice=" + sellprice + ", length=" + length + ", width=" + width + ", height=" + height + "\n";
-    }
-
+    
+    
+    
 }

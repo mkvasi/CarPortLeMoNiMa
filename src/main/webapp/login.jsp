@@ -1,7 +1,8 @@
+
 <%-- 
-    Document   : employeepage
-    Created on : 14-11-2018, 12:56:42
-    Author     : Yeha
+    Document   : newjsp
+    Created on : 16-11-2018, 13:58:40
+    Author     : Morten
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -93,19 +94,56 @@
 
         <br>
 
-        <h3 style="text-align: center;">Beregn din carport nedenfor</h3>
+        <h3 style="text-align: center;">Login eller opret bruger</h3>
 
         <hr>
 
+        <br>
 
-        <div id="forspg">
 
-            <form name="login" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="login">
-                <button class="button1 button2">ReqestID</button>
-            </form>
+        <input type='checkbox' id='form-switch'>
+        <form id='login-form' name="login" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="login">
+            <input type="email" name="email" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type='submit' class="btn btn-primary">Login</button>
+            <label for='form-switch'><span>Opret bruger</span></label>
+        </form>
+        <form id='register-form' name="register" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="register">
+            <input type="text" name="firstname" placeholder="Firstname" required>
+            <input type="text" name="lastname" placeholder="Lastname" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="number" name="zipcode" placeholder="Zipcode" required>
+            <input type="text" name="city" placeholder="City" required>
+            <input type="number" name="phone" placeholder="Phone" required>
+            <input type="password" name="password1" placeholder="Password" required>
+            <input type="password" name="password2" placeholder="RePassword" required>
 
-        </div>
+            <button type='submit' class="btn btn-primary">Register</button>
+            <label for='form-switch'>Allerede oprettet? Log ind her</label>
+        </form>
+
+<!--        <form id='login-form' name="emplogin" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="emplogin">
+            <input type="email" name="email" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type='submit' class="btn btn-primary">Login</button>
+            <label for='form-switch'><span>Opret bruger</span></label>
+        </form>
+-->
+
+<br>
+        <form name="emplogin" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="emplogin">
+            Employee Email:<br>
+            <input type="text" name="email" value="">
+            <br>
+            Password:<br>
+            <input type="password" name="password" value="">
+            <br>
+            <input type="submit" value="Login">
+        </form>
 
 
 

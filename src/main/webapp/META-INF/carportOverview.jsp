@@ -4,7 +4,6 @@
     Author     : Yeha
 --%>
 
-<%@page import="FunctionLayer.Price"%>
 <%@page import="FunctionLayer.LineItem"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="FunctionLayer.BillOfMaterial"%>
@@ -43,9 +42,9 @@
     </head>
 
     <% Carport carport = (Carport) request.getAttribute("carport");%>
-
-    <%  BillOfMaterial billofmaterial = (BillOfMaterial) request.getAttribute("billOfMaterial");  %>
-    <% Price offerPrice = (Price) request.getAttribute("offerprice");%>
+   
+        <%  BillOfMaterial billofmaterial = (BillOfMaterial) request.getAttribute("billOfMaterial");  %>
+    <% //double offerPrice = (Double) request.getAttribute("offerprice");%>
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
         <header>
             <!-- Navbar
@@ -112,63 +111,63 @@
 
 
         <div id="carportinfo">
-            <!-- <form action="FrontController" method="POST" name="billOfMaterial" action="FrontController" method="POST">
-                  <input type="hidden" name="command" value="billOfMaterial"> -->
+            <form action="FrontController" method="POST" name="billOfMaterial" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="billOfMaterial">
 
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Carport bredde</th>
-                        <td><%= (carport.getWidth())%> m</td>
-                    </tr>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Carport bredde</th>
+                            <td><%= (carport.getWidth())%> m</td>
+                        </tr>
 
 
-                    <tr>
-                        <th>Carport længde</th>
-                        <td><%out.print(carport.getLength());%> m</td>
-                    </tr>
-                    <tr>
-                        <th>Tag bredde</th>
-                        <td><%= (carport.getRoof().getWidth())%> m</td>
-                    </tr>
-                    <tr>
-                        <th>Tag længde</th>
-                        <td><%= (carport.getRoof().getLength())%> m</td>
-                    </tr>
-                    <tr>
-                        <th>Redskabsrum bredde</th>
-                        <td>
-                            <%
-                                if (carport.getShed() == null) {
-                                    out.println("Ønsker ikke redskabsrum");
-                                } else {
-                                    out.println(carport.getShed().getWidth() + " m");
-                                }
-                            %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Redskabsrum længde</th>
-                        <td>
-                            <%
-                                if (carport.getShed() == null) {
-                                    out.println("Ønsker ikke redskabsrum");
-                                } else {
-                                    out.println(carport.getShed().getLength() + " m");
-                                }
-                            %>
-                        </td>
-                    </tr>
-                    <!--<tr>
-                          <th>Pris</th>
-                          <td><//%=offerPrice%></td>
-                          
-                      </tr>-->
+                        <tr>
+                            <th>Carport længde</th>
+                            <td><%out.print(carport.getLength());%> m</td>
+                        </tr>
+                        <tr>
+                            <th>Tag bredde</th>
+                            <td><%= (carport.getRoof().getWidth())%> m</td>
+                        </tr>
+                        <tr>
+                            <th>Tag længde</th>
+                            <td><%= (carport.getRoof().getLength())%> m</td>
+                        </tr>
+                        <tr>
+                            <th>Redskabsrum bredde</th>
+                            <td>
+                                <%
+                                    if (carport.getShed().getWidth() == 0.0) {
+                                        out.println("Ønsker ikke redskabsrum");
+                                    } else {
+                                        out.println(carport.getShed().getWidth() + " m");
+                                    }
+                                %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Redskabsrum længde</th>
+                            <td>
+                                <%
+                                    if (carport.getShed().getWidth() == 0.0) {
+                                        out.println("Ønsker ikke redskabsrum");
+                                    } else {
+                                        out.println(carport.getShed().getLength() + " m");
+                                    }
+                                %>
+                            </td>
+                        </tr>
+                        <!--<tr>
+                              <th>Pris</th>
+                              <td><//%=offerPrice%></td>
+                              
+                          </tr>-->
 
-                </thead>
-            </table>
-            <!-- </form>-->
+                    </thead>
+                </table>
+            </form>
         </div>
 
         <div id="customerinfo">
@@ -238,18 +237,41 @@
             <table>
                 <thead>
                     <tr>
-
-
-                        <th>Pris</th>
-                        <td><%=offerPrice.getSellprice()%></td>
-
-
+                        <th>Tilbuds Pris.......</th>
+                        <td>15.499,-</td>
                     </tr>                 
 
                 </thead>
             </table>
 
         </div>
+        <%  List<LineItem> list = (List) billofmaterial.getLineItems();   %>
+        <table cellspacing="2" cellpadding="2">
+ 
+<tr><th>Employee ID</th><th>Employee Age</th><th>Employee Name</th><th>Employee City</th></tr>
+<%
+// Iterating through subjectList
+ 
+if(list != null)  // Null check for the object
+{
+ Iterator<LineItem> iterator = list.iterator();  // Iterator interface
+ 
+ while(iterator.hasNext())  // iterate through all the data until the last record
+ {
+ LineItem empDetails = iterator.next(); //assign individual employee record to the employee class object
+ <tr><td><%empDetails.get%></td>
+     <td><%%></td>
+ <td><%%></td>
+ <td><%%></td>
+ </tr>
+ %>
+ <%
+ }
+}
+%>
+</table>
+
+<!--
         <br>
         <br>
         <h3 style="text-align: center;">Tegninger</h3>
@@ -291,7 +313,7 @@
                         Det er til at placere en stolpe i midten hvis carporten er lang nok.
             -->
 
-
+<!--
             <rect y="0" height="15" width="15"
                   style="stroke:#000000; fill: #3B0B0B"/>
 
@@ -311,6 +333,7 @@
                     out.println("<rect x=\"485\" y=\"50%\" height=\"15\" width=\"14\" stroke-width=\"2\"style=\"stroke:#000000; fill: #3B0B0B\"/>");
                     out.println("<rect y=\"50%\" height=\"15\" width=\"14\" stroke-width=\"2\"style=\"stroke:#000000; fill: #3B0B0B\"/>");
                 }
+
             %>
 
             <!--  <rect y="50%" x="485" height="15" width="15"
@@ -321,7 +344,7 @@
             -->
 
 
-            <%    if (carport.getShed() != null) {
+            <%                if (carport.getShed().getLength() != 0.0) {
                     out.println("<rect x=\"15\" y=\"150\" height=\"15\" width=\"470\" stroke-width=\"2\"\n"
                             + "				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n"
                             + "				  \n"
@@ -339,27 +362,8 @@
                             + "                  style=\"stroke:#000000; fill: #3B0B0B\"/>");
                 }
 
-//              if (carport.getShed() == halv bredde)
-//                 {
-//                    out.println("<rect x=\"15\" y=\"150\" height=\"15\" width=\"235\" stroke-width=\"2\"\n" +
-//"				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n" +
-//"				  \n" +
-//"			<rect x=\"243\" y=\"15\" height=\"150\" width=\"15\" stroke-width=\"2\"\n" +
-//"				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n" +
-//"			\n" +
-//"\n" +
-//"			<rect y=\"150\" height=\"15\" width=\"15\"\n" +
-//"                  style=\"stroke:#000000; fill: #3B0B0B\"/> \n" +
-//"				  \n" +
-//"			<rect y=\"0\" x=\"243\" height=\"15\" width=\"15\"\n" +
-//"                  style=\"stroke:#000000; fill: #3B0B0B\"/>\n" +
-//"				  \n" +
-//"			<rect y=\"150\" x=\"243\" height=\"15\" width=\"15\"\n" +
-//"                  style=\"stroke:#000000; fill: #3B0B0B\"/>");
-//                }
-
             %>
-
+<!--
             </SVG>
 
             <rect x="98" y="650" height="79" width="14" stroke-width="2"
@@ -385,20 +389,12 @@
             Så ved vi hvor mange px der skal være mellem hvert spær, som vi derefter indsætter
             på y1 og y2.
             -->
+<!--
 
+            <%                int pxmellemspar = 700 / billofmaterial.get("Spær").getQty();
+                int nextspar = 700 / billofmaterial.get("Spær").getQty();
 
-            <%  int qty = 0;
-                for (LineItem lineItem : billofmaterial.getLineItems()) {
-                    if (lineItem.getHelpDescription().equals("Spær")) {
-                        qty = lineItem.getQty();
-                    }
-
-                }
-
-                int pxmellemspar = 700 / qty;
-                int nextspar = 700 / qty;
-
-                for (int i = 0; i < qty; i++) {
+                for (int i = 0; i < billofmaterial.get("Spær").getQty(); i++) {
                     out.println("<line x1=\"77\" y1=\"" + nextspar + "\" " + "x2=\"618\" y2=\"" + nextspar + "\" " + "style=\"stroke:rgb(0,0,0);stroke-width:3\" />");
 
                     nextspar += pxmellemspar;
@@ -436,7 +432,7 @@
             <!--
             Her erstatter vi "3 m" med den bredde carporten har ud til spærene
             -->
-
+<!--
             <text x="48%" y="755" ><%= (carport.getWidth())%> m </text>
 
 
@@ -448,7 +444,7 @@
             <!--
             Her erstatter vi "3,2 m" med den bredde brugeren indtaster
             -->
-
+   <!--
             <text x="48%" y="780" ><%= (carport.getRoof().getWidth())%> m</text>
 
 
@@ -460,7 +456,7 @@
             <!--
             Her erstatter vi "5 m" med den længde brugeren indtaster
             -->
-
+   <!--
             <text x="640" y="400" style="writing-mode: sideways-lr;"><%= (carport.getRoof().getLength())%> m</text>
 
 
@@ -472,7 +468,7 @@
             <!--
             Den her er altid 0,55 m
             -->
-
+   <!--
             <text x="54" y="<%= pxmellemspar * 1.33%>" style="writing-mode: sideways-lr;">0,55 m</text>
 
             <line x1="60" y1="<%= pxmellemspar%>" x2="60" y2="<%= pxmellemspar * 2%>" style="stroke:rgb(0,0,0);stroke-width:2" />
@@ -540,54 +536,53 @@
                   style="stroke:#000000; fill: #D8D8D8"/>
 
             <text x="328" y="562" fill="">FOG</text>
-
+   <!--
 
             <%
-                if (carport.getRoof().getRoofSlopeCelsius() == 10) {
+                if (carport.getRoof().getSlope() == 10.0) {
                     out.println("<polygon points=\"330,230 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                if (carport.getRoof().getRoofSlopeCelsius() == 15) {
+            <%                if (carport.getRoof().getSlope() == 10.0) {
                     out.println("<polygon points=\"330,220 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                if (carport.getRoof().getRoofSlopeCelsius() == 20) {
+            <%                if (carport.getRoof().getSlope() == 10.0) {
                     out.println("<polygon points=\"330,210 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                if (carport.getRoof().getRoofSlopeCelsius() == 25) {
+            <%                if (carport.getRoof().getSlope() == 10.0) {
                     out.println("<polygon points=\"330,200 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                if (carport.getRoof().getRoofSlopeCelsius() == 30) {
+            <%                if (carport.getRoof().getSlope() == 10.0) {
                     out.println("<polygon points=\"330,190 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                if (carport.getRoof().getRoofSlopeCelsius() == 35) {
+            <%                if (carport.getRoof().getSlope() == 10.0) {
                     out.println("<polygon points=\"330,180 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                if (carport.getRoof().getRoofSlopeCelsius() == 40) {
+            <%                if (carport.getRoof().getSlope() == 10.0) {
                     out.println("<polygon points=\"330,170 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
                 }
 
             %>
 
-            <%                 if (carport.getRoof().getRoofSlopeCelsius() == 45) {
-                    out.println("<polygon points=\"330,160 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
-                }
+            <%                // if (carport.getRoof().getSlope() == 10.0)
+                out.println("<polygon points=\"330,160 625,272 55,272\" style=\"fill: #F3E2A9; stroke:#000000 ;stroke-width:2\" />");
 
             %>
 
@@ -603,47 +598,102 @@
         <br>
         <br>
         <br>
+        
+        -->
 
         <h3 style="text-align: center;">Stykliste</h3>
 
         <hr>
 
-
-
-
-
-        <div id="stykliste">                                   
+                        
+   <table style="border: 1px solid;">
+ 
+  <% for (int i = 0; i < billofmaterial.getLineItems().size(); i++) { %>
+     <%  LineItem lineItem = billofmaterial.getLineItems().get(i); %>  
+       <!-- create an html table row -->
+       <tr>
+       <!-- create cells of row -->
+       <td><% out.print(lineItem.getMaterial()); %></td>
+       <td><% out.print(lineItem.getHelpDescription()); %></td>
+       <td><% out.print(lineItem.getQty()); %></td>
+       <!-- close row -->
+       </tr>
+       <!-- close the loop -->
+   <% } %>
+   <!-- close table --> 
+   </table>}
+  <!--                      %>
+        <div id="stykliste">
             <table>
                 <thead>
                     <tr>
+                        <th>Anvendes som</th>
                         <th>Produkt</th>
-                        <th>Anvendelses område</th>
-                        <th>Antal</th>
                         <th>Længde</th>
-
+                        <th>Antal</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% for (LineItem lineItem : billofmaterial.getLineItems()) {%>
                     <tr>
-                        <td><% out.print(lineItem.getMaterial().getDescription()); %></td>
-                        <td><% out.print(lineItem.getHelpDescription()); %></td>
-                        <td><% out.print(lineItem.getQty()); %></td>
-                        <td><% out.print(lineItem.getMaterial().getLength());
-           }%></td>
-
-
-
-                        <!-- create an html table row -->
-                        <!-- create cells of row -->
-                        <!-- close row -->
-                        <!-- close the loop -->
-
-                        <!-- close table --> 
+                        <td>Spær</td>
+                        <td><%out.print(billofmaterial.get("Spær").getDescription()
+                            );%></td>
+                        <td><%out.print(billofmaterial.get("Spær").getLength());%></td>
+                        <td><%out.print(billofmaterial.get("Spær").getQty());%></td>
                     </tr>
+                    <tr>
+                        <td>Rem</td>
+                        <td><%out.print(billofmaterial.get("Rem").getDescription());%></td>
+                        <td><%out.print(billofmaterial.get("Rem").getLength());%></td>
+                        <td><%out.print(billofmaterial.get("Rem").getQty());%></td>
+                    </tr>
+                    <tr>
+                        <td>Universalbeslag højre</td>
+                        <td><%out.print(billofmaterial.get("Universalbeslag højre").getDescription());%></td>
+                        <td><%out.print(billofmaterial.get("Universalbeslag højre").getLength());%></td>
+                        <td><%out.print(billofmaterial.get("Universalbeslag højre").getQty());%></td>
+
+                    </tr>
+                    <tr>
+                        <td>Universalbeslag venstre</td>
+                        <td><%out.print(billofmaterial.get("Universalbeslag venstre").getDescription());%></td>
+                        <td><%out.print(billofmaterial.get("Universalbeslag venstre").getLength());%></td>
+                        <td><%out.print(billofmaterial.get("Universalbeslag venstre").getQty());%></td>
+
+                    </tr>
+                    <tr>
+                        <td>Stolper</td>
+                        <td><%out.print(billofmaterial.get("Stolper").getDescription());%></td>
+                        <td></td>
+                        <td><%out.print(billofmaterial.get("Stolper").getQty());%></td>
+
+                    </tr>
+                    <tr>
+                        <td>Understern sider</td>
+                        <td><%out.print(billofmaterial.get("Understern til siderne").getDescription());%></td>
+                        <td><%out.print(billofmaterial.get("Understern til siderne").getLength());%></td>
+                        <td><%out.print(billofmaterial.get("Understern til siderne").getQty());%></td>
+
+                    </tr>
+                    <tr>
+                        <td>Understern for/bagende</td>
+                        <td><%out.print(billofmaterial.get("Understern til for og bagende").getDescription());%></td>
+                        <td><%out.print(billofmaterial.get("Understern til for og bagende").getLength());%></td>
+                        <td><%out.print(billofmaterial.get("Understern til for og bagende").getQty());%></td>
+                    </tr>
+
+                    <tr>
+                        <td>Overstern sider</td>
+                        <td><%out.print(billofmaterial.get("Overstern til siderne").getDescription());%></td>
+                        <td><%out.print(billofmaterial.get("Overstern til siderne").getLength());%></td>
+                        <td><%out.print(billofmaterial.get("Overstern til siderne").getQty());%></td>
+                    </tr>
+
+
                 </tbody>
+
             </table> 
-        </div>
+        </div> -->
 
 
         <!-- Footer

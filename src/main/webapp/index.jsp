@@ -99,7 +99,7 @@
 
 
         <div class="containerForCarport">
-            <form action="FrontController" method="POST" name="carportOverview" action="FrontController" method="POST">
+            <form action="FrontController" method="POST" name="carportOverview">
                 <input type="hidden" name="command" value="carportOverview">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01" >Længde på carport</label>
@@ -153,15 +153,15 @@
                     <label class="input-group-text" for="inputGroupSelect01">Hældning på taget?</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" name="roof">
-                    <option selected value="0.0">Ingen hældning</option>
-                    <option value="1.0">10°</option>
-                    <option value="1.0">15°</option>
-                    <option value="1.0">20°</option>
-                    <option value="1.0">25°</option>
-                    <option value="1.0">30°</option>
-                    <option value="1.0">35°</option>
-                    <option value="1.0">40°</option>
-                    <option value="1.0">45°</option>
+                    <option selected value="0">Ingen hældning</option>
+                    <option value="10">10°</option>
+                    <option value="15">15°</option>
+                    <option value="20">20°</option>
+                    <option value="25">25°</option>
+                    <option value="30">30°</option>
+                    <option value="35">35°</option>
+                    <option value="40">40°</option>
+                    <option value="45">45°</option>
 
                 </select>
                 <div class="input-group-prepend">
@@ -218,7 +218,12 @@
             </form>
         </div>
 
-
+ <% String error = (String) request.getAttribute("error");
+            if (error != null) {
+                out.println("<H2>Error!!</h2>");
+                out.println(error);
+            }
+        %>
 
 
 

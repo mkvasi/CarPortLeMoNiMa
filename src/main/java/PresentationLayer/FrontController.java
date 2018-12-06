@@ -1,7 +1,11 @@
 package PresentationLayer;
 
+import FunctionLayer.LogicFacade;
+import FunctionLayer.exceptions.CalculatorException;
+import FunctionLayer.exceptions.ConverterMapException;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
+import FunctionLayer.exceptions.SystemException;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletException;
@@ -21,9 +25,15 @@ public class FrontController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws FunctionLayer.exceptions.CalculatorException
+     * @throws FunctionLayer.exceptions.ConverterMapException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+//        String command = request.getParameter("command");
+//        if (command == null) {
+//            getDefaultMaterialList = LogicFacade.getAllDefaultMaterialsAsList(carport)
+//        }
         try {
             Command action = Command.from(request);
             String view = action.execute(request, response);
@@ -32,10 +42,10 @@ public class FrontController extends HttpServlet {
             } else {
                 request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
             }
-        } catch (LoginUserException | MaterialException ex) {
+        } catch (LoginUserException | MaterialException | SystemException | CalculatorException | ConverterMapException ex) {
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("index.jsp").forward(request, response);
-        } 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

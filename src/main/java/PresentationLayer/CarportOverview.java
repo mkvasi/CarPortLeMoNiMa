@@ -1,62 +1,47 @@
 package PresentationLayer;
 
+import FunctionLayer.BillOfMaterial;
 import FunctionLayer.Carport;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Material;
+import FunctionLayer.Price;
 import FunctionLayer.Roof;
 import FunctionLayer.Shed;
+import FunctionLayer.exceptions.CalculatorException;
+import FunctionLayer.exceptions.ConverterMapException;
 import FunctionLayer.exceptions.MaterialException;
+import FunctionLayer.exceptions.SystemException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * The purpose of BillOfMaterial: !!!TYPE PURPOSE OF BillOfMaterial HERE!!!
- *
- * @author Morten
- * @version 1.0
- * @since 16-11-2018
- */
 public class CarportOverview extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws MaterialException {
-        double shedLength = 0.0;
-        double shedWidth = 0.0;
-        boolean roofFlat;
-        boolean shedWanted;
+    String execute(HttpServletRequest request, HttpServletResponse response) throws CalculatorException, MaterialException, SystemException, ConverterMapException {
         double length = Double.parseDouble(request.getParameter("length"));
         double width = Double.parseDouble(request.getParameter("width"));
-        String _roof = request.getParameter("roof");
-        String _shed = request.getParameter("shed");
-        if (_roof.equals("1.0")) {
-            roofFlat = true;
-        } else {
-            roofFlat = false;
-        }
-        if (shedLength == 0.0 || shedWidth == 0.0 ) {
-            shedWanted = false;
-            shedLength = 0.0;
-            shedWidth = 0.0;
-        } else {
-            shedWanted = true;
-            shedLength = Double.parseDouble(request.getParameter("shedLength"));
-            shedWidth = Double.parseDouble(request.getParameter("shedWidth"));
-        }
+        int roofSlopeCelcius = Integer.parseInt(request.getParameter("roof"));
+        double shedLength = Double.parseDouble(request.getParameter("shedLength"));
+        double shedWidth = Double.parseDouble(request.getParameter("shedWidth"));
+        
 
-        Roof roof = new Roof(roofFlat, length, width);
-        Carport carport;
+        Carport carport = LogicFacade.makeCarport(length, width, roofSlopeCelcius, shedLength, shedWidth);
+      
 
-        carport = new Carport(length, width, roof, new Shed(shedWanted, shedLength, shedWidth));
+        BillOfMaterial billOfMaterial = LogicFacade.makeBillOfMaterial(carport);
+        carport.setBillOfmaterial(billOfMaterial);
+        
+        Price price = LogicFacade.makePrice(billOfMaterial);
 
-        LogicFacade.getAllMaterialsFromDB(carport);
-        HashMap<String, Material> billOfMaterials = LogicFacade.getDoneCarportWithMaterialList(carport);
+       // request.setAttribute("billOfMaterial", billOfMaterial);
 
-        request.setAttribute("billOfMaterial", billOfMaterials);
-        //request.setAttribute("offerprice", offerPrice);
+        request.setAttribute("offerprice", price);
+       // request.setAttribute("price", price);
         request.setAttribute("carport", carport);
+        request.setAttribute("billOfMaterial", billOfMaterial);
 
         return "carportOverview";
-    }
 
+    }
 }

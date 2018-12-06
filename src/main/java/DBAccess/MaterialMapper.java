@@ -1,13 +1,25 @@
 package DBAccess;
 
+import FunctionLayer.BillOfMaterial;
+import FunctionLayer.Carport;
 import FunctionLayer.Material;
+import FunctionLayer.Customer;
+import FunctionLayer.LineItem;
+import FunctionLayer.Request;
+import FunctionLayer.Shed;
+import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
+import FunctionLayer.exceptions.SystemException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,102 +27,196 @@ import java.util.TreeMap;
  */
 public class MaterialMapper {
 
-    public static HashMap<String, Material> getMaterialList() throws MaterialException {
+    //private final double SHED_CLADDING_LENGTH = 3000.0;
+    //private final int ROOF_FLAT_CLADDING_TYPE = 2;
+    //private final int ROOF_SLOPE_CLADDING_TYPE = 3;
+    private static final String GET_DEFAULT_MATERIALS = "SELECT * FROM `MATERIALS` WHERE defaultused = 1 ORDER BY type_id ASC";
+    private static final String GET_MATERIALS_BY_TYPEID_LENGTH = "SELECT * FROM `MATERIALS` WHERE type_id = ? AND length = ? ORDER BY description ASC";
+    private static final String GET_DISTINCT_MATERIALDESCRIPTION_BY_TYPEID = "SELECT DISTINCT description FROM `MATERIALS` WHERE type_id = ?;";
+    private static final String GET_MATERIAL_BY_DESCRIPTION = "SELECT * FROM MATERIALS WHERE description = (SELECT description FROM MATERIALS WHERE id = ?)";
+    private static final String GET_MATERIALS_BY_TYPEID = "SELECT * FROM `MATERIALS` WHERE type_id = ?";
+
+    public static List<Material> getDefaultList() throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
-            String SQL = "SELECT * FROM `MATERIALS`";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            PreparedStatement ps = con.prepareStatement(GET_DEFAULT_MATERIALS);
 
             ResultSet rs = ps.executeQuery();
 
-            Material material = null;
-            HashMap<String, Material> materialList = new HashMap();
+            if (!rs.next()) {
+                throw new MaterialException();
+            }
+
+            List<Material> materialList = new ArrayList();
+
             while (rs.next()) {
 
                 int id = rs.getInt("id");
-                double length = rs.getDouble("length");
+                String description = rs.getString("description");
                 double height = rs.getDouble("heigth");
                 double width = rs.getDouble("width");
-                int measure_id = rs.getInt("measure_id");
+                double length = rs.getDouble("length");
+                double buyprice = rs.getDouble("buyprice");
+                double sellprice = rs.getDouble("sellprice");
+                boolean defaultUsed = rs.getBoolean("defaultused");
                 int type_id = rs.getInt("type_id");
-                String description = rs.getString("description");
-                double buyprice = rs.getDouble("buy_price");
-                double sellprice = rs.getDouble("sell_price");
-                String name = description + length;
+                int measure_id = rs.getInt("measure_id");
 
-                material = new Material(id, measure_id, type_id, description, buyprice, sellprice, length, width, height);
-                materialList.put(name, material);
-
+                materialList.add(new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
             }
 
             return materialList;
 
-        } catch (SQLException | ClassNotFoundException ex) {
-            throw new MaterialException(ex.getMessage());
+        } catch (SQLException ex) {
+            throw new SystemException(ex);
         }
+
     }
 
-    public static HashMap<Integer, TreeMap<Double, Material>> getAllBoardsForThisCarportWithOutLengthCalculation() throws MaterialException {
-        HashMap<Integer, TreeMap<Double, Material>> materialList = new HashMap<>();
+    public static List<Material> getShedCladdingMaterialList(int input_type_id, double input_length) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
+            PreparedStatement ps = con.prepareStatement(GET_MATERIALS_BY_TYPEID_LENGTH);
+            ps.setInt(1, input_type_id);
+            ps.setDouble(2, input_length);
 
-            materialList.put(6, getBoardWithType_id(con, 6, 200.0, 25));
-            materialList.put(7, getBoardWithType_id(con, 7, 97.0, 97.0));
-            materialList.put(8, getBoardWithType_id(con, 8, 73.0, 38.0));
-            materialList.put(9, getBoardWithType_id(con, 9, 150.0, 50.0));
-            materialList.put(10, getBoardWithType_id(con, 10, 195.0, 45));
-            materialList.put(11, getBoardWithType_id(con, 11, 1.0, 1.0));
+            ResultSet rs = ps.executeQuery();
+
+            if (!rs.next()) {
+                throw new MaterialException();
+            }
+
+            List<Material> materialList = new ArrayList();
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String description = rs.getString("description");
+                double height = rs.getDouble("heigth");
+                double width = rs.getDouble("width");
+                double length = rs.getDouble("length");
+                double buyprice = rs.getDouble("buyprice");
+                double sellprice = rs.getDouble("sellprice");
+                boolean defaultUsed = rs.getBoolean("defaultused");
+                int type_id = rs.getInt("type_id");
+                int measure_id = rs.getInt("measure_id");
+
+                materialList.add(new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
+            }
 
             return materialList;
 
-        } catch (SQLException | ClassNotFoundException ex) {
-
-            throw new MaterialException(ex.getMessage());
-
+        } catch (SQLException ex) {
+            throw new SystemException(ex);
+            //Logging
         }
 
     }
 
+    public static List<String> getRoofFlatCladdingMaterialListJSP(int input_type_id) throws MaterialException, SystemException {
+        try {
+            Connection con = DBConnector.connection();
+            PreparedStatement ps = con.prepareStatement(GET_DISTINCT_MATERIALDESCRIPTION_BY_TYPEID);
+            ps.setInt(1, input_type_id);
 
-    public static TreeMap<Double, Material> getBoardWithType_id(Connection con, int type_id, double width, double height) throws SQLException {
-        String SQL = " SELECT * FROM `MATERIALS` WHERE type_id = " + type_id + " AND width =" + width + " AND heigth =" + height + "";
-        PreparedStatement ps = con.prepareStatement(SQL);
-        ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
-        TreeMap<Double, Material> boardsType = new TreeMap();
-        Material material = null;
-        while (rs.next()) {
+            if (!rs.next()) {
+                throw new MaterialException();
+            }
 
-            int id = rs.getInt("id");
-            String description = rs.getString("description");
-            double length = rs.getDouble("length");
-            int measure_id = rs.getInt("measure_id");
-            double buyprice = rs.getDouble("buy_price");
-            double sellprice = rs.getDouble("sell_price");
-       
+            List<String> roofFlatMaterialListDefault = new ArrayList();
 
-            material = new Material(id, type_id, measure_id, description, buyprice, sellprice, length, width, height);
-            boardsType.put(length, material);
+            while (rs.next()) {
+                String description = rs.getString("description");
+
+                roofFlatMaterialListDefault.add(description);
+            }
+
+            return roofFlatMaterialListDefault;
+
+        } catch (SQLException ex) {
+            throw new SystemException(ex);
+            //Logging
         }
-        return boardsType;
+
     }
 
-//    public static void main(String[] args) throws MaterialException {
-//
-//        HashMap<Integer, TreeMap<Double, Material>> hej = getAllBoardsForThisCarportWithOutLengthCalculation();
-//        for (Map.Entry<Integer, TreeMap<Double, Material>> entry : hej.entrySet()) {
-//            Integer key = entry.getKey();
-//            TreeMap<Double, Material> value = entry.getValue();
-//            System.out.println(key);
-//            System.out.println(value);
-//
-//            for (Map.Entry<Double, Material> entry1 : value.entrySet()) {
-//                Double key1 = entry1.getKey();
-//                Material value1 = entry1.getValue();
-//
-//            }
-//
-//        }
-//    }
+    public static TreeMap<Double, Material> getRoofFlatCladdingMaterialList(int input_type_id) throws MaterialException, SystemException {
+        try {
+            Connection con = DBConnector.connection();
+            PreparedStatement ps = con.prepareStatement(GET_MATERIAL_BY_DESCRIPTION);
+            ps.setInt(1, input_type_id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (!rs.next()) {
+                throw new MaterialException();
+            }
+
+            TreeMap<Double, Material> listRoofFlat = new TreeMap();
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String description = rs.getString("description");
+                double height = rs.getDouble("heigth");
+                double width = rs.getDouble("width");
+                double length = rs.getDouble("length");
+                double buyprice = rs.getDouble("buyprice");
+                double sellprice = rs.getDouble("sellprice");
+                boolean defaultUsed = rs.getBoolean("defaultused");
+                int type_id = rs.getInt("type_id");
+                int measure_id = rs.getInt("measure_id");
+
+                listRoofFlat.put(length, new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
+            }
+
+            return listRoofFlat;
+
+        } catch (SQLException ex) {
+            throw new SystemException(ex);
+            //Logging
+        }
+
+    }
+
+    public static List<Material> getRoofSlopeCladdingMaterialList(int input_type_id) throws MaterialException, SystemException {
+        try {
+            Connection con = DBConnector.connection();
+            PreparedStatement ps = con.prepareStatement(GET_MATERIALS_BY_TYPEID);
+            ps.setInt(1, input_type_id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (!rs.next()) {
+                throw new MaterialException();
+            }
+
+            List<Material> materialList = new ArrayList();
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String description = rs.getString("description");
+                double height = rs.getDouble("heigth");
+                double width = rs.getDouble("width");
+                double length = rs.getDouble("length");
+                double buyprice = rs.getDouble("buyprice");
+                double sellprice = rs.getDouble("sellprice");
+                boolean defaultUsed = rs.getBoolean("defaultused");
+                int type_id = rs.getInt("type_id");
+                int measure_id = rs.getInt("measure_id");
+
+                materialList.add(new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
+            }
+
+            return materialList;
+
+        } catch (SQLException ex) {
+            throw new SystemException(ex);
+            //Logging
+        }
+
+    }
 }

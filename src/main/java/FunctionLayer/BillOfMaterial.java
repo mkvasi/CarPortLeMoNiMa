@@ -5,26 +5,41 @@
  */
 package FunctionLayer;
 
-import java.util.HashMap;
+import java.util.List;
 
 /**
  *
  * @author leage
  */
 public class BillOfMaterial {
-    HashMap<String,Material> BOM;
+    
+    private List<LineItem> lineItems;
 
-    public BillOfMaterial(HashMap<String, Material> BOM) {
-        this.BOM = BOM;
+    public BillOfMaterial() {
     }
 
-    public HashMap<String, Material> getBOM() {
-        return BOM;
+    public BillOfMaterial(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
     }
 
-    public void setBOM(HashMap<String, Material> BOM) {
-        this.BOM = BOM;
+    @Override
+    public String toString() {
+        return "BillOfMaterial{" + "lineItems=" + lineItems + '}';
     }
     
+ 
+
+    public List<LineItem> getLineItems() {
+        return lineItems;
+    }
+
+    public void setLineItems(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
+    }
+    
+    public List<LineItem> addMaterialToBOM(LineItem lineItem, List<LineItem> lineItems){
+        lineItems.add(lineItem);
+        return lineItems;
+    }
     
 }

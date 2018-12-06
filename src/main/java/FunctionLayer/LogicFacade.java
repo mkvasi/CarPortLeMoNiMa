@@ -1,63 +1,73 @@
 package FunctionLayer;
 
-import FunctionLayer.calculators.OfferPriceCalculator;
-import FunctionLayer.calculators.MaterialQtyCalculator;
+//import FunctionLayer.calculators.OfferPriceCalculator;
 import DBAccess.MaterialMapper;
+import DBAccess.UserMapper;
 import FunctionLayer.exceptions.MaterialException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.TreeMap;
+import FunctionLayer.BillOfMaterial;
+import FunctionLayer.calculators.LineItemQtyGenerator;
+import FunctionLayer.exceptions.CalculatorException;
+import FunctionLayer.exceptions.ConverterMapException;
+import FunctionLayer.exceptions.LoginUserException;
+import FunctionLayer.exceptions.SystemException;
+import java.util.List;
 
 public class LogicFacade {
 
-    private static final String ENCODING_SHA256 = "SHA-256";
-
-//SHA256 AF PASSWORD
-    public static String encodePasswordSHA256(String password) throws NoSuchAlgorithmException {
-        MessageDigest digest = MessageDigest.getInstance(ENCODING_SHA256);
-        byte[] encodedPassword = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-
-        StringBuilder passwordSHA256 = new StringBuilder();
-        for (int i : encodedPassword) {
-            if (Integer.toHexString(0xFF & i).length() == 2) {
-                passwordSHA256.append(Integer.toHexString(0xFF & i));
-            } else {
-                passwordSHA256.append(0x00).append(Integer.toHexString(0xFF & i));
-            }
+//CRUD - DATABASE
+//BUSINESS LOGIC    
+    public static Carport makeCarport(double length, double width, int roofSlopCelsius, double shedLength, double shedWidth) {
+        if (shedLength > 0.0 && shedWidth > 0.0) {
+            Carport carport = new Carport(length, width, new Roof(roofSlopCelsius), new Shed(shedWidth, shedLength), new BillOfMaterial());
+            carport.getRoof().calculateRoofDimensions(carport);
+            return carport;
+        } else {
+            Carport carport = new Carport(length, width, new Roof(roofSlopCelsius), null, new BillOfMaterial());
+            carport.getRoof().calculateRoofDimensions(carport);
+            return carport;
         }
-        return new String(passwordSHA256);
     }
 
-    public static HashMap<String, Material> getAllMaterialsFromDB(Carport carport) throws MaterialException {
-        HashMap<String, Material> lort = MaterialMapper.getMaterialList();
-        carport.setMaterialsToUseForThisCarport(lort);
-        return lort;
+    public static BillOfMaterial makeBillOfMaterial(Carport carport) throws MaterialException, SystemException, CalculatorException, ConverterMapException {
+
+        LineItemQtyGenerator calc = new LineItemQtyGenerator();
+
+        return calc.makeBillOfMaterial(carport, getAllDefaultMaterialsAsHashMapOfTreeMaps(carport));
 
     }
 
-    public static HashMap<String, Material> getDoneCarportWithMaterialList(Carport carport) throws MaterialException {
-        MaterialQtyCalculator calc = new MaterialQtyCalculator();
-        return calc.getDoneCarportWithMaterialQty(carport, getAllBoards());
+    public static Price makePrice(BillOfMaterial billOfMaterial) throws MaterialException {
+        Price price = new Price();
+        price.calculateBuyPrice(billOfMaterial);
+        price.calculateSellPrice(billOfMaterial);
+        return price;
     }
 
-    public static double getOfferPrice(BillOfMaterial bill) throws MaterialException {
-        OfferPriceCalculator calc = new OfferPriceCalculator();
-        return calc.calculateOfferPrice(bill);
+    public static List<Material> getAllDefaultMaterialsAsList(Carport carport) throws MaterialException, SystemException {
+        return MaterialMapper.getDefaultList();
+
     }
 
-    public static HashMap<Integer, TreeMap<Double, Material>> getAllBoards() throws MaterialException {
-        return MaterialMapper.getAllBoardsForThisCarportWithOutLengthCalculation();
+    public static HashMap<Integer, TreeMap<Double, Material>> getAllDefaultMaterialsAsHashMapOfTreeMaps(Carport carport) throws ConverterMapException, SystemException, MaterialException {
+
+        ConverterListAndMap con = new ConverterListAndMap();
+        return con.ListToHashMap(getAllDefaultMaterialsAsList(carport));
+    }
+
+    public static Customer login(String email, String password) throws LoginUserException, SystemException {
+        return UserMapper.login(email, password);
     }
     
-    public static Carport makeCarport(double length, double width, boolean roof, double shedLength, double shedWidth) {
-        Roof roofDone = new Roof(roof); 
-        Shed shed = new Shed(shedLength, shedWidth); 
-        Carport carport = new Carport (length, width, roofDone, shed); 
-        return carport;
+    public static Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
+        return UserMapper.employeelogin(email, password);
+    }
+
+    public static Customer createCustomer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) throws LoginUserException, SystemException {
+        Customer user = new Customer(firstName, lastName, email, zipcode, city, phone, password);
+        UserMapper.createCustomer(user);
+        return user;
     }
 
 }
-
-

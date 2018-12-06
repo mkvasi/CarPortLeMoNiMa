@@ -13,39 +13,33 @@ package FunctionLayer;
  */
 public class Roof {
 
-    private boolean isPitchedRoof;
-    private double length, width, slope;
+    private int roofSlopeCelsius;
+    private double heigth, width, length;
+    private int roofCladding;
+    private final double FLATWIDTH = 0.0;
+    private final double FLATLENGTH = 50.0;
+    private final double SLOPEWIDTH = 300.0;
+    private final double SLOPELENGTH = 300.0;
+    private final double TOMILIMETERS = 1000;
 
-
-    
-    
-
-    public Roof(boolean flatRoof) {
-        this.isPitchedRoof = flatRoof;
+    public Roof(int roofSlopeCelsius) {
+        this.roofSlopeCelsius = roofSlopeCelsius;
     }
 
-    public Roof(boolean isPitchedRoof, double length, double width) {
-        this.isPitchedRoof = isPitchedRoof;
-        this.length = length;
-        this.width = width;
-       
-    }
-    
-
-    public boolean isPitchedRoof() {
-        return isPitchedRoof;
+    public int getRoofSlopeCelsius() {
+        return roofSlopeCelsius;
     }
 
-    public void setIsPitchedRoof(boolean isPitchedRoof) {
-        this.isPitchedRoof = isPitchedRoof;
+    public void setRoofSlopeCelsius(int roofSlopeCelsius) {
+        this.roofSlopeCelsius = roofSlopeCelsius;
     }
 
-    public double getLength() {
-        return length;
+    public double getHeigth() {
+        return heigth;
     }
 
-    public void setLength(double length) {
-        this.length = length;
+    public void setHeigth(double heigth) {
+        this.heigth = heigth;
     }
 
     public double getWidth() {
@@ -56,14 +50,32 @@ public class Roof {
         this.width = width;
     }
 
-    public double getSlope() {
-        return slope;
+    public double getLength() {
+        return length;
     }
 
-    public void setSlope(double slope) {
-        this.slope = slope;
+    public void setLength(double length) {
+        this.length = length;
+    }
+
+    public int getRoofCladding() {
+        return roofCladding;
+    }
+
+    public void setRoofCladding(int roofCladding) {
+        this.roofCladding = roofCladding;
     }
     
-
+    
+    
+    public void calculateRoofDimensions(Carport carport){
+        if(roofSlopeCelsius == 0){
+            width = (carport.getWidth() * TOMILIMETERS) + (FLATWIDTH * 2);
+            length = (carport.getLength() * TOMILIMETERS) + (FLATLENGTH * 2);
+        } else {
+            width = (carport.getWidth() * TOMILIMETERS) + (SLOPEWIDTH * 2);
+            length = (carport.getLength() * TOMILIMETERS) + (SLOPELENGTH * 2);
+        }
+    }
 }
 

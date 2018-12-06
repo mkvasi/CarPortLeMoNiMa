@@ -6,62 +6,35 @@
 package FunctionLayer;
 
 import java.util.HashMap;
+import java.util.List;
 
 
 
 public class Carport {
 
-    private double length, width;
-    private double heigth;
+    private int id;
+    private double heigth, length, width;
     private Roof roof;
     private Shed shed; 
-    private HashMap<String,Material> materialsToUseForThisCarport; 
+    private BillOfMaterial billOfmaterial;
+    
 
-    public Shed getShed() {
-        return shed;
-    }
 
-    public void setShed(Shed shed) {
-        this.shed = shed;
-    }
-
-    public Carport(double length, double width, Roof roof, Shed shed) {
+    public Carport(double length, double width, Roof roof, Shed shed, BillOfMaterial billOfmaterial) {
         this.length = length;
         this.width = width;
         this.roof = roof;
         this.shed = shed;
+        this.billOfmaterial = new BillOfMaterial();
     }
 
-    public Carport(double length, double width, double heigth, Roof roof, HashMap<String, Material> materialsToUseForThisCarport) {
-        this.length = length;
-        this.width = width;
-        this.heigth = heigth;
-        this.roof = roof;
-        this.materialsToUseForThisCarport = materialsToUseForThisCarport;
-    }
-   
 
-    public Carport(double length, double width, Roof roof) {
-        this.length = length;
-        this.width = width;
-        this.heigth = 2.25;
-        this.roof = roof;
+    public int getId() {
+        return id;
     }
 
-    public double getLength() {
-        return length;
-    }
-
-    public void setLength(double length) {
-        this.length = length;
-    }
-
-    public double getWidth() {
-        return width;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getHeigth() {
@@ -72,6 +45,22 @@ public class Carport {
         this.heigth = heigth;
     }
 
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+
     public Roof getRoof() {
         return roof;
     }
@@ -80,15 +69,23 @@ public class Carport {
         this.roof = roof;
     }
 
-    public HashMap<String, Material> getMaterialsToUseForThisCarport() {
-        return materialsToUseForThisCarport;
+    public Shed getShed() {
+        return shed;
     }
 
-    public void setMaterialsToUseForThisCarport(HashMap<String, Material> materialsToUseForThisCarport) {
-        this.materialsToUseForThisCarport = materialsToUseForThisCarport;
+    public void setShed(Shed shed) {
+        this.shed = shed;
     }
 
- 
+    public BillOfMaterial getBillOfmaterial() {
+        return billOfmaterial;
+    }
+
+    public void setBillOfmaterial(BillOfMaterial billOfmaterial) {
+        this.billOfmaterial = billOfmaterial;
+    }
+
+    
 
    
 
