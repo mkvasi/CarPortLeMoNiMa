@@ -59,6 +59,10 @@ public class LogicFacade {
     public static Customer login(String email, String password) throws LoginUserException, SystemException {
         return UserMapper.login(email, password);
     }
+    
+    public static Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
+        return UserMapper.employeelogin(email, password);
+    }
 
     public static Customer createCustomer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) throws LoginUserException, SystemException {
         Customer user = new Customer(firstName, lastName, email, zipcode, city, phone, password);

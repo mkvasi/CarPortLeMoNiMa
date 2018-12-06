@@ -6,6 +6,7 @@
 package DBAccess;
 
 import FunctionLayer.Customer;
+import FunctionLayer.Employee;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.SystemException;
 import java.sql.Connection;
@@ -19,12 +20,12 @@ import java.sql.Statement;
  * @author nr
  */
 public class UserMapper {
-    
-    
+
     private static final String INSERT_CUSTOMER_DEFAULT = "INSERT INTO `CUSTOMER` (firstname, lastname, email, zipcode, city, phonenumber, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_LOGIN_USER = "SELECT * FROM `CUSTOMER` WHERE email=? AND password=?";
-    
-        public static Customer login(String email, String password) throws LoginUserException, SystemException {
+    private static final String GET_LOGIN_EMPLOYEE = "SELECT * FROM `EMPLOYEE` WHERE email=? AND password=?";
+
+    public static Customer login(String email, String password) throws LoginUserException, SystemException {
         try {
             Connection con = DBConnector.connection();
             PreparedStatement ps = con.prepareStatement(GET_LOGIN_USER);
@@ -71,5 +72,29 @@ public class UserMapper {
             //Logging
         }
     }
-    
+
+    public static Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
+        try {
+            Connection con = DBConnector.connection();
+            PreparedStatement ps = con.prepareStatement(GET_LOGIN_EMPLOYEE);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                boolean admin = rs.getBoolean("admin");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
+                String role = rs.getString("role");
+                Employee employee = new Employee(id, admin, firstname, lastname, email, password, role);
+                return employee;
+            } else {
+                throw new LoginUserException("Could not validate user");
+            }
+        } catch (SQLException ex) {
+            throw new SystemException(ex);
+            //Logging
+        }
+    }
+
 }

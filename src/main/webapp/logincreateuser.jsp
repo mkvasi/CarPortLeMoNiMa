@@ -68,6 +68,8 @@
                     </form>
                     <br><br>
         </table>
+        
+        
         <% String error = (String) request.getAttribute("error");
             if (error != null) {
                 out.println("<H2>Error!!</h2>");

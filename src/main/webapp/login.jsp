@@ -94,38 +94,65 @@
 
         <br>
 
-        <h3 style="text-align: center;">Beregn din carport nedenfor</h3>
+        <h3 style="text-align: center;">Login eller opret bruger</h3>
 
         <hr>
 
-        <div style=""
-        <input type='checkbox' name="command" value="login" id='form-switch'>
-    <form name="login" id='login-form' action="FrontController" method='POST'>
-        <input type="text" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type='submit' value="Login" >Login</button>
-        <label for='form-switch'><span>Register</span></label>
-    </form>
+        <br>
 
 
-    <form name="register" id='register-form' action="FrontController" method='POST'>
-        <input type="hidden" name="command" value="register">
-        
-        <input type="text" name="firstname" placeholder="Firstname" required>
-        <input type="text" name="lastname" placeholder="Lastname" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password1" placeholder="Password" required>
-        <input type="password" name="password2" placeholder="Re Password" required>
-        <button type='submit' value="Register">Register</button>
-        <label for='form-switch'>Already Member ? Sign In Now..</label>
-    </form>
+        <input type='checkbox' id='form-switch'>
+        <form id='login-form' name="login" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="login">
+            <input type="email" name="email" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type='submit' class="btn btn-primary">Login</button>
+            <label for='form-switch'><span>Opret bruger</span></label>
+        </form>
+        <form id='register-form' name="register" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="register">
+            <input type="text" name="firstname" placeholder="Firstname" required>
+            <input type="text" name="lastname" placeholder="Lastname" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="number" name="zipcode" placeholder="Zipcode" required>
+            <input type="text" name="city" placeholder="City" required>
+            <input type="number" name="phone" placeholder="Phone" required>
+            <input type="password" name="password1" placeholder="Password" required>
+            <input type="password" name="password2" placeholder="RePassword" required>
 
-    <% String error = (String) request.getAttribute("error");
-        if (error != null) {
-            out.println("<H2>Error!!</h2>");
-            out.println(error);
-        }
-    %>
+            <button type='submit' class="btn btn-primary">Register</button>
+            <label for='form-switch'>Allerede oprettet? Log ind her</label>
+        </form>
+
+<!--        <form id='login-form' name="emplogin" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="emplogin">
+            <input type="email" name="email" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type='submit' class="btn btn-primary">Login</button>
+            <label for='form-switch'><span>Opret bruger</span></label>
+        </form>
+-->
+
+<br>
+        <form name="emplogin" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="emplogin">
+            Employee Email:<br>
+            <input type="text" name="email" value="">
+            <br>
+            Password:<br>
+            <input type="password" name="password" value="">
+            <br>
+            <input type="submit" value="Login">
+        </form>
+
+
+
+        <% String error = (String) request.getAttribute("error");
+            if (error != null) {
+                out.println("<H2>Error!!</h2>");
+                out.println(error);
+            }
+        %>
 
 
 
