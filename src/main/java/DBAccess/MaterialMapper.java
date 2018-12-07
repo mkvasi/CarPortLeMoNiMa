@@ -35,9 +35,9 @@ public class MaterialMapper {
 
             ResultSet rs = ps.executeQuery();
 
-            if (!rs.next()) {
-                throw new MaterialException();
-            }
+//            if (!rs.next()) {
+//                throw new MaterialException();
+//            }
 
             List<Material> materialList = new ArrayList();
 
@@ -56,8 +56,12 @@ public class MaterialMapper {
 
                 materialList.add(new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
             }
-
-            return materialList;
+            
+            if(materialList.isEmpty()){
+                throw new MaterialException();
+            } else {
+                return materialList;
+            }
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
@@ -74,9 +78,9 @@ public class MaterialMapper {
 
             ResultSet rs = ps.executeQuery();
 
-            if (!rs.next()) {
-                throw new MaterialException();
-            }
+//            if (!rs.next()) {
+//                throw new MaterialException();
+//            }
 
             List<Material> materialList = new ArrayList();
 
@@ -95,8 +99,12 @@ public class MaterialMapper {
 
                 materialList.add(new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
             }
-
-            return materialList;
+            
+            if(materialList.isEmpty()){
+                throw new MaterialException();
+            } else{
+                return materialList;
+            }
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
@@ -113,9 +121,9 @@ public class MaterialMapper {
 
             ResultSet rs = ps.executeQuery();
 
-            if (!rs.next()) {
-                throw new MaterialException();
-            }
+//            if (!rs.next()) {
+//                throw new MaterialException();
+//            }
 
             List<String> roofFlatMaterialListDefault = new ArrayList();
 
@@ -124,8 +132,12 @@ public class MaterialMapper {
 
                 roofFlatMaterialListDefault.add(description);
             }
-
-            return roofFlatMaterialListDefault;
+            
+            if(roofFlatMaterialListDefault.isEmpty()){
+                throw new MaterialException();
+            } else {
+                return roofFlatMaterialListDefault;
+            }  
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
@@ -142,9 +154,9 @@ public class MaterialMapper {
 
             ResultSet rs = ps.executeQuery();
 
-            if (!rs.next()) {
-                throw new MaterialException();
-            }
+//            if (!rs.next()) {
+//                throw new MaterialException();
+//            }
 
             TreeMap<Double, Material> listRoofFlat = new TreeMap();
 
@@ -163,8 +175,12 @@ public class MaterialMapper {
 
                 listRoofFlat.put(length, new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
             }
-
-            return listRoofFlat;
+            
+            if(listRoofFlat.isEmpty()){
+                throw new MaterialException();
+            } else {
+                return listRoofFlat;
+            }
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
@@ -181,9 +197,9 @@ public class MaterialMapper {
 
             ResultSet rs = ps.executeQuery();
 
-            if (!rs.next()) {
-                throw new MaterialException();
-            }
+//            if (!rs.next()) {
+//                throw new MaterialException();
+//            }
 
             List<Material> materialList = new ArrayList();
 
@@ -202,8 +218,12 @@ public class MaterialMapper {
 
                 materialList.add(new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id));
             }
-
-            return materialList;
+            
+            if(materialList.isEmpty()){
+                throw new MaterialException();
+            } else {
+                return materialList;
+            }
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
@@ -211,10 +231,10 @@ public class MaterialMapper {
         }
 
     }
-    public static void main(String[] args) throws MaterialException, SystemException {
-        List hej = new ArrayList();
-        hej = getRoofFlatCladdingMaterialListJSP(2);
-       
-        System.out.println(hej.toString());
-    }
+//    public static void main(String[] args) throws MaterialException, SystemException {
+//        List hej = new ArrayList();
+//        hej = getRoofFlatCladdingMaterialListJSP(2);
+//       
+//        System.out.println(hej.toString());
+//    }
 }

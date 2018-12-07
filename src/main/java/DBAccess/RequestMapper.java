@@ -107,9 +107,9 @@ public class RequestMapper {
 
             ResultSet rs = ps.executeQuery();
 
-            if (!rs.next()) {
-                throw new MaterialException();
-            }
+//            if (!rs.next()) {
+//                throw new MaterialException();
+//            }
 
             List<Integer> listCustomerRequestId = new ArrayList();
 
@@ -120,7 +120,11 @@ public class RequestMapper {
                 listCustomerRequestId.add(id);
             }
 
-            return listCustomerRequestId;
+            if(listCustomerRequestId.isEmpty()){
+                throw new MaterialException();
+            } else {
+                return listCustomerRequestId;
+            }
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
@@ -136,9 +140,9 @@ public class RequestMapper {
 
             ResultSet rs = ps.executeQuery();
 
-            if (!rs.next()) {
-                throw new MaterialException();
-            }
+//            if (!rs.next()) {
+//                throw new MaterialException();
+//            }
 
             List<Integer> listEmployeeOpenRequestId = new ArrayList();
 
@@ -148,9 +152,12 @@ public class RequestMapper {
 
                 listEmployeeOpenRequestId.add(id);
             }
-
-            return listEmployeeOpenRequestId;
-
+            
+            if(listEmployeeOpenRequestId.isEmpty()){
+                throw new MaterialException();
+            } else {
+                return listEmployeeOpenRequestId;
+            }
         } catch (SQLException ex) {
             throw new SystemException(ex);
             //Logging
@@ -164,9 +171,9 @@ public class RequestMapper {
 
             ResultSet rs = ps.executeQuery();
 
-            if (!rs.next()) {
-                throw new MaterialException();
-            }
+//            if (!rs.next()) {
+//                throw new MaterialException();
+//            }
 
             List<Integer> listEmployeeNotOpenRequestId = new ArrayList();
 
@@ -176,8 +183,12 @@ public class RequestMapper {
 
                 listEmployeeNotOpenRequestId.add(id);
             }
-
-            return listEmployeeNotOpenRequestId;
+            
+            if(listEmployeeNotOpenRequestId.isEmpty()){
+                throw new MaterialException();
+            } else {
+                return listEmployeeNotOpenRequestId;
+            }
 
         } catch (SQLException ex) {
             throw new SystemException(ex);

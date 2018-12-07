@@ -72,7 +72,7 @@ public class MaterialMapperIT {
 //     */
     @Test
     public void testGetDefaultList() throws Exception {
-        int amountOfItemsOnList = 46;
+        int amountOfItemsOnList = 47;
         int result = MaterialMapper.getDefaultList().size();
         assertEquals(amountOfItemsOnList, result);
        
@@ -194,7 +194,7 @@ public class MaterialMapperIT {
     public void testGetRoofFlatCladdingMaterialListJSP() throws Exception {
         System.out.println("getRoofFlatCladdingMaterialListJSP");
         int input_type_id = 2;
-        int expResult = 1;
+        int expResult = 2;
         int result = MaterialMapper.getRoofFlatCladdingMaterialListJSP(input_type_id).size();
         assertEquals(expResult, result);
        
