@@ -164,6 +164,30 @@
                     <option value="45">45°</option>
 
                 </select>
+
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Tagtype fladt tag</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name="roof">
+                    <option selected value="0">Ingen hældning</option>
+                    <option value="10">10°</option>
+                    <option value="15">15°</option>
+                    <option value="20">20°</option>
+
+
+                </select>
+
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Tagtype tag med hældning</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name="roof">
+                    <option selected value="0">Ingen hældning</option>
+                    <option value="10">10°</option>
+                    <option value="15">15°</option>
+                    <option value="20">20°</option>
+
+                </select>
+
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Vælge længde</label>
                 </div>
@@ -193,23 +217,8 @@
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" name="shedWidth">
                     <option selected value="0.0">Ønsker ikke redskabsrum</option>
-                    <option value="2.4">2,4 m.</option>
-                    <option value="2.7">2,7 m</option>
-                    <option value="3.0">3,0 m</option>
-                    <option value="3.3">3,3 m</option>
-                    <option value="3.6">3,6 m</option>
-                    <option value="3.9">3,9 m</option>
-                    <option value="4.2">4,2 m</option>
-                    <option value="4.5">4,5 m</option>
-                    <option value="5.1">5,1 m</option>
-                    <option value="5.4">5,4 m</option>
-                    <option value="5.7">5,7 m</option>
-                    <option value="6.0">6,0 m</option>
-                    <option value="6.3">6,3 m</option>
-                    <option value="6.6">6,6 m</option>
-                    <option value="6.9">6,9 m</option>
-                    <option value="7.2">7,2 m</option>
-                    <option value="7.5">7,5 m</option>
+                    <option value="0">Halv bredde</option>
+                    <option value="1">Fuld bredde</option>
 
                 </select>
                 <div id="button">
@@ -218,7 +227,7 @@
             </form>
         </div>
 
- <% String error = (String) request.getAttribute("error");
+        <% String error = (String) request.getAttribute("error");
             if (error != null) {
                 out.println("<H2>Error!!</h2>");
                 out.println(error);

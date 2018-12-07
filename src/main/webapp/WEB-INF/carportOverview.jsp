@@ -248,6 +248,24 @@
 
                 </thead>
             </table>
+            
+
+            <form id='login-form' name="emplogin" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="emplogin">
+                <button type='submit' class="btn btn-primary">Send forespørgsel</button>
+            </form>
+            
+            
+            <form id='login-form' name="emplogin" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="emplogin">
+                <button type='submit' class="btn btn-primary">Send tilbud</button>
+            </form>
+
+            
+            <form id='login-form' name="emplogin" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="emplogin">
+                <button type='submit' class="btn btn-primary">Accepter tilbud og betal</button>
+            </form>
 
         </div>
         <br>
@@ -339,7 +357,7 @@
                             + "                  style=\"stroke:#000000; fill: #3B0B0B\"/>");
                 }
 
-//              if (carport.getShed() == halv bredde)
+//          if (carport.getShed() == !=null)
 //                 {
 //                    out.println("<rect x=\"15\" y=\"150\" height=\"15\" width=\"235\" stroke-width=\"2\"\n" +
 //"				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n" +
@@ -629,8 +647,8 @@
                         <td><% out.print(lineItem.getMaterial().getDescription()); %></td>
                         <td><% out.print(lineItem.getHelpDescription()); %></td>
                         <td><% out.print(lineItem.getQty()); %></td>
-                        <td><% out.print(lineItem.getMaterial().getLength());
-           }%></td>
+                            <td><% out.print(lineItem.getMaterial().getLength());
+                                }%></td>
 
 
 

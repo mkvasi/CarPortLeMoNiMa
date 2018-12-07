@@ -100,11 +100,18 @@
 
         <br>
 
+        <% String error = (String) request.getAttribute("error");
+            if (error != null) {
+                out.println("<H2>Error!!</h2>");
+                out.println(error);
+            }
+        %>
+
 
         <input type='checkbox' id='form-switch'>
         <form id='login-form' name="login" action="FrontController" method="POST">
             <input type="hidden" name="command" value="login">
-            <input type="email" name="email" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type='submit' class="btn btn-primary">Login</button>
             <label for='form-switch'><span>Opret bruger</span></label>
@@ -124,35 +131,29 @@
             <label for='form-switch'>Allerede oprettet? Log ind her</label>
         </form>
 
-<!--        <form id='login-form' name="emplogin" action="FrontController" method="POST">
+        <!--        <form id='login-form' name="emplogin" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="emplogin">
+                    <input type="email" name="email" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type='submit' class="btn btn-primary">Login</button>
+                    <label for='form-switch'><span>Opret bruger</span></label>
+                </form>
+        -->
+
+        <br>
+        <br>
+
+
+        <form id='login-form' name="emplogin" action="FrontController" method="POST">
             <input type="hidden" name="command" value="emplogin">
-            <input type="email" name="email" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Employee email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type='submit' class="btn btn-primary">Login</button>
-            <label for='form-switch'><span>Opret bruger</span></label>
-        </form>
--->
-
-<br>
-        <form name="emplogin" action="FrontController" method="POST">
-            <input type="hidden" name="command" value="emplogin">
-            Employee Email:<br>
-            <input type="text" name="email" value="">
-            <br>
-            Password:<br>
-            <input type="password" name="password" value="">
-            <br>
-            <input type="submit" value="Login">
         </form>
 
 
 
-        <% String error = (String) request.getAttribute("error");
-            if (error != null) {
-                out.println("<H2>Error!!</h2>");
-                out.println(error);
-            }
-        %>
+
 
 
 
