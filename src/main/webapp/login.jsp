@@ -52,8 +52,8 @@
                         <div class="navigation">
                             <nav>
                                 <ul class="nav topnav">
-                                    <li class="dropdown active">
-                                        <a href="index.html">Forside</a>
+                                    <li class="dropdown">
+                                        <a href="http://localhost:8084/websitetest">Beregn carport</a>
                                     </li>
                                     <li class="dropdown">
                                         <a href="#">Min profil</a>
@@ -61,8 +61,8 @@
                                     <li class="dropdown">
                                         <a href="#">Pages</a>
                                     </li>
-                                    <li class="dropdown">
-                                        <a href="#">Portfolio</a>
+                                    <li class="dropdown active">
+                                        <a href="http://localhost:8084/websitetest/login.jsp">Login</a>
                                     </li>
                                     <li>
                                         <a href="contact.html">Contact</a>
