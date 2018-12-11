@@ -5,8 +5,8 @@
  */
 package DBAccess;
 
-import FunctionLayer.Customer;
-import FunctionLayer.Employee;
+import FunctionLayer.entity.Customer;
+import FunctionLayer.entity.Employee;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.SystemException;
 import java.sql.Connection;

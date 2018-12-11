@@ -5,8 +5,8 @@
  */
 package FunctionLayer.calculators;
 
-import FunctionLayer.Carport;
-import FunctionLayer.Material;
+import FunctionLayer.entity.Carport;
+import FunctionLayer.entity.Material;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;

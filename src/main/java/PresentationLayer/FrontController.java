@@ -1,7 +1,7 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
-import FunctionLayer.Material;
+import FunctionLayer.entity.Material;
 import FunctionLayer.exceptions.CalculatorException;
 import FunctionLayer.exceptions.ConverterMapException;
 import FunctionLayer.exceptions.LoginUserException;

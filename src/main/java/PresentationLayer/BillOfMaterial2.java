@@ -5,9 +5,9 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.Carport;
+import FunctionLayer.entity.Carport;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.Material;
+import FunctionLayer.entity.Material;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
 import java.util.HashMap;

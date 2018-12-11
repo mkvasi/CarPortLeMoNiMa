@@ -1,4 +1,4 @@
-package FunctionLayer;
+package FunctionLayer.entity;
 
 /**
  * The purpose of MaterialMeasure: !!!TYPE PURPOSE OF MaterialMeasure HERE!!!

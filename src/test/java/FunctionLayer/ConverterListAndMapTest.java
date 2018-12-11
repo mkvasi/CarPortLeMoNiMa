@@ -5,6 +5,9 @@
  */
 package FunctionLayer;
 
+import FunctionLayer.entity.Shed;
+import FunctionLayer.entity.Roof;
+import FunctionLayer.entity.Material;
 import FunctionLayer.calculators.LineItemQtyGenerator;
 import FunctionLayer.exceptions.CalculatorException;
 import FunctionLayer.exceptions.ConverterMapException;

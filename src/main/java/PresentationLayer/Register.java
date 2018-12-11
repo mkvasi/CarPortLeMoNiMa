@@ -5,7 +5,7 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.Customer;
+import FunctionLayer.entity.Customer;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.SystemException;
@@ -32,9 +32,9 @@ import javax.servlet.http.HttpSession;
         String password1 = request.getParameter("password1");
         String password2 = request.getParameter("password2");
         if (password1.equals(password2)) {
-            Customer customer = LogicFacade.createCustomer(firstName, lastName, email, Integer.parseInt(zipcode), city, Integer.parseInt(phone), password2);
-            HttpSession session = request.getSession();
-            session.setAttribute("user", customer);
+            LogicFacade.createCustomer(firstName, lastName, email, Integer.parseInt(zipcode), city, Integer.parseInt(phone), password2);
+            //HttpSession session = request.getSession();
+            //session.setAttribute("user", customer);
             return "index";
         } else {
             throw new LoginUserException("the two passwords did not match");

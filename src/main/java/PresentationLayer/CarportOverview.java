@@ -1,12 +1,12 @@
 package PresentationLayer;
 
 import FunctionLayer.BillOfMaterial;
-import FunctionLayer.Carport;
+import FunctionLayer.entity.Carport;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.Material;
-import FunctionLayer.Price;
-import FunctionLayer.Roof;
-import FunctionLayer.Shed;
+import FunctionLayer.entity.Material;
+import FunctionLayer.entity.Price;
+import FunctionLayer.entity.Roof;
+import FunctionLayer.entity.Shed;
 import FunctionLayer.exceptions.CalculatorException;
 import FunctionLayer.exceptions.ConverterMapException;
 import FunctionLayer.exceptions.MaterialException;

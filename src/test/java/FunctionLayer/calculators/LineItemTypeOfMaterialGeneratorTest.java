@@ -6,10 +6,10 @@
 package FunctionLayer.calculators;
 
 import FunctionLayer.BillOfMaterial;
-import FunctionLayer.Carport;
-import FunctionLayer.Material;
-import FunctionLayer.Roof;
-import FunctionLayer.Shed;
+import FunctionLayer.entity.Carport;
+import FunctionLayer.entity.Material;
+import FunctionLayer.entity.Roof;
+import FunctionLayer.entity.Shed;
 import java.util.TreeMap;
 import org.junit.After;
 import org.junit.AfterClass;

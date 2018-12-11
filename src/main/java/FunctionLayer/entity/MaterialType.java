@@ -1,4 +1,4 @@
-package FunctionLayer;
+package FunctionLayer.entity;
 
 /**
  * The purpose of MaterialType: !!!TYPE PURPOSE OF MaterialType HERE!!!

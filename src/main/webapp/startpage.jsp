@@ -4,7 +4,7 @@
     Author     : Morten
 --%>
 
-<%@page import="FunctionLayer.Material"%>
+<%@page import="FunctionLayer.entity.Material"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

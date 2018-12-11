@@ -1,4 +1,6 @@
-package FunctionLayer;
+package FunctionLayer.entity;
+
+import FunctionLayer.entity.Material;
 
 /**
  * The purpose of LineItem is to set QTY for used materials, and then use this in the BillOfMaterial entity

@@ -6,9 +6,9 @@
 package FunctionLayer.calculators;
 
 import FunctionLayer.BillOfMaterial;
-import FunctionLayer.Carport;
-import FunctionLayer.LineItem;
-import FunctionLayer.Material;
+import FunctionLayer.entity.Carport;
+import FunctionLayer.entity.LineItem;
+import FunctionLayer.entity.Material;
 import FunctionLayer.exceptions.CalculatorException;
 import java.util.ArrayList;
 import java.util.HashMap;

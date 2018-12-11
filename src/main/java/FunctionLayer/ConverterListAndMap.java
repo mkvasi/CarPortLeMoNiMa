@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import FunctionLayer.entity.Material;
 import FunctionLayer.exceptions.ConverterMapException;
 import java.util.ArrayList;
 import java.util.HashMap;

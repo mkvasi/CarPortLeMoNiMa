@@ -5,6 +5,7 @@
  */
 package FunctionLayer;
 
+import FunctionLayer.entity.LineItem;
 import java.util.List;
 
 /**

@@ -1,4 +1,7 @@
-package FunctionLayer;
+package FunctionLayer.entity;
+
+import FunctionLayer.BillOfMaterial;
+import FunctionLayer.entity.LineItem;
 
 /**
  * The purpose of Price is to calculate prices - both buy and sell price

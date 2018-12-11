@@ -6,7 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
-import FunctionLayer.Customer;
+import FunctionLayer.entity.Customer;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.SystemException;
 import javax.servlet.http.HttpServletRequest;

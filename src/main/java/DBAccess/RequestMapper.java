@@ -5,11 +5,11 @@
  */
 package DBAccess;
 
-import FunctionLayer.Carport;
-import FunctionLayer.Customer;
-import FunctionLayer.LineItem;
-import FunctionLayer.Request;
-import FunctionLayer.Shed;
+import FunctionLayer.entity.Carport;
+import FunctionLayer.entity.Customer;
+import FunctionLayer.entity.LineItem;
+import FunctionLayer.entity.Request;
+import FunctionLayer.entity.Shed;
 import FunctionLayer.exceptions.MaterialException;
 import FunctionLayer.exceptions.SystemException;
 import java.sql.Connection;

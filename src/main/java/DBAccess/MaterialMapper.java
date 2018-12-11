@@ -1,7 +1,7 @@
 package DBAccess;
 
 
-import FunctionLayer.Material;
+import FunctionLayer.entity.Material;
 import FunctionLayer.exceptions.MaterialException;
 import FunctionLayer.exceptions.SystemException;
 import java.sql.Connection;
@@ -267,43 +267,4 @@ public class MaterialMapper {
         return null;
 
     }
-    
-    public static List<String> getRoofSlopeCladdingMaterialListJSP(int input_type_id) throws MaterialException, SystemException {
-        try {
-            Connection con = DBConnector.connection();
-            PreparedStatement ps = con.prepareStatement(GET_DISTINCT_MATERIALDESCRIPTION_BY_TYPEID);
-            ps.setInt(1, input_type_id);
-
-            ResultSet rs = ps.executeQuery();
-
-//            if (!rs.next()) {
-//                throw new MaterialException();
-//            }
-
-            List<String> roofFlatMaterialListDefault = new ArrayList();
-
-            while (rs.next()) {
-                String description = rs.getString("description");
-
-                roofFlatMaterialListDefault.add(description);
-            }
-            
-            if(roofFlatMaterialListDefault.isEmpty()){
-                throw new MaterialException();
-            } else {
-                return roofFlatMaterialListDefault;
-            }  
-
-        } catch (SQLException ex) {
-            throw new SystemException(ex);
-            //Logging
-        }
-
-    }
-//    public static void main(String[] args) throws MaterialException, SystemException {
-//        List hej = new ArrayList();
-//        hej = getRoofFlatCladdingMaterialListJSP(2);
-//       
-//        System.out.println(hej.toString());
-//    }
 }

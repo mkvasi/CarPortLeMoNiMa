@@ -1,6 +1,14 @@
 package FunctionLayer;
 
 //import FunctionLayer.calculators.OfferPriceCalculator;
+import FunctionLayer.entity.Shed;
+import FunctionLayer.entity.Roof;
+import FunctionLayer.entity.Price;
+import FunctionLayer.entity.Material;
+import FunctionLayer.entity.Employee;
+import FunctionLayer.entity.Customer;
+import FunctionLayer.entity.Carport;
+import DBAccess.DataFacade;
 import DBAccess.MaterialMapper;
 import DBAccess.UserMapper;
 import FunctionLayer.exceptions.MaterialException;
@@ -42,11 +50,12 @@ public class LogicFacade {
 
     //--------------------
     public static TreeMap<Double, Material> getAllMaterialForFlatRoofsAsList(String roofFlatDescription) throws MaterialException, SystemException {
-        return MaterialMapper.getRoofFlatCladdingMaterialTreeMap(roofFlatDescription);
+        //return MaterialMapper.getRoofFlatCladdingMaterialTreeMap(roofFlatDescription);
+        return DataFacade.getRoofFlatCladdingMaterialTreeMap(roofFlatDescription);
     }
 
     public static Material getAllMaterialForSlopeRoofAsList(int roofSlopeId) throws MaterialException, SystemException {
-        return MaterialMapper.getRoofSlopeCladdingMaterial(roofSlopeId);
+        return DataFacade.getRoofSlopeCladdingMaterial(roofSlopeId);
     }
     //--------------------
 
@@ -58,7 +67,7 @@ public class LogicFacade {
     }
 
     public static List<Material> getAllDefaultMaterialsAsList(Carport carport) throws MaterialException, SystemException {
-        return MaterialMapper.getDefaultList();
+        return DataFacade.getDefaultList();
 
     }
 
@@ -69,26 +78,25 @@ public class LogicFacade {
     }
 
     public static Customer login(String email, String password) throws LoginUserException, SystemException {
-        return UserMapper.login(email, password);
+        return DataFacade.login(email, password);
     }
 
     public static Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
-        return UserMapper.employeelogin(email, password);
+        return DataFacade.employeelogin(email, password);
     }
 
-    public static Customer createCustomer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) throws LoginUserException, SystemException {
+    public static void createCustomer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) throws LoginUserException, SystemException {
         Customer user = new Customer(firstName, lastName, email, zipcode, city, phone, password);
-        UserMapper.createCustomer(user);
-        return user;
+        DataFacade.createCustomer(user);
     }
 
     public static List<String> getCladdingFlatRoof() throws MaterialException, SystemException {
-        List<String> eaveList = MaterialMapper.getRoofFlatCladdingMaterialListJSP(2);
+        List<String> eaveList = DataFacade.getRoofFlatCladdingMaterialListJSP(2);
         return eaveList;
     }
 
     public static List<Material> getCladdingSlopeRoof() throws MaterialException, SystemException {
-        List<Material> tileList = MaterialMapper.getRoofSlopeCladdingMaterialList(3);
+        List<Material> tileList = DataFacade.getRoofSlopeCladdingMaterialList(3);
         return tileList;
     }
 

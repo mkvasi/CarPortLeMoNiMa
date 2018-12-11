@@ -1,4 +1,8 @@
-package FunctionLayer;
+package FunctionLayer.entity;
+
+import FunctionLayer.entity.Employee;
+import FunctionLayer.entity.Customer;
+import FunctionLayer.entity.Carport;
 
 /**
  * The purpose of Request: !!!TYPE PURPOSE OF Request HERE!!!

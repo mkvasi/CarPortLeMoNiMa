@@ -4,13 +4,13 @@
     Author     : Yeha
 --%>
 
-<%@page import="FunctionLayer.Price"%>
-<%@page import="FunctionLayer.LineItem"%>
+<%@page import="FunctionLayer.entity.Price"%>
+<%@page import="FunctionLayer.entity.LineItem"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="FunctionLayer.BillOfMaterial"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="FunctionLayer.Carport"%>
-<%@page import="FunctionLayer.Material"%>
+<%@page import="FunctionLayer.entity.Carport"%>
+<%@page import="FunctionLayer.entity.Material"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
