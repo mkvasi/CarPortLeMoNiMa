@@ -4,6 +4,8 @@
     Author     : Morten
 --%>
 
+<%@page import="FunctionLayer.Material"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,6 +26,9 @@
         <!-- fav and touch icons -->
 
         <link rel="shortcut icon" href="bootstrap/ico/favicon.ico">
+
+        <% List<String> claddingflatroof = (List<String>) request.getAttribute("claddingflatroof");%>
+        <% List<Material> claddingsloperoof = (List<Material>) request.getAttribute("claddingsloperoof");%>
 
         <!-- =======================================================
           Theme Name: Serenity
@@ -168,23 +173,36 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Tagtype fladt tag</label>
                 </div>
-                <select class="custom-select" id="inputGroupSelect01" name="roof">
-                    <option selected value="0">Ingen hældning</option>
-                    <option value="10">10°</option>
-                    <option value="15">15°</option>
-                    <option value="20">20°</option>
+                <select class="custom-select" id="inputGroupSelect01" name="roofflat">
+                    <option selected value="0">Vælg tagtype</option>
 
+                    <%
+                        if (claddingflatroof == null) {
+                            out.println("<option value =\"" + 1 + "\">" + "No materials");
+                        } else {
+                            for (String str : claddingflatroof) {
+                                out.println("<option value=\"" + str + "\">" + str + "</option>");
+                            }
+                        }
+                    %>
 
                 </select>
 
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Tagtype tag med hældning</label>
+                    <label class="input-group-text" for="inputGroupSelect01">Tagtype skråtag</label>
                 </div>
-                <select class="custom-select" id="inputGroupSelect01" name="roof">
-                    <option selected value="0">Ingen hældning</option>
-                    <option value="10">10°</option>
-                    <option value="15">15°</option>
-                    <option value="20">20°</option>
+                <select class="custom-select" id="inputGroupSelect01" name="roofslope">
+                    <option selected value="0">Vælg tagtype</option>
+                    
+                    <%
+                        if (claddingsloperoof == null) {
+                            out.println("<option value =\"" + 1 + "\">" + "No materials");
+                        } else {
+                            for (Material m : claddingsloperoof) {
+                                out.println("<option value=\"" + m.getId() + "\">" + m.getDescription() + "</option>");
+                            }
+                        }
+                    %>
 
                 </select>
 
@@ -192,7 +210,7 @@
                     <label class="input-group-text" for="inputGroupSelect01">Vælge længde</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" name="shedLength">
-                    <option selected value="0.0">Ønsker ikke redsskabsrum</option>
+                    <option selected value="-1">Ønsker ikke redsskabsrum</option>
                     <option value="2.4">2,4 m.</option>
                     <option value="2.7">2,7 m</option>
                     <option value="3.0">3,0 m</option>
@@ -216,7 +234,7 @@
                     <label class="input-group-text" for="inputGroupSelect01">Vælg bredde</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" name="shedWidth">
-                    <option selected value="0.0">Ønsker ikke redskabsrum</option>
+                    <option selected value="-1">Ønsker ikke redskabsrum</option>
                     <option value="0">Halv bredde</option>
                     <option value="1">Fuld bredde</option>
 

@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 public class DBConnector {
 
     //private static final String URL = "jdbc:mysql://localhost/fog?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private static final String URL = "jdbc:mysql://46.101.210.61/fog";
-    //private static final String URL = "jdbc:mysql://188.166.86.13/fog";
+//    private static final String URL = "jdbc:mysql://46.101.210.61/fog";
+    private static final String URL = "jdbc:mysql://188.166.86.13/fog";
     private static final String USERNAME = "connect";
     private static final String PASSWORD = "connect";
 

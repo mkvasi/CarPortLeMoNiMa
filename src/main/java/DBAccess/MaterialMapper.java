@@ -25,8 +25,9 @@ public class MaterialMapper {
     private static final String GET_DEFAULT_MATERIALS = "SELECT * FROM `MATERIALS` WHERE defaultused = 1 ORDER BY type_id ASC";
     private static final String GET_MATERIALS_BY_TYPEID_LENGTH = "SELECT * FROM `MATERIALS` WHERE type_id = ? AND length = ? ORDER BY description ASC";
     private static final String GET_DISTINCT_MATERIALDESCRIPTION_BY_TYPEID = "SELECT DISTINCT description FROM `MATERIALS` WHERE type_id = ?;";
-    private static final String GET_MATERIAL_BY_DESCRIPTION = "SELECT * FROM MATERIALS WHERE description = (SELECT description FROM MATERIALS WHERE id = ?)";
+    private static final String GET_MATERIAL_BY_DESCRIPTION = "SELECT * FROM MATERIALS WHERE description = ?";
     private static final String GET_MATERIALS_BY_TYPEID = "SELECT * FROM `MATERIALS` WHERE type_id = ?";
+    private static final String GET_MATERIALS_BY_ID = "SELECT * FROM `MATERIALS` WHERE id = ?";
 
     public static List<Material> getDefaultList() throws MaterialException, SystemException {
         try {
@@ -146,11 +147,11 @@ public class MaterialMapper {
 
     }
 
-    public static TreeMap<Double, Material> getRoofFlatCladdingMaterialList(int input_type_id) throws MaterialException, SystemException {
+    public static TreeMap<Double, Material> getRoofFlatCladdingMaterialTreeMap(String input_description) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
             PreparedStatement ps = con.prepareStatement(GET_MATERIAL_BY_DESCRIPTION);
-            ps.setInt(1, input_type_id);
+            ps.setString(1, input_description);
 
             ResultSet rs = ps.executeQuery();
 
@@ -224,6 +225,74 @@ public class MaterialMapper {
             } else {
                 return materialList;
             }
+
+        } catch (SQLException ex) {
+            throw new SystemException(ex);
+            //Logging
+        }
+
+    }
+    
+        public static Material getRoofSlopeCladdingMaterial(int input_type_id) throws MaterialException, SystemException {
+        try {
+            Connection con = DBConnector.connection();
+            PreparedStatement ps = con.prepareStatement(GET_MATERIALS_BY_ID);
+            ps.setInt(1, input_type_id);
+
+            ResultSet rs = ps.executeQuery();
+
+//            if (!rs.next()) {
+//                throw new MaterialException();
+//            }
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String description = rs.getString("description");
+                double height = rs.getDouble("heigth");
+                double width = rs.getDouble("width");
+                double length = rs.getDouble("length");
+                double buyprice = rs.getDouble("buyprice");
+                double sellprice = rs.getDouble("sellprice");
+                boolean defaultUsed = rs.getBoolean("defaultused");
+                int type_id = rs.getInt("type_id");
+                int measure_id = rs.getInt("measure_id");
+
+                return new Material(id, description, height, width, length, buyprice, sellprice, defaultUsed, type_id, measure_id);
+            }
+
+        } catch (SQLException ex) {
+            throw new SystemException(ex);
+            //Logging
+        }
+        return null;
+
+    }
+    
+    public static List<String> getRoofSlopeCladdingMaterialListJSP(int input_type_id) throws MaterialException, SystemException {
+        try {
+            Connection con = DBConnector.connection();
+            PreparedStatement ps = con.prepareStatement(GET_DISTINCT_MATERIALDESCRIPTION_BY_TYPEID);
+            ps.setInt(1, input_type_id);
+
+            ResultSet rs = ps.executeQuery();
+
+//            if (!rs.next()) {
+//                throw new MaterialException();
+//            }
+
+            List<String> roofFlatMaterialListDefault = new ArrayList();
+
+            while (rs.next()) {
+                String description = rs.getString("description");
+
+                roofFlatMaterialListDefault.add(description);
+            }
+            
+            if(roofFlatMaterialListDefault.isEmpty()){
+                throw new MaterialException();
+            } else {
+                return roofFlatMaterialListDefault;
+            }  
 
         } catch (SQLException ex) {
             throw new SystemException(ex);

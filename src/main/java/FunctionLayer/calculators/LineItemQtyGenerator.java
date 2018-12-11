@@ -24,11 +24,20 @@ public class LineItemQtyGenerator {
     double toMilimeters = 1000;
     LineItemTypeOfMaterialGenerator calc = new LineItemTypeOfMaterialGenerator();
 
-    public BillOfMaterial makeBillOfMaterial(Carport carport, HashMap<Integer, TreeMap<Double, Material>> boards) throws CalculatorException {
+    public BillOfMaterial makeBillOfMaterial(Carport carport, HashMap<Integer, TreeMap<Double, Material>> boards, TreeMap<Double, Material> eaves, Material tiles) throws CalculatorException {
         List<LineItem> lineItemList = new ArrayList();
         BillOfMaterial billOfMaterial = new BillOfMaterial();
 
         Material material;
+
+        if (carport.getRoof().getRoofSlopeCelsius() != 0) {
+            //Tagsten    
+            lineItemList.add(new LineItem(calculateTiles(carport), "Tagsten", tiles));
+        } else {
+            //Tagplader
+            material = calc.getCladdingForFlatRoof(carport, eaves);
+            lineItemList.add(new LineItem(getQtyForEaves(carport, material), "Tagplade", material));
+        }
 
         //Spær
         material = calc.getBoardForRafter(carport, boards.get(10));
@@ -114,38 +123,42 @@ public class LineItemQtyGenerator {
         try {
             int meterPerPost = 2;
             double posts = ((Math.ceil(carport.getLength() / meterPerPost) * 2));
-            if(carport.getShed() == null){
-            return (int) posts;
-            }else{
-            return (int) posts + extraPostForShed;     
+            if (carport.getShed() == null) {
+                return (int) posts;
+            } else {
+                return (int) posts + extraPostForShed;
             }
-                
+
         } catch (Exception ex) {
             throw new CalculatorException(ex);
         }
     }
 
-    public int countEaves(Carport carport) throws CalculatorException {
+    public int getQtyForEaves(Carport carport, Material eave) throws CalculatorException {
         //carport.getRoof().calculateRoofDimensions(carport);
         try {
-            double eavesWidth = 1.0;
+            double eavesWidth = eave.getWidth();
             double countEaves = Math.ceil(carport.getRoof().getWidth() / eavesWidth); // Total pieces of eaves with 1 meter width. 
-            return (int) countEaves;
+            if (eave.getLength() < carport.getRoof().getLength()) {
+               return (int) countEaves * 2;
+            } else {
+                return (int) countEaves;
+            }
         } catch (Exception ex) {
             throw new CalculatorException(ex);
         }
     }
 
-    //stykslisten says 21 rygsten for 7,3 m, we calculate with 3 rygsten each meter
-    public int calculateRygstensTiles(Carport carport) throws CalculatorException {
-        try {
-            int rygstenTilesPrMeterLength = 3;
-            double roofTiles = Math.ceil((carport.getRoof().getLength())) * rygstenTilesPrMeterLength;
-            return (int) roofTiles;
-        } catch (Exception ex) {
-            throw new CalculatorException(ex);
-        }
-    }
+
+//    public int calculateRygstensTiles(Carport carport) throws CalculatorException {
+//        try {
+//            int rygstenTilesPrMeterLength = 3;
+//            double roofTiles = Math.ceil((carport.getRoof().getLength())) * rygstenTilesPrMeterLength;
+//            return (int) roofTiles;
+//        } catch (Exception ex) {
+//            throw new CalculatorException(ex);
+//        }
+//    }
 
     public Material returnMaterialForFarciaAndRainware(Carport carport, TreeMap<Double, Material> boards) throws CalculatorException {
         try {
@@ -214,10 +227,12 @@ public class LineItemQtyGenerator {
     public int calculateTiles(Carport carport) throws CalculatorException {
         try {
             carport.getRoof().calculateRoofDimensions(carport);
+            double roofLength = carport.getRoof().getLength() / 1000;
+            double roofWidth = carport.getRoof().getWidth() / 1000;
             int tilesPrM2 = 11;
-            double roof = Math.ceil((carport.getRoof().getLength() * (carport.getRoof().getWidth()))) * tilesPrM2;
-
-            return (int) roof;
+            double tilesForRoof = Math.ceil(roofWidth * roofLength * tilesPrM2); // Dividering med 2 laves for at få målene fra milimeter til meter.
+            System.out.println(tilesForRoof);
+            return (int) tilesForRoof;
         } catch (Exception ex) {
             throw new CalculatorException(ex);
         }
@@ -250,14 +265,15 @@ public class LineItemQtyGenerator {
             throw new CalculatorException(ex);
         }
     }
+
     private int getQtyOfScrews(Carport carport, Material mat) throws CalculatorException {
         int screwsForEachUniversalBracket = 9;
         int screwsInEachPackage = 200;
         try {
             if (carport.getRoof().getRoofSlopeCelsius() == 0) {
-                return (int) Math.ceil(((getUniversalBracketsQtyForOneSide(carport, mat)*2) * screwsForEachUniversalBracket))/screwsInEachPackage; 
+                return (int) Math.ceil(((getUniversalBracketsQtyForOneSide(carport, mat) * 2) * screwsForEachUniversalBracket)) / screwsInEachPackage;
             } else {
-                return (int)Math.ceil((8 * screwsForEachUniversalBracket))/screwsInEachPackage;
+                return (int) Math.ceil((8 * screwsForEachUniversalBracket)) / screwsInEachPackage;
 
             }
         } catch (CalculatorException ex) {

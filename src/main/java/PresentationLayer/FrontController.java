@@ -1,6 +1,7 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
+import FunctionLayer.Material;
 import FunctionLayer.exceptions.CalculatorException;
 import FunctionLayer.exceptions.ConverterMapException;
 import FunctionLayer.exceptions.LoginUserException;
@@ -8,13 +9,14 @@ import FunctionLayer.exceptions.MaterialException;
 import FunctionLayer.exceptions.SystemException;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
+@WebServlet(name = "FrontController", urlPatterns = {"/FrontController", "/index.jsp"})
 public class FrontController extends HttpServlet {
 
     /**
@@ -30,21 +32,31 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        String command = request.getParameter("command");
-//        if (command == null) {
-//            getDefaultMaterialList = LogicFacade.getAllDefaultMaterialsAsList(carport)
-//        }
-        try {
-            Command action = Command.from(request);
-            String view = action.execute(request, response);
-            if (view.equals("index")) {
-                request.getRequestDispatcher(view + ".jsp").forward(request, response);
-            } else {
-                request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
+        String command = request.getParameter("command");
+        if (command == null) {
+            try {
+                List<String> CladdingFlatRoof = LogicFacade.getCladdingFlatRoof();
+                List<Material> CladdingSlopeRoof = LogicFacade.getCladdingSlopeRoof();
+                request.setAttribute("claddingflatroof", CladdingFlatRoof);
+                request.setAttribute("claddingsloperoof", CladdingSlopeRoof);
+                request.getRequestDispatcher("startpage.jsp").forward(request, response);
+            } catch (MaterialException | SystemException ex) {
+                request.setAttribute("error", ex.getMessage());
+                request.getRequestDispatcher("startpage.jsp").forward(request, response);
             }
-        } catch (LoginUserException | MaterialException | SystemException | CalculatorException | ConverterMapException ex) {
-            request.setAttribute("error", ex.getMessage());
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } else {
+            try {
+                Command action = Command.from(request);
+                String view = action.execute(request, response);
+                if (view.equals("index")) {
+                    request.getRequestDispatcher(view + ".jsp").forward(request, response);
+                } else {
+                    request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
+                }
+            } catch (LoginUserException | MaterialException | SystemException | CalculatorException | ConverterMapException ex) {
+                request.setAttribute("error", ex.getMessage());
+                request.getRequestDispatcher("startpage.jsp").forward(request, response);
+            }
         }
     }
 

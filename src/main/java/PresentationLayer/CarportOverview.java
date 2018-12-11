@@ -22,14 +22,24 @@ public class CarportOverview extends Command {
         double length = Double.parseDouble(request.getParameter("length"));
         double width = Double.parseDouble(request.getParameter("width"));
         int roofSlopeCelcius = Integer.parseInt(request.getParameter("roof"));
+        int shedHalfOrFull = Integer.parseInt(request.getParameter("shedWidth"));
+        
+        double shedWidth = 0.0;
+        if(shedHalfOrFull == 0){
+           shedWidth = width / 2; 
+        } else if(shedHalfOrFull == 1){
+            shedWidth = width;
+        }
         double shedLength = Double.parseDouble(request.getParameter("shedLength"));
-        double shedWidth = Double.parseDouble(request.getParameter("shedWidth"));
+        String roofFlat = request.getParameter("roofflat");
+        int roofSlope = Integer.parseInt(request.getParameter("roofslope"));
+        System.out.println(roofFlat);
         
 
         Carport carport = LogicFacade.makeCarport(length, width, roofSlopeCelcius, shedLength, shedWidth);
       
 
-        BillOfMaterial billOfMaterial = LogicFacade.makeBillOfMaterial(carport);
+        BillOfMaterial billOfMaterial = LogicFacade.makeBillOfMaterial(carport, roofFlat, roofSlope);
         carport.setBillOfmaterial(billOfMaterial);
         
         Price price = LogicFacade.makePrice(billOfMaterial);

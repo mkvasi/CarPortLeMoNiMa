@@ -103,24 +103,24 @@ public class LineItemQtyGeneratorTest {
     /**
      * Test of makeBillOfMaterial method, of class LineItemQtyGenerator.
      */
-    @Test
-    //Listens 
-    public void testMakeBillOfMaterial() throws CalculatorException {
-        Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
-        HashMap<Integer, TreeMap<Double, Material>> boards = new HashMap();
-        boards.put(6, treemap);
-        boards.put(7, treemap);
-        boards.put(13, treemap);
-        boards.put(14, treemap);
-        boards.put(10, treemap);
-        boards.put(12, treemap);
-        boards.put(4, treemap);
-        int expResult = 11;
-        int result = instance.makeBillOfMaterial(carport, boards).getLineItems().size();
-
-        assertEquals(expResult, result);
-
-    }
+//    @Test
+//    //Listens 
+//    public void testMakeBillOfMaterial() throws CalculatorException {
+//        Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
+//        HashMap<Integer, TreeMap<Double, Material>> boards = new HashMap();
+//        boards.put(6, treemap);
+//        boards.put(7, treemap);
+//        boards.put(13, treemap);
+//        boards.put(14, treemap);
+//        boards.put(10, treemap);
+//        boards.put(12, treemap);
+//        boards.put(4, treemap);
+//        int expResult = 11;
+//        int result = instance.makeBillOfMaterial(carport, boards).getLineItems().size();
+//
+//        assertEquals(expResult, result);
+//
+//    }
 
     /**
      * Test of getQTYForRafter method, of class LineItemQtyGenerator.

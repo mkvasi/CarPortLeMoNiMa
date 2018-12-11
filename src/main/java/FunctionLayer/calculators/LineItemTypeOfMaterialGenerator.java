@@ -7,6 +7,7 @@ package FunctionLayer.calculators;
 
 import FunctionLayer.Carport;
 import FunctionLayer.Material;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -15,6 +16,7 @@ import java.util.TreeMap;
  * @author nr
  */
 public class LineItemTypeOfMaterialGenerator {
+
     int toMilimeters = 1000;
 
     public Material getBoardForRem(Carport carport, TreeMap<Double, Material> boards) {
@@ -44,6 +46,14 @@ public class LineItemTypeOfMaterialGenerator {
         }
     }
 
+    public Material getCladdingForFlatRoof(Carport carport, TreeMap<Double, Material> eaves) {
+        if (carport.getRoof().getRoofSlopeCelsius() == 0) {
+            double carportMeasure = carport.getRoof().getLength();
+            return boardCalculator(carportMeasure, carport, eaves);
+        }
+        return null;
+    }
+
     //******************************************Board Calculation method***********************************************
     //Finding the best board length to use for spær, or returning the type of board that we need two of to get the correct length
     public Material boardCalculator(double carportMeasure, Carport carport, TreeMap<Double, Material> boards) {
@@ -58,7 +68,5 @@ public class LineItemTypeOfMaterialGenerator {
             return board;
         }
     }
-
-
 
 }

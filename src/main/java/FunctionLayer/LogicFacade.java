@@ -30,13 +30,25 @@ public class LogicFacade {
         }
     }
 
-    public static BillOfMaterial makeBillOfMaterial(Carport carport) throws MaterialException, SystemException, CalculatorException, ConverterMapException {
+    public static BillOfMaterial makeBillOfMaterial(Carport carport, String roofFlatDescription, int roofSlopeId) throws MaterialException, SystemException, CalculatorException, ConverterMapException {
 
         LineItemQtyGenerator calc = new LineItemQtyGenerator();
-
-        return calc.makeBillOfMaterial(carport, getAllDefaultMaterialsAsHashMapOfTreeMaps(carport));
-
+        if (carport.getRoof().getRoofSlopeCelsius() == 0) {
+            return calc.makeBillOfMaterial(carport, getAllDefaultMaterialsAsHashMapOfTreeMaps(carport), getAllMaterialForFlatRoofsAsList(roofFlatDescription), null);
+        } else {
+            return calc.makeBillOfMaterial(carport, getAllDefaultMaterialsAsHashMapOfTreeMaps(carport), null, getAllMaterialForSlopeRoofAsList(roofSlopeId));
+        }
     }
+
+    //--------------------
+    public static TreeMap<Double, Material> getAllMaterialForFlatRoofsAsList(String roofFlatDescription) throws MaterialException, SystemException {
+        return MaterialMapper.getRoofFlatCladdingMaterialTreeMap(roofFlatDescription);
+    }
+
+    public static Material getAllMaterialForSlopeRoofAsList(int roofSlopeId) throws MaterialException, SystemException {
+        return MaterialMapper.getRoofSlopeCladdingMaterial(roofSlopeId);
+    }
+    //--------------------
 
     public static Price makePrice(BillOfMaterial billOfMaterial) throws MaterialException {
         Price price = new Price();
@@ -59,7 +71,7 @@ public class LogicFacade {
     public static Customer login(String email, String password) throws LoginUserException, SystemException {
         return UserMapper.login(email, password);
     }
-    
+
     public static Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
         return UserMapper.employeelogin(email, password);
     }
@@ -68,6 +80,16 @@ public class LogicFacade {
         Customer user = new Customer(firstName, lastName, email, zipcode, city, phone, password);
         UserMapper.createCustomer(user);
         return user;
+    }
+
+    public static List<String> getCladdingFlatRoof() throws MaterialException, SystemException {
+        List<String> eaveList = MaterialMapper.getRoofFlatCladdingMaterialListJSP(2);
+        return eaveList;
+    }
+
+    public static List<Material> getCladdingSlopeRoof() throws MaterialException, SystemException {
+        List<Material> tileList = MaterialMapper.getRoofSlopeCladdingMaterialList(3);
+        return tileList;
     }
 
 }

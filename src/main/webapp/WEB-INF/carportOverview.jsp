@@ -248,20 +248,20 @@
 
                 </thead>
             </table>
-            
+
 
             <form id='login-form' name="emplogin" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="emplogin">
                 <button type='submit' class="btn btn-primary">Send forespørgsel</button>
             </form>
-            
-            
+
+
             <form id='login-form' name="emplogin" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="emplogin">
                 <button type='submit' class="btn btn-primary">Send tilbud</button>
             </form>
 
-            
+
             <form id='login-form' name="emplogin" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="emplogin">
                 <button type='submit' class="btn btn-primary">Accepter tilbud og betal</button>
@@ -340,41 +340,41 @@
 
 
             <%    if (carport.getShed() != null) {
-                    out.println("<rect x=\"15\" y=\"150\" height=\"15\" width=\"470\" stroke-width=\"2\"\n"
-                            + "				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n"
-                            + "				  \n"
-                            + "			\n"
-                            + "			<rect y=\"150\" x=\"485\" height=\"15\" width=\"15\"\n"
-                            + "                  style=\"stroke:#000000; fill: #3B0B0B\"/>\n"
-                            + "\n"
-                            + "			<rect y=\"150\" height=\"15\" width=\"15\"\n"
-                            + "                  style=\"stroke:#000000; fill: #3B0B0B\"/> \n"
-                            + "				  \n"
-                            + "			<rect y=\"0\" x=\"243\" height=\"15\" width=\"15\"\n"
-                            + "                  style=\"stroke:#000000; fill: #3B0B0B\"/>\n"
-                            + "				  \n"
-                            + "			<rect y=\"150\" x=\"243\" height=\"15\" width=\"15\"\n"
-                            + "                  style=\"stroke:#000000; fill: #3B0B0B\"/>");
+                    if (carport.getShed().getWidth() == carport.getWidth()) {
+                        out.println("<rect x=\"15\" y=\"150\" height=\"15\" width=\"470\" stroke-width=\"2\"\n"
+                                + "				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n"
+                                + "				  \n"
+                                + "			\n"
+                                + "			<rect y=\"150\" x=\"485\" height=\"15\" width=\"15\"\n"
+                                + "                  style=\"stroke:#000000; fill: #3B0B0B\"/>\n"
+                                + "\n"
+                                + "			<rect y=\"150\" height=\"15\" width=\"15\"\n"
+                                + "                  style=\"stroke:#000000; fill: #3B0B0B\"/> \n"
+                                + "				  \n"
+                                + "			<rect y=\"0\" x=\"243\" height=\"15\" width=\"15\"\n"
+                                + "                  style=\"stroke:#000000; fill: #3B0B0B\"/>\n"
+                                + "				  \n"
+                                + "			<rect y=\"150\" x=\"243\" height=\"15\" width=\"15\"\n"
+                                + "                  style=\"stroke:#000000; fill: #3B0B0B\"/>");
+                    } else {
+                        out.println("<rect x=\"15\" y=\"150\" height=\"15\" width=\"235\" stroke-width=\"2\"\n"
+                                + "				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n"
+                                + "				  \n"
+                                + "			<rect x=\"243\" y=\"15\" height=\"150\" width=\"15\" stroke-width=\"2\"\n"
+                                + "				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n"
+                                + "			\n"
+                                + "\n"
+                                + "			<rect y=\"150\" height=\"15\" width=\"15\"\n"
+                                + "                  style=\"stroke:#000000; fill: #3B0B0B\"/> \n"
+                                + "				  \n"
+                                + "			<rect y=\"0\" x=\"243\" height=\"15\" width=\"15\"\n"
+                                + "                  style=\"stroke:#000000; fill: #3B0B0B\"/>\n"
+                                + "				  \n"
+                                + "			<rect y=\"150\" x=\"243\" height=\"15\" width=\"15\"\n"
+                                + "                  style=\"stroke:#000000; fill: #3B0B0B\"/>");
+                    }
                 }
 
-//          if (carport.getShed() == !=null)
-//                 {
-//                    out.println("<rect x=\"15\" y=\"150\" height=\"15\" width=\"235\" stroke-width=\"2\"\n" +
-//"				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n" +
-//"				  \n" +
-//"			<rect x=\"243\" y=\"15\" height=\"150\" width=\"15\" stroke-width=\"2\"\n" +
-//"				  style=\"stroke:#000000; fill: #F3E2A9\"/>\n" +
-//"			\n" +
-//"\n" +
-//"			<rect y=\"150\" height=\"15\" width=\"15\"\n" +
-//"                  style=\"stroke:#000000; fill: #3B0B0B\"/> \n" +
-//"				  \n" +
-//"			<rect y=\"0\" x=\"243\" height=\"15\" width=\"15\"\n" +
-//"                  style=\"stroke:#000000; fill: #3B0B0B\"/>\n" +
-//"				  \n" +
-//"			<rect y=\"150\" x=\"243\" height=\"15\" width=\"15\"\n" +
-//"                  style=\"stroke:#000000; fill: #3B0B0B\"/>");
-//                }
 
             %>
 
@@ -648,7 +648,7 @@
                         <td><% out.print(lineItem.getHelpDescription()); %></td>
                         <td><% out.print(lineItem.getQty()); %></td>
                             <td><% out.print(lineItem.getMaterial().getLength());
-                                }%></td>
+                            }%></td>
 
 
 
