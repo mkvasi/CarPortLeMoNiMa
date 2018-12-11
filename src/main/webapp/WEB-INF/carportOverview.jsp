@@ -220,11 +220,17 @@
 
                     <tr>
                         <th>Dato tilbud</th>
-                        <td>13/34-18</td>
+                        <td><form id='login-form' name="emplogin" action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="emplogin">
+                                <button type='submit' class="btn btn-primary">Send tilbud</button>
+                            </form></td>
                     </tr>
                     <tr>
                         <th>Dato betaling</th>
-                        <td>13/34-18</td>
+                        <td>            <form id='login-form' name="emplogin" action="FrontController" method="POST">
+                                <input type="hidden" name="command" value="emplogin">
+                                <button type='submit' class="btn btn-primary">Accepter tilbud og betal</button>
+                            </form></td>
                     </tr>
 
 
@@ -249,23 +255,6 @@
                 </thead>
             </table>
 
-
-            <form id='login-form' name="emplogin" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="emplogin">
-                <button type='submit' class="btn btn-primary">Send forespørgsel</button>
-            </form>
-
-
-            <form id='login-form' name="emplogin" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="emplogin">
-                <button type='submit' class="btn btn-primary">Send tilbud</button>
-            </form>
-
-
-            <form id='login-form' name="emplogin" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="emplogin">
-                <button type='submit' class="btn btn-primary">Accepter tilbud og betal</button>
-            </form>
 
         </div>
         <br>
@@ -647,8 +636,8 @@
                         <td><% out.print(lineItem.getMaterial().getDescription()); %></td>
                         <td><% out.print(lineItem.getHelpDescription()); %></td>
                         <td><% out.print(lineItem.getQty()); %></td>
-                            <td><% out.print(lineItem.getMaterial().getLength());
-                            }%></td>
+                        <td><% out.print(lineItem.getMaterial().getLength());
+                                }%></td>
 
 
 
@@ -661,6 +650,13 @@
                     </tr>
                 </tbody>
             </table> 
+        </div>
+
+        <div id="forspgknap">
+            <form id='login-form' name="emplogin" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="emplogin">
+                <button type='submit' class="btn btn-primary">Send forespørgsel</button>
+            </form>
         </div>
 
 
