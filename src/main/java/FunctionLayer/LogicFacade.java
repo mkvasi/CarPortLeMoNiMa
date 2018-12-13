@@ -10,6 +10,7 @@ import FunctionLayer.entity.Customer;
 import FunctionLayer.entity.Carport;
 import DBAccess.DataFacade;
 import DBAccess.MaterialMapper;
+import DBAccess.RequestMapper;
 import DBAccess.UserMapper;
 import FunctionLayer.exceptions.MaterialException;
 import java.util.HashMap;
@@ -98,6 +99,18 @@ public class LogicFacade {
     public static List<Material> getCladdingSlopeRoof() throws MaterialException, SystemException {
         List<Material> tileList = DataFacade.getRoofSlopeCladdingMaterialList(3);
         return tileList;
+    }
+    
+    public static void createRequest(Customer customer, Price price, Carport carport) throws LoginUserException, SystemException {
+        DataFacade.createRequest(customer, price, carport);
+    }
+    
+    public static List<Integer> getRequestCustomerList(Customer customer) throws LoginUserException, SystemException, MaterialException {
+        return DataFacade.getRequestCustomerList(customer);
+    }
+    
+    public static FunctionLayer.entity.Request getRequestDetails(int request_id) throws LoginUserException, SystemException, MaterialException {
+        return DataFacade.getRequestDetails(request_id);
     }
 
 }

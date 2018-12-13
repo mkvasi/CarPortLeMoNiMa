@@ -28,6 +28,11 @@ public class Roof {
         this.roofSlopeCelsius = roofSlopeCelsius;
     }
 
+    public Roof(int roofSlopeCelsius, int roofCladding) {
+        this.roofSlopeCelsius = roofSlopeCelsius;
+        this.roofCladding = roofCladding;
+    }
+
     public int getRoofSlopeCelsius() {
         return roofSlopeCelsius;
     }

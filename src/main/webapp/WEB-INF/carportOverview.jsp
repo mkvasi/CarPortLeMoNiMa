@@ -4,6 +4,9 @@
     Author     : Yeha
 --%>
 
+<%@page import="FunctionLayer.entity.Request"%>
+<%@page import="FunctionLayer.entity.Employee"%>
+<%@page import="FunctionLayer.entity.Customer"%>
 <%@page import="FunctionLayer.entity.Price"%>
 <%@page import="FunctionLayer.entity.LineItem"%>
 <%@page import="java.util.Iterator"%>
@@ -42,10 +45,14 @@
         ======================================================= -->
     </head>
 
-    <% Carport carport = (Carport) request.getAttribute("carport");%>
+    <% Carport carport = (Carport) request.getSession().getAttribute("carport");%>
 
     <%  BillOfMaterial billofmaterial = (BillOfMaterial) request.getAttribute("billOfMaterial");  %>
-    <% Price offerPrice = (Price) request.getAttribute("offerprice");%>
+    <% Price offerPrice = (Price) request.getSession().getAttribute("offerprice");%>
+    <% Customer customer = (Customer) request.getSession().getAttribute("customer");%>
+    <% Employee employee = (Employee) request.getSession().getAttribute("employee");%>
+    <% Request requestClass = (Request) request.getAttribute("request");%>
+    <% String requestDate = (String) request.getAttribute("date");%>
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
         <header>
             <!-- Navbar
@@ -74,7 +81,7 @@
                                         <a href="#">Pages</a>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="#">Portfolio</a>
+                                        <a href="http://localhost:8084/websitetest/login.jsp">Login</a>
                                     </li>
                                     <li>
                                         <a href="contact.html">Contact</a>
@@ -171,6 +178,7 @@
             <!-- </form>-->
         </div>
 
+        <% if (customer != null || employee != null) { %>           
         <div id="customerinfo">
 
 
@@ -178,35 +186,48 @@
                 <thead>
                     <tr>
                         <th>Navn</th>
-                        <td>Yunson Yürpor </td>
+                            <% if (customer != null || employee != null) {
+                                    out.print("<td>" + customer.getFirstName() + " " + customer.getLastName() + "</td>");
+                                }%>
                     </tr>
 
                     <tr>
-                        <th>Adresse</th>
-                        <td>Pipivej 16</td>
+                        <th>Kundenummer</th>
+                            <% if (customer != null || employee != null) {
+                                    out.print("<td>" + customer.getId() + "</td>");
+                                }%>
                     </tr>
                     <tr>
                         <th>Postnummer</th>
-                        <td>6969</td>
+                            <% if (customer != null || employee != null) {
+                                    out.print("<td>" + customer.getZipcode() + "</td>");
+                                }%>
                     </tr>
 
                     <tr>
                         <th>By</th>
-                        <td>Smørum</td>
+                            <% if (customer != null || employee != null) {
+                                    out.print("<td>" + customer.getCity() + "</td>");
+                                }%>
                     </tr>
                     <tr>
                         <th>Telefon</th>
-                        <td>45893675</td>
+                            <% if (customer != null || employee != null) {
+                                    out.print("<td>" + customer.getPhone() + "</td>");
+                                }%>
                     </tr>
                     <tr>
                         <th>E-mail adresse</th>
-                        <td>Yupor@gmail.com</td>
+                            <% if (customer != null || employee != null) {
+                                    out.print("<td>" + customer.getEmail() + "</td>");
+                                }%>
                     </tr>
 
                 </thead>
             </table>
 
         </div>
+        <%}%>
 
         <div id="dates">
 
@@ -215,24 +236,36 @@
                 <thead>
                     <tr>
                         <th>Dato forespørgsel</th>
-                        <td>13/34-18</td>
+                            <% if (requestClass != null) {
+                                    out.print("<td>" + requestClass.getRequestDate() + "</td>");
+                                } else {
+                                    out.print("<td>" + requestDate + "</td>");
+                                }%>
                     </tr>
-
+                    <% if ((customer != null || employee != null)) {%>
+                    <% if (employee != null) {%>
                     <tr>
                         <th>Dato tilbud</th>
                         <td><form id='login-form' name="emplogin" action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="emplogin">
+                                <input type="hidden" name="command" value="sendoffer">
                                 <button type='submit' class="btn btn-primary">Send tilbud</button>
                             </form></td>
                     </tr>
+                    <%} else if (requestClass != null) {
+                            out.print("<td>" + requestClass.getOfferDate() + "</td>");
+                        }%>
+                    <% if (customer != null && requestClass != null) {%>
                     <tr>
                         <th>Dato betaling</th>
                         <td>            <form id='login-form' name="emplogin" action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="emplogin">
+                                <input type="hidden" name="command" value="acceptoffer">
                                 <button type='submit' class="btn btn-primary">Accepter tilbud og betal</button>
                             </form></td>
                     </tr>
-
+                    <%} else if (requestClass != null) {
+                            out.print("<td>" + requestClass.getPaymentDate() + "</td>");
+                        }%>
+                    <%}%>
 
                 </thead>
             </table>
@@ -611,6 +644,8 @@
         <br>
         <br>
 
+        <% if (employee != null) { %>
+
         <h3 style="text-align: center;">Stykliste</h3>
 
         <hr>
@@ -636,7 +671,7 @@
                         <td><% out.print(lineItem.getMaterial().getDescription()); %></td>
                         <td><% out.print(lineItem.getHelpDescription()); %></td>
                         <td><% out.print(lineItem.getQty()); %></td>
-                        <td><% out.print(lineItem.getMaterial().getLength());
+                            <td><% out.print(lineItem.getMaterial().getLength());
                                 }%></td>
 
 
@@ -651,13 +686,16 @@
                 </tbody>
             </table> 
         </div>
+        <% }%>
 
+        <% if (customer != null) { %>
         <div id="forspgknap">
             <form id='login-form' name="emplogin" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="emplogin">
+                <input type="hidden" name="command" value="sendrequest">
                 <button type='submit' class="btn btn-primary">Send forespørgsel</button>
             </form>
         </div>
+        <% }%>
 
 
         <!-- Footer

@@ -15,6 +15,10 @@ public class Employee {
     private boolean admin;
     private String firstName, lastName, email, password, role;
 
+    public Employee(int id) {
+        this.id = id;
+    }
+
     public Employee(int id, boolean admin, String firstName, String lastName, String email, String password, String role) {
         this.id = id;
         this.admin = admin;

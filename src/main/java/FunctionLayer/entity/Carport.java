@@ -29,6 +29,18 @@ public class Carport {
         this.billOfmaterial = new BillOfMaterial();
     }
 
+    public Carport(int id, double heigth, double length, double width, Roof roof, Shed shed) {
+        this.id = id;
+        this.heigth = heigth;
+        this.length = length;
+        this.width = width;
+        this.roof = roof;
+        this.shed = shed;
+        this.billOfmaterial = new BillOfMaterial();
+    }
+    
+    
+
 
     public int getId() {
         return id;

@@ -5,9 +5,12 @@
  */
 package DBAccess;
 
+import FunctionLayer.entity.Carport;
 import FunctionLayer.entity.Customer;
 import FunctionLayer.entity.Employee;
 import FunctionLayer.entity.Material;
+import FunctionLayer.entity.Price;
+import FunctionLayer.entity.Request;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
 import FunctionLayer.exceptions.SystemException;
@@ -36,8 +39,8 @@ public class DataFacade {
         return UserMapper.login(email, password);
     }
 
-    public static Employee employeelogin(String email, String password) {
-        return employeelogin(email, password);
+    public static Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
+        return UserMapper.employeelogin(email, password);
     }
 
     public static void createCustomer(Customer user) throws LoginUserException, SystemException {
@@ -51,5 +54,18 @@ public class DataFacade {
     public static List<Material> getRoofSlopeCladdingMaterialList(int i) throws MaterialException, SystemException {
         return MaterialMapper.getRoofSlopeCladdingMaterialList(i);
     }
+    
+    public static void createRequest(Customer customer, Price price, Carport carport) throws LoginUserException, SystemException {
+        RequestMapper.createRequest(customer, price, carport);
+    }
+    
+    public static List<Integer> getRequestCustomerList(Customer customer) throws LoginUserException, SystemException, MaterialException {
+        return RequestMapper.getListCustomerRequestId(customer);
+    }
+    
+    public static Request getRequestDetails(int request_id) throws LoginUserException, SystemException, MaterialException {
+        return RequestMapper.getRequestDetailsByRequestId(request_id);
+    }
+    
 
 }

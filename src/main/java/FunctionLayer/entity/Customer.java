@@ -14,6 +14,10 @@ public class Customer {
     private String firstName, lastName, city, email, password, role;
     private int id, zipcode, phone;
 
+    public Customer(int id) {
+        this.id = id;
+    }
+
     public Customer(int id, String firstName, String lastName, String email, int zipcode, String city, int phone, String password, String role) {
         this.id = id;
         this.firstName = firstName;

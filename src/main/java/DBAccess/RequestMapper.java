@@ -5,10 +5,14 @@
  */
 package DBAccess;
 
+import FunctionLayer.BillOfMaterial;
 import FunctionLayer.entity.Carport;
 import FunctionLayer.entity.Customer;
+import FunctionLayer.entity.Employee;
 import FunctionLayer.entity.LineItem;
+import FunctionLayer.entity.Price;
 import FunctionLayer.entity.Request;
+import FunctionLayer.entity.Roof;
 import FunctionLayer.entity.Shed;
 import FunctionLayer.exceptions.MaterialException;
 import FunctionLayer.exceptions.SystemException;
@@ -32,10 +36,16 @@ public class RequestMapper {
     private static final String INSERT_INTO_CARPORT_HAS_MATERIALS = "INSERT INTO `CARPORT_HAS_MATERIALS` (`carport_id`, `materials_id`) VALUES (?,?)";
 
     private static final String GET_REQUESTID_BY_CUSTOMERID = "SELECT id FROM `REQUEST` WHERE customer_id = ?";
-    private static final String GET_REQUESTID_BY_EMPLOYEE_NULL = "SELECT id FROM `REQUEST` WHERE employee_id IS NULL?";
-    private static final String GET_REQUESTID_BY_EMPLOYEE_NOTNULL = "SELECT id FROM `REQUEST` WHERE employee_id IS NOT NULL?";
+    private static final String GET_REQUESTID_BY_EMPLOYEE_NULL = "SELECT id FROM `REQUEST` WHERE employee_id IS NULL";
+    private static final String GET_REQUESTID_BY_EMPLOYEE_NOTNULL = "SELECT id FROM `REQUEST` WHERE employee_id IS NOT NULL";
+    private static final String GET_REQUESTDETAILS_BY_REQUESTID = "SELECT request.id, requestdate, offerdate, paymentdate, pricedefault, priceemployee, customer_id, employee_id, carport.id AS carport_id, carport.heigth AS carport_heigth, carport.width AS carport_width, carport.length AS carport_length, roofslopecelsius, roofcladding,\n"
+            + "shed.id AS shed_id, ifnull(shed.heigth, 0.0) AS shed_heigth, ifnull(shed.width, 0.0) AS shed_width, ifnull(shed.length, 0.0) AS shed_length, ifnull(shedcladding,0)\n"
+            + "FROM request\n"
+            + "LEFT JOIN carport ON request.carport_id = carport.id\n"
+            + "LEFT JOIN shed ON shed.id = carport.shed_id\n"
+            + "WHERE request.id = ?";
 
-    public static void createRequest(Customer customer, Request request, Carport carport, Shed shed) throws SystemException {
+    public static void createRequest(Customer customer, Price price, Carport carport) throws SystemException {
         try {
             Connection conn = DBConnector.connection();
             PreparedStatement shedPstmt = conn.prepareStatement(INSERT_INTO_SHED, Statement.RETURN_GENERATED_KEYS);
@@ -44,16 +54,21 @@ public class RequestMapper {
             PreparedStatement billOfMaterialPstmt = conn.prepareStatement(INSERT_INTO_CARPORT_HAS_MATERIALS);
             ResultSet rsShed = null;
             int shedId = 0;
+            int resultShed = 0;
             try {
-                shedPstmt.setDouble(1, shed.getHeigth());
-                shedPstmt.setDouble(2, shed.getWidth());
-                shedPstmt.setDouble(3, shed.getLength());
-                shedPstmt.setInt(4, shed.getShedCladding());
                 conn.setAutoCommit(false);
-                int resultShed = shedPstmt.executeUpdate();
-                rsShed = shedPstmt.getGeneratedKeys();
-                rsShed.next();
-                shedId = rsShed.getInt(1);
+                if (carport.getShed() != null) {
+                    shedPstmt.setDouble(1, carport.getShed().getHeigth());
+                    shedPstmt.setDouble(2, carport.getShed().getWidth());
+                    shedPstmt.setDouble(3, carport.getShed().getLength());
+                    shedPstmt.setInt(4, carport.getShed().getShedCladding());
+                    resultShed = shedPstmt.executeUpdate();
+                    rsShed = shedPstmt.getGeneratedKeys();
+                    rsShed.next();
+                    shedId = rsShed.getInt(1);
+                } else {
+                    resultShed = 1;
+                }
                 if (resultShed == 1) {
                     ResultSet rsCarport = null;
                     int carportId = 0;
@@ -62,22 +77,24 @@ public class RequestMapper {
                     carportPstmt.setDouble(3, carport.getLength());
                     carportPstmt.setInt(4, carport.getRoof().getRoofSlopeCelsius());
                     carportPstmt.setInt(5, carport.getRoof().getRoofCladding());
-                    carportPstmt.setInt(6, shedId);
+                    if (carport.getShed() != null) {
+                        carportPstmt.setInt(6, shedId);
+                    } else {
+                        carportPstmt.setNull(6, java.sql.Types.INTEGER);
+                    }
                     int resultCarport = carportPstmt.executeUpdate();
                     rsCarport = carportPstmt.getGeneratedKeys();
                     rsCarport.next();
                     carportId = rsCarport.getInt(1);
                     if (resultCarport == 1) {
-                        requestPstmt.setDouble(1, request.getPriceDefault());
-                        requestPstmt.setDouble(2, request.getPriceEmployee());
+                        requestPstmt.setDouble(1, price.getSellprice());
+                        requestPstmt.setDouble(2, price.getBuyprice());
                         requestPstmt.setInt(3, customer.getId());
                         requestPstmt.setInt(4, carportId);
                         requestPstmt.executeUpdate();
-                        for (LineItem lineItem : carport.getBillOfmaterial().getLineItems()) {
-                            billOfMaterialPstmt.setInt(1, carportId);
-                            billOfMaterialPstmt.setInt(2, lineItem.getMaterial().getId());
-                            billOfMaterialPstmt.executeUpdate();
-                        }
+                        billOfMaterialPstmt.setInt(1, carportId);
+                        billOfMaterialPstmt.setInt(2, carport.getBillOfmaterial().getLineItems().get(0).getMaterial().getId());
+                        billOfMaterialPstmt.executeUpdate();
                         conn.commit();
                     } else {
                         conn.rollback();
@@ -110,7 +127,6 @@ public class RequestMapper {
 //            if (!rs.next()) {
 //                throw new MaterialException();
 //            }
-
             List<Integer> listCustomerRequestId = new ArrayList();
 
             while (rs.next()) {
@@ -120,7 +136,7 @@ public class RequestMapper {
                 listCustomerRequestId.add(id);
             }
 
-            if(listCustomerRequestId.isEmpty()){
+            if (listCustomerRequestId.isEmpty()) {
                 throw new MaterialException();
             } else {
                 return listCustomerRequestId;
@@ -143,7 +159,6 @@ public class RequestMapper {
 //            if (!rs.next()) {
 //                throw new MaterialException();
 //            }
-
             List<Integer> listEmployeeOpenRequestId = new ArrayList();
 
             while (rs.next()) {
@@ -152,8 +167,8 @@ public class RequestMapper {
 
                 listEmployeeOpenRequestId.add(id);
             }
-            
-            if(listEmployeeOpenRequestId.isEmpty()){
+
+            if (listEmployeeOpenRequestId.isEmpty()) {
                 throw new MaterialException();
             } else {
                 return listEmployeeOpenRequestId;
@@ -174,7 +189,6 @@ public class RequestMapper {
 //            if (!rs.next()) {
 //                throw new MaterialException();
 //            }
-
             List<Integer> listEmployeeNotOpenRequestId = new ArrayList();
 
             while (rs.next()) {
@@ -183,8 +197,8 @@ public class RequestMapper {
 
                 listEmployeeNotOpenRequestId.add(id);
             }
-            
-            if(listEmployeeNotOpenRequestId.isEmpty()){
+
+            if (listEmployeeNotOpenRequestId.isEmpty()) {
                 throw new MaterialException();
             } else {
                 return listEmployeeNotOpenRequestId;
@@ -194,5 +208,48 @@ public class RequestMapper {
             throw new SystemException(ex);
             //Logging
         }
+    }
+
+    public static Request getRequestDetailsByRequestId(int request_id) throws MaterialException, SystemException {
+        try {
+            Connection con = DBConnector.connection();
+            PreparedStatement ps = con.prepareStatement(GET_REQUESTDETAILS_BY_REQUESTID);
+            ps.setInt(1, request_id);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String requestDate = rs.getString("requestdate");
+                String offerDate = rs.getString("offerdate");
+                String paymentDate = rs.getString("paymentdate");
+                double pricedefault = rs.getDouble("pricedefault");
+                double priceemployee = rs.getDouble("priceemployee");
+                int customer_id = rs.getInt("customer_id");
+                int employee_id = rs.getInt("employee_id");
+                int carport_id = rs.getInt("carport_id");
+                double carport_heigth = rs.getDouble("carport_heigth");
+                double carport_width = rs.getDouble("carport_width");
+                double carport_length = rs.getDouble("carport_length");
+                int roofslopecelsius = rs.getInt("roofslopecelsius");
+                int roofcladding = rs.getInt("roofcladding");
+                int shed_id = rs.getInt("shed_id");
+                double shed_heigth = rs.getDouble("shed_heigth");
+                double shed_width = rs.getDouble("shed_width");
+                double shed_length = rs.getDouble("shed_length");
+                int shedcladding = rs.getInt("shedcladding");
+
+                return new Request(id, requestDate, offerDate, paymentDate, pricedefault, priceemployee,
+                        new Customer(customer_id),
+                        new Employee(employee_id),
+                        new Carport(carport_id, carport_heigth, carport_length, carport_width, new Roof(roofslopecelsius, roofcladding), new Shed(shed_id, shed_heigth, shed_width, shed_length, shedcladding)));
+            }
+
+        } catch (SQLException ex) {
+            throw new SystemException(ex);
+            //Logging
+        }
+
+        return null;
     }
 }
