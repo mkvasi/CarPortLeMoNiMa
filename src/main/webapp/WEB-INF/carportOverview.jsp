@@ -4,7 +4,7 @@
     Author     : Yeha
 --%>
 
-<%@page import="FunctionLayer.entity.Request"%>
+<%@page import="FunctionLayer.entity.RequestObject"%>
 <%@page import="FunctionLayer.entity.Employee"%>
 <%@page import="FunctionLayer.entity.Customer"%>
 <%@page import="FunctionLayer.entity.Price"%>
@@ -46,12 +46,11 @@
     </head>
 
     <% Carport carport = (Carport) request.getSession().getAttribute("carport");%>
-
     <%  BillOfMaterial billofmaterial = (BillOfMaterial) request.getAttribute("billOfMaterial");  %>
     <% Price offerPrice = (Price) request.getSession().getAttribute("offerprice");%>
     <% Customer customer = (Customer) request.getSession().getAttribute("customer");%>
     <% Employee employee = (Employee) request.getSession().getAttribute("employee");%>
-    <% Request requestClass = (Request) request.getAttribute("request");%>
+    <% RequestObject requestClass = (RequestObject) request.getSession().getAttribute("request");%>
     <% String requestDate = (String) request.getAttribute("date");%>
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
         <header>
@@ -71,20 +70,17 @@
                         <div class="navigation">
                             <nav>
                                 <ul class="nav topnav">
-                                    <li class="dropdown active">
-                                        <a href="index.html">Home</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#">Features</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#">Pages</a>
-                                    </li>
                                     <li class="dropdown">
                                         <a href="http://localhost:8084/websitetest/login.jsp">Login</a>
                                     </li>
-                                    <li>
-                                        <a href="contact.html">Contact</a>
+                                    <li class="dropdown active">
+                                        <a href="http://localhost:8084/websitetest">Beregn carport</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="http://localhost:8084/websitetest/WEB-INF/customerpage.jsp">Mine forespørgsler</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="/FrontController?command=logout">Logud</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -243,29 +239,32 @@
                                 }%>
                     </tr>
                     <% if ((customer != null || employee != null)) {%>
-                    <% if (employee != null) {%>
+                    
                     <tr>
                         <th>Dato tilbud</th>
+                        <% if (employee != null) {%>
                         <td><form id='login-form' name="emplogin" action="FrontController" method="POST">
                                 <input type="hidden" name="command" value="sendoffer">
                                 <button type='submit' class="btn btn-primary">Send tilbud</button>
                             </form></td>
-                    </tr>
+                    
                     <%} else if (requestClass != null) {
                             out.print("<td>" + requestClass.getOfferDate() + "</td>");
                         }%>
-                    <% if (customer != null && requestClass != null) {%>
+                    </tr>
                     <tr>
                         <th>Dato betaling</th>
+                        <% if (customer != null && (requestClass != null && requestClass.getPaymentDate() == "Tilbud ej betalt!")) {%>
                         <td>            <form id='login-form' name="emplogin" action="FrontController" method="POST">
-                                <input type="hidden" name="command" value="acceptoffer">
+                                <input type="hidden" name="command" value="customerrequestdetailspayment">
                                 <button type='submit' class="btn btn-primary">Accepter tilbud og betal</button>
                             </form></td>
-                    </tr>
+                    
                     <%} else if (requestClass != null) {
                             out.print("<td>" + requestClass.getPaymentDate() + "</td>");
                         }%>
                     <%}%>
+                    </tr>
 
                 </thead>
             </table>
@@ -644,7 +643,7 @@
         <br>
         <br>
 
-        <% if (employee != null) { %>
+        <% if (employee != null || (customer != null && requestClass != null && requestClass.getPaymentDate() != "Tilbud ej betalt!")) { %>
 
         <h3 style="text-align: center;">Stykliste</h3>
 
@@ -688,14 +687,14 @@
         </div>
         <% }%>
 
-        <% if (customer != null) { %>
+        <% if (customer != null && requestClass == null) { %> 
         <div id="forspgknap">
             <form id='login-form' name="emplogin" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="sendrequest">
                 <button type='submit' class="btn btn-primary">Send forespørgsel</button>
             </form>
         </div>
-        <% }%>
+        <%  }%> 
 
 
         <!-- Footer

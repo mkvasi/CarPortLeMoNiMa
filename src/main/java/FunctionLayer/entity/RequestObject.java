@@ -5,13 +5,13 @@ import FunctionLayer.entity.Customer;
 import FunctionLayer.entity.Carport;
 
 /**
- * The purpose of Request: !!!TYPE PURPOSE OF Request HERE!!!
+ * The purpose of RequestObject: !!!TYPE PURPOSE OF RequestObject HERE!!!
  * @author Morten
  * @version 1.0
  * @since 03-12-2018
  */
 
-public class Request {
+public class RequestObject {
     
     private int id;
     private String requestDate, offerDate, paymentDate;
@@ -22,7 +22,7 @@ public class Request {
     private Employee employee;
     private Carport carport;
 
-    public Request(int id, String requestDate, String offerDate, String paymentDate, double priceDefault, double priceEmployee, Customer customer, Employee employee, Carport carport) {
+    public RequestObject(int id, String requestDate, String offerDate, String paymentDate, double priceDefault, double priceEmployee, Customer customer, Employee employee, Carport carport) {
         this.id = id;
         this.requestDate = requestDate;
         this.priceDefault = priceDefault;

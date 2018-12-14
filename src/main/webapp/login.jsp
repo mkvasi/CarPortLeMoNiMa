@@ -53,19 +53,16 @@
                             <nav>
                                 <ul class="nav topnav">
                                     <li class="dropdown">
+                                        <a href="http://localhost:8084/websitetest/login.jsp">Login</a>
+                                    </li>
+                                    <li class="dropdown active">
                                         <a href="http://localhost:8084/websitetest">Beregn carport</a>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="#">Min profil</a>
+                                        <a href="http://localhost:8084/websitetest/WEB-INF/customerpage.jsp">Mine forespørgsler</a>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="#">Pages</a>
-                                    </li>
-                                    <li class="dropdown active">
-                                        <a href="http://localhost:8084/websitetest/login.jsp">Login</a>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html">Contact</a>
+                                        <a href="/FrontController?command=logout">Logud</a>
                                     </li>
                                 </ul>
                             </nav>
