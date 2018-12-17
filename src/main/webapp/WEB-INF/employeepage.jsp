@@ -98,16 +98,6 @@
         <hr>
 
 
-        <div id="forspg">
-
-            <form name="login" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="login">
-                <button class="button1 button2">ReqestID</button>
-            </form>
-
-        </div>
-
-
 
         <% String error = (String) request.getAttribute("error");
             if (error != null) {

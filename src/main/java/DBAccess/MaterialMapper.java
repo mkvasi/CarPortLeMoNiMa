@@ -20,13 +20,13 @@ public class MaterialMapper {
     //private final double SHED_CLADDING_LENGTH = 3000.0;
     //private final int ROOF_FLAT_CLADDING_TYPE = 2;
     //private final int ROOF_SLOPE_CLADDING_TYPE = 3;
-    private static final String GET_DEFAULT_MATERIALS = "SELECT * FROM `MATERIALS` WHERE defaultused = 1 ORDER BY type_id ASC";
-    private static final String GET_MATERIALS_BY_TYPEID_LENGTH = "SELECT * FROM `MATERIALS` WHERE type_id = ? AND length = ? ORDER BY description ASC";
-    private static final String GET_DISTINCT_MATERIALDESCRIPTION_BY_TYPEID = "SELECT DISTINCT description FROM `MATERIALS` WHERE type_id = ?";
-    private static final String GET_MATERIAL_BY_DESCRIPTION = "SELECT * FROM MATERIALS WHERE description = ?";
-    private static final String GET_MATERIALS_BY_TYPEID = "SELECT * FROM `MATERIALS` WHERE type_id = ?";
-    private static final String GET_MATERIALS_BY_ID = "SELECT * FROM `MATERIALS` WHERE id = ?";
-    private static final String GET_MATERIALDESCRIPTION_BY_ID = "SELECT description FROM `MATERIALS` WHERE id = ?";
+    private static final String GET_DEFAULT_MATERIALS = "SELECT * FROM `MATERIALS` WHERE `defaultused` = 1 ORDER BY `type_id` ASC";
+    private static final String GET_MATERIALS_BY_TYPEID_LENGTH = "SELECT * FROM `MATERIALS` WHERE `type_id` = ? AND `length` = ? ORDER BY `description` ASC";
+    private static final String GET_DISTINCT_MATERIALDESCRIPTION_BY_TYPEID = "SELECT DISTINCT `description` FROM `MATERIALS` WHERE `type_id` = ?";
+    private static final String GET_MATERIAL_BY_DESCRIPTION = "SELECT * FROM `MATERIALS` WHERE `description` = ?";
+    private static final String GET_MATERIALS_BY_TYPEID = "SELECT * FROM `MATERIALS` WHERE `type_id` = ?";
+    private static final String GET_MATERIALS_BY_ID = "SELECT * FROM `MATERIALS` WHERE `id` = ?";
+    private static final String GET_MATERIALDESCRIPTION_BY_ID = "SELECT description FROM `MATERIALS` WHERE `id` = ?";
 
     public static List<Material> getDefaultList() throws MaterialException, SystemException {
         try {

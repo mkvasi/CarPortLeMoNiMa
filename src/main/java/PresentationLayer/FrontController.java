@@ -39,10 +39,10 @@ public class FrontController extends HttpServlet {
                 List<Material> CladdingSlopeRoof = LogicFacade.getCladdingSlopeRoof();
                 request.setAttribute("claddingflatroof", CladdingFlatRoof);
                 request.setAttribute("claddingsloperoof", CladdingSlopeRoof);
-                request.getRequestDispatcher("startpage.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/startpage.jsp").forward(request, response);
             } catch (MaterialException | SystemException ex) {
                 request.setAttribute("error", ex.getMessage());
-                request.getRequestDispatcher("startpage.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/startpage.jsp").forward(request, response);
             }
         } else {
             try {
@@ -55,7 +55,7 @@ public class FrontController extends HttpServlet {
                 }
             } catch (LoginUserException | MaterialException | SystemException | CalculatorException | ConverterMapException ex) {
                 request.setAttribute("error", ex.getMessage());
-                request.getRequestDispatcher("startpage.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/startpage.jsp").forward(request, response);
             }
         }
     }

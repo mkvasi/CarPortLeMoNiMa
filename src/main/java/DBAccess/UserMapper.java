@@ -21,9 +21,9 @@ import java.sql.Statement;
  */
 public class UserMapper {
 
-    private static final String INSERT_CUSTOMER_DEFAULT = "INSERT INTO `CUSTOMER` (firstname, lastname, email, zipcode, city, phonenumber, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private static final String GET_LOGIN_USER = "SELECT * FROM `CUSTOMER` WHERE email=? AND password=?";
-    private static final String GET_LOGIN_EMPLOYEE = "SELECT * FROM `EMPLOYEE` WHERE email=? AND password=?";
+    private static final String INSERT_CUSTOMER_DEFAULT = "INSERT INTO `CUSTOMER` (`firstname`, `lastname`, `email`, `zipcode`, `city`, `phonenumber`, `password`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String GET_LOGIN_USER = "SELECT * FROM `CUSTOMER` WHERE `email`=? AND `password`=?";
+    private static final String GET_LOGIN_EMPLOYEE = "SELECT * FROM `EMPLOYEE` WHERE `email`=? AND `password`=?";
 
     public static Customer login(String email, String password) throws LoginUserException, SystemException {
         try {

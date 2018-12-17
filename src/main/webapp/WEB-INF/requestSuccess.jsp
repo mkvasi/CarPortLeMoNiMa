@@ -48,20 +48,28 @@
                         <!-- end menu -->
                         <div class="navigation">
                             <nav>
-                                <ul class="nav topnav">
-                                    <li class="dropdown">
-                                        <a href="http://localhost:8084/websitetest/login.jsp">Login</a>
-                                    </li>
-                                    <li class="dropdown active">
-                                        <a href="http://localhost:8084/websitetest">Beregn carport</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="http://localhost:8084/websitetest/WEB-INF/customerpage.jsp">Mine forespørgsler</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="/FrontController?command=logout">Logud</a>
-                                    </li>
-                                </ul>
+
+                                        <form name="loginpage" action="FrontController" method="POST">
+                                            <input type="hidden" name="command" value="loginpage" >
+                                            <button type='submit' class="btn btn-primary">Login</button>
+                                        </form>
+
+
+                                        <form name="startpage" action="FrontController" method="POST">
+                                            <input type="hidden" name="command" value="startpage" >
+                                            <button type='submit' class="btn btn-primary">Beregn Carport</button>
+                                        </form>
+
+                                        <form name="customerrequest" action="FrontController" method="POST">
+                                            <input type="hidden" name="command" value="customerrequest">
+                                            <button type='submit' class="btn btn-primary">Mine forespørgsler</button>
+                                        </form>
+
+                                        <form name="logout" action="FrontController" method="POST">
+                                            <input type="hidden" name="command" value="logout">
+                                            <button type='submit' class="btn btn-primary">Log ud</button>
+                                        </form>
+
                             </nav>
                         </div>
                         <!-- end menu -->
