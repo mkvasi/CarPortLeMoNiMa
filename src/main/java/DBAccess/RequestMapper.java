@@ -36,16 +36,16 @@ public class RequestMapper {
     private static final String INSERT_INTO_CARPORT = "INSERT INTO `CARPORT` (`heigth`, `width`, `length`, `roofslopecelsius`, `roofcladding`, `shed_id`) VALUES (?,?,?,?,?,?)";
     private static final String INSERT_INTO_CARPORT_HAS_MATERIALS = "INSERT INTO `CARPORT_HAS_MATERIALS` (`carport_id`, `materials_id`) VALUES (?,?)";
 
-    private static final String GET_REQUESTID_BY_CUSTOMERID = "SELECT id FROM `REQUEST` WHERE customer_id = ?";
-    private static final String GET_REQUESTID_BY_EMPLOYEE_NULL = "SELECT id FROM `REQUEST` WHERE employee_id IS NULL";
-    private static final String GET_REQUESTID_BY_EMPLOYEE_NOTNULL = "SELECT id FROM `REQUEST` WHERE employee_id IS NOT NULL";
-    private static final String GET_REQUESTDETAILS_BY_REQUESTID = "SELECT request.id, requestdate, offerdate, paymentdate, pricedefault, priceemployee, customer_id, employee_id, carport.id AS carport_id, carport.heigth AS carport_heigth, carport.width AS carport_width, carport.length AS carport_length, roofslopecelsius, roofcladding,\n"
-            + "shed.id AS shed_id, ifnull(shed.heigth, 0.0) AS shed_heigth, ifnull(shed.width, 0.0) AS shed_width, ifnull(shed.length, 0.0) AS shed_length, ifnull(shedcladding,0) AS shedcladding\n"
-            + "FROM request\n"
-            + "LEFT JOIN carport ON request.carport_id = carport.id\n"
-            + "LEFT JOIN shed ON shed.id = carport.shed_id\n"
-            + "WHERE request.id = ?";
-    private static final String UPDATE_REQUEST_PAYMENT_BY_CUSTOMER = "UPDATE request SET paymentdate = current_timestamp() WHERE id = ?";
+    private static final String GET_REQUESTID_BY_CUSTOMERID = "SELECT `id` FROM `REQUEST` WHERE `customer_id` = ?";
+    private static final String GET_REQUESTID_BY_EMPLOYEE_NULL = "SELECT `id` FROM `REQUEST` WHERE `employee_id` IS NULL";
+    private static final String GET_REQUESTID_BY_EMPLOYEE_NOTNULL = "SELECT `id` FROM `REQUEST` WHERE `employee_id` IS NOT NULL";
+    private static final String GET_REQUESTDETAILS_BY_REQUESTID = "SELECT `REQUEST`.`id`, `requestdate`, `offerdate`, `paymentdate`, `pricedefault`, `priceemployee`, `customer_id`, `employee_id`, `CARPORT`.`id` AS `carport_id`, `CARPORT`.`heigth` AS `carport_heigth`, `CARPORT`.`width` AS `carport_width`, `CARPORT`.`length` AS `carport_length`, `roofslopecelsius`, `roofcladding`,\n"
+            + "`SHED`.`id` AS `shed_id`, ifnull(`SHED`.`heigth`, 0.0) AS `shed_heigth`, ifnull(`SHED`.`width`, 0.0) AS `shed_width`, ifnull(`SHED`.`length`, 0.0) AS `shed_length`, ifnull(`shedcladding`,0) AS `shedcladding`\n"
+            + "FROM `REQUEST`\n"
+            + "LEFT JOIN `CARPORT` ON `REQUEST`.`carport_id` = `CARPORT`.`id`\n"
+            + "LEFT JOIN `SHED` ON `SHED`.`id` = `CARPORT`.`shed_id`\n"
+            + "WHERE `REQUEST`.`id` = ?";
+    private static final String UPDATE_REQUEST_PAYMENT_BY_CUSTOMER = "UPDATE `REQUEST` SET `paymentdate` = current_timestamp() WHERE `id` = ?";
 
     public static void createRequest(Customer customer, Price price, Carport carport) throws SystemException {
         try {

@@ -30,12 +30,7 @@
         <% List<String> claddingflatroof = (List<String>) request.getAttribute("claddingflatroof");%>
         <% List<Material> claddingsloperoof = (List<Material>) request.getAttribute("claddingsloperoof");%>
 
-        <!-- =======================================================
-          Theme Name: Serenity
-          Theme URL: https://bootstrapmade.com/serenity-bootstrap-corporate-template/
-          Author: BootstrapMade.com
-          Author URL: https://bootstrapmade.com
-        ======================================================= -->
+
     </head>
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
@@ -55,20 +50,28 @@
                         <!-- end menu -->
                         <div class="navigation">
                             <nav>
-                                <ul class="nav topnav">
-                                    <li class="dropdown">
-                                        <a href="http://localhost:8084/websitetest/login.jsp">Login</a>
-                                    </li>
-                                    <li class="dropdown active">
-                                        <a href="http://localhost:8084/websitetest">Beregn carport</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="http://localhost:8084/websitetest/WEB-INF/customerpage.jsp">Mine forespørgsler</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="/FrontController?command=logout">Logud</a>
-                                    </li>
-                                </ul>
+
+                                        <form name="loginpage" action="FrontController" method="POST">
+                                            <input type="hidden" name="command" value="loginpage" >
+                                            <button type='submit' class="btn btn-primary">Login</button>
+                                        </form>
+
+
+                                        <form name="startpage" action="FrontController" method="POST">
+                                            <input type="hidden" name="command" value="startpage" >
+                                            <button type='submit' class="btn btn-primary">Beregn Carport</button>
+                                        </form>
+
+                                        <form name="customerrequest" action="FrontController" method="POST">
+                                            <input type="hidden" name="command" value="customerrequest">
+                                            <button type='submit' class="btn btn-primary">Mine forespørgsler</button>
+                                        </form>
+
+                                        <form name="logout" action="FrontController" method="POST">
+                                            <input type="hidden" name="command" value="logout">
+                                            <button type='submit' class="btn btn-primary">Log ud</button>
+                                        </form>
+
                             </nav>
                         </div>
                         <!-- end menu -->
@@ -190,7 +193,7 @@
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" name="roofslope">
                     <option selected value="0">Vælg tagtype</option>
-                    
+
                     <%
                         if (claddingsloperoof == null) {
                             out.println("<option value =\"" + 1 + "\">" + "No materials");

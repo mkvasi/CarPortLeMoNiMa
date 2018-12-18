@@ -8,7 +8,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
         <title>Fog - carport beregner</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
@@ -25,12 +26,7 @@
 
         <link rel="shortcut icon" href="bootstrap/ico/favicon.ico">
 
-        <!-- =======================================================
-          Theme Name: Serenity
-          Theme URL: https://bootstrapmade.com/serenity-bootstrap-corporate-template/
-          Author: BootstrapMade.com
-          Author URL: https://bootstrapmade.com
-        ======================================================= -->
+
     </head>
     <% List<Integer> listOfCustomerRequest = (List<Integer>) request.getAttribute("listOfCustomerRequest"); %>
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
@@ -50,20 +46,28 @@
                         <!-- end menu -->
                         <div class="navigation">
                             <nav>
-                                <ul class="nav topnav">
-                                    <li class="dropdown">
-                                        <a href="http://localhost:8084/websitetest/login.jsp">Login</a>
-                                    </li>
-                                    <li class="dropdown active">
-                                        <a href="http://localhost:8084/websitetest">Beregn carport</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="http://localhost:8084/websitetest/WEB-INF/customerpage.jsp">Mine forespørgsler</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="/FrontController?command=logout">Logud</a>
-                                    </li>
-                                </ul>
+
+                                        <form name="loginpage" action="FrontController" method="POST">
+                                            <input type="hidden" name="command" value="loginpage" >
+                                            <button type='submit' class="btn btn-primary">Login</button>
+                                        </form>
+
+
+                                        <form name="startpage" action="FrontController" method="POST">
+                                            <input type="hidden" name="command" value="startpage" >
+                                            <button type='submit' class="btn btn-primary">Beregn Carport</button>
+                                        </form>
+
+                                        <form name="customerrequest" action="FrontController" method="POST">
+                                            <input type="hidden" name="command" value="customerrequest">
+                                            <button type='submit' class="btn btn-primary">Mine forespørgsler</button>
+                                        </form>
+
+                                        <form name="logout" action="FrontController" method="POST">
+                                            <input type="hidden" name="command" value="logout">
+                                            <button type='submit' class="btn btn-primary">Log ud</button>
+                                        </form>
+
                             </nav>
                         </div>
                         <!-- end menu -->
@@ -93,6 +97,9 @@
             if (listOfCustomerRequest != null) {
         %>
         <h1>Tidligere forespørgsler</h1>
+
+
+
         <table>
             <tr>
                 <td>
@@ -111,6 +118,17 @@
                 </td>
             </tr>
         </table>
+
+        <%                                for (Integer r_id : listOfCustomerRequest) {
+                out.println("<form name=\"customerrequestdetails\" action=\"FrontController\" method=\"POST\">\n"
+                        + "                <input type=\"hidden\" name=\"command\" value=\"customerrequestdetails\" >\n"
+                        + "                <input type=\"hidden\" name=\"r_id\" value=\"" + r_id + "\" >\n"
+                        + "                <button class=\"button1 button2\">" + r_id + "</button>\n"
+                        + "            </form>");
+            }
+
+        %>          
+
         <%                            } else {
         %>
         <h1>Ingen tidligere forespørgsler!</h1>

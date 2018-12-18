@@ -21,6 +21,8 @@ public class CustomerRequestDetails extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginUserException, MaterialException, SystemException, CalculatorException, ConverterMapException {
         int request_id = Integer.parseInt(request.getParameter("r_id"));
         
+        System.out.println(request_id);
+        
         RequestObject requestObject = LogicFacade.getRequestDetails(request_id);
         
         double carportLength = requestObject.getCarport().getLength();
