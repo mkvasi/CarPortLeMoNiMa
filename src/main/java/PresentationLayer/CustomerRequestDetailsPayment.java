@@ -19,7 +19,6 @@ public class CustomerRequestDetailsPayment extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginUserException, MaterialException, SystemException, CalculatorException, ConverterMapException {
-        //int request_id = Integer.parseInt(request.getParameter("r_id"));
         
         RequestObject requestObject = (RequestObject) request.getSession().getAttribute("request");
         
@@ -47,17 +46,9 @@ public class CustomerRequestDetailsPayment extends Command {
         BillOfMaterial billOfMaterial = LogicFacade.makeBillOfMaterial(carport, roofFlat, roofSlope);
         carport.setBillOfmaterial(billOfMaterial);
         
-//        int materialRoofCladdingId = billOfMaterial.getLineItems().get(0).getMaterial().getId();
-//        carport.getRoof().setRoofCladding(materialRoofCladdingId);
 
         Price price = LogicFacade.makePrice(billOfMaterial);
 
-        //String dateFormat = "dd-MM-yyyy";
-        //SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
-        //String orderDate = simpleDateFormat.format(new Date());
-
-        // request.setAttribute("billOfMaterial", billOfMaterial);
-        //request.setAttribute("date", orderDate);
         request.getSession().setAttribute("offerprice", price);
         // request.setAttribute("price", price);
         request.getSession().setAttribute("request", requestObject);

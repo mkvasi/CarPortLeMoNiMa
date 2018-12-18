@@ -45,8 +45,4 @@ public class LineItem {
         this.material = material;
     }   
 
-  
-    
-    
-
 }

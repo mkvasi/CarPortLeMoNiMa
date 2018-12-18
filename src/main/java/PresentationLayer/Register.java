@@ -33,8 +33,6 @@ import javax.servlet.http.HttpSession;
         String password2 = request.getParameter("password2");
         if (password1.equals(password2)) {
             LogicFacade.createCustomer(firstName, lastName, email, Integer.parseInt(zipcode), city, Integer.parseInt(phone), password2);
-            //HttpSession session = request.getSession();
-            //session.setAttribute("user", customer);
             return "index";
         } else {
             throw new LoginUserException("the two passwords did not match");

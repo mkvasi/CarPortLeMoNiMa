@@ -150,16 +150,6 @@ public class LineItemQtyGenerator {
     }
 
 
-//    public int calculateRygstensTiles(Carport carport) throws CalculatorException {
-//        try {
-//            int rygstenTilesPrMeterLength = 3;
-//            double roofTiles = Math.ceil((carport.getRoof().getLength())) * rygstenTilesPrMeterLength;
-//            return (int) roofTiles;
-//        } catch (Exception ex) {
-//            throw new CalculatorException(ex);
-//        }
-//    }
-
     public Material returnMaterialForFarciaAndRainware(Carport carport, TreeMap<Double, Material> boards) throws CalculatorException {
         try {
             double boardLengthHypotenuse = calculateBoardLengthForFarciaAndRainware(carport); // Kalder metode for at få længden på vinskederne (hypotenusen)

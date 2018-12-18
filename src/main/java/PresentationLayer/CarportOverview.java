@@ -50,10 +50,8 @@ public class CarportOverview extends Command {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
         String orderDate = simpleDateFormat.format(new Date());
 
-        // request.setAttribute("billOfMaterial", billOfMaterial);
         request.setAttribute("date", orderDate);
         request.getSession().setAttribute("offerprice", price);
-        // request.setAttribute("price", price);
         request.getSession().setAttribute("carport", carport);
         request.setAttribute("billOfMaterial", billOfMaterial);
 
