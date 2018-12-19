@@ -65,26 +65,26 @@
                         <div class="navigation">
                             <nav>
 
-                                        <form name="loginpage" action="FrontController" method="POST">
-                                            <input type="hidden" name="command" value="loginpage" >
-                                            <button type='submit' class="btn btn-primary">Login</button>
-                                        </form>
+                                <form name="loginpage" action="FrontController" method="POST">
+                                    <input type="hidden" name="command" value="loginpage" >
+                                    <button type='submit' class="btn btn-primary">Login</button>
+                                </form>
 
 
-                                        <form name="startpage" action="FrontController" method="POST">
-                                            <input type="hidden" name="command" value="startpage" >
-                                            <button type='submit' class="btn btn-primary">Beregn Carport</button>
-                                        </form>
+                                <form name="startpage" action="FrontController" method="POST">
+                                    <input type="hidden" name="command" value="startpage" >
+                                    <button type='submit' class="btn btn-primary">Beregn Carport</button>
+                                </form>
 
-                                        <form name="customerrequest" action="FrontController" method="POST">
-                                            <input type="hidden" name="command" value="customerrequest">
-                                            <button type='submit' class="btn btn-primary">Mine forespørgsler</button>
-                                        </form>
+                                <form name="customerrequest" action="FrontController" method="POST">
+                                    <input type="hidden" name="command" value="customerrequest">
+                                    <button type='submit' class="btn btn-primary">Mine forespørgsler</button>
+                                </form>
 
-                                        <form name="logout" action="FrontController" method="POST">
-                                            <input type="hidden" name="command" value="logout">
-                                            <button type='submit' class="btn btn-primary">Log ud</button>
-                                        </form>
+                                <form name="logout" action="FrontController" method="POST">
+                                    <input type="hidden" name="command" value="logout">
+                                    <button type='submit' class="btn btn-primary">Log ud</button>
+                                </form>
 
                             </nav>
                         </div>
@@ -127,7 +127,6 @@
                         <th>Carport bredde</th>
                         <td><%= (carport.getWidth())%> m</td>
                     </tr>
-
 
                     <tr>
                         <th>Carport længde</th>
@@ -296,13 +295,20 @@
 
         <div id="yderst">
 
+            <!--
+            Her laver vi en firkant på 700x800px som bliver den yderst kant på hele svg tegningen
+            -->
+
             <SVG width="700" height=800>
             <rect width="100%" height="100%" fill="#FFFFFF"/>
 
             <rect x="77" y="30" height="700" width="540" stroke-width="2"
                   style="stroke:#000000; fill: #EFF2FB"/>
 
-
+            <!--
+            Der bliver lavet endnu en firkant, som er inde i den første firkant vi lavede.
+            Det skaber carportens fundation.
+            -->
 
             <SVG x="97" y="50" width="500" height=600>
             <rect width="100%" height="100%" fill="#E6E6E6"/>
@@ -320,13 +326,19 @@
             <rect y="585" height="15" width="15"
                   style="stroke:#000000; fill: #3B0B0B"/>
 
-
+            <!--
+                    Her indsættes de små mørke firkanter der ligner stolper
+            -->
 
             <rect y="0" x="485" height="15" width="15"
                   style="stroke:#000000; fill: #3B0B0B"/>
 
             <rect y="585" x="485" height="15" width="15"
                   style="stroke:#000000; fill: #3B0B0B"/>
+
+            <!--
+            Vi carporten er mere end 6m, bliver der indsat 2 ekstra stolper
+            -->
 
             <%
                 if (carport.getLength() >= 6) {
@@ -336,6 +348,10 @@
             %>
 
 
+            <!--
+            Her tegnes skuret. Der kommer ekstra mørke firkanter (stolper).
+            Hvor der også bliver lavet aflange firkanter der ligner remme.
+            -->
 
             <%    if (carport.getShed() != null) {
                     if (carport.getShed().getWidth() == carport.getWidth()) {
@@ -378,12 +394,20 @@
 
             </SVG>
 
+
+            <!--
+            Her tegner vi de korte remme i fronten af carporten, så det ligner den stikker 1 meter ud.
+            -->
+
             <rect x="98" y="650" height="79" width="14" stroke-width="2"
                   style="stroke:#000000; fill: #F3E2A9"/>
 
-
             <rect x="582" y="650" height="79" width="14" stroke-width="2"
                   style="stroke:#000000; fill: #F3E2A9"/>
+
+            <!--
+            Her tegner vi der 2 meget korte remme bagerst på carporten.
+            -->
 
             <rect x="98" y="30" height="20" width="14" stroke-width="2"
                   style="stroke:#000000; fill: #F3E2A9"/>
@@ -392,7 +416,9 @@
                   style="stroke:#000000; fill: #F3E2A9"/>
 
 
-
+            <!--
+            Der bliver tjekket hvor mange spær der skal være, hvorefter den tegner det antal spær carporten har
+            -->
 
             <%  int qty = 0;
                 for (LineItem lineItem : billofmaterial.getLineItems()) {
@@ -416,24 +442,10 @@
             %>
 
 
-
             <!--
-            <text x="48%" y="755" ><%= (carport.getWidth())%> m </text>
-
-
-            <line x1="97" y1="760" x2="598" y2="760" style="stroke:rgb(0,0,0);stroke-width:2" />
-
-            <line x1="97" y1="765" x2="97" y2="755" style="stroke:rgb(0,0,0);stroke-width:2" />
-            <line x1="598" y1="765" x2="598" y2="755" style="stroke:rgb(0,0,0);stroke-width:2" />
-            
+            En streg bliver lavet langs carporten bredde, hvorefter den indsætter carportens bredde i meter som text
             -->
 
-            <!--
-            Her erstatter vi "3,2 m" med den bredde brugeren indtaster
-            -->
-
-            
-            
             <text x="48%" y="780" ><%= (carport.getRoof().getWidth())%> m</text>
 
 
@@ -443,7 +455,7 @@
             <line x1="618" y1="780" x2="618" y2="790" style="stroke:rgb(0,0,0);stroke-width:2" />
 
             <!--
-            Her erstatter vi "5 m" med den længde brugeren indtaster
+En streg bliver tegnet langs carporten, hvorefter den indsætter carporten længde i meter som text
             -->
 
             <text x="640" y="400" style="writing-mode: sideways-lr;"><%= (carport.getRoof().getLength())%> m</text>
@@ -455,7 +467,8 @@
             <line x1="650" y1="730" x2="640" y2="730" style="stroke:rgb(0,0,0);stroke-width:2" />
 
             <!--
-            Den her er altid 0,55 m
+Her bliver længden mellem spær målt. 0,55m er hardcoded, da det er altid er afstanden mellem spær.
+            Stregen der bliver tegnet mellem spærene er dynamisk, og følger afstanden mellem spær.
             -->
 
             <text x="54" y="<%= pxmellemspar * 1.33%>" style="writing-mode: sideways-lr;">0,55 m</text>
@@ -474,15 +487,27 @@
 
         <div id="svgfront">
 
+            <!--
+            En firkant bliver lavet hvor der bliver tegnet inden i
+            -->
+
             <SVG width="700" height=600>
             <rect width="100%" height="100%" fill="#FFFFFF"/>
 
 
+
+            <!--
+            Der tegnes 2 stolper her
+            -->
             <rect x="120" y="299" height="300" width="16" stroke-width="2"
                   style="stroke:#000000; fill: #F3E2A9"/>
 
             <rect x="550" y="299" height="300" width="16" stroke-width="2"
                   style="stroke:#000000; fill: #F3E2A9"/>
+
+            <!--
+            De to små aflange firkanter der ligner remme bliver tegnet
+            -->
 
             <rect x="115" y="299" height="28" width="13" stroke-width="2"
                   style="stroke:#000000; fill: #F3E2A9"/>
@@ -490,8 +515,16 @@
             <rect x="558" y="299" height="28" width="13" stroke-width="2"
                   style="stroke:#000000; fill: #F3E2A9"/>
 
+            <!--
+            Carporten tag bliver tegnet her
+            -->
+
             <rect x="55" y="272" height="25" width="570" stroke-width="2"
                   style="stroke:#000000; fill: #F3E2A9"/>
+
+            <!--
+            Højden på 2,25m er hardcoded, hvorefter vi også tegner stregen langs højden
+            -->
 
             <text x="648" y="420" fill="" style="writing-mode: sideways-lr;">2,25 m</text>
 
@@ -500,6 +533,10 @@
             <line x1="650" y1="272" x2="660" y2="272" style="stroke:rgb(0,0,0);stroke-width:2" />
             <line x1="650" y1="598" x2="660" y2="598" style="stroke:rgb(0,0,0);stroke-width:2" />
 
+
+            <!--
+            Her bliver bilen tegnet
+            -->
 
             <rect x="223" y="569" rx="5" ry="5" height="30" width="30" stroke-width="2"
                   style="stroke:#000000; fill: #424242"/> 
@@ -524,6 +561,10 @@
                   style="stroke:#000000; fill: #D8D8D8"/>
 
             <text x="328" y="562" fill="">FOG</text>
+
+            <!--
+            En trekant bliver tegnet alt efter hvilken hældning det bliver valgt
+            -->
 
 
             <%
@@ -618,7 +659,7 @@
                         <td><% out.print(lineItem.getMaterial().getLength());
                                 }%></td>
 
- 
+
                     </tr>
                 </tbody>
             </table> 
