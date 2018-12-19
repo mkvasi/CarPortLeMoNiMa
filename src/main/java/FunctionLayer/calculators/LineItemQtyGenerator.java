@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- * 
- * @author Morten
+ * Denne klasse indeholer udregningsmetoder til carportens tilhørende stykliste
  */
 public class LineItemQtyGenerator {
 
@@ -24,12 +23,12 @@ public class LineItemQtyGenerator {
     LineItemTypeOfMaterialGenerator calc = new LineItemTypeOfMaterialGenerator();
 
     /**
-     * 
+     * Meningen med denne metode er at lave en stykliste med alle default materialer samt valgfrie materialer kunden har valgt, for carporten.
      * @param carport
      * @param boards
      * @param eaves
      * @param tiles
-     * @return
+     * @return BillOfMaterial
      * @throws CalculatorException 
      */
     public BillOfMaterial makeBillOfMaterial(Carport carport, HashMap<Integer, TreeMap<Double, Material>> boards, TreeMap<Double, Material> eaves, Material tiles) throws CalculatorException {
@@ -95,10 +94,10 @@ public class LineItemQtyGenerator {
     }
 
     /**
-     * 
+     * Metoden finder antallet af spær for en carport.
      * @param carport
      * @param board
-     * @return
+     * @return int
      * @throws CalculatorException 
      */
     public int getQTYForRafter(Carport carport, Material board) throws CalculatorException {
@@ -122,10 +121,10 @@ public class LineItemQtyGenerator {
     }
 
     /**
-     * 
+     * Metoden retunere antallet af remme for carporten.
      * @param carport
      * @param board
-     * @return
+     * @return int
      * @throws CalculatorException 
      */
     public int getQTYForRem(Carport carport, Material board) throws CalculatorException {
@@ -141,9 +140,9 @@ public class LineItemQtyGenerator {
     }
 
     /**
-     * 
+     * Metoden retunere antallet af stolper for carporten.
      * @param carport
-     * @return
+     * @return int
      * @throws CalculatorException 
      */
     public int getQtyOfPosts(Carport carport) throws CalculatorException {
@@ -163,10 +162,10 @@ public class LineItemQtyGenerator {
     }
 
     /**
-     * 
+     * Metoden retunere antallet tagplader for carporten.
      * @param carport
      * @param eave
-     * @return
+     * @return int
      * @throws CalculatorException 
      */
     public int getQtyForEaves(Carport carport, Material eave) throws CalculatorException {
@@ -184,10 +183,10 @@ public class LineItemQtyGenerator {
     }
 
     /**
-     * 
+     * Metoden retunere det bedst mulige materiale ud for vinskedernes længde, i en vinklet tagkonstruktion.
      * @param carport
      * @param boards
-     * @return
+     * @return Material
      * @throws CalculatorException 
      */
     public Material returnMaterialForFarciaAndRainware(Carport carport, TreeMap<Double, Material> boards) throws CalculatorException {
@@ -203,9 +202,9 @@ public class LineItemQtyGenerator {
     //Beregner vindskedernes(Facia) længde, skal modtage boardtypen(25x150 mm trykimp. bræt), og carporten som parameter.
     //Kan også beregne længden på vandbrædderne(RainWare)(19x100mm tryk imp. bræt)
     /**
-     * 
+     * Metoden regner længden af vinskederne i en vinklet tagkonstruktion
      * @param carport
-     * @return
+     * @return Double
      * @throws CalculatorException 
      */
     public Double calculateBoardLengthForFarciaAndRainware(Carport carport) throws CalculatorException {
@@ -221,9 +220,9 @@ public class LineItemQtyGenerator {
     }
 
     /**
-     * 
+     * Metoden beregner højden fra spær til gavltoppen.
      * @param carport
-     * @return
+     * @return Double
      * @throws CalculatorException 
      */
     public Double calculateHeightForRoof(Carport carport) throws CalculatorException {
@@ -239,10 +238,10 @@ public class LineItemQtyGenerator {
 
     // Den maksimale højde på taget, og den halve bredde på gavl, bruges til at regne antal brædder.
     /**
-     * 
+     * Metoden finder frem til antallet af brædder som skal bruges til gavlen.
      * @param carport
      * @param boards
-     * @return
+     * @return Double
      * @throws CalculatorException 
      */
     public Double calculateBoardsForGable(Carport carport, Material boards) throws CalculatorException {
@@ -258,10 +257,10 @@ public class LineItemQtyGenerator {
 
     // Regner antal lægter ud som skal ligge på begge sidder af skråtaget
     /**
-     * 
+     * Metoden finder frem til antallet af lægter i en vinklet tagkonstruktion.
      * @param carport
      * @param boards
-     * @return
+     * @return int
      * @throws CalculatorException 
      */
     public int calculateBattensForPitchedRoof(Carport carport, TreeMap<Double, Material> boards) throws CalculatorException {
@@ -281,9 +280,9 @@ public class LineItemQtyGenerator {
 
     //add tiles pr. m2, based on measure from stykliste
     /**
-     * 
+     * Metoden finder frem til antallet af tagsten der skal bruges til taget.
      * @param carport
-     * @return
+     * @return int
      * @throws CalculatorException 
      */
     public int calculateTiles(Carport carport) throws CalculatorException {
@@ -301,10 +300,10 @@ public class LineItemQtyGenerator {
     }
 
     /**
-     * 
+     * Metoden retunere antallet af universal beslag for en side af carporten.
      * @param carport
      * @param mat
-     * @return
+     * @return int
      * @throws CalculatorException 
      */
     public int getUniversalBracketsQtyForOneSide(Carport carport, Material mat) throws CalculatorException {
@@ -322,9 +321,9 @@ public class LineItemQtyGenerator {
     }
 
     /**
-     * 
+     * Metoden retunere antallet af brædddebolte som skal bruges til carporten.
      * @param carport
-     * @return
+     * @return int
      * @throws CalculatorException 
      */
     public int getQtyOfBræddebolt(Carport carport) throws CalculatorException {
@@ -341,10 +340,10 @@ public class LineItemQtyGenerator {
     }
 
     /**
-     * 
+     * Metoden retunere antallet af skruer ud fra antallet af universalbeslag.
      * @param carport
      * @param mat
-     * @return
+     * @return int
      * @throws CalculatorException 
      */
     private int getQtyOfScrews(Carport carport, Material mat) throws CalculatorException {
