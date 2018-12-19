@@ -23,6 +23,12 @@ public class SystemException extends Exception {
         super(msg);
     }
 
+    /**
+     * Denne exception smider en predefineret besked samt en throwable videre op af.
+     * 
+     *
+     * @param msg the detail message.
+     */
     public SystemException(Throwable thrwbl) {
         super("There was a technical error - please contact IT-Support", thrwbl);
     }

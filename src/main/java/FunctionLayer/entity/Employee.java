@@ -2,8 +2,7 @@
 package FunctionLayer.entity;
 
 /**
- * 
- * @author Morten
+ * Denne klasse indeholder variabler, konstruktør, gettere & settere for en ansat.
  */
 public class Employee {
     

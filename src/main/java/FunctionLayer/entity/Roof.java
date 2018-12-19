@@ -1,8 +1,7 @@
 package FunctionLayer.entity;
 
 /**
- * 
- * @author Morten
+ * Denne klasse indeholder variabler, konstruktør, gettere & settere for et tag.
  */
 public class Roof {
 

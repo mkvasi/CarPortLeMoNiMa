@@ -3,8 +3,7 @@ package FunctionLayer.entity;
 import FunctionLayer.BillOfMaterial;
 
 /**
- * 
- * @author Morten
+ * Denne klasse indeholder variabler, konstruktør, gettere & settere for en pris.
  */
 public class Price {
 
@@ -28,7 +27,7 @@ public class Price {
     }
     
     /**
-     * 
+     * Tager imod en BillOfMaterial for at udregne købsprisen for tilhørende lineItems.
      * @param billOfMaterial 
      */
     public void calculateBuyPrice(BillOfMaterial billOfMaterial){
@@ -40,7 +39,7 @@ public class Price {
     }
     
     /**
-     * 
+     * Tager imod en BillOfMaterial for at udregne salgsprisen for tilhørende lineItems.
      * @param billOfMaterial 
      */
     public void calculateSellPrice(BillOfMaterial billOfMaterial){
