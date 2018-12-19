@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- * Purpose of this class is to combine methods from functionlayer with correct mappers with access to database
+ * Meningen med denne klasse er at skabe adgang fra functionlayer til database med mappers
  */
 
 public class DataFacade {

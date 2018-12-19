@@ -20,19 +20,18 @@ import FunctionLayer.exceptions.SystemException;
 import java.util.List;
 
 /**
- *
- * @author Morten
+ * Meningen med denne klasse er at skabe adgang mellem presentationlayer og functionlayer
  */
 public class LogicFacade {
     
     /**
-     * 
+     * Meningen med denne metode er at danne et carport object ud fra de angivne parametre
      * @param length
      * @param width
      * @param roofSlopCelsius
      * @param shedLength
      * @param shedWidth
-     * @return 
+     * @return Carport
      */
     public static Carport makeCarport(double length, double width, int roofSlopCelsius, double shedLength, double shedWidth) {
         if (shedLength > 0.0 && shedWidth > 0.0) {
@@ -47,11 +46,11 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at danne en BillOfMaterial (stykliste) ud fra informationerne i de angivne parametre
      * @param carport
      * @param roofFlatDescription
      * @param roofSlopeId
-     * @return
+     * @return BillOfMaterial
      * @throws MaterialException
      * @throws SystemException
      * @throws CalculatorException
@@ -67,9 +66,9 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente alle metrialerne i databasen og returnere som et TreeMap baseret på det angivne parameter
      * @param roofFlatDescription
-     * @return
+     * @return TreeMap
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -78,9 +77,9 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente det specifike materiale baseret på det angivne parameter
      * @param roofSlopeId
-     * @return
+     * @return Material
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -89,9 +88,9 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at beregne priserne på indholdet af BillOfMaterial (styklisten)
      * @param billOfMaterial
-     * @return
+     * @return Price
      * @throws MaterialException 
      */
     public static Price makePrice(BillOfMaterial billOfMaterial) throws MaterialException {
@@ -102,9 +101,9 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente alle standard materialer i en liste
      * @param carport
-     * @return
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -113,9 +112,9 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at danne en HashMap ud fra en liste af standard materialer
      * @param carport
-     * @return
+     * @return HashMap
      * @throws ConverterMapException
      * @throws SystemException
      * @throws MaterialException 
@@ -126,10 +125,10 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denn metode er at tjekke input fra en bruger, som prøver at logge ind
      * @param email
      * @param password
-     * @return
+     * @return Customer
      * @throws LoginUserException
      * @throws SystemException 
      */
@@ -138,10 +137,10 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denn metode er at tjekke input fra en medarbejder, som prøver at logge ind
      * @param email
      * @param password
-     * @return
+     * @return Employee
      * @throws LoginUserException
      * @throws SystemException 
      */
@@ -150,7 +149,7 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denn metode er at oprette en bruger i systemet ud fra de angivne informationer i det object som er med som parameter
      * @param firstName
      * @param lastName
      * @param email
@@ -167,8 +166,8 @@ public class LogicFacade {
     }
 
     /**
-     * 
-     * @return
+     * Meningen med denne metode er at hente alle materialerne til fladt tag baseret på det angivne parameter
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -179,7 +178,7 @@ public class LogicFacade {
 
     /**
      * 
-     * @return
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -189,7 +188,7 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at alle materialerne til tag med hældning baseret på det angivne parameter
      * @param customer
      * @param price
      * @param carport
@@ -201,9 +200,9 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente alle forespørgsler fra databasen baseret på informationer fra det angivne parameter
      * @param customer
-     * @return
+     * @return List
      * @throws LoginUserException
      * @throws SystemException
      * @throws MaterialException 
@@ -215,7 +214,7 @@ public class LogicFacade {
     /**
      * 
      * @param request_id
-     * @return
+     * @return RequestObject
      * @throws LoginUserException
      * @throws SystemException
      * @throws MaterialException 
@@ -225,9 +224,9 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente alle detaljer på en forespørgsel
      * @param id
-     * @return
+     * @return String
      * @throws LoginUserException
      * @throws SystemException
      * @throws MaterialException 
@@ -237,7 +236,7 @@ public class LogicFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at sætte en forespørgsel som betalt i datbasen baseret på det angivne parameter
      * @param id
      * @throws LoginUserException
      * @throws SystemException 

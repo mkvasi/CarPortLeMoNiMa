@@ -6,19 +6,18 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * 
- * @author Morten
+ * Meningen med denne klasse er at finde de bedste og korrekte materialer til carportens stykliste
  */
 public class LineItemTypeOfMaterialGenerator {
 
-    //
+    //Bruges til at alle mål til milimeter
     int toMilimeters = 1000;
 
     /**
-     * 
+     * Meningen med denne metode er at finde materialet til brug for rem i carporten
      * @param carport
      * @param boards
-     * @return 
+     * @return Material
      */
     public Material getBoardForRem(Carport carport, TreeMap<Double, Material> boards) {
         double carportMeasure = carport.getLength() * toMilimeters; // To get the dimension in milimeters, so it's comparable to the materials in the database.
@@ -26,10 +25,10 @@ public class LineItemTypeOfMaterialGenerator {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at finde materialet til brug for understern for og bag i carporten
      * @param carport
      * @param boards
-     * @return 
+     * @return Material
      */
     public Material getBoardForUndersternFrontAndBack(Carport carport, TreeMap<Double, Material> boards) {
         int extraSpace = 50; // Extra space in each side for the boards.
@@ -38,10 +37,10 @@ public class LineItemTypeOfMaterialGenerator {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at finde materialet til brug for understern og overstern i siderne i carporten
      * @param carport
      * @param boards
-     * @return 
+     * @return Material
      */
     public Material getBoardLengthForOversternAndUndersternSides(Carport carport, TreeMap<Double, Material> boards) {
         int extraSpace = 50; // 2.5 Cencimeter extra space for each side.
@@ -50,10 +49,10 @@ public class LineItemTypeOfMaterialGenerator {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at finde materialet til brug for spær i carporten
      * @param carport
      * @param boards
-     * @return 
+     * @return Material
      */
     public Material getBoardForRafter(Carport carport, TreeMap<Double, Material> boards) {
         if (carport.getRoof().getRoofSlopeCelsius() == 0) {
@@ -65,10 +64,10 @@ public class LineItemTypeOfMaterialGenerator {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at finde materialet til brug for beklædning af fladt tag i carporten
      * @param carport
      * @param eaves
-     * @return 
+     * @return Material
      */
     public Material getCladdingForFlatRoof(Carport carport, TreeMap<Double, Material> eaves) {
         if (carport.getRoof().getRoofSlopeCelsius() == 0) {
@@ -78,13 +77,12 @@ public class LineItemTypeOfMaterialGenerator {
         return null;
     }
 
-    //Finding the best board length to use for spær, or returning the type of board that we need two of to get the correct length
     /**
-     * 
+     * Meningen med denne metode er at finde den korrekte længde af materialet, ellers deles målet med 2 før en ny udregning af korrekte materiale
      * @param carportMeasure
      * @param carport
      * @param boards
-     * @return 
+     * @return Material
      */
     public Material boardCalculator(double carportMeasure, Carport carport, TreeMap<Double, Material> boards) {
         Map.Entry<Double, Material> boardMatch = boards.ceilingEntry(carportMeasure);
@@ -92,7 +90,7 @@ public class LineItemTypeOfMaterialGenerator {
             Material board = boardMatch.getValue();
             return board;
         } else {
-            double newMeasure = carportMeasure / 2; // Results in having two boards to fill out the carport length
+            double newMeasure = carportMeasure / 2;
             boardMatch = boards.ceilingEntry(newMeasure);
             Material board = boardMatch.getValue();
             return board;

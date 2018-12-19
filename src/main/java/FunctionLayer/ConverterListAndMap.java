@@ -10,17 +10,15 @@ import java.util.TreeMap;
 
 
 /**
- * 
- * @author Morten
+ * Meningen med denne klasse er at konvetere mellem HashMap og Lister
  */
 public class ConverterListAndMap {
     
    
-//Denne metode repræsentere default listen fra DB, som hashMap
     /**
-     * 
+     * Meningen med denne metode er at danne en HashMap ud fra en liste af standard materialer 
      * @param listOfMaterials
-     * @return
+     * @return HashMap
      * @throws ConverterMapException 
      */
     public HashMap<Integer,TreeMap<Double, Material>> ListToHashMap(List<Material> listOfMaterials) throws ConverterMapException {
@@ -79,9 +77,9 @@ public class ConverterListAndMap {
         }
 
     /**
-     * 
+     * Meningen med denne metod er at konvertere et HashMap af materialer til en liste
      * @param mapOfMaterials
-     * @return 
+     * @return List
      */
     public List<Material> hashMaptoList(HashMap<String, Material> mapOfMaterials) {
         List<Material> materialList = new ArrayList();

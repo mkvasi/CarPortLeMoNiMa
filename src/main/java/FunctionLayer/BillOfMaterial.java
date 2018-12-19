@@ -5,8 +5,7 @@ import FunctionLayer.entity.LineItem;
 import java.util.List;
 
 /**
- * 
- * @author Morten
+ * Meningen med denne klasse er at danne en samlet billofmaterial (stykliste)
  */
 
 public class BillOfMaterial {
@@ -33,6 +32,12 @@ public class BillOfMaterial {
         this.lineItems = lineItems;
     }
     
+    /**
+     * Meningen med denne metode er at tilføje et lineitem bestående af Qty, Hjælpetekst og Materiale til denne billof material (stykliste)
+     * @param lineItem
+     * @param lineItems
+     * @return List
+     */
     public List<LineItem> addMaterialToBOM(LineItem lineItem, List<LineItem> lineItems){
         lineItems.add(lineItem);
         return lineItems;

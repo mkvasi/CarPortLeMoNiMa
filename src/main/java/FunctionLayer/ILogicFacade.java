@@ -16,8 +16,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- *
- * @author Morten
+ * Dette interface indeholder metoderne til brug for LogicFacaden
  */
 public interface ILogicFacade {
     
