@@ -16,7 +16,7 @@ public class MaterialMapperIT {
   private static Connection testConnection;
     private static String USER = "connect";
     private static String USERPW = "connect";
-    private static String DBNAME = "fog";
+    private static String DBNAME = "fogtest";
     private static String HOST = "188.166.86.13";
 
     @BeforeClass
@@ -56,7 +56,7 @@ public class MaterialMapperIT {
 
     @Test
     public void testGetDefaultList() throws Exception {
-        int amountOfItemsOnList = 47;
+        int amountOfItemsOnList = 48;
         int result = MaterialMapper.getDefaultList().size();
         assertEquals(amountOfItemsOnList, result);
        

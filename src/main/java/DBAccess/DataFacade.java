@@ -17,71 +17,152 @@ import java.util.TreeMap;
  * Purpose of this class is to combine methods from functionlayer with correct mappers with access to database
  */
 
-public class DataFacade implements IDataFacade {
+public class DataFacade {
 
-    @Override
-    public TreeMap<Double, Material> getRoofFlatCladdingMaterialTreeMap(String roofFlatDescription) throws SystemException, MaterialException {
+    /**
+     * Purpose of this method is to 
+     * @param roofFlatDescription
+     * @return
+     * @throws SystemException
+     * @throws MaterialException 
+     */
+    public static TreeMap<Double, Material> getRoofFlatCladdingMaterialTreeMap(String roofFlatDescription) throws SystemException, MaterialException {
         return MaterialMapper.getRoofFlatCladdingMaterialTreeMap(roofFlatDescription);
     }
 
-    @Override
-    public Material getRoofSlopeCladdingMaterial(int roofSlopeId) throws MaterialException, SystemException {
+    /**
+     * 
+     * @param roofSlopeId
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
+    public static Material getRoofSlopeCladdingMaterial(int roofSlopeId) throws MaterialException, SystemException {
         return MaterialMapper.getRoofSlopeCladdingMaterial(roofSlopeId);
     }
 
-    @Override
-    public List<Material> getDefaultList() throws MaterialException, SystemException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
+    public static List<Material> getDefaultList() throws MaterialException, SystemException {
+        return MaterialMapper.getDefaultList();
     }
 
-    @Override
-    public Customer login(String email, String password) throws LoginUserException, SystemException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @param email
+     * @param password
+     * @return
+     * @throws LoginUserException
+     * @throws SystemException 
+     */
+    public static Customer login(String email, String password) throws LoginUserException, SystemException {
+        return UserMapper.login(email, password);
     }
 
-    @Override
-    public Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @param email
+     * @param password
+     * @return
+     * @throws LoginUserException
+     * @throws SystemException 
+     */
+    public static Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
+        return UserMapper.employeelogin(email, password);
     }
 
-    @Override
-    public void createCustomer(Customer user) throws LoginUserException, SystemException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @param user
+     * @throws LoginUserException
+     * @throws SystemException 
+     */
+    public static void createCustomer(Customer user) throws LoginUserException, SystemException {
+        UserMapper.createCustomer(user);
     }
 
-    @Override
-    public List<String> getRoofFlatCladdingMaterialListJSP(int i) throws MaterialException, SystemException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @param i
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
+    public static List<String> getRoofFlatCladdingMaterialListJSP(int i) throws MaterialException, SystemException {
+        return MaterialMapper.getRoofFlatCladdingMaterialListJSP(i);
     }
 
-    @Override
-    public List<Material> getRoofSlopeCladdingMaterialList(int i) throws MaterialException, SystemException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @param i
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
+    public static List<Material> getRoofSlopeCladdingMaterialList(int i) throws MaterialException, SystemException {
+        return MaterialMapper.getRoofSlopeCladdingMaterialList(i);
     }
 
-    @Override
-    public void createRequest(Customer customer, Price price, Carport carport) throws LoginUserException, SystemException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @param customer
+     * @param price
+     * @param carport
+     * @throws LoginUserException
+     * @throws SystemException 
+     */
+    public static void createRequest(Customer customer, Price price, Carport carport) throws LoginUserException, SystemException {
+        RequestMapper.createRequest(customer, price, carport);
     }
 
-    @Override
-    public List<Integer> getRequestCustomerList(Customer customer) throws LoginUserException, SystemException, MaterialException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @param customer
+     * @return
+     * @throws LoginUserException
+     * @throws SystemException
+     * @throws MaterialException 
+     */
+    public static List<Integer> getRequestCustomerList(Customer customer) throws LoginUserException, SystemException, MaterialException {
+        return RequestMapper.getListCustomerRequestId(customer);
     }
 
-    @Override
-    public RequestObject getRequestDetails(int request_id) throws LoginUserException, SystemException, MaterialException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @param request_id
+     * @return
+     * @throws LoginUserException
+     * @throws SystemException
+     * @throws MaterialException 
+     */
+    public static RequestObject getRequestDetails(int request_id) throws LoginUserException, SystemException, MaterialException {
+        return RequestMapper.getRequestDetailsByRequestId(request_id);
     }
 
-    @Override
-    public String getRoofDescriptionById(int id) throws LoginUserException, SystemException, MaterialException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @param id
+     * @return
+     * @throws LoginUserException
+     * @throws SystemException
+     * @throws MaterialException 
+     */
+    public static String getRoofDescriptionById(int id) throws LoginUserException, SystemException, MaterialException {
+        return MaterialMapper.getRoofFlatDescriptionById(id);
     }
 
-    @Override
-    public void customerUpdatePayment(int id) throws LoginUserException, SystemException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * 
+     * @param id
+     * @throws LoginUserException
+     * @throws SystemException 
+     */
+    public static void customerUpdatePayment(int id) throws LoginUserException, SystemException {
+        RequestMapper.customerUpdatePayment(id);
     }
 
 //    /**

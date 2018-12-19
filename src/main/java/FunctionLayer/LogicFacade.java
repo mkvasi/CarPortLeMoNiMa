@@ -23,10 +23,9 @@ import java.util.List;
  *
  * @author Morten
  */
-public class LogicFacade implements ILogicFacade {
-
-    @Override
-    public Carport makeCarport(double length, double width, int roofSlopCelsius, double shedLength, double shedWidth) {
+public class LogicFacade {
+    
+    public static Carport makeCarport(double length, double width, int roofSlopCelsius, double shedLength, double shedWidth) {
         if (shedLength > 0.0 && shedWidth > 0.0) {
             Carport carport = new Carport(length, width, new Roof(roofSlopCelsius), new Shed(shedWidth, shedLength), new BillOfMaterial());
             carport.getRoof().calculateRoofDimensions(carport);
@@ -38,8 +37,7 @@ public class LogicFacade implements ILogicFacade {
         }
     }
 
-    @Override
-    public BillOfMaterial makeBillOfMaterial(Carport carport, String roofFlatDescription, int roofSlopeId) throws MaterialException, SystemException, CalculatorException, ConverterMapException {
+    public static BillOfMaterial makeBillOfMaterial(Carport carport, String roofFlatDescription, int roofSlopeId) throws MaterialException, SystemException, CalculatorException, ConverterMapException {
         LineItemQtyGenerator calc = new LineItemQtyGenerator();
         if (carport.getRoof().getRoofSlopeCelsius() == 0) {
             return calc.makeBillOfMaterial(carport, getAllDefaultMaterialsAsHashMapOfTreeMaps(carport), getAllMaterialForFlatRoofsAsList(roofFlatDescription), null);
@@ -48,85 +46,175 @@ public class LogicFacade implements ILogicFacade {
         }
     }
 
-    @Override
-    public TreeMap<Double, Material> getAllMaterialForFlatRoofsAsList(String roofFlatDescription) throws MaterialException, SystemException {
+    public static TreeMap<Double, Material> getAllMaterialForFlatRoofsAsList(String roofFlatDescription) throws MaterialException, SystemException {
         return DataFacade.getRoofFlatCladdingMaterialTreeMap(roofFlatDescription);
     }
 
-    @Override
-    public Material getAllMaterialForSlopeRoofAsList(int roofSlopeId) throws MaterialException, SystemException {
+    public static Material getAllMaterialForSlopeRoofAsList(int roofSlopeId) throws MaterialException, SystemException {
         return DataFacade.getRoofSlopeCladdingMaterial(roofSlopeId);
     }
 
-    @Override
-    public Price makePrice(BillOfMaterial billOfMaterial) throws MaterialException {
+    public static Price makePrice(BillOfMaterial billOfMaterial) throws MaterialException {
         Price price = new Price();
         price.calculateBuyPrice(billOfMaterial);
         price.calculateSellPrice(billOfMaterial);
         return price;
     }
 
-    @Override
-    public List<Material> getAllDefaultMaterialsAsList(Carport carport) throws MaterialException, SystemException {
+    public static List<Material> getAllDefaultMaterialsAsList(Carport carport) throws MaterialException, SystemException {
         return DataFacade.getDefaultList();
     }
 
-    @Override
-    public HashMap<Integer, TreeMap<Double, Material>> getAllDefaultMaterialsAsHashMapOfTreeMaps(Carport carport) throws ConverterMapException, SystemException, MaterialException {
+    public static HashMap<Integer, TreeMap<Double, Material>> getAllDefaultMaterialsAsHashMapOfTreeMaps(Carport carport) throws ConverterMapException, SystemException, MaterialException {
         ConverterListAndMap con = new ConverterListAndMap();
         return con.ListToHashMap(getAllDefaultMaterialsAsList(carport));
     }
 
-    @Override
-    public Customer login(String email, String password) throws LoginUserException, SystemException {
+    public static Customer login(String email, String password) throws LoginUserException, SystemException {
         return DataFacade.login(email, password);
     }
 
-    @Override
-    public Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
+    public static Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
         return DataFacade.employeelogin(email, password);
     }
 
-    @Override
-    public void createCustomer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) throws LoginUserException, SystemException {
+    public static void createCustomer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) throws LoginUserException, SystemException {
         Customer user = new Customer(firstName, lastName, email, zipcode, city, phone, password);
         DataFacade.createCustomer(user);
     }
 
-    @Override
-    public List<String> getCladdingFlatRoof() throws MaterialException, SystemException {
+    public static List<String> getCladdingFlatRoof() throws MaterialException, SystemException {
         List<String> eaveList = DataFacade.getRoofFlatCladdingMaterialListJSP(2);
         return eaveList;
     }
 
-    @Override
-    public List<Material> getCladdingSlopeRoof() throws MaterialException, SystemException {
+    public static List<Material> getCladdingSlopeRoof() throws MaterialException, SystemException {
         List<Material> tileList = DataFacade.getRoofSlopeCladdingMaterialList(3);
         return tileList;
     }
 
-    @Override
-    public void createRequest(Customer customer, Price price, Carport carport) throws LoginUserException, SystemException {
+    public static void createRequest(Customer customer, Price price, Carport carport) throws LoginUserException, SystemException {
         DataFacade.createRequest(customer, price, carport);
     }
 
-    @Override
-    public List<Integer> getRequestCustomerList(Customer customer) throws LoginUserException, SystemException, MaterialException {
+    public static List<Integer> getRequestCustomerList(Customer customer) throws LoginUserException, SystemException, MaterialException {
         return DataFacade.getRequestCustomerList(customer);
     }
 
-    @Override
-    public RequestObject getRequestDetails(int request_id) throws LoginUserException, SystemException, MaterialException {
+    public static RequestObject getRequestDetails(int request_id) throws LoginUserException, SystemException, MaterialException {
         return DataFacade.getRequestDetails(request_id);
     }
 
-    @Override
-    public String getRoofDescriptionById(int id) throws LoginUserException, SystemException, MaterialException {
+    public static String getRoofDescriptionById(int id) throws LoginUserException, SystemException, MaterialException {
         return DataFacade.getRoofDescriptionById(id);
     }
 
-    @Override
-    public void customerUpdatePayment(int id) throws LoginUserException, SystemException {
+    public static void customerUpdatePayment(int id) throws LoginUserException, SystemException {
         DataFacade.customerUpdatePayment(id);
     }
+
+//    @Override
+//    public Carport makeCarport(double length, double width, int roofSlopCelsius, double shedLength, double shedWidth) {
+//        if (shedLength > 0.0 && shedWidth > 0.0) {
+//            Carport carport = new Carport(length, width, new Roof(roofSlopCelsius), new Shed(shedWidth, shedLength), new BillOfMaterial());
+//            carport.getRoof().calculateRoofDimensions(carport);
+//            return carport;
+//        } else {
+//            Carport carport = new Carport(length, width, new Roof(roofSlopCelsius), null, new BillOfMaterial());
+//            carport.getRoof().calculateRoofDimensions(carport);
+//            return carport;
+//        }
+//    }
+//
+//    @Override
+//    public BillOfMaterial makeBillOfMaterial(Carport carport, String roofFlatDescription, int roofSlopeId) throws MaterialException, SystemException, CalculatorException, ConverterMapException {
+//        LineItemQtyGenerator calc = new LineItemQtyGenerator();
+//        if (carport.getRoof().getRoofSlopeCelsius() == 0) {
+//            return calc.makeBillOfMaterial(carport, getAllDefaultMaterialsAsHashMapOfTreeMaps(carport), getAllMaterialForFlatRoofsAsList(roofFlatDescription), null);
+//        } else {
+//            return calc.makeBillOfMaterial(carport, getAllDefaultMaterialsAsHashMapOfTreeMaps(carport), null, getAllMaterialForSlopeRoofAsList(roofSlopeId));
+//        }
+//    }
+//
+//    @Override
+//    public TreeMap<Double, Material> getAllMaterialForFlatRoofsAsList(String roofFlatDescription) throws MaterialException, SystemException {
+//        return DataFacade.getRoofFlatCladdingMaterialTreeMap(roofFlatDescription);
+//    }
+//
+//    @Override
+//    public Material getAllMaterialForSlopeRoofAsList(int roofSlopeId) throws MaterialException, SystemException {
+//        return DataFacade.getRoofSlopeCladdingMaterial(roofSlopeId);
+//    }
+//
+//    @Override
+//    public Price makePrice(BillOfMaterial billOfMaterial) throws MaterialException {
+//        Price price = new Price();
+//        price.calculateBuyPrice(billOfMaterial);
+//        price.calculateSellPrice(billOfMaterial);
+//        return price;
+//    }
+//
+//    @Override
+//    public List<Material> getAllDefaultMaterialsAsList(Carport carport) throws MaterialException, SystemException {
+//        return DataFacade.getDefaultList();
+//    }
+//
+//    @Override
+//    public HashMap<Integer, TreeMap<Double, Material>> getAllDefaultMaterialsAsHashMapOfTreeMaps(Carport carport) throws ConverterMapException, SystemException, MaterialException {
+//        ConverterListAndMap con = new ConverterListAndMap();
+//        return con.ListToHashMap(getAllDefaultMaterialsAsList(carport));
+//    }
+//
+//    @Override
+//    public Customer login(String email, String password) throws LoginUserException, SystemException {
+//        return DataFacade.login(email, password);
+//    }
+//
+//    @Override
+//    public Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
+//        return DataFacade.employeelogin(email, password);
+//    }
+//
+//    @Override
+//    public void createCustomer(String firstName, String lastName, String email, int zipcode, String city, int phone, String password) throws LoginUserException, SystemException {
+//        Customer user = new Customer(firstName, lastName, email, zipcode, city, phone, password);
+//        DataFacade.createCustomer(user);
+//    }
+//
+//    @Override
+//    public List<String> getCladdingFlatRoof() throws MaterialException, SystemException {
+//        List<String> eaveList = DataFacade.getRoofFlatCladdingMaterialListJSP(2);
+//        return eaveList;
+//    }
+//
+//    @Override
+//    public List<Material> getCladdingSlopeRoof() throws MaterialException, SystemException {
+//        List<Material> tileList = DataFacade.getRoofSlopeCladdingMaterialList(3);
+//        return tileList;
+//    }
+//
+//    @Override
+//    public void createRequest(Customer customer, Price price, Carport carport) throws LoginUserException, SystemException {
+//        DataFacade.createRequest(customer, price, carport);
+//    }
+//
+//    @Override
+//    public List<Integer> getRequestCustomerList(Customer customer) throws LoginUserException, SystemException, MaterialException {
+//        return DataFacade.getRequestCustomerList(customer);
+//    }
+//
+//    @Override
+//    public RequestObject getRequestDetails(int request_id) throws LoginUserException, SystemException, MaterialException {
+//        return DataFacade.getRequestDetails(request_id);
+//    }
+//
+//    @Override
+//    public String getRoofDescriptionById(int id) throws LoginUserException, SystemException, MaterialException {
+//        return DataFacade.getRoofDescriptionById(id);
+//    }
+//
+//    @Override
+//    public void customerUpdatePayment(int id) throws LoginUserException, SystemException {
+//        DataFacade.customerUpdatePayment(id);
+//    }
 }
