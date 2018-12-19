@@ -1,9 +1,3 @@
-<%-- 
-    Document   : employeepage
-    Created on : 14-11-2018, 12:56:42
-    Author     : Yeha
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

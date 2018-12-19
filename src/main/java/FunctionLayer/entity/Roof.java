@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package FunctionLayer.entity;
 
-import FunctionLayer.entity.Carport;
-
-
-
 /**
- *
- * @author nr
+ * 
+ * @author Morten
  */
 public class Roof {
 
@@ -73,8 +64,10 @@ public class Roof {
         this.roofCladding = roofCladding;
     }
     
-    
-    
+    /**
+     * 
+     * @param carport 
+     */
     public void calculateRoofDimensions(Carport carport){
         if(roofSlopeCelsius == 0){
             width = (carport.getWidth() * TOMILIMETERS) + (FLATWIDTH * 2);

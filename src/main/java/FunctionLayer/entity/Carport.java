@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package FunctionLayer.entity;
 
 import FunctionLayer.BillOfMaterial;
-import java.util.HashMap;
-import java.util.List;
 
-
+/**
+ * 
+ * @author Morten
+ */
 
 public class Carport {
 
@@ -19,8 +16,6 @@ public class Carport {
     private Shed shed; 
     private BillOfMaterial billOfmaterial;
     
-
-
     public Carport(double length, double width, Roof roof, Shed shed, BillOfMaterial billOfmaterial) {
         this.length = length;
         this.width = width;
@@ -39,9 +34,6 @@ public class Carport {
         this.billOfmaterial = new BillOfMaterial();
     }
     
-    
-
-
     public int getId() {
         return id;
     }
@@ -97,15 +89,5 @@ public class Carport {
     public void setBillOfmaterial(BillOfMaterial billOfmaterial) {
         this.billOfmaterial = billOfmaterial;
     }
-
-    
-
-   
-
- 
-
-
-
-
 
 }

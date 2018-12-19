@@ -1,14 +1,9 @@
 package FunctionLayer.entity;
 
-import FunctionLayer.entity.Material;
-
 /**
- * The purpose of LineItem is to set QTY for used materials, and then use this in the BillOfMaterial entity
+ * 
  * @author Morten
- * @version 1.0
- * @since 27-11-2018
  */
-
 public class LineItem {
     
     private int qty;

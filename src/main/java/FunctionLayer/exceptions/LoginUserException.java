@@ -1,5 +1,9 @@
 package FunctionLayer.exceptions;
 
+/**
+ * 
+ * @author Morten
+ */
 public class LoginUserException extends Exception {
 
     public LoginUserException(String msg) {

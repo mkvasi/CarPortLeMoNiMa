@@ -1,5 +1,9 @@
 package FunctionLayer.exceptions;
 
+/**
+ * 
+ * @author Morten
+ */
 public class MaterialException extends Exception {
 
     public MaterialException(String msg) {
@@ -9,9 +13,5 @@ public class MaterialException extends Exception {
     public MaterialException() {
         super("There was an error. Please try again later.");
     }
-
-
-    
-    
 
 }

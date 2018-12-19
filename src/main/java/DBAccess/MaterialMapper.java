@@ -12,14 +12,11 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- *
- * @author leage
+ * 
+ * @author Morten
  */
 public class MaterialMapper {
 
-    //private final double SHED_CLADDING_LENGTH = 3000.0;
-    //private final int ROOF_FLAT_CLADDING_TYPE = 2;
-    //private final int ROOF_SLOPE_CLADDING_TYPE = 3;
     private static final String GET_DEFAULT_MATERIALS = "SELECT * FROM `MATERIALS` WHERE `defaultused` = 1 ORDER BY `type_id` ASC";
     private static final String GET_MATERIALS_BY_TYPEID_LENGTH = "SELECT * FROM `MATERIALS` WHERE `type_id` = ? AND `length` = ? ORDER BY `description` ASC";
     private static final String GET_DISTINCT_MATERIALDESCRIPTION_BY_TYPEID = "SELECT DISTINCT `description` FROM `MATERIALS` WHERE `type_id` = ?";
@@ -28,6 +25,12 @@ public class MaterialMapper {
     private static final String GET_MATERIALS_BY_ID = "SELECT * FROM `MATERIALS` WHERE `id` = ?";
     private static final String GET_MATERIALDESCRIPTION_BY_ID = "SELECT description FROM `MATERIALS` WHERE `id` = ?";
 
+    /**
+     * 
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
     public static List<Material> getDefaultList() throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -35,9 +38,6 @@ public class MaterialMapper {
 
             ResultSet rs = ps.executeQuery();
 
-//            if (!rs.next()) {
-//                throw new MaterialException();
-//            }
             List<Material> materialList = new ArrayList();
 
             while (rs.next()) {
@@ -68,6 +68,14 @@ public class MaterialMapper {
 
     }
 
+    /**
+     * 
+     * @param input_type_id
+     * @param input_length
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
     public static List<Material> getShedCladdingMaterialList(int input_type_id, double input_length) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -77,9 +85,6 @@ public class MaterialMapper {
 
             ResultSet rs = ps.executeQuery();
 
-//            if (!rs.next()) {
-//                throw new MaterialException();
-//            }
             List<Material> materialList = new ArrayList();
 
             while (rs.next()) {
@@ -106,11 +111,17 @@ public class MaterialMapper {
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
 
     }
 
+    /**
+     * 
+     * @param input_type_id
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
     public static List<String> getRoofFlatCladdingMaterialListJSP(int input_type_id) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -119,9 +130,6 @@ public class MaterialMapper {
 
             ResultSet rs = ps.executeQuery();
 
-//            if (!rs.next()) {
-//                throw new MaterialException();
-//            }
             List<String> roofFlatMaterialListDefault = new ArrayList();
 
             while (rs.next()) {
@@ -138,11 +146,17 @@ public class MaterialMapper {
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
 
     }
 
+    /**
+     * 
+     * @param input_description
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
     public static TreeMap<Double, Material> getRoofFlatCladdingMaterialTreeMap(String input_description) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -177,11 +191,17 @@ public class MaterialMapper {
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
 
     }
 
+    /**
+     * 
+     * @param input_type_id
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
     public static List<Material> getRoofSlopeCladdingMaterialList(int input_type_id) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -216,11 +236,17 @@ public class MaterialMapper {
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
 
     }
 
+    /**
+     * 
+     * @param input_type_id
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
     public static Material getRoofSlopeCladdingMaterial(int input_type_id) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -247,12 +273,18 @@ public class MaterialMapper {
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
         return null;
 
     }
 
+    /**
+     * 
+     * @param input_type_id
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
     public static String getRoofFlatDescriptionById(int input_type_id) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -269,7 +301,6 @@ public class MaterialMapper {
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
         
         return null;

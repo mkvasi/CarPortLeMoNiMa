@@ -1,9 +1,3 @@
-<%-- 
-    Document   : LoginCreateUser
-    Created on : 03-12-2018, 18:33:37
-    Author     : nr
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

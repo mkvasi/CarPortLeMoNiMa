@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DBAccess;
 
-import FunctionLayer.BillOfMaterial;
 import FunctionLayer.entity.Carport;
 import FunctionLayer.entity.Customer;
 import FunctionLayer.entity.Employee;
-import FunctionLayer.entity.LineItem;
 import FunctionLayer.entity.Price;
 import FunctionLayer.entity.RequestObject;
 import FunctionLayer.entity.Roof;
@@ -26,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author nr
+ * 
+ * @author Morten
  */
 public class RequestMapper {
 
@@ -47,6 +41,13 @@ public class RequestMapper {
             + "WHERE `REQUEST`.`id` = ?";
     private static final String UPDATE_REQUEST_PAYMENT_BY_CUSTOMER = "UPDATE `REQUEST` SET `paymentdate` = current_timestamp() WHERE `id` = ?";
 
+    /**
+     * 
+     * @param customer
+     * @param price
+     * @param carport
+     * @throws SystemException 
+     */
     public static void createRequest(Customer customer, Price price, Carport carport) throws SystemException {
         try {
             Connection conn = DBConnector.connection();
@@ -106,18 +107,23 @@ public class RequestMapper {
                 }
             } catch (Exception ex) {
                 conn.rollback();
-                throw new SystemException(ex);
-                //Logging                
+                throw new SystemException(ex);               
             } finally {
                 conn.setAutoCommit(true);
             }
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
     }
 
+    /**
+     * 
+     * @param customer
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
     public static List<Integer> getListCustomerRequestId(Customer customer) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -143,10 +149,15 @@ public class RequestMapper {
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
     }
 
+    /**
+     * 
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
     public static List<Integer> getListEmployeeUnassignedRequestId() throws MaterialException, SystemException {
 
         try {
@@ -171,10 +182,15 @@ public class RequestMapper {
             }
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
     }
 
+    /**
+     * 
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
     public static List<Integer> getListEmployeeAssignedRequestId() throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -199,10 +215,16 @@ public class RequestMapper {
 
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
     }
 
+    /**
+     * 
+     * @param request_id
+     * @return
+     * @throws MaterialException
+     * @throws SystemException 
+     */
     public static RequestObject getRequestDetailsByRequestId(int request_id) throws MaterialException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -239,14 +261,18 @@ public class RequestMapper {
             }
 
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
             throw new SystemException(ex);
-            //Logging
         }
 
         return null;
     }
     
+    /**
+     * 
+     * @param id
+     * @throws LoginUserException
+     * @throws SystemException 
+     */
     public static void customerUpdatePayment(int id) throws LoginUserException, SystemException {
         try {
             Connection con = DBConnector.connection();

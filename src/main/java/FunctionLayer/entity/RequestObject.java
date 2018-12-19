@@ -1,16 +1,9 @@
 package FunctionLayer.entity;
 
-import FunctionLayer.entity.Employee;
-import FunctionLayer.entity.Customer;
-import FunctionLayer.entity.Carport;
-
 /**
- * The purpose of RequestObject: !!!TYPE PURPOSE OF RequestObject HERE!!!
+ * 
  * @author Morten
- * @version 1.0
- * @since 03-12-2018
  */
-
 public class RequestObject {
     
     private int id;

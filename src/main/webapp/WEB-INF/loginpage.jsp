@@ -1,10 +1,3 @@
-
-<%-- 
-    Document   : newjsp
-    Created on : 16-11-2018, 13:58:40
-    Author     : Morten
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

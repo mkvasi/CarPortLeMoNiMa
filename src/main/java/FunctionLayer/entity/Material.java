@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package FunctionLayer.entity;
 
 /**
- *
- * @author nr
+ * 
+ * @author Morten
  */
 public class Material {
 
@@ -44,9 +40,6 @@ public class Material {
         this.length = length; 
     }
     
-    
-    
-
     public int getId() {
         return id;
     }
@@ -127,7 +120,4 @@ public class Material {
         this.measure_id = measure_id;
     }
 
-    
-    
-    
 }

@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package FunctionLayer;
 
 import FunctionLayer.entity.Shed;
 import FunctionLayer.entity.Roof;
 import FunctionLayer.entity.Material;
-import FunctionLayer.calculators.LineItemQtyGenerator;
-import FunctionLayer.exceptions.CalculatorException;
 import FunctionLayer.exceptions.ConverterMapException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 import org.junit.After;
@@ -22,10 +15,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author leage
- */
 public class ConverterListAndMapTest {
       TreeMap<Double, Material> treemap;
     Material material3000;
@@ -65,8 +54,8 @@ public class ConverterListAndMapTest {
     
     @Before
     public void setUp() {
-    instance = new ConverterListAndMap();
-    roof25 = new Roof(25); //In between min and max
+        instance = new ConverterListAndMap();
+        roof25 = new Roof(25); //In between min and max
         roof45 = new Roof(45);//Max slope
         roofNull = null;
 
@@ -108,21 +97,11 @@ public class ConverterListAndMapTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of ListToHashMap method, of class ConverterListAndMap.
-     */
-
     @Test
     public void testListToHashMapSmallList() throws ConverterMapException {
-       
-        
-        
-        
         int  expResult = 5;
         int result = instance.ListToHashMap(smallMaterialList).size();
-        assertEquals(expResult, result);
-
-       
+        assertEquals(expResult, result);       
     }
    
     @Test
@@ -192,9 +171,6 @@ public class ConverterListAndMapTest {
         listOfMaterials.add(new Material(14, 3600.0));
         listOfMaterials.add(new Material(14, 4200.0));
        
-        
-        
-        
         Material expResult = listOfMaterials.get(1);
         Material result = instance.ListToHashMap(listOfMaterials).get(10).get(3600.0);
         assertEquals(expResult, result);

@@ -10,18 +10,18 @@ import FunctionLayer.exceptions.ConverterMapException;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
 import FunctionLayer.exceptions.SystemException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 
+ * @author Morten
+ */
 public class CustomerRequestDetails extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginUserException, MaterialException, SystemException, CalculatorException, ConverterMapException {
         int request_id = Integer.parseInt(request.getParameter("r_id"));
-        
-        System.out.println(request_id);
         
         RequestObject requestObject = LogicFacade.getRequestDetails(request_id);
         

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package FunctionLayer.calculators;
 
 import FunctionLayer.BillOfMaterial;
@@ -18,10 +14,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author leage
- */
 public class LineItemTypeOfMaterialGeneratorTest {
 
     LineItemTypeOfMaterialGenerator instance;
@@ -97,9 +89,6 @@ public class LineItemTypeOfMaterialGeneratorTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of getBoardForRem method, of class LineItemTypeOfMaterialGenerator.
-     */
     @Test
     public void testGetBoardForRemSmallCarport() {
         Carport carport  = new Carport(2.4, 2.4, roof0, shedNull, bill);
@@ -107,21 +96,16 @@ public class LineItemTypeOfMaterialGeneratorTest {
         Material expResult = material3000;
         Material result = instance.getBoardForRem(carport, treemap);
         assertEquals(expResult, result);
-     
     }
+    
     @Test
     public void testGetBoardForRemBigCarport() {
         Carport carport  = new Carport(7.5, 7.8, roof0, shedNull, bill);
         Material expResult = material4200;
         Material result = instance.getBoardForRem(carport, treemap);
         assertEquals(expResult, result);
-     
     }
 
-    /**
-     * Test of getBoardForUndersternFrontAndBack method, of class
-     * LineItemTypeOfMaterialGenerator.
-     */
     @Test
     public void testGetBoardForUndersternFrontAndBackBigCarport() {
         Carport carport = new Carport(7.5, 7.8, roof0, shedNull, bill);
@@ -138,13 +122,6 @@ public class LineItemTypeOfMaterialGeneratorTest {
         assertEquals(expResult, result);
     }
    
-        
-        
-
-    /**
-     * Test of getBoardLengthForOversternAndUndersternSides method, of class
-     * LineItemTypeOfMaterialGenerator.
-     */
     @Test
     public void testGetBoardLengthForOversternAndUndersternSidesSmallCarport() {
         Carport carport  = new Carport(2.4, 2.4, roof0, shedNull, bill);
@@ -152,6 +129,7 @@ public class LineItemTypeOfMaterialGeneratorTest {
         Material result = instance.getBoardLengthForOversternAndUndersternSides(carport, treemap);
         assertEquals(expResult, result);
     }
+    
     @Test
     public void testGetBoardLengthForOversternAndUndersternSidesBigCarport() {
         Carport carport  = new Carport(7.5, 7.8, roof0, shedNull, bill);
@@ -159,15 +137,7 @@ public class LineItemTypeOfMaterialGeneratorTest {
         Material result = instance.getBoardLengthForOversternAndUndersternSides(carport, treemap);
         assertEquals(expResult, result);
     }
-     
-       
-    
-      
 
-    /**
-     * Test of getBoardForRafter method, of class
-     * LineItemTypeOfMaterialGenerator.
-     */
     @Test
     public void testGetBoardForRafterBigCarport() {
         Carport carport  = new Carport(7.5, 7.8, roof0, shedNull, bill);
@@ -175,6 +145,7 @@ public class LineItemTypeOfMaterialGeneratorTest {
         Material result = instance.getBoardForRafter(carport, treemap);
         assertEquals(expResult, result);
     }
+    
     @Test
     public void testGetBoardForRafterNotChooseAbleValueForUserBigCarport() {
         Carport carport  = new Carport(7.4, 7.4, roof0, shedNull, bill);
@@ -182,6 +153,7 @@ public class LineItemTypeOfMaterialGeneratorTest {
         Material result = instance.getBoardForRafter(carport, treemap);
         assertEquals(expResult, result);
     }
+    
     @Test
     public void testGetBoardForRafterNotChooseAbleValueForUserSmallCarport() {
         Carport carport  = new Carport(3.81, 7.96, roof0, shedNull, bill);
@@ -189,10 +161,6 @@ public class LineItemTypeOfMaterialGeneratorTest {
         Material result = instance.getBoardForRafter(carport, treemap);
         assertEquals(expResult, result);
     }
-    
-    
-       
-   
       
     @Test
     public void testGetBoardForRafterSmallCarport() {
@@ -201,24 +169,17 @@ public class LineItemTypeOfMaterialGeneratorTest {
         Material result = instance.getBoardForRafter(carport, treemap);
         assertEquals(expResult, result);
     }
-    
-   
-      
 
-    /**
-     * Test of boardCalculator method, of class LineItemTypeOfMaterialGenerator.
-     */
     @Test
     public void testBoardCalculatorSmallCarport() {
         double carportMeasure = 3000.0;
-         Carport carport  = new Carport(2.4, 2.4, roof0, shedNull, bill);
+        Carport carport  = new Carport(2.4, 2.4, roof0, shedNull, bill);
        
-    
         Material expResult = material3000;
         Material result = instance.boardCalculator(carportMeasure, carport, treemap);
         assertEquals(expResult, result);
-      
     }
+    
     @Test
     public void testBoardCalculatorBigCarport() {
         double carportMeasure = 7800.0;
@@ -226,9 +187,6 @@ public class LineItemTypeOfMaterialGeneratorTest {
         Material expResult = material4200;
         Material result = instance.boardCalculator(carportMeasure, carport, treemap);
         assertEquals(expResult, result);
-    }
-       
-    
-      
+    }  
 
 }

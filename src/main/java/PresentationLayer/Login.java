@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
 import FunctionLayer.entity.Customer;
+import FunctionLayer.entity.Material;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
 import FunctionLayer.exceptions.SystemException;
@@ -17,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author nr
+ * @author Morten
  */
 public class Login extends Command {
 
@@ -31,11 +27,12 @@ public class Login extends Command {
         HttpSession session = request.getSession();
         session.setAttribute("customer", customer);
         session.setAttribute("role", customer.getRole());
-        
-        List<Integer> listOfCustomerRequest = LogicFacade.getRequestCustomerList(customer);
-        
-        request.setAttribute("listOfCustomerRequest", listOfCustomerRequest);
-        
-        return customer.getRole() + "page";
+
+        List<String> CladdingFlatRoof = LogicFacade.getCladdingFlatRoof();
+        List<Material> CladdingSlopeRoof = LogicFacade.getCladdingSlopeRoof();
+        request.setAttribute("claddingflatroof", CladdingFlatRoof);
+        request.setAttribute("claddingsloperoof", CladdingSlopeRoof);
+
+        return "startpage";
     }
 }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package FunctionLayer.calculators;
 
 import FunctionLayer.BillOfMaterial;
@@ -11,8 +7,6 @@ import FunctionLayer.entity.Material;
 import FunctionLayer.entity.Roof;
 import FunctionLayer.entity.Shed;
 import FunctionLayer.exceptions.CalculatorException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.TreeMap;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -21,10 +15,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author leage
- */
 public class LineItemQtyGeneratorTest {
 
     LineItemQtyGenerator instance;
@@ -100,33 +90,6 @@ public class LineItemQtyGeneratorTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of makeBillOfMaterial method, of class LineItemQtyGenerator.
-     */
-//    @Test
-//    //Listens 
-//    public void testMakeBillOfMaterial() throws CalculatorException {
-//        Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
-//        HashMap<Integer, TreeMap<Double, Material>> boards = new HashMap();
-//        boards.put(6, treemap);
-//        boards.put(7, treemap);
-//        boards.put(13, treemap);
-//        boards.put(14, treemap);
-//        boards.put(10, treemap);
-//        boards.put(12, treemap);
-//        boards.put(4, treemap);
-//        int expResult = 11;
-//        int result = instance.makeBillOfMaterial(carport, boards).getLineItems().size();
-//
-//        assertEquals(expResult, result);
-//
-//    }
-
-    /**
-     * Test of getQTYForRafter method, of class LineItemQtyGenerator.
-     *
-     * @throws FunctionLayer.exceptions.CalculatorException
-     */
     @Test
     public void testGetQTYForRafterSmallCarport() throws CalculatorException {
         Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
@@ -134,7 +97,6 @@ public class LineItemQtyGeneratorTest {
         int expResult = 5;
         int result = instance.getQTYForRafter(carport, board);
         assertEquals(expResult, result);
-
     }
 
     @Test
@@ -144,7 +106,6 @@ public class LineItemQtyGeneratorTest {
         int expResult = 8;
         int result = instance.getQTYForRafter(carport, board);
         assertEquals(expResult, result);
-
     }
 
     @Test
@@ -154,7 +115,6 @@ public class LineItemQtyGeneratorTest {
         int expResult = 8;
         int result = instance.getQTYForRafter(carport, board);
         assertEquals(expResult, result);
-
     }
 
     @Test
@@ -164,7 +124,6 @@ public class LineItemQtyGeneratorTest {
         int expResult = 28;
         int result = instance.getQTYForRafter(carport, board);
         assertEquals(expResult, result);
-
     }
 
     @Test
@@ -174,7 +133,6 @@ public class LineItemQtyGeneratorTest {
         int expResult = 5;
         int result = instance.getQTYForRafter(carport, board);
         assertEquals(expResult, result);
-
     }
 
     @Test
@@ -184,12 +142,8 @@ public class LineItemQtyGeneratorTest {
         int expResult = 28;
         int result = instance.getQTYForRafter(carport, board);
         assertEquals(expResult, result);
-
     }
 
-    /**
-     * Test of getQTYForRem method, of class LineItemQtyGenerator.
-     */
     @Test
     public void testGetQTYForRemBigCarport() throws CalculatorException {
         Carport carport = new Carport(7.5, 7.8, roof0, shedNull, bill);
@@ -197,7 +151,6 @@ public class LineItemQtyGeneratorTest {
         int expResult = 4;
         int result = instance.getQTYForRem(carport, board);
         assertEquals(expResult, result);
-
     }
 
     @Test
@@ -207,15 +160,8 @@ public class LineItemQtyGeneratorTest {
         int expResult = 2;
         int result = instance.getQTYForRem(carport, board);
         assertEquals(expResult, result);
-
     }
 
-
-    /**
-     * Test of getQtyOfPosts method, of class LineItemQtyGenerator.
-     *
-     * @throws FunctionLayer.exceptions.CalculatorException
-     */
     @Test
     public void testGetQtyOfPostsBigCarport() throws CalculatorException {
         Carport carport = new Carport(7.5, 7.8, roof0, shedNull, bill);
@@ -223,7 +169,6 @@ public class LineItemQtyGeneratorTest {
         int expResult = 8;
         int result = instance.getQtyOfPosts(carport);
         assertEquals(expResult, result);
-
     }
 
     @Test
@@ -233,7 +178,6 @@ public class LineItemQtyGeneratorTest {
         int expResult = 4;
         int result = instance.getQtyOfPosts(carport);
         assertEquals(expResult, result);
-
     }
 
     @Test
@@ -243,7 +187,6 @@ public class LineItemQtyGeneratorTest {
         int expResult = 4;
         int result = instance.getQtyOfPosts(carport);
         assertEquals(expResult, result);
-
     }
 
     @Test
@@ -252,7 +195,6 @@ public class LineItemQtyGeneratorTest {
         int expResult = 8;
         int result = instance.getQtyOfPosts(carport);
         assertEquals(expResult, result);
-
     }
 
     @Test(expected = CalculatorException.class)
@@ -263,7 +205,6 @@ public class LineItemQtyGeneratorTest {
         instance.getQTYForRem(carport, board);
         instance.getQTYForRafter(carport, board);
         instance.getQtyOfPosts(carport);
-
     }
 
     @Test(expected = CalculatorException.class)
@@ -273,7 +214,6 @@ public class LineItemQtyGeneratorTest {
 
         instance.getQTYForRem(carport, board);
         instance.getQTYForRafter(carport, board);
-
     }
 
     @Test(expected = CalculatorException.class)
@@ -283,18 +223,8 @@ public class LineItemQtyGeneratorTest {
 
         instance.getQTYForRem(carport, board);
         instance.getQTYForRafter(carport, board);
-
     }
 
-
-    /**
-     * Test of getUniversalBracketsQtyForOneSide method, of class LineItemQtyGenerator.
-     */
- 
-
-    /**
-     * Test of getQtyOfBræddebolt method, of class LineItemQtyGenerator.
-     */
     @Test
     public void testGetQtyOfBræddeboltSmallCarport() throws Exception {
         Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
@@ -304,6 +234,7 @@ public class LineItemQtyGeneratorTest {
         assertEquals(expResult, result);
         
     }
+    
     @Test
     public void testGetQtyOfBræddeboltBigCarport() throws Exception {
         Carport carport = new Carport(2.4, 2.4, roof0, shedNull, bill);
@@ -313,7 +244,7 @@ public class LineItemQtyGeneratorTest {
         assertEquals(expResult, result);
     }
     
-     @Test
+    @Test
     public void testGetQtyOfBræddeboltSmallCarportSmallShed() throws Exception {
         Carport carport = new Carport(2.4, 2.4, roof0, shedSmall, bill);
   
@@ -322,7 +253,5 @@ public class LineItemQtyGeneratorTest {
         assertEquals(expResult, result);
         
     }
-
-   
 
 }

@@ -1,9 +1,5 @@
-<%-- 
-    Document   : index
-    Created on : 14-11-2018, 13:44:38
-    Author     : Yeha
---%>
-
+<%@page import="FunctionLayer.entity.LineItem"%>
+<%@page import="FunctionLayer.entity.Carport"%>
 <%@page import="FunctionLayer.LineItem"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="FunctionLayer.BillOfMaterial"%>

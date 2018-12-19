@@ -1,9 +1,3 @@
-<%-- 
-    Document   : newjsp
-    Created on : 16-11-2018, 13:58:40
-    Author     : Morten
---%>
-
 <%@page import="FunctionLayer.entity.Material"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

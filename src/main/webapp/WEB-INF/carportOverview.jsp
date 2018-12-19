@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 14-11-2018, 13:44:38
-    Author     : Yeha
---%>
-
 <%@page import="FunctionLayer.entity.RequestObject"%>
 <%@page import="FunctionLayer.entity.Employee"%>
 <%@page import="FunctionLayer.entity.Customer"%>

@@ -3,20 +3,20 @@ package PresentationLayer;
 import FunctionLayer.BillOfMaterial;
 import FunctionLayer.entity.Carport;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.entity.Material;
 import FunctionLayer.entity.Price;
-import FunctionLayer.entity.Roof;
-import FunctionLayer.entity.Shed;
 import FunctionLayer.exceptions.CalculatorException;
 import FunctionLayer.exceptions.ConverterMapException;
 import FunctionLayer.exceptions.MaterialException;
 import FunctionLayer.exceptions.SystemException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 
+ * @author Morten
+ */
 public class CarportOverview extends Command {
 
     @Override

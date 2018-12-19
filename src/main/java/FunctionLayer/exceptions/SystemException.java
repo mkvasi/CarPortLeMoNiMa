@@ -1,7 +1,7 @@
 package FunctionLayer.exceptions;
 
 /**
- *
+ * 
  * @author Morten
  */
 public class SystemException extends Exception {

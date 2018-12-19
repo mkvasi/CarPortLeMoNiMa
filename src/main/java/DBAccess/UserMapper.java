@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DBAccess;
 
 import FunctionLayer.entity.Customer;
@@ -16,8 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
- * @author nr
+ * 
+ * @author Morten
  */
 public class UserMapper {
 
@@ -47,10 +43,15 @@ public class UserMapper {
             }
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
     }
 
+    /**
+     * 
+     * @param c
+     * @throws LoginUserException
+     * @throws SystemException 
+     */
     public static void createCustomer(Customer c) throws LoginUserException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -69,10 +70,17 @@ public class UserMapper {
             c.setId(id);
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
     }
 
+    /**
+     * 
+     * @param email
+     * @param password
+     * @return
+     * @throws LoginUserException
+     * @throws SystemException 
+     */
     public static Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -93,7 +101,6 @@ public class UserMapper {
             }
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
     }
 

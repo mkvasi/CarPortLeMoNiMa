@@ -10,11 +10,13 @@ import FunctionLayer.exceptions.ConverterMapException;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.MaterialException;
 import FunctionLayer.exceptions.SystemException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 
+ * @author Morten
+ */
 public class CustomerRequestDetailsPayment extends Command {
 
     @Override
@@ -50,7 +52,6 @@ public class CustomerRequestDetailsPayment extends Command {
         Price price = LogicFacade.makePrice(billOfMaterial);
 
         request.getSession().setAttribute("offerprice", price);
-        // request.setAttribute("price", price);
         request.getSession().setAttribute("request", requestObject);
         request.getSession().setAttribute("carport", carport);
         request.setAttribute("billOfMaterial", billOfMaterial);

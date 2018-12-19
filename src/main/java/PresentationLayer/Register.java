@@ -1,23 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package PresentationLayer;
 
-import FunctionLayer.entity.Customer;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.exceptions.LoginUserException;
 import FunctionLayer.exceptions.SystemException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author nr
+ * 
+ * @author Morten
  */
   public class Register extends Command {
 
@@ -33,7 +25,7 @@ import javax.servlet.http.HttpSession;
         String password2 = request.getParameter("password2");
         if (password1.equals(password2)) {
             LogicFacade.createCustomer(firstName, lastName, email, Integer.parseInt(zipcode), city, Integer.parseInt(phone), password2);
-            return "index";
+            return "loginpage";
         } else {
             throw new LoginUserException("the two passwords did not match");
         }

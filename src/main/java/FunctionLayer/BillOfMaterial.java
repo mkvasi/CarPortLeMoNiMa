@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package FunctionLayer;
 
 import FunctionLayer.entity.LineItem;
 import java.util.List;
 
 /**
- *
- * @author leage
+ * 
+ * @author Morten
  */
+
 public class BillOfMaterial {
     
     private List<LineItem> lineItems;
@@ -28,8 +25,6 @@ public class BillOfMaterial {
         return "BillOfMaterial{" + "lineItems=" + lineItems + '}';
     }
     
- 
-
     public List<LineItem> getLineItems() {
         return lineItems;
     }

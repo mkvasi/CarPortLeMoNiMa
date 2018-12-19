@@ -1,15 +1,11 @@
 package FunctionLayer.entity;
 
 import FunctionLayer.BillOfMaterial;
-import FunctionLayer.entity.LineItem;
 
 /**
- * The purpose of Price is to calculate prices - both buy and sell price
+ * 
  * @author Morten
- * @version 1.0
- * @since 27-11-2018
  */
-
 public class Price {
 
     private double buyprice;
@@ -31,6 +27,10 @@ public class Price {
         this.sellprice = sellprice;
     }
     
+    /**
+     * 
+     * @param billOfMaterial 
+     */
     public void calculateBuyPrice(BillOfMaterial billOfMaterial){
         buyprice = 0.00;
         
@@ -39,6 +39,10 @@ public class Price {
         }
     }
     
+    /**
+     * 
+     * @param billOfMaterial 
+     */
     public void calculateSellPrice(BillOfMaterial billOfMaterial){
         sellprice = 0.00;
         

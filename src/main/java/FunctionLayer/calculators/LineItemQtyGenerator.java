@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package FunctionLayer.calculators;
 
 import FunctionLayer.BillOfMaterial;
@@ -16,14 +12,26 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- *
- * @author leage
+ * 
+ * @author Morten
  */
 public class LineItemQtyGenerator {
 
+    //
     double toMilimeters = 1000;
+    
+    //
     LineItemTypeOfMaterialGenerator calc = new LineItemTypeOfMaterialGenerator();
 
+    /**
+     * 
+     * @param carport
+     * @param boards
+     * @param eaves
+     * @param tiles
+     * @return
+     * @throws CalculatorException 
+     */
     public BillOfMaterial makeBillOfMaterial(Carport carport, HashMap<Integer, TreeMap<Double, Material>> boards, TreeMap<Double, Material> eaves, Material tiles) throws CalculatorException {
         List<LineItem> lineItemList = new ArrayList();
         BillOfMaterial billOfMaterial = new BillOfMaterial();
@@ -86,6 +94,13 @@ public class LineItemQtyGenerator {
         return billOfMaterial;
     }
 
+    /**
+     * 
+     * @param carport
+     * @param board
+     * @return
+     * @throws CalculatorException 
+     */
     public int getQTYForRafter(Carport carport, Material board) throws CalculatorException {
 
         try {
@@ -106,6 +121,13 @@ public class LineItemQtyGenerator {
         }
     }
 
+    /**
+     * 
+     * @param carport
+     * @param board
+     * @return
+     * @throws CalculatorException 
+     */
     public int getQTYForRem(Carport carport, Material board) throws CalculatorException {
         try {
             int amountOfRem = 2;
@@ -118,6 +140,12 @@ public class LineItemQtyGenerator {
         }
     }
 
+    /**
+     * 
+     * @param carport
+     * @return
+     * @throws CalculatorException 
+     */
     public int getQtyOfPosts(Carport carport) throws CalculatorException {
         int extraPostForShed = 6;
         try {
@@ -134,8 +162,14 @@ public class LineItemQtyGenerator {
         }
     }
 
+    /**
+     * 
+     * @param carport
+     * @param eave
+     * @return
+     * @throws CalculatorException 
+     */
     public int getQtyForEaves(Carport carport, Material eave) throws CalculatorException {
-        //carport.getRoof().calculateRoofDimensions(carport);
         try {
             double eavesWidth = eave.getWidth();
             double countEaves = Math.ceil(carport.getRoof().getWidth() / eavesWidth); // Total pieces of eaves with 1 meter width. 
@@ -149,7 +183,13 @@ public class LineItemQtyGenerator {
         }
     }
 
-
+    /**
+     * 
+     * @param carport
+     * @param boards
+     * @return
+     * @throws CalculatorException 
+     */
     public Material returnMaterialForFarciaAndRainware(Carport carport, TreeMap<Double, Material> boards) throws CalculatorException {
         try {
             double boardLengthHypotenuse = calculateBoardLengthForFarciaAndRainware(carport); // Kalder metode for at få længden på vinskederne (hypotenusen)
@@ -162,11 +202,17 @@ public class LineItemQtyGenerator {
     //METODER NEDENFOR BRUGES KUN TIL TAG MED HÆLDNING!
     //Beregner vindskedernes(Facia) længde, skal modtage boardtypen(25x150 mm trykimp. bræt), og carporten som parameter.
     //Kan også beregne længden på vandbrædderne(RainWare)(19x100mm tryk imp. bræt)
+    /**
+     * 
+     * @param carport
+     * @return
+     * @throws CalculatorException 
+     */
     public Double calculateBoardLengthForFarciaAndRainware(Carport carport) throws CalculatorException {
         try {
-            double hosliggendeKatete = (carport.getRoof().getWidth() / 2);          // Tagbredden divideres med 2 for at finde midten af gavlen
-            int roofAngle = carport.getRoof().getRoofSlopeCelsius();                 // roofAngle holder hældningen på taget
-            double boardLengthHypotenuse = (hosliggendeKatete) / (Math.cos(Math.toRadians(roofAngle))); //  Hypotenusen isoleres i cosinus formel for retvinklet trekanter, for at finde længden på vindskederne
+            double hosliggendeKatete = (carport.getRoof().getWidth() / 2); // Tagbredden divideres med 2 for at finde midten af gavlen
+            int roofAngle = carport.getRoof().getRoofSlopeCelsius(); // roofAngle holder hældningen på taget
+            double boardLengthHypotenuse = (hosliggendeKatete) / (Math.cos(Math.toRadians(roofAngle))); //Hypotenusen isoleres i cosinus formel for retvinklet trekanter, for at finde længden på vindskederne
 
             return boardLengthHypotenuse;
         } catch (Exception ex) {
@@ -174,6 +220,12 @@ public class LineItemQtyGenerator {
         }
     }
 
+    /**
+     * 
+     * @param carport
+     * @return
+     * @throws CalculatorException 
+     */
     public Double calculateHeightForRoof(Carport carport) throws CalculatorException {
         try {
             double boardLengthHypotenuse = calculateBoardLengthForFarciaAndRainware(carport); // Kalder metode for at få længden på vinskederne (hypotenusen)
@@ -186,6 +238,13 @@ public class LineItemQtyGenerator {
     }
 
     // Den maksimale højde på taget, og den halve bredde på gavl, bruges til at regne antal brædder.
+    /**
+     * 
+     * @param carport
+     * @param boards
+     * @return
+     * @throws CalculatorException 
+     */
     public Double calculateBoardsForGable(Carport carport, Material boards) throws CalculatorException {
         try {
             double halfGable = (carport.getRoof().getWidth() / 2);                  // Finder bredden på en halv gavl
@@ -198,6 +257,13 @@ public class LineItemQtyGenerator {
     }
 
     // Regner antal lægter ud som skal ligge på begge sidder af skråtaget
+    /**
+     * 
+     * @param carport
+     * @param boards
+     * @return
+     * @throws CalculatorException 
+     */
     public int calculateBattensForPitchedRoof(Carport carport, TreeMap<Double, Material> boards) throws CalculatorException {
         try {
             int spaceBetweenEachBatten = 300;
@@ -214,6 +280,12 @@ public class LineItemQtyGenerator {
     }
 
     //add tiles pr. m2, based on measure from stykliste
+    /**
+     * 
+     * @param carport
+     * @return
+     * @throws CalculatorException 
+     */
     public int calculateTiles(Carport carport) throws CalculatorException {
         try {
             carport.getRoof().calculateRoofDimensions(carport);
@@ -228,6 +300,13 @@ public class LineItemQtyGenerator {
         }
     }
 
+    /**
+     * 
+     * @param carport
+     * @param mat
+     * @return
+     * @throws CalculatorException 
+     */
     public int getUniversalBracketsQtyForOneSide(Carport carport, Material mat) throws CalculatorException {
         try {
             if (carport.getRoof().getRoofSlopeCelsius() == 0) {
@@ -242,8 +321,13 @@ public class LineItemQtyGenerator {
         }
     }
 
+    /**
+     * 
+     * @param carport
+     * @return
+     * @throws CalculatorException 
+     */
     public int getQtyOfBræddebolt(Carport carport) throws CalculatorException {
-        //int extraBræddeBoltForShed = 
         try {
             if (carport.getRoof().getRoofSlopeCelsius() == 0) {
                 return getQtyOfPosts(carport) * 2;
@@ -256,6 +340,13 @@ public class LineItemQtyGenerator {
         }
     }
 
+    /**
+     * 
+     * @param carport
+     * @param mat
+     * @return
+     * @throws CalculatorException 
+     */
     private int getQtyOfScrews(Carport carport, Material mat) throws CalculatorException {
         int screwsForEachUniversalBracket = 9;
         int screwsInEachPackage = 200;

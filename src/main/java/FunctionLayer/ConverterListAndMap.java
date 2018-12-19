@@ -10,17 +10,19 @@ import java.util.TreeMap;
 
 
 /**
- * The purpose of ConverterListAndMap is to have an entity to convert a List to a Map
- HashMap
- *
+ * 
  * @author Morten
- * @version 1.0
- * @since 27-11-2018
  */
 public class ConverterListAndMap {
     
    
 //Denne metode repræsentere default listen fra DB, som hashMap
+    /**
+     * 
+     * @param listOfMaterials
+     * @return
+     * @throws ConverterMapException 
+     */
     public HashMap<Integer,TreeMap<Double, Material>> ListToHashMap(List<Material> listOfMaterials) throws ConverterMapException {
         HashMap<Integer, TreeMap<Double, Material>> materialMap = new HashMap();
         try {
@@ -76,7 +78,11 @@ public class ConverterListAndMap {
                     
         }
 
-    
+    /**
+     * 
+     * @param mapOfMaterials
+     * @return 
+     */
     public List<Material> hashMaptoList(HashMap<String, Material> mapOfMaterials) {
         List<Material> materialList = new ArrayList();
 
