@@ -20,9 +20,9 @@ import java.util.TreeMap;
 public class DataFacade {
 
     /**
-     * Purpose of this method is to 
+     * Meningen med denne metode er at hente alle metrialerne i databasen og returnere som et TreeMap baseret på det angivne parameter 
      * @param roofFlatDescription
-     * @return
+     * @return TreeMap
      * @throws SystemException
      * @throws MaterialException 
      */
@@ -31,9 +31,9 @@ public class DataFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente det specifike materiale baseret på det angivne parameter
      * @param roofSlopeId
-     * @return
+     * @return Material
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -42,8 +42,8 @@ public class DataFacade {
     }
 
     /**
-     * 
-     * @return
+     * Meningen med denne metode er at hente alle standard materialer i en liste
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -52,10 +52,10 @@ public class DataFacade {
     }
 
     /**
-     * 
+     * Meningen med denn metode er at tjekke input fra en bruger, som prøver at logge ind
      * @param email
      * @param password
-     * @return
+     * @return Customer
      * @throws LoginUserException
      * @throws SystemException 
      */
@@ -64,10 +64,10 @@ public class DataFacade {
     }
 
     /**
-     * 
+     * Meningen med denn metode er at tjekke input fra en medarbejder, som prøver at logge ind
      * @param email
      * @param password
-     * @return
+     * @return Employee
      * @throws LoginUserException
      * @throws SystemException 
      */
@@ -76,7 +76,7 @@ public class DataFacade {
     }
 
     /**
-     * 
+     * Meningen med denn metode er at oprette en bruger i systemet ud fra de angivne informationer i det object som er med som parameter
      * @param user
      * @throws LoginUserException
      * @throws SystemException 
@@ -86,9 +86,9 @@ public class DataFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente alle materialerne til fladt tag baseret på det angivne parameter
      * @param i
-     * @return
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -97,9 +97,9 @@ public class DataFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at alle materialerne til tag med hældning baseret på det angivne parameter
      * @param i
-     * @return
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -108,7 +108,7 @@ public class DataFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at lave et request til databasen med information fra de angivne parametre
      * @param customer
      * @param price
      * @param carport
@@ -120,9 +120,9 @@ public class DataFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente alle forespørgsler fra databasen baseret på informationer fra det angivne parameter
      * @param customer
-     * @return
+     * @return List
      * @throws LoginUserException
      * @throws SystemException
      * @throws MaterialException 
@@ -132,9 +132,9 @@ public class DataFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente alle detaljer på en forespørgsel
      * @param request_id
-     * @return
+     * @return RequestObject
      * @throws LoginUserException
      * @throws SystemException
      * @throws MaterialException 
@@ -144,9 +144,9 @@ public class DataFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente beskrivelsen for materialet baseret på det angivne parameter
      * @param id
-     * @return
+     * @return String
      * @throws LoginUserException
      * @throws SystemException
      * @throws MaterialException 
@@ -156,7 +156,7 @@ public class DataFacade {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at sætte en forespørgsel som betalt i datbasen baseret på det angivne parameter
      * @param id
      * @throws LoginUserException
      * @throws SystemException 
@@ -164,151 +164,5 @@ public class DataFacade {
     public static void customerUpdatePayment(int id) throws LoginUserException, SystemException {
         RequestMapper.customerUpdatePayment(id);
     }
-
-//    /**
-//     * Purpose of this method is to get all cladding material from database by the material mapper method
-//     * @param roofFlatDescription
-//     * @return 
-//     * @throws SystemException
-//     * @throws MaterialException 
-//     */
-//    public static TreeMap<Double, Material> getRoofFlatCladdingMaterialTreeMap(String roofFlatDescription) throws SystemException, MaterialException {
-//        return MaterialMapper.getRoofFlatCladdingMaterialTreeMap(roofFlatDescription);
-//    }
-//
-//    /**
-//     * Purpose of this method is to get all cladding material from database by the material mapper method
-//     * @param roofSlopeId
-//     * @return
-//     * @throws MaterialException
-//     * @throws SystemException 
-//     */
-//    public static Material getRoofSlopeCladdingMaterial(int roofSlopeId) throws MaterialException, SystemException {
-//        return MaterialMapper.getRoofSlopeCladdingMaterial(roofSlopeId);
-//    }
-//
-//    /**
-//     * 
-//     * @return
-//     * @throws MaterialException
-//     * @throws SystemException 
-//     */
-//    public static List<Material> getDefaultList() throws MaterialException, SystemException {
-//        return MaterialMapper.getDefaultList();
-//    }
-//
-//    /**
-//     * 
-//     * @param email
-//     * @param password
-//     * @return
-//     * @throws LoginUserException
-//     * @throws SystemException 
-//     */
-//    public static Customer login(String email, String password) throws LoginUserException, SystemException {
-//        return UserMapper.login(email, password);
-//    }
-//
-//    /**
-//     * 
-//     * @param email
-//     * @param password
-//     * @return
-//     * @throws LoginUserException
-//     * @throws SystemException 
-//     */
-//    public static Employee employeelogin(String email, String password) throws LoginUserException, SystemException {
-//        return UserMapper.employeelogin(email, password);
-//    }
-//
-//    /**
-//     * 
-//     * @param user
-//     * @throws LoginUserException
-//     * @throws SystemException 
-//     */
-//    public static void createCustomer(Customer user) throws LoginUserException, SystemException {
-//        UserMapper.createCustomer(user);
-//    }
-//
-//    /**
-//     * 
-//     * @param i
-//     * @return
-//     * @throws MaterialException
-//     * @throws SystemException 
-//     */
-//    public static List<String> getRoofFlatCladdingMaterialListJSP(int i) throws MaterialException, SystemException {
-//        return MaterialMapper.getRoofFlatCladdingMaterialListJSP(i);
-//    }
-//
-//    /**
-//     * 
-//     * @param i
-//     * @return
-//     * @throws MaterialException
-//     * @throws SystemException 
-//     */
-//    public static List<Material> getRoofSlopeCladdingMaterialList(int i) throws MaterialException, SystemException {
-//        return MaterialMapper.getRoofSlopeCladdingMaterialList(i);
-//    }
-//    
-//    /**
-//     * 
-//     * @param customer
-//     * @param price
-//     * @param carport
-//     * @throws LoginUserException
-//     * @throws SystemException 
-//     */
-//    public static void createRequest(Customer customer, Price price, Carport carport) throws LoginUserException, SystemException {
-//        RequestMapper.createRequest(customer, price, carport);
-//    }
-//    
-//    /**
-//     * 
-//     * @param customer
-//     * @return
-//     * @throws LoginUserException
-//     * @throws SystemException
-//     * @throws MaterialException 
-//     */
-//    public static List<Integer> getRequestCustomerList(Customer customer) throws LoginUserException, SystemException, MaterialException {
-//        return RequestMapper.getListCustomerRequestId(customer);
-//    }
-//    
-//    /**
-//     * 
-//     * @param request_id
-//     * @return
-//     * @throws LoginUserException
-//     * @throws SystemException
-//     * @throws MaterialException 
-//     */
-//    public static RequestObject getRequestDetails(int request_id) throws LoginUserException, SystemException, MaterialException {
-//        return RequestMapper.getRequestDetailsByRequestId(request_id);
-//    }
-//    
-//    /**
-//     * 
-//     * @param id
-//     * @return
-//     * @throws LoginUserException
-//     * @throws SystemException
-//     * @throws MaterialException 
-//     */
-//    public static String getRoofDescriptionById(int id) throws LoginUserException, SystemException, MaterialException {
-//        return MaterialMapper.getRoofFlatDescriptionById(id);
-//    }
-//    
-//    /**
-//     * 
-//     * @param id
-//     * @throws LoginUserException
-//     * @throws SystemException 
-//     */
-//    public static void customerUpdatePayment(int id) throws LoginUserException, SystemException {
-//        RequestMapper.customerUpdatePayment(id);
-//    }
     
 }

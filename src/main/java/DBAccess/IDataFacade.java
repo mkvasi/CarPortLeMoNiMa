@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- *
- * @author Morten
+ * Dette interface indeholder metoderne til brug for DataFacaden
  */
 public interface IDataFacade {
     TreeMap<Double, Material> getRoofFlatCladdingMaterialTreeMap(String roofFlatDescription) throws SystemException, MaterialException;

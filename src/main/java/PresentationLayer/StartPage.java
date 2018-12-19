@@ -12,10 +12,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * 
- * @author Morten
- */
 public class StartPage extends Command {
 
     @Override

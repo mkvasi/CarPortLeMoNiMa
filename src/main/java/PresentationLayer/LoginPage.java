@@ -9,10 +9,6 @@ import FunctionLayer.exceptions.SystemException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * 
- * @author Morten
- */
 public class LoginPage extends Command {
 
     @Override

@@ -20,8 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
- * @author Morten
+ * Meningen med denne klasse er at samle alle SQL til databasen baseret på Request
  */
 public class RequestMapper {
 
@@ -42,7 +41,7 @@ public class RequestMapper {
     private static final String UPDATE_REQUEST_PAYMENT_BY_CUSTOMER = "UPDATE `REQUEST` SET `paymentdate` = current_timestamp() WHERE `id` = ?";
 
     /**
-     * 
+     * Meningen med denne metode er at lave et request til databasen med information fra de angivne parametre
      * @param customer
      * @param price
      * @param carport
@@ -118,9 +117,9 @@ public class RequestMapper {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente alle forespørgsler fra databasen baseret på informationer fra det angivne parameter
      * @param customer
-     * @return
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -153,8 +152,8 @@ public class RequestMapper {
     }
 
     /**
-     * 
-     * @return
+     * Meningen med denne metode er at hente alle forespørgsler som ikke er koblet til en medarbejder endnu
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -186,8 +185,8 @@ public class RequestMapper {
     }
 
     /**
-     * 
-     * @return
+     * Meningen med denne metode er at hente alle forespørgsler som er koblet til en medarbejder
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -219,9 +218,9 @@ public class RequestMapper {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente alle detaljer på en forespørgsel
      * @param request_id
-     * @return
+     * @return RequestObject
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -268,7 +267,7 @@ public class RequestMapper {
     }
     
     /**
-     * 
+     * Meningen med denne metode er at sætte en forespørgsel som betalt i datbasen baseret på det angivne parameter
      * @param id
      * @throws LoginUserException
      * @throws SystemException 
@@ -281,7 +280,6 @@ public class RequestMapper {
             ps.executeUpdate();
         } catch (SQLException ex) {
             throw new SystemException(ex);
-            //Logging
         }
     }
 }

@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- * 
- * @author Morten
+ * Meningen med denne klasse er at samle alle SQL til databasen baseret på Material
  */
 public class MaterialMapper {
 
@@ -26,8 +25,8 @@ public class MaterialMapper {
     private static final String GET_MATERIALDESCRIPTION_BY_ID = "SELECT description FROM `MATERIALS` WHERE `id` = ?";
 
     /**
-     * 
-     * @return
+     * Meningen med denne metode er at hente alle standard materialer i en liste
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -69,10 +68,10 @@ public class MaterialMapper {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente alle materialer til skur baseret på de angivne parametre
      * @param input_type_id
      * @param input_length
-     * @return
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -116,9 +115,9 @@ public class MaterialMapper {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente alle materialerne til fladt tag baseret på det angivne parameter
      * @param input_type_id
-     * @return
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -151,9 +150,9 @@ public class MaterialMapper {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente alle metrialerne i databasen og returnere som et TreeMap baseret på det angivne parameter
      * @param input_description
-     * @return
+     * @return TreeMap
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -196,9 +195,9 @@ public class MaterialMapper {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at alle materialerne til tag med hældning baseret på det angivne parameter
      * @param input_type_id
-     * @return
+     * @return List
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -241,9 +240,9 @@ public class MaterialMapper {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente det specifike materiale baseret på det angivne parameter
      * @param input_type_id
-     * @return
+     * @return Material
      * @throws MaterialException
      * @throws SystemException 
      */
@@ -279,9 +278,9 @@ public class MaterialMapper {
     }
 
     /**
-     * 
+     * Meningen med denne metode er at hente beskrivelsen for materialet baseret på det angivne parameter
      * @param input_type_id
-     * @return
+     * @return String
      * @throws MaterialException
      * @throws SystemException 
      */

@@ -7,10 +7,6 @@ import FunctionLayer.exceptions.MaterialException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * 
- * @author Morten
- */
 public class BillOfMaterial2 extends Command {
 
     public BillOfMaterial2() {

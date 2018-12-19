@@ -9,10 +9,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * 
- * @author Morten
- */
 abstract class Command {
 
     private static HashMap<String, Command> commands;

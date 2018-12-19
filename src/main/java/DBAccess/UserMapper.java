@@ -12,8 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * 
- * @author Morten
+ * Meningen med denne klasse er at samle alle SQL til databasen baseret på User
  */
 public class UserMapper {
 
@@ -21,6 +20,14 @@ public class UserMapper {
     private static final String GET_LOGIN_USER = "SELECT * FROM `CUSTOMER` WHERE `email`=? AND `password`=?";
     private static final String GET_LOGIN_EMPLOYEE = "SELECT * FROM `EMPLOYEE` WHERE `email`=? AND `password`=?";
 
+    /**
+     * Meningen med denn metode er at tjekke input fra en bruger, som prøver at logge ind
+     * @param email
+     * @param password
+     * @return Customer
+     * @throws LoginUserException
+     * @throws SystemException 
+     */
     public static Customer login(String email, String password) throws LoginUserException, SystemException {
         try {
             Connection con = DBConnector.connection();
@@ -47,7 +54,7 @@ public class UserMapper {
     }
 
     /**
-     * 
+     * Meningen med denn metode er at oprette en bruger i systemet ud fra de angivne informationer i det object som er med som parameter
      * @param c
      * @throws LoginUserException
      * @throws SystemException 
@@ -74,10 +81,10 @@ public class UserMapper {
     }
 
     /**
-     * 
+     * Meningen med denn metode er at tjekke input fra en medarbejder, som prøver at logge ind
      * @param email
      * @param password
-     * @return
+     * @return Employee
      * @throws LoginUserException
      * @throws SystemException 
      */

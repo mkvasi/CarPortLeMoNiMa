@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Purpose of this class is to connect to database but only one connection a time (singleton)
+ * Meningen med denne klasse er at forbinde til databasen med en forbindelse ad gangen (singleton)
  */
 
 public class DBConnector {
