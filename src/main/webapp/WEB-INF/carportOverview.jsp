@@ -63,6 +63,11 @@
 
                         <!-- end menu -->
                         <div class="navigation">
+
+                            <!--
+                            Menu knapper bliver lavet under hinanden
+                            -->
+
                             <nav>
 
                                 <form name="loginpage" action="FrontController" method="POST">
@@ -94,7 +99,9 @@
             </div>
         </header>
         <!-- Subhead
-      ================================================== -->
+      ==================================================
+        Den blå streg der strækker sig hen over siden
+        -->
         <section id="subintro">
             <div class="jumbotron subhead" id="overview">
                 <div class="container">
@@ -114,12 +121,17 @@
 
         <h3 style="text-align: center;">Information</h3>
 
+        <!--
+        En streg der går hen over siden liger under overskriften
+        -->
+
         <hr>
 
+        <!--
+        tabellen med caportinfo
+        -->
 
         <div id="carportinfo">
-
-
 
             <table>
                 <thead>
@@ -170,6 +182,10 @@
             </table>
             <!-- </form>-->
         </div>
+
+        <!--
+        Tabel med kundeinfo
+        -->
 
         <% if (customer != null || employee != null) { %>           
         <div id="customerinfo">
@@ -222,6 +238,10 @@
         </div>
         <%}%>
 
+        <!--
+        Tabel til dato og knapper
+        -->
+
         <div id="dates">
 
 
@@ -268,16 +288,18 @@
 
         </div>
 
+        <!--
+        Carportens pris i en lille tabel
+        -->
+
         <div id="pris">
 
             <table>
                 <thead>
                     <tr>
 
-
                         <th>Pris</th>
                         <td><%=offerPrice.getSellprice()%></td>
-
 
                     </tr>                 
 
@@ -292,6 +314,9 @@
 
         <hr>
 
+        <!--
+        Carporten set fra oven bliver lavet inde i denne div
+        -->
 
         <div id="yderst">
 
@@ -483,7 +508,9 @@ Her bliver længden mellem spær målt. 0,55m er hardcoded, da det er altid er a
         </div>
 
 
-
+        <!--
+        carporten set fra fronten bliver tegnet i denne div
+        -->
 
         <div id="svgfront">
 
@@ -656,8 +683,8 @@ Her bliver længden mellem spær målt. 0,55m er hardcoded, da det er altid er a
                         <td><% out.print(lineItem.getMaterial().getDescription()); %></td>
                         <td><% out.print(lineItem.getHelpDescription()); %></td>
                         <td><% out.print(lineItem.getQty()); %></td>
-                        <td><% out.print(lineItem.getMaterial().getLength());
-                                }%></td>
+                            <td><% out.print(lineItem.getMaterial().getLength());
+                            }%></td>
 
 
                     </tr>
