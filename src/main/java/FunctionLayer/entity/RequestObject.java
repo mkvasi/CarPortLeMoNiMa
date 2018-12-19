@@ -1,8 +1,7 @@
 package FunctionLayer.entity;
 
 /**
- * 
- * @author Morten
+ * Denne klasse indeholder variabler, konstruktør, gettere & settere for et request. Derudover holder den også instanser af carport, employee samt customer.
  */
 public class RequestObject {
     

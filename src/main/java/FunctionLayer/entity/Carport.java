@@ -4,8 +4,7 @@ package FunctionLayer.entity;
 import FunctionLayer.BillOfMaterial;
 
 /**
- * 
- * @author Morten
+ * Denne klasse indeholder variabler, konstruktør, gettere & settere for en carport.
  */
 
 public class Carport {

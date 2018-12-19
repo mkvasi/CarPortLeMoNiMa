@@ -2,8 +2,7 @@
 package FunctionLayer.entity;
 
 /**
- * 
- * @author Morten
+ * Denne klasse indeholder variabler, konstruktør, gettere & settere for et skur.
  */
 public class Shed {
     
